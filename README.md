@@ -25,15 +25,14 @@ PFE/
 ├── README.md
 ├── Research/
 │   ├── Development/          ← Design Blueprint v2.4 (split)
-│   │   ├── README.md
-│   │   ├── 00_…07_*.md
-│   │   └── blueprint_v2.4_full.md
-│   ├── Sources/              ← Literature & parameter sources
-│   │   ├── README.md
-│   │   └── sources.md        ← Feng et al. 2019 + supporting refs
-│   └── reports/              ← Simulation reports & audits
-│       ├── README.md
-│       └── BLA_isolated_simulation_report.md
+│   ├── Sources/              ← Literature (split by topic)
+│   │   ├── 01_primary_bla_references.md   ⭐ Feng et al. 2019
+│   │   ├── 02_…07_*.md
+│   │   └── sources_full.md
+│   └── reports/              ← Simulation reports (split)
+│       ├── 00_overview_and_context.md
+│       ├── 01_…05_*.md
+│       └── BLA_isolated_simulation_report_full.md
 └── Simulation tests/         ← Simulation code & run outputs (to be populated)
 ```
 
@@ -41,11 +40,11 @@ PFE/
 
 ## Key Documents
 
-| Document | Location |
-|----------|----------|
-| Design Blueprint (split) | [Research/Development/](Research/Development/) |
-| Research Sources (⭐ Feng et al. 2019) | [Research/Sources/sources.md](Research/Sources/sources.md) |
-| BLA Isolated Simulation Report (Runs 1–5) | [Research/reports/BLA_isolated_simulation_report.md](Research/reports/BLA_isolated_simulation_report.md) |
+| Document | Start here |
+|----------|------------|
+| Design Blueprint | [Research/Development/](Research/Development/) |
+| Research Sources (⭐ Feng et al. 2019) | [Research/Sources/](Research/Sources/) |
+| BLA Isolated Simulation Report (Runs 1–5) | [Research/reports/](Research/reports/) |
 
 ---
 
