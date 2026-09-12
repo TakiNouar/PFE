@@ -2,46 +2,31 @@
 
 ### eLife 2024 — BLA oscillations enable fear learning
 
-> (Authors TBC — published November 2024)
+> Cattani A, Arnold DB, McCarthy M, Kopell N.
 > **"Basolateral amygdala oscillations enable fear learning in a biophysical model"**
-> *eLife*, 2024.
+> *eLife*, 12:RP89519, 2024.
+> DOI: 10.7554/eLife.89519.4
 > Full text: https://elifesciences.org/articles/89519
 
-**What it provides:** Extends the Feng et al. 2019 architecture by adding VIP (vasoactive intestinal peptide) and SOM (somatostatin) interneuron subtypes with their specific additional currents:
-- VIP interneurons: standard fast-spiking HH + **D-current** (slowly inactivating K+ current)
-- SOM interneurons: standard HH + **NaP current** (persistent Na+) + **H-current** (hyperpolarization-activated)
+**Provides:** Extension of the Feng-style architecture with VIP and SOM interneuron subtypes and their specific currents:
+- VIP: fast-spiking + **D-current**
+- SOM: HH + **NaP** + **H-current**
 
-These additional currents explain why the BLA SOM sub-population in Runs 1–3 was silent — our SOM model had no intrinsic currents that could drive spontaneous or low-stimulus firing. The NaP current provides persistent depolarization that keeps SOM neurons closer to threshold even without strong external drive.
-
-**Also confirms:** The PING (pyramidal-interneuron network gamma) mechanism, where PV interneurons are driven by Pyr activity and in turn deliver feedback inhibition, is the correct model for BLA rhythmogenesis.
+These currents explain why a generic SOM model without NaP/H can remain silent under weak drive. Also confirms PING (PN↔PV) as the core rhythmogenic motif for BLA gamma/theta interactions that support spike-timing-dependent plasticity during fear learning.
 
 ---
 
-### Headley et al. 2021 — LA and BL models
+### Headley et al. 2021 — LA and BL gamma localization
 
-> Headley DB, Kanta V, Feng F, Nair SS, Paré D.
+> Headley DB, Kyriazi P, Feng F, Nair SS, Paré D.
 > **"Gamma Oscillations in the Basolateral Amygdala: Localization, Microcircuitry, and Behavioral Correlates"**
-> *PMC8276735*, 2021.
+> *Journal of Neuroscience*, 41(28):6087–6101, 2021.
+> PMID: 34088799 · PMC: PMC8276735
 
-**What it provides:** Extends Feng et al. 2019 to the lateral amygdala (LA), with identical synaptic parameters applied to both LA and BL models. Confirms that the Feng et al. parameter set generalizes within the BLA complex. Also confirms the Ornstein-Uhlenbeck point-conductance model is used for all background activity.
-
----
-
-### Kim et al. (lateral amygdala) — 1000-cell network model
-
-> Kim D, et al.
-> **"A 1000 cell network model for Lateral Amygdala"**
-> ModelDB accession number.
-
-**What it provides:** A complementary 1000-neuron LA model with similar architecture to Feng et al. BL model. Useful for understanding how larger population counts affect dynamics, and as a cross-check on the Feng et al. parameters.
+**Provides:** Extension of the Feng parameter set to LA; microcircuit differences that make BL more gamma-prone than LA; behavioural correlates of gamma. (Second author corrected from an earlier “Kanta V” listing.)
 
 ---
 
-### NMDA kinetics — chaotic firing study (2026)
+### Kim et al. 2013 — 1000-cell LA network (same paper as primary single-cell source)
 
-> (Authors — published 2026)
-> **"NMDA receptor kinetics drive distinct routes to chaotic firing in pyramidal neurons"**
-> *PMC13272316*, 2026.
-> Full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC13272316/
-
-**What it provides:** Hodgkin-Huxley-type computational model incorporating NMDA, AMPA, and GABA receptor kinetics. Systematic analysis of how NMDA receptor closing rate (β_NMDA) and glutamatergic stimulation frequency control neuronal dynamics. Demonstrates that both AMPA and NMDA are required for normal firing patterns — NMDA alone produces qualitatively different dynamics than the combined case. Directly relevant for understanding why the Run 5 NMDA-only diagnostic (mean=41.2 Hz) looked different from the expected combined-component behavior.
+See primary sources entry: Kim, Paré & Nair, *Learn Mem* 2013. The large-scale LA network experiments in that paper complement the single-cell mechanisms reused by Feng.
