@@ -1,26 +1,24 @@
 # Research Reports
 
-Formal simulation reports and audits for the limbic network characterization studies.
+Project-level simulation reports and audit documents.
 
-## BLA Isolated Population Study (Runs 1–5)
+## BLA Isolated Study (Runs 1–5)
 
 | File | Content |
 |------|---------|
-| [00_overview_and_context.md](00_overview_and_context.md) | Repository validation, project context, full-network pre-history, simulation brief |
-| [01_bla_biology_and_design.md](01_bla_biology_and_design.md) | Blueprint vs literature parameters; critical discrepancies discovered after Runs 1–5 |
-| [02_runs_1_to_3.md](02_runs_1_to_3.md) | Run 1 (synchrony artifact), Run 2 (partial desync), Run 3 (private drive, first genuine passes) |
-| [03_runs_4_to_5.md](03_runs_4_to_5.md) | Run 4 (E/I sweep), Run 5 (NMDA-like slow excitation) |
-| [04_established_results_and_conclusion.md](04_established_results_and_conclusion.md) | What was achieved + design-level conclusion (after-discharge is a network property) |
-| [05_parameter_errors_next_steps.md](05_parameter_errors_next_steps.md) | Literature corrections required for Run 6, next steps (CeA, BLA→CeA), open full-network items |
-| [BLA_isolated_simulation_report_full.md](BLA_isolated_simulation_report_full.md) | Original complete report (single file) |
+| [00_overview_and_context.md](00_overview_and_context.md) | Context, full-network pre-history, brief |
+| [01_bla_biology_and_design.md](01_bla_biology_and_design.md) | Blueprint vs literature parameters |
+| [02_runs_1_to_3.md](02_runs_1_to_3.md) | Runs 1–3 |
+| [03_runs_4_to_5.md](03_runs_4_to_5.md) | Runs 4–5 |
+| [04_established_results_and_conclusion.md](04_established_results_and_conclusion.md) | What was achieved + design conclusion |
+| [05_parameter_errors_next_steps.md](05_parameter_errors_next_steps.md) | Literature fixes for Run 6, next steps |
+| [BLA_isolated_simulation_report.md](BLA_isolated_simulation_report.md) | Full monolithic report (reference) |
 
-## Key Takeaway
+## Other
 
-> After-discharge (emotional inertia) was not achieved in isolated BLA.  
-> This is a **design-level finding**, not a simulation bug: inertia is a network-level property requiring cross-regional feedback (VTA, HYP, HIP, BLA→CeA→PAG).
+| File | Content |
+|------|---------|
+| [blueprint_corrections_v2.5.md](blueprint_corrections_v2.5.md) | Audit trail of blueprint v2.4 → v2.5 |
+| [BLA_isolated_simulation_report_CORRECTIONS.md](BLA_isolated_simulation_report_CORRECTIONS.md) | Accuracy corrections log |
 
-## Next Report Expected
-
-- Run 6 (BLA with Feng et al. 2019 parameters)  
-- CeA isolation study  
-- BLA → CeA two-region network
+Region-specific run archives also live under `Simulation tests/<Region>/reports/`.
