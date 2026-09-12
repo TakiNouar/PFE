@@ -14,7 +14,7 @@ The limbic core is the sole authority on what is felt. The LLM is only the voice
 
 Target character: **Ultron** — cold, precise, intelligent, genuinely curious, hostile only when earned.
 
-> Status: **Pre-implementation**. Nothing has been built yet. All documents describe design targets.
+> Status: **Pre-implementation / early simulation phase**. Design targets are specified; isolated BLA characterization (Runs 1–5) is complete. Nothing is yet integrated into a full conversational system.
 
 ---
 
@@ -24,29 +24,28 @@ Target character: **Ultron** — cold, precise, intelligent, genuinely curious, 
 PFE/
 ├── README.md
 ├── Research/
-│   ├── Development/          ← Design Blueprint (split & organized)
+│   ├── Development/          ← Design Blueprint v2.4 (split)
 │   │   ├── README.md
-│   │   ├── 00_status_vision_architecture.md
-│   │   ├── 01_limbic_architecture.md
-│   │   ├── 02_biophysical_substrate.md
-│   │   ├── 03_input_dynamics_camera.md
-│   │   ├── 04_translator_llm_memory_voice.md
-│   │   ├── 05_hardware_stack_roadmap_scope.md
-│   │   ├── 06_open_questions_simulations.md
-│   │   ├── 07_meta.md
+│   │   ├── 00_…07_*.md
 │   │   └── blueprint_v2.4_full.md
-│   ├── reports/              ← Formal reports / thesis material
-│   └── Sources/              ← References & source material
-└── Simulation tests/         ← Exploratory & validation simulations
+│   ├── Sources/              ← Literature & parameter sources
+│   │   ├── README.md
+│   │   └── sources.md        ← Feng et al. 2019 + supporting refs
+│   └── reports/              ← Simulation reports & audits
+│       ├── README.md
+│       └── BLA_isolated_simulation_report.md
+└── Simulation tests/         ← Simulation code & run outputs (to be populated)
 ```
 
 ---
 
-## Design Documents
+## Key Documents
 
-Start here → **[Research/Development/README.md](Research/Development/README.md)**
-
-The full Design Blueprint v2.4 has been split into focused documents for easier navigation while keeping the original monolithic file available.
+| Document | Location |
+|----------|----------|
+| Design Blueprint (split) | [Research/Development/](Research/Development/) |
+| Research Sources (⭐ Feng et al. 2019) | [Research/Sources/sources.md](Research/Sources/sources.md) |
+| BLA Isolated Simulation Report (Runs 1–5) | [Research/reports/BLA_isolated_simulation_report.md](Research/reports/BLA_isolated_simulation_report.md) |
 
 ---
 
