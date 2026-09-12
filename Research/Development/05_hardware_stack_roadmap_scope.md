@@ -57,16 +57,17 @@ If built as designed, the system would implement a continuous dynamical process 
 
 This would remain a research prototype, not a claim of sentience, even in its best-realized form.
 
-## 16. Implementation Roadmap
+## 16. Implementation Roadmap (Updated September 2026)
 
 | Phase | Window | Focus |
 |---|---|---|
-| Deep theory | Now → Dec 2026 | Finalize dynamical equations, connectivity matrices, neuromodulator kinetics, dual-route input formalism. Validate suppression gap and hypothalamic bypass in isolated, informal simulations. |
-| Concept perfection | Dec 2026 → Feb 2027 | Complete translator specification, affective-tagging schema, mid-generation shift protocol. Finalize 200–300 training pairs. |
-| Implementation | Mar → May 2027 | Build and integrate the full pipeline on the RTX 3060. QLoRA fine-tuning on cloud. Camera and continuous-loop integration. |
+| Simulation characterization | Sep → Dec 2026 | Per-region isolation studies: BLA done (5 runs), CeA next, then BLA→CeA two-region network. Establish validated parameters from literature (Feng et al. 2019) before wiring the full network. Apply corrected Feng et al. parameters to BLA (Run 6). |
+| Erasmus+ (parallel) | Oct 2026 → Feb 2027 | Exchange at WSB University, Poland. Simulation and theory work continues remotely; integration-heavy engineering deferred until return. Literature review, parameter validation, and design decisions can proceed during this period. |
+| Full network + theory | Dec 2026 → Mar 2027 | Wire the full 10-region network with validated per-region parameters. Finalize suppression gap equations, hypothalamic bypass rule, neuromodulator kinetics. Finalize 200–300 LLM training pairs. |
+| Implementation | Mar → May 2027 | Build and integrate the full pipeline on the RTX 3060. QLoRA fine-tuning on cloud GPU. Camera and continuous-loop integration. |
 | Testing + thesis | May → Jul 2027 | Systematic evaluation of emotional dynamics, mid-generation shifts, autonomous initiation, felt-knowledge retrieval. Write and defend the PFE. |
 
-**Honest risk note:** underestimating the integration cost of continuous real-time limbic dynamics coupled to an LLM is likely the single largest risk. Mid-generation state injection and suppression-gap fidelity are expected to be the hardest parts to get working end-to-end.
+**Risk note (updated):** Two risks are now better understood than when the original roadmap was written. First, the per-region isolation approach adds time to the early phase but substantially reduces the risk of compounding errors in the full network — the prior full-network approach failed across 4 attempts and would have failed again without isolated characterization. Second, the Erasmus+ period is an opportunity for focused theoretical work (reading Feng et al., finalizing connectivity matrices, writing training pairs) rather than a gap. Engineering tasks that require local hardware (RTX 3060, camera, continuous-loop testing) are correctly scoped to the post-exchange period.
 
 ## 17. PFE Scope — Must Have vs. Future Work
 
