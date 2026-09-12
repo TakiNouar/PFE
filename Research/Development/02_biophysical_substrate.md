@@ -35,7 +35,7 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 | Hypothalamus | 15 | Raw drive |
 | **Total** | **255** | Proposed scaled starting point |
 
-**BLA note (updated September 2026):** The N_pyr=50, N_PV=12, N_SOM=8 baseline has been empirically tested in the BLA isolated simulation study (5 runs). It produces desynchronized graded activity (synchrony index < 0.5, CV > 0.3, active_frac > 0.60) during a threat stimulus at the baseline scale under fixed in-degree connectivity with private Ornstein-Uhlenbeck drive. PV and SOM interneurons produce approximately 4× suppression of Pyr mean rate when active. These counts remain subject to revision once Feng et al. 2019 parameters are fully applied in Run 6, but they are no longer unjustified guesses. Full detail in Research/reports/.
+**BLA note (updated September 2026):** Default for the clean **Run 1** campaign is N_pyr=50, N_PV=12, N_SOM=8. An alternate 150/112/108 composition appeared in archived material only; it is **not** interchangeable with 50/12/8 (different E/I ratio) and is not used. Architecture: distance-dependent connectivity and Feng kinetics — see `Simulation tests/BLA/Research/architecture/`.
 
 **All other regions:** Numbers chosen for plausibility and computational tractability only. Not derived from empirical analysis. Each region will be characterized in isolation (CeA next, then BLA→CeA two-region network) before full-network wiring begins.
 
@@ -45,30 +45,34 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 
   If computational tractability requires it, a single-compartment model is acceptable as a first approximation, but the sAHP current must be explicitly included as a simplified somatic conductance (with the caveat that its interaction with Ca²⁺ will be less realistic). This simplification must be stated in any thesis chapter describing the simulation.
 
-- **Interneurons (PV, SOM, VIP):** Single-compartment fast-spiking models. PV interneurons use standard HH Na/K conductances only. SOM interneurons additionally require a persistent Na⁺ current (I_NaP) and a hyperpolarization-activated cation current (I_H) to reproduce their spontaneous activity at low drive. VIP interneurons additionally require a D-current (slowly inactivating K⁺). These additional currents explain why SOM neurons were silent in BLA simulation Runs 1–3 — they received insufficient drive to fire without their intrinsic depolarizing currents. (Source: eLife 2024, "BLA oscillations enable fear learning".)
+- **Interneurons (PV, SOM, VIP):** Single-compartment fast-spiking models. PV interneurons use standard HH Na/K conductances only. SOM interneurons additionally require a persistent Na⁺ current (I_NaP) and a hyperpolarization-activated cation current (I_H) to reproduce their spontaneous activity at low drive. VIP interneurons additionally require a D-current (slowly inactivating K⁺). (Source: Cattani et al. 2024, eLife.)
 
 - Conductance-based synapses with axonal/synaptic delays.
 
-- Short-term presynaptic depression on all synapse types (D_max=0.6, τ_D1=40ms, τ_D2=70ms for FSI→PN and PN→PN; source: Woodruff and Sah 2007).
+- **Short-term presynaptic depression, per connection type (Feng et al. 2019, Table 4):**
+  - FSI→PN: D_max = **0.6** (Woodruff & Sah 2007, BLA)
+  - PN→FSI: D_max = **0.7** (Woodruff & Sah 2007, BLA)
+  - PN→PN: D_max = **0.5** (**Silberberg et al. 2004, neocortex** — Feng states BLA-specific PN–PN depression data were unavailable; this is an explicit approximation)
+  - All connections: d1/d2 = 0.9/0.95, τ_D1/τ_D2 = 40/70 ms
 
 - An explicit dopamine variable (VTA-sourced) and a slower noradrenaline-like arousal variable (design incomplete — see open question [6]).
 
 - Structured (non-random) connectivity following the primary loops in §4.7, with distance-dependent connection probabilities for PN→PN (3% at <50μm, 2% at 50–100μm, 1% at 100–200μm, 0.5% at 200–600μm; source: Feng et al. 2019 citing Abatis et al. 2017).
 
-**Synaptic kinetics for BLA** (from Feng et al. 2019, constrained by direct BLA electrophysiology):
+**Synaptic kinetics for BLA** (Feng et al. 2019 Table 3; upstream sources as cited by Feng):
 
-| Connection | Receptor | Rise τ | Decay τ | Conductance |
-| ---------- | -------- | ------ | ------- | ----------- |
-| PN → PN    | AMPA     | 0.3 ms | 6.9 ms  | 1.0 nS      |
-| PN → PN    | NMDA     | 3.7 ms | 125 ms  | 0.5 nS      |
-| PN → FSI   | AMPA     | 0.1 ms | 2.4 ms  | 1.0 nS      |
-| FSI → PN   | GABA-A   | 0.5 ms | 6.8 ms  | 0.6 nS      |
+| Connection | Receptor | Rise τ | Decay τ | Conductance | Upstream (Feng cites) |
+| ---------- | -------- | ------ | ------- | ----------- | --------------------- |
+| PN → PN    | AMPA     | 0.3 ms | 6.9 ms  | 1.0 nS      | Mahanty & Sah 1998; Guzman et al. 2016 |
+| PN → PN    | NMDA     | 3.7 ms | 125 ms  | 0.5 nS      | (confirm Feng footnote) |
+| PN → FSI   | AMPA     | 0.1 ms | 2.4 ms  | 1.0 nS      | Mahanty & Sah 1998; Guzman et al. 2016 |
+| FSI → PN   | GABA-A   | 0.5 ms | 6.8 ms  | 0.6 nS      | Galarreta & Hestrin 1997 |
 
-NMDA Mg²⁺ block: s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹. E_GABA = −75 mV.
+NMDA Mg²⁺ block: s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹ (Zador et al. 1990). E_GABA = −75 mV.
 
-These parameters replace any earlier placeholder values used in exploratory simulations. Full derivation and sources in Research/Sources/.
+These parameters replace any earlier placeholder values. Full provenance in `Research/Sources/`.
 
-None of the full multi-structure network has been implemented as a coupled system. The informal simulations in §19 and the BLA isolated study (Runs 1–5) tested isolated pieces of this substrate, not the complete architecture.
+None of the full multi-structure network has been implemented as a coupled system. Archived isolated attempts and the biology/architecture dossiers under `Simulation tests/BLA/` inform the clean Run 1 campaign.
 
 **5.2.3 What This Phase Is Intended To Establish**
 

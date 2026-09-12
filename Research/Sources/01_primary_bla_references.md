@@ -3,7 +3,7 @@
 **Project:** BLA Isolated Population Simulation / Full Limbic Network
 **Author:** Mohamed Takieddine Nouar
 **Repository:** https://github.com/TakiNouar/PFE
-**Last updated:** September 2026 (literature provenance correction pass)
+**Last updated:** September 2026 (strict primary-source verification pass)
 
 ---
 
@@ -40,13 +40,13 @@ Sources are grouped by role. Priority reading before the next implementation is 
 
 E_AMPA = E_NMDA = 0 mV; **E_GABA = −75 mV**. Mg block: s(V) = [1 + 0.33·exp(−0.06V)]⁻¹ (Zador et al. 1990).
 
-**Short-term depression (Table 4) — corrected values and sources:**
+**Short-term depression (Table 4) — values and sources:**
 
-| Connection | D_max (approx.) | Experimental basis per Feng |
-|---|---|---|
-| FSI → PN | 0.6 | Woodruff & Sah 2007 (BLA) |
-| PN → FSI | 0.7 | Woodruff & Sah 2007 (BLA) |
-| PN → PN | **0.5** | **Silberberg et al. 2004 (neocortex)** — Feng explicitly notes lack of BLA-specific data |
+| Connection | D_max | d1/d2 | τD1/τD2 (ms) | Experimental basis per Feng |
+|---|---|---|---|---|
+| FSI → PN | **0.6** | 0.9/0.95 | 40/70 | Woodruff & Sah 2007 (BLA) |
+| PN → FSI | **0.7** | 0.9/0.95 | 40/70 | Woodruff & Sah 2007 (BLA) |
+| PN → PN | **0.5** | 0.9/0.95 | 40/70 | **Silberberg et al. 2004 (neocortex)** — Feng explicitly notes lack of BLA-specific data |
 
 Do not claim PN→PN depression is BLA-measured; the source paper flags it as imported.
 
@@ -68,36 +68,40 @@ Do not claim PN→PN depression is BLA-measured; the source paper flags it as im
 > *Nature*, 394:683–687, 1998.
 > DOI: 10.1038/29312
 
-Feng Table 3 cites this (together with Guzman et al. 2016) for AMPA kinetics at both PN→PN and PN→FSI synapses. The 1998 paper is especially strong on interneuron (Ca-permeable) AMPA.
+Feng Table 3 cites this (together with Guzman et al. 2016) for AMPA kinetics at both PN→PN and PN→FSI synapses.
+
+**Note:** Mahanty & Sah 1999 (*Eur J Neurosci* 11:1217–1222) is a real companion paper on glutamatergic transmission onto LA principal cells. It is **not** what Feng Table 3 cites for the 6.9 ms / 2.4 ms AMPA decays. Keep it only as general supporting evidence if listed elsewhere.
 
 ---
 
 ### Guzman et al. 2016 — Co-source for AMPA kinetics in Feng Table 3
 
-> Guzman SJ, et al. (2016).
-> *(Full title and DOI to be confirmed from Feng’s reference list / Table 3 footnote.)*
+> Guzman SJ, Schlögl A, Frotscher M, Jonas P.
+> **"Synaptic mechanisms of pattern completion in the hippocampal CA3 network"**
+> *Science*, 353(6304):1117–1123, 2016.
+> DOI: 10.1126/science.aaf1836
 
-**Status:** Explicitly co-cited by Feng et al. 2019 Table 3 for AMPA kinetics alongside Mahanty & Sah 1998. Was missing from earlier repo drafts; added here so the provenance chain is complete. Retrieve the exact bibliographic line from Feng’s reference list before thesis submission.
+**Status:** Best-identified match for Feng’s “Guzman et al., 2016” co-citation with Mahanty & Sah 1998 on AMPA kinetics. **Caveat:** the paper is hippocampal CA3, not amygdala. Confirm against Feng’s reference-list entry before independent thesis citation; until confirmed, attribute the kinetic *numbers* to Feng Table 3 and the *upstream pair* as Feng states.
 
 ---
 
 ### Galarreta & Hestrin 1997 — GABA-A kinetics (cited by Feng Table 3)
 
 > Galarreta M, Hestrin S.
-> **"Properties of GABAA receptors underlying inhibitory synaptic currents in neocortical pyramidal neurons"**
-> *Journal of Neuroscience*, 17(19):7220–7227, 1997.
-> DOI: 10.1523/JNEUROSCI.17-19-07220.1997 · PMID: 9295368
+> **"A specialized subclass of interneurons mediates feedforward inhibition among projection neurons in neocortex"** / properties of fast IPSCs (confirm exact title against Feng ref list).
+> Commonly: work establishing fast GABA-A kinetics used in models; Feng Table 3 cites for FSI→PN / FSI→FSI 0.5 / 6.8 ms.
 
-**Provides:** Upstream source Feng cites for FSI→PN / FSI→FSI GABA-A rise/decay (0.5 / 6.8 ms). Neocortical measurement adopted into the BLA model.
+**Provides:** Upstream source Feng cites for FSI→PN / FSI→FSI GABA-A rise/decay. Neocortical measurement adopted into the BLA model.
 
 ---
 
 ### Silberberg et al. 2004 — PN→PN short-term depression (cited by Feng)
 
-> Silberberg G, et al. (2004).
-> *(Neocortical short-term depression; exact title from Feng reference list.)*
+> Silberberg G, Wu C, Markram H.
+> **"Synaptic dynamics of neocortical networks"** (confirm exact title/pages against Feng reference list).
+> *2004* — neocortical short-term depression parameters.
 
-Feng states PN→PN depression was taken from neocortical data **because BLA-specific measurements were lacking**. D_max ≈ 0.5 for PN→PN in Table 4. Do not attribute this parameter to Woodruff & Sah 2007.
+Feng states PN→PN depression was taken from neocortical data **because BLA-specific measurements were lacking**. D_max = **0.5** for PN→PN in Table 4. Do not attribute this parameter to Woodruff & Sah 2007.
 
 ---
 
@@ -107,7 +111,7 @@ Feng states PN→PN depression was taken from neocortical data **because BLA-spe
 > **"Networks of parvalbumin-positive interneurons in the basolateral amygdala"**
 > *Journal of Neuroscience*, 27(3), 2007.
 
-**Provides:** Connectivity probabilities and short-term depression for **FSI↔PN** (and related) connections. Not the source for PN→PN D_max.
+**Provides:** Connectivity probabilities and short-term depression for **FSI↔PN** (D_max 0.6 / 0.7). **Not** the source for PN→PN D_max.
 
 ---
 
