@@ -6,6 +6,7 @@ A run is accepted only when every gate below passes. Failure of any gate stops t
 
 - [ ] Every kinetic coefficient and probability is present in `full_parameters.json` with a literature citation or ModelDB path.
 - [ ] `deviations.md` exists and is either empty (“no deviations”) or lists only environment-forced approximations that were pre-authorized.
+- [ ] Live parameters assert: AMPA PN→PN decay = 6.9 ms, NMDA decay = 125 ms, E_GABA = −75 mV, Mg block applied each step (not merely documented).
 
 ## Gate 1 — Reproducibility
 
@@ -39,4 +40,6 @@ A run is accepted only when every gate below passes. Failure of any gate stops t
 - [ ] Summary text contains only numbers that appear in the JSON/CSV tables of that run.
 - [ ] No template sentences, no invented claims.
 
-Only after all gates pass may the parameters be promoted for use in the multi-region network.
+Only after all gates pass may the parameters be promoted for multi-region work.
+
+Intermittent gamma is **not** a gate. If present, record it as a diagnostic under metrics.

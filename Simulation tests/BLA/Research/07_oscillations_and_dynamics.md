@@ -18,4 +18,4 @@
 
 - Local gamma provides a natural substrate for binding and for selective routing of information to downstream targets.
 - Competition among PN ensembles is a plausible microcircuit implementation of valence or threat-priority selection.
-- Any isolated BLA model that cannot generate intermittent gamma under realistic drive is missing essential recurrent dynamics.
+- Intermittent gamma under realistic drive is **desirable evidence** that recurrent PN–PV dynamics are healthy. It is a **diagnostic**, not a hard pass/fail gate for isolated Run 1 (see `architecture/10_validation_gates.md`). Scaled populations may not reproduce every statistic of Feng’s ~27 000-cell model; graded desynchronized rates, functional inhibition, and correct kinetics take priority.
