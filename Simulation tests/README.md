@@ -4,6 +4,14 @@ Isolated and multi-region simulation studies for the biophysical limbic network.
 
 ## Folder Structure
 
+Each region folder contains:
+
+```
+Region/
+├── reports/      ← run reports, audits, findings
+└── simulation/   ← code, configs, outputs, plots
+```
+
 | Folder | Purpose |
 |--------|---------|
 | **BLA/** | Basolateral Amygdala — isolated characterization (Runs 1–5 complete; Run 6 pending with Feng et al. 2019 parameters) |
@@ -22,5 +30,6 @@ Isolated and multi-region simulation studies for the biophysical limbic network.
 
 **Isolation-first:** characterize each region independently with literature-grounded parameters, then wire networks under `Neurons Connected/`.
 
-Reports and findings live in `Research/reports/`.
-Sources and parameters live in `Research/Sources/`.
+Cross-cutting reports and literature live in:
+- `Research/reports/`
+- `Research/Sources/`
