@@ -1,30 +1,34 @@
 # 02 — Population Structure
 
-## Default population (1.0×) — Run 1
+## Authoritative reference population for the next implementation
+
+**Locked choice: Blueprint scale**
 
 | Population | Count | Role |
 |------------|-------|------|
-| Principal (Pyr / PN) | 50 | Glutamatergic, long-range projecting |
-| PV-like (fast-spiking) | 12 | Perisomatic inhibition, PING partner |
-| SOM-like | 8 | Distal dendritic inhibition |
+| Principal (Pyr / PN) | **50** | Glutamatergic, long-range projecting |
+| PV-like (fast-spiking) | **12** | Perisomatic inhibition, PING partner |
+| SOM-like | **8** | Distal dendritic inhibition |
 | **Total** | **70** | |
 
-This is the **only default** for Run 1. Scale sweeps use 0.5×, 1.0×, 1.5×, 3.0× with the **same proportions** (e.g. 3.0× → 150 / 36 / 24). Do not change the inhibitory fraction independently of Pyr count.
+Ratio ≈ 1 : 0.24 : 0.16 (excitatory-dominant, consistent with biological BLA ≈ 80–90 % principal cells).
+
+### Why not 150 / 112 / 108?
+
+A later experimental request used 150 Pyr / 112 PV / 108 SOM (near 1 : 0.75 : 0.72). That composition is **not** interchangeable with the blueprint:
+
+- It makes inhibitory cells almost as numerous as principal cells, which does not match BLA histology.
+- Distance-dependent and probability-based connectivity were derived under excitatory-dominant densities.
+- Using the expanded counts without re-deriving connection probabilities would distort E/I balance.
+
+**Decision:** All future isolated-BLA characterization runs use **50 / 12 / 8** (or exact proportional scales of that ratio). The 150/112/108 figures are retained only as historical notes in test_run_1 reports and must not be used as the design target.
+
+## Scale sweep
+
+Multiply every population by the same factor (0.5×, 1.0×, 1.5×, 3.0×) so relative proportions stay constant.
 
 ## Spatial layout
 
-- Place cells in a cubic volume sized so that mean density is consistent with the literature scale used by Feng (rat BL density; exact side length reported in `full_parameters.json`).
-- Minimum inter-soma distance > 25 µm (Feng-style exclusion).
-- Report: volume side length, mean pairwise PN–PN distance, realized density.
-
-## Cell classes
-
-- **PN:** glutamatergic; may be split into Type-A (strong adaptation) and Type-C (weak adaptation) if ModelDB templates distinguish them; otherwise a single adapting class is acceptable and must be documented.
-- **PV-like:** fast-spiking interneuron from Kim/Feng.
-- **SOM-like:** for Run 1, the same fast-spiking kinetics as PV-like may be used **only if documented in `deviations.md`** as a temporary limitation. Distinct SOM currents (NaP, H) from later extensions may be added in a later run and labelled as post-Feng.
-
-## What must not be done
-
-- Do not keep PN count fixed while scaling only inhibitory populations (or vice versa).
-- Do not use a pure feed-forward architecture; recurrent PN→PN connections are required.
-- Do not introduce a second “experimental” baseline without a written decision in `reports/` that updates this file.
+- Place somata randomly in a cubic volume sized to preserve literature density (Feng reference: ~27 000 cells in a 1.4 mm cube for the full rat BL model, scaled to N = 70).
+- Minimum inter-soma distance > 25 µm.
+- Euclidean distances drive PN→PN connection probabilities.

@@ -1,27 +1,32 @@
 # Research Folder — Accuracy Verification Corrections Log
 
-**Date:** September 2026
+**Last updated:** September 2026 (provenance correction pass)
 
-## High-priority fixes applied
+## High-priority provenance fixes (this pass)
 
-| Issue | Action |
-|-------|--------|
-| Mahanty & Sah 1998 conflated with 1999 | Split: 1998 (*Nature*) = FSI Ca-permeable AMPA (2.4 ms); 1999 (*Eur J Neurosci*) = PN excitatory inputs (basis for 6.9 ms PN→PN AMPA) |
-| Weisskopf 1999 wrong title | Corrected to L-type VGCC / NMDA-independent LTP paper; explicit note that it is not the verified source of τ_NMDA = 125 ms |
-| Rainnie 1993 wrong title | Corrected to *Intracellular recordings from morphologically identified neurons of the basolateral amygdala* |
-| Destexhe year 2001 → 2003 | Corrected in all primary/computational source files |
-| Headley 2021 second author | Kanta V → **Kyriazi P** |
-| Kim 2013 title/journal | Corrected to *Mechanisms contributing to the induction and storage of Pavlovian fear memories in the lateral amygdala*, *Learn Mem* 20:421–430 |
-| eLife 2024 authors missing | Filled: Cattani A, Arnold DB, McCarthy M, Kopell N |
-| Wang & Buzsáki 1996 called PING | Corrected: paper describes **ING**; BLA mechanism in Feng is **PING** (Traub/Whittington lineage) |
-| Abatis 2017 incomplete | Flagged; numbers attributed to Feng Tables 5–6 |
-| Samson & Paré 2006 incomplete | Full citation added |
-| Full-network “3 attempts” / 2× vs 4× | Already corrected in prior pass; overlay and split reports remain authoritative |
+| Issue | Correction |
+|-------|------------|
+| AMPA source | Feng Table 3 cites **Mahanty & Sah 1998 + Guzman et al. 2016**, not Mahanty & Sah 1999. 1999 paper remains a real companion study but is not Feng’s cited source for the 6.9 ms value. |
+| GABA-A source | Feng Table 3 attributes 0.5/6.8 ms to **Galarreta & Hestrin 1997**. Added. |
+| STP PN→PN | D_max = **0.5** (not 0.6); source = **Silberberg et al. 2004 (neocortex)**. Woodruff & Sah 2007 covers FSI-related connections only. |
+| Destexhe noise model | Methods source = **Destexhe, Rudolph, Fellous, Sejnowski 2001**, *Neuroscience* 107:13–24. The 2003 *Nat Rev Neurosci* paper is a different review. |
+| Population counts | Locked to blueprint **50 Pyr / 12 PV / 8 SOM**. 150/112/108 is historical only and not biologically interchangeable. |
 
-## Remaining open (not errors, but for thesis hygiene)
+## Previously applied fixes (still valid)
 
-1. Exact experimental source of Feng’s 125 ms NMDA decay (check Table 3 footnotes).
-2. Full DOI/PMID for Abatis et al. 2017 if cited independently of Feng.
-3. When Run 5 code is available, re-verify the 0.852 NMDA current fraction.
+- Rainnie 1993 title corrected
+- Weisskopf 1999 title corrected + hedged on τ_NMDA source
+- Headley 2021 second author = Kyriazi P
+- Kim 2013 title/journal corrected
+- eLife 2024 authors = Cattani, Arnold, McCarthy, Kopell
+- Wang & Buzsáki = ING, not PING
+- Suppression ratio unified to ~2×
+- Full-network attempts = 4
 
-None of the corrections change the scientific conclusions of the design or the isolated BLA study.
+## Still open
+
+1. Exact Feng footnote for τ_NMDA = 125 ms.
+2. Full bibliographic line for Guzman et al. 2016 and Silberberg et al. 2004 from Feng’s reference list.
+3. Full DOI for Abatis et al. 2017 if cited independently of Feng.
+
+None of these corrections change the numerical kinetic targets used by the architecture; they correct **provenance** so the thesis can defend every number.
