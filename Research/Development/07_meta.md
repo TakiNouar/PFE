@@ -14,5 +14,6 @@ Exact Hodgkin–Huxley parameter tables, integrator settings, training corpus fo
 | 2.2 | Gap fill | BLA/CeA split, sensory routes, arousal dimension, PAG, bypass rule, affective priming mechanism |
 | 2.3 | Master synthesis | Unified document; added an (incorrectly-framed) "current implementation" snapshot |
 | **2.4** | **Correction pass** | **Removed all "implemented"/"current prototype" framing — nothing has been built. Reframed §5.2 as a proposed target, not a measured snapshot. Consolidated all open questions (including six surfaced while building the architecture diagram) into a single §18. Added §19 documenting two informal exploratory simulations and the open scaling question they raised. Tense corrected throughout to reflect pre-implementation status.** |
+| **2.5** | **Simulation alignment** | **Updated status block, open question [2], §19 simulation notes, §5.2.1 BLA population note, §5.2.2 biophysical substrate, §16 roadmap to reflect: BLA isolated study (5 runs complete), Feng et al. 2019 parameter sources, Erasmus+ timeline (Oct 2026 – Feb 2027), and isolation-first simulation strategy.** |
 
-*End of Design Blueprint v2.4*
+*End of Design Blueprint v2.5*

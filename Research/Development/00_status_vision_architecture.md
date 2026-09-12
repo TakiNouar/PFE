@@ -1,5 +1,5 @@
 # Emotionally Grounded Conversational AI
-### Design Blueprint — v2.4 (Pre-Implementation Edition)
+### Design Blueprint — v2.5 (Pre-Implementation Edition)
 
 Mohamed Takieddine Nouar
 Higher Institute of Sciences — HIS, Algiers
@@ -7,11 +7,19 @@ Bachelor PFE | Computer Science
 
 ---
 
-## Status of this document
+## Status of this document — updated September 2026
 
-**Nothing described below has been built, coded, or prototyped.** Every specification, population count, and mechanism in this document is a *design target* — a decision about what should eventually be built and why — not a report of something that exists. Earlier drafts (v2.1–v2.3) contained a section describing a "current implemented limbic core" with measured population counts; that framing was incorrect and has been removed. Where earlier drafts used present tense to describe system behavior ("the system implements...", "the model is trained to..."), this edition uses conditional or future tense ("the system is intended to implement...", "the model will be trained to...") to keep the document honest about project stage.
+The full 10-region integrated system described in this blueprint has not been built. Every specification for the complete architecture (multi-region wiring, translator layer, LLM fine-tuning, voice synthesis, camera integration) remains a design target, not an implemented system.
 
-This matters for two reasons: first, because a jury or reviewer reading present-tense implementation claims will reasonably expect to see a running system, and second, because treating design decisions as already-validated facts (rather than open questions) hides exactly the risks that need attention during the planning phase.
+However, simulation work has begun. As of September 2026:
+
+* A full-network simulation (10 regions simultaneously) was attempted across four attempts. It established that 6 of 10 regions (BLA, CeA, HIP, INS, ACC, PAG) can be made to produce healthy activity, while PFC flatlines in Stage-2 runs, HYP shows only fixed baseline activity, and NAc/VTA remain completely dead due to wiring errors (zero inbound connections to VTA; NAc receives input only from dead VTA). Full documentation in Research/reports/.
+* A BLA isolated simulation was completed across 5 runs, establishing validated baseline parameters for the basolateral amygdala sub-populations (pyramidal, PV, SOM) before wiring the full network. Key findings are in Research/reports/.
+* A literature review identified Feng et al. 2019 (eNeuro) as the primary biological reference for BLA parameters, revealing that several parameters used in early simulation runs were incorrect. Corrections are specified in Research/reports/ and Research/Sources/.
+
+The isolation-first simulation strategy (characterize each region independently, then wire the network) was adopted after the full-network attempts revealed that compounding errors across all 10 regions simultaneously made diagnosis impossible.
+
+Where earlier drafts (v2.1–v2.3) used present tense to describe system behavior, this edition uses conditional or future tense to keep the document honest about project stage. The simulation findings do not change any design decisions in this blueprint — they inform the parameter choices and confirm which dynamic targets require network-level interaction rather than single-region implementation.
 
 ---
 
