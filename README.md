@@ -6,48 +6,47 @@
 
 ---
 
-## Project Vision
+## Vision
 
-Build a conversational AI system whose emotional state is produced by a continuous **biophysical limbic simulation** (Hodgkin–Huxley neurons), not by scripted role-play from a language model.
+A conversational AI whose emotional state is produced by a continuous **biophysical limbic simulation** (Hodgkin–Huxley neurons), not by scripted role-play.
 
-The limbic core is the sole authority on what is felt. The LLM is only the voice that translates the neural state.
+The limbic core is the sole authority on what is felt. The LLM only translates that state.
 
 Target character: **Ultron** — cold, precise, intelligent, genuinely curious, hostile only when earned.
 
-> Status: **Pre-implementation / early simulation phase**. Design targets are specified; isolated BLA characterization (Runs 1–5) is complete. Nothing is yet integrated into a full conversational system.
+> Status: **Early simulation phase.** Design Blueprint v2.5 is complete. BLA isolated characterization (Runs 1–5) is done. Full pipeline is not yet built.
 
 ---
 
-## Repository Structure
+## Repository Layout
 
 ```
 PFE/
 ├── README.md
 ├── Research/
-│   ├── Development/          ← Design Blueprint v2.4 (split)
-│   ├── Sources/              ← Literature (split by topic)
-│   │   ├── 01_primary_bla_references.md   ⭐ Feng et al. 2019
-│   │   ├── 02_…07_*.md
-│   │   └── sources_full.md
-│   └── reports/              ← Simulation reports (split)
-│       ├── 00_overview_and_context.md
-│       ├── 01_…05_*.md
-│       └── BLA_isolated_simulation_report_full.md
-└── Simulation tests/         ← Simulation code & run outputs (to be populated)
+│   ├── Development/     Design Blueprint v2.5 (split)
+│   ├── Sources/         Literature & parameter references
+│   └── reports/         Project-level simulation reports & audits
+└── Simulation tests/
+    ├── BLA/ … PAG/      One folder per limbic region
+    │   ├── reports/      Region-specific run reports
+    │   └── simulation/   Code, configs, outputs
+    └── Neurons Connected/   Multi-region / full-network sims
 ```
 
 ---
 
-## Key Documents
+## Start Here
 
-| Document | Start here |
-|----------|------------|
-| Design Blueprint | [Research/Development/](Research/Development/) |
-| Research Sources (⭐ Feng et al. 2019) | [Research/Sources/](Research/Sources/) |
-| BLA Isolated Simulation Report (Runs 1–5) | [Research/reports/](Research/reports/) |
+| What | Where |
+|------|--------|
+| Design Blueprint v2.5 | [Research/Development/](Research/Development/) |
+| Literature (Feng et al. 2019 ⭐) | [Research/Sources/](Research/Sources/) |
+| BLA simulation report (Runs 1–5) | [Research/reports/](Research/reports/) |
+| Per-region sim work | [Simulation tests/](Simulation%20tests/) |
 
 ---
 
 ## Core Constraint
 
-The language model may **never** invent, override, or perform an emotion that is not present in the neural state vector produced by the limbic simulation.
+The language model may **never** invent, override, or perform an emotion that is not present in the neural state vector.
