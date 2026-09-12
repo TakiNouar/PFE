@@ -3,7 +3,9 @@
 **Location:** `Simulation tests/BLA/Research/architecture/`  
 **Purpose:** Complete, literature-constrained specification of how the isolated BLA simulation must be built. No code — only structure, numbers, rules, and module mapping.
 
-This series is the authoritative design for the next implementation. It supersedes all guessed parameters from test_run_1.
+This series is the authoritative design for **Run 1** (clean restart). It supersedes all guessed parameters from the archived failed tests in `reports/test_run_1/`.
+
+The Design Blueprint is a living project outline only; when this architecture and the literature disagree with older blueprint numbers, **this architecture and the literature win**, and the blueprint should be updated afterward.
 
 ---
 
@@ -22,7 +24,7 @@ This series is the authoritative design for the next implementation. It supersed
 | `08_metrics_and_outputs.md` | Required metrics, file outputs, reproducibility checks |
 | `09_code_module_map.md` | Recommended package / module structure (no code) |
 | `10_validation_gates.md` | Gate checklist before accepting a run |
-| `11_anti_patterns.md` | Explicit list of what failed in test_run_1 and must not be repeated |
+| `11_anti_patterns.md` | Explicit list of what failed in archived tests and must not be repeated |
 
 ---
 
@@ -31,16 +33,16 @@ This series is the authoritative design for the next implementation. It supersed
 Every number and every kinetic form must be traceable to:
 
 1. Feng et al. 2019 (eNeuro) + ModelDB 247968, or
-2. Kim et al. 2013 (*Learn Mem*) + ModelDB 150288, or
-3. The supporting experimental papers listed in `Research/Sources/` (Mahanty & Sah 1998/1999, Woodruff & Sah 2007, etc.).
+2. Kim et al. 2013 + ModelDB 150288, or
+3. The supporting experimental papers listed in `Research/Sources/`.
 
-If a required value is missing from those sources, the implementation **stops** and reports the gap. No substitution, no cortical defaults, no “reasonable” guesses.
+If a required value is missing from those sources, the implementation **stops** and reports the gap. No substitution, no cortical defaults presented as BLA fact, no “reasonable” guesses.
 
 ---
 
 ## Scope of this architecture
 
-**In scope (isolated BLA characterization):**
+**In scope (isolated BLA Run 1):**
 - Principal neurons + PV-like + SOM-like populations
 - Local recurrent circuitry with correct kinetics and connectivity
 - Graded, desynchronized activity under moderate drive
@@ -53,3 +55,4 @@ If a required value is missing from those sources, the implementation **stops** 
 - Dynamic neuromodulation (DA, NA, ACh)
 - Projection-defined ensembles (NAc / CeA / vHPC)
 - Full 10-region wiring
+- Intermittent gamma as a hard pass/fail criterion (diagnostic only)

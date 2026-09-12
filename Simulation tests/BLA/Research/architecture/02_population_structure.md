@@ -1,10 +1,6 @@
 # 02 — Population Structure
 
-## Reference population (1.0×)
-
-Two admissible reference sizes are defined. Choose one and keep it fixed for the entire characterization run series.
-
-### Option A — Blueprint scale (preferred for first successful full run)
+## Default population (1.0×) — Run 1
 
 | Population | Count | Role |
 |------------|-------|------|
@@ -13,30 +9,22 @@ Two admissible reference sizes are defined. Choose one and keep it fixed for the
 | SOM-like | 8 | Distal dendritic inhibition |
 | **Total** | **70** | |
 
-### Option B — Expanded scale (later request)
-
-| Population | Count |
-|------------|-------|
-| Principal | 150 |
-| PV-like | 112 |
-| SOM-like | 108 |
-| **Total** | **370** |
-
-**Rule:** All scale-sweep factors (0.5×, 1.5×, 3.0×) multiply every population by the same factor so relative proportions stay constant.
+This is the **only default** for Run 1. Scale sweeps use 0.5×, 1.0×, 1.5×, 3.0× with the **same proportions** (e.g. 3.0× → 150 / 36 / 24). Do not change the inhibitory fraction independently of Pyr count.
 
 ## Spatial layout
 
-- Place somata uniformly at random inside a cubic volume whose side length is chosen so that the resulting density matches the literature density used by Feng (~27 000 cells in a 1.4 mm cube for the full rat BL model, scaled appropriately for the chosen N).
-- Enforce a minimum inter-soma distance (Feng used >25 µm) to avoid spatial collapse.
-- Compute Euclidean pairwise distances for all PN–PN pairs; these distances drive the connection probabilities.
+- Place cells in a cubic volume sized so that mean density is consistent with the literature scale used by Feng (rat BL density; exact side length reported in `full_parameters.json`).
+- Minimum inter-soma distance > 25 µm (Feng-style exclusion).
+- Report: volume side length, mean pairwise PN–PN distance, realized density.
 
-## Cell-type identity for this isolated phase
+## Cell classes
 
-- **PN:** multi-compartment, adapting (I_sAHP present). Optionally split into Type-A (strong adaptation) and Type-C (weak adaptation) if the ModelDB templates distinguish them; otherwise a single adapting class is acceptable.
-- **PV-like:** fast-spiking interneuron model from Kim/Feng.
-- **SOM-like:** for the first isolated characterization, the same fast-spiking kinetics as PV may be used (as previously authorized). Distinct SOM currents (NaP, H) from Cattani et al. 2024 may be added later and must be labelled as a post-Feng extension.
+- **PN:** glutamatergic; may be split into Type-A (strong adaptation) and Type-C (weak adaptation) if ModelDB templates distinguish them; otherwise a single adapting class is acceptable and must be documented.
+- **PV-like:** fast-spiking interneuron from Kim/Feng.
+- **SOM-like:** for Run 1, the same fast-spiking kinetics as PV-like may be used **only if documented in `deviations.md`** as a temporary limitation. Distinct SOM currents (NaP, H) from later extensions may be added in a later run and labelled as post-Feng.
 
 ## What must not be done
 
 - Do not keep PN count fixed while scaling only inhibitory populations (or vice versa).
 - Do not use a pure feed-forward architecture; recurrent PN→PN connections are required.
+- Do not introduce a second “experimental” baseline without a written decision in `reports/` that updates this file.
