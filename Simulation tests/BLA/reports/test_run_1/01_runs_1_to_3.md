@@ -48,6 +48,8 @@
 
 **Cause:** Fixed K=3 keeps recurrent excitation per neuron constant while inhibitory populations scale with N → inhibition wins at large N.
 
+**Interneuron effectiveness ratio (1.0×):** 0.51 → **~2× suppression** of peak rate when inhibitory synapses are active vs silenced. (Earlier summary tables that said “~4×” were inconsistent with this measured ratio and have been corrected.)
+
 **After-discharge:** Zero across all fixed-indegree runs.
 
 **What was established:** Graded desynchronized activity is achievable once shared drive is broken. Reproducibility is achievable with a single global seed.

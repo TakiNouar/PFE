@@ -20,6 +20,8 @@
 
 **Best calibration point:** τ=120 ms, g_NMDA=0.040 → mean 46.4 Hz, after_r=9.2 Hz, **after_d=0 ms**, syn=0.393, NMDA current fraction ≈ 0.85.
 
+**ISI note:** Reported mean ISI = 22.9 ms at this point. 1000/46.4 ≈ 21.6 ms. The small difference is expected: ISI is measured from inter-spike intervals of *active* neurons, while 1/mean_rate includes the contribution of silent cells (active fraction < 1).
+
 **Scale sweep (selected parameters):**
 
 | Scale | N_pyr | Mean (Hz) | Active frac | After_d |
@@ -47,7 +49,7 @@ Emotional inertia is a **network-level** property (VTA dopamine tone, HIP contex
 
 Isolated characterization should only be required to deliver:
 - graded desynchronized activity,
-- functional interneuron suppression,
+- functional interneuron suppression (~2× at the measured ratio 0.51),
 - reproducible parameters.
 
 Those were achieved (with caveats on kinetics). After-discharge belongs to the multi-region phase.
