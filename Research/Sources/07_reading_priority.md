@@ -1,16 +1,19 @@
-# Reading Priority for Run 6
+# Reading Priority for Next Implementation
 
 | Priority | Paper | Specific sections to read |
 |---|---|---|
 | ⭐⭐⭐ | Feng et al. 2019 | Methods: Model Implementation, Tables 1–7 |
-| ⭐⭐⭐ | Feng et al. 2019 code | `function_calcconduc.hoc`, cell definition files |
-| ⭐⭐ | Kim et al. 2013 | Single-cell model parameters, sAHP current |
-| ⭐⭐ | Weisskopf & LeDoux 1999 | NMDA kinetics measurement in rat BLA |
-| ⭐⭐ | Mahanty & Sah 1998 | AMPA kinetics measurement in rat BLA |
+| ⭐⭐⭐ | Feng et al. 2019 ModelDB code | cell definition `.hoc` / `.mod` files, synaptic & noise mechanisms |
+| ⭐⭐ | Kim et al. 2013 (*Learn Mem*) | Single-cell PN/FSI models, I_sAHP |
+| ⭐⭐ | Mahanty & Sah 1999 (*Eur J Neurosci*) | PN (pyramidal) excitatory synaptic inputs — AMPA/NMDA onto principal cells |
+| ⭐⭐ | Mahanty & Sah 1998 (*Nature*) | Calcium-permeable AMPA on interneurons (FSI kinetics) |
 | ⭐⭐ | Woodruff & Sah 2007 | FSI connectivity probabilities and short-term depression |
-| ⭐ | Destexhe et al. 2001 | OU conductance noise model, Table with PN/FSI parameters |
-| ⭐ | eLife 2024 (BLA fear learning) | SOM and VIP interneuron additional currents |
+| ⭐ | Destexhe et al. 2003 | High-conductance state / OU conductance-noise framework |
+| ⭐ | Cattani et al. 2024 (*eLife*) | SOM & VIP additional currents (NaP, H, D); PING support of fear learning |
+| ⭐ | Weisskopf, Bauer & LeDoux 1999 | L-type VGCC–dependent, NMDA-independent LTP at thalamic input to LA (not the primary τ_NMDA source) |
+
+**Note:** τ_NMDA = 125 ms is the value adopted in Feng Table 3. Confirm the experimental source from Feng’s footnotes before attributing it to any single 1999 paper.
 
 ---
 
-*This document covers sources identified and used (or found not to have been used) during the BLA isolated simulation study, Runs 1–5. It will be updated as the project progresses to CeA characterization and the full 10-region network.*
+*Updated after the September 2026 accuracy verification pass. This list will be revised as the project moves to CeA characterization and the multi-region network.*
