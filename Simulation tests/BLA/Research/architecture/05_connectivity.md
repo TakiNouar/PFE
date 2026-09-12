@@ -15,36 +15,42 @@ After placing somata in the volume, for every ordered pair (i ≠ j):
 | 200 ≤ d < 600 | 0.005 |
 | d ≥ 600 | 0 |
 
-3. Draw a Bernoulli trial from the global RNG. If success, create AMPA + NMDA synapses on the postsynaptic dendrite.
+3. Bernoulli trial from the global RNG. On success, create AMPA + NMDA synapses on the postsynaptic dendrite.
 
-**Forbidden:** fixed in-degree K = 3 (or any fixed K) while freely scaling population size. That produced the large-N collapse in test_run_1.
+**Forbidden:** fixed in-degree K = 3 (or any fixed K) while freely scaling population size. That produced the large-N collapse in the archived failed tests.
 
 ## PV → PN
 
-- Probability ≈ **0.34** (unidirectional).
+- Probability **P_PV_PN = 0.34** (unidirectional).
 - Target: soma / proximal dendrite (perisomatic).
 
 ## PN → PV
 
 - ≈ 0.12 unidirectional + ≈ 0.16 reciprocal (Woodruff & Sah / Feng).
-- In practice a combined probability draw that yields the published uni/reciprocal fractions is acceptable.
+- Implement so that realized uni/reciprocal fractions are reported after wiring.
 
 ## PV → PV
 
 - ≈ 0.26 total chemical connectivity.
-- Gap junctions only if the ModelDB implementation includes them and they can be loaded without invention.
+- Gap junctions only if ModelDB includes them and they load without invention; otherwise omit and note in `deviations.md`.
 
 ## SOM → PN
 
-- Use the same GABA-A kinetics as PV→PN.
-- Probability may be set equal to (or a documented fraction of) the PV→PN probability for the isolated phase; exact SOM-specific anatomical probabilities are less completely quantified and any choice must be stated.
+- GABA-A kinetics same as PV→PN.
+- **Named constant for Run 1:** `P_SOM_PN = 0.34` (same as PV→PN), documented as an approximation because SOM-specific anatomical probabilities are less complete than PV.
+- Any other value must be written into `full_parameters.json` and justified in `deviations.md`.
+
+## PN → SOM
+
+- Use PN→PV AMPA/NMDA kinetics (2.4 ms AMPA decay).
+- Probability: report the value used; default equal to PN→PV unidirectional probability unless ModelDB specifies otherwise.
 
 ## Construction algorithm (required order)
 
-1. Place all somata (respecting density and minimum distance).
+1. Place all somata (density + minimum distance).
 2. Build PN→PN edges from distance probabilities.
 3. Build PV↔PN and PV↔PV edges from fixed probabilities.
-4. Build SOM→PN edges.
-5. Attach AMPA/NMDA or GABA-A synapses with the kinetic parameters of §04.
-6. Enable dynamic STP on every synapse.
-7. Report: volume side length, mean pairwise PN–PN distance, number of synapses of each type, realized connection probabilities.
+4. Build SOM→PN (and PN→SOM) edges.
+5. Attach AMPA/NMDA or GABA-A synapses with §04 kinetics.
+6. Enable dynamic STP on every synapse (Feng Table 4 numbers).
+7. Report: volume side length, mean pairwise PN–PN distance, synapse counts by type, **realized** connection probabilities.

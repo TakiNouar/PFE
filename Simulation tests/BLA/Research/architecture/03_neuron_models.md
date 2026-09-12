@@ -5,7 +5,7 @@
 ### Morphology
 
 - Multi-compartment: **soma + apical (or proximal) dendrite + passive / distal dendrite**.
-- Geometry numbers (L, diam, nseg) taken from the Kim/Feng cell templates, not invented.
+- Geometry (L, diam, nseg) taken from Kim/Feng cell templates, not invented.
 
 ### Currents (all from ModelDB / Kim–Feng)
 
@@ -21,24 +21,32 @@
 | **I_sAHP** | Slow Ca-dependent AHP — **mandatory for adaptation** |
 | Leak | Resting conductance |
 
-Passive parameters (C_m, R_a, g_L, E_L) and maximal conductance densities must be copied from the same source files / tables.
+Passive parameters (C_m, R_a, g_L, E_L) and maximal conductance densities must be copied from the same source files / tables into `full_parameters.json`.
 
 ### Heterogeneity
 
-- If the source files specify ranges, use them.
-- Otherwise apply a uniform ±10 % variation on C_m, g_L and E_L only, drawn once per neuron from the global seed.
+- If the source files specify ranges, use those ranges only.
+- If the source does **not** specify ranges, use **0%** extra heterogeneity for Run 1 (identical passive parameters across cells of a class). Do not invent ±10% (or any other spread) without a cited justification and an entry in `deviations.md`.
 
 ## PV-like fast-spiking interneuron
 
-- Morphology and currents from the FSI templates in Kim/Feng (typically soma + dendrite).
+- Morphology and currents from the FSI templates in Kim/Feng.
 - Short action-potential duration, essentially non-adapting high-frequency trains.
 - Lower C_m / higher leak relative to PNs as in the source models.
 
 ## SOM-like
 
-- Phase-1 (isolated characterization): identical kinetics to PV-like is acceptable and must be documented.
-- Phase-2 (optional extension): add NaP and H currents from Cattani et al. 2024; document as a post-Feng addition.
+- Run 1: identical kinetics to PV-like is acceptable **only with a `deviations.md` entry**.
+- Later: add NaP and H currents from the extended literature; document as post-Feng.
 
 ## Implementation rule
 
-Prefer loading the compiled NMODL mechanisms from ModelDB 247968 / 150288. If the environment cannot run NEURON, a pure-Python or Brian2 re-implementation is allowed **only** if every coefficient is taken from the published tables / `.mod` files and every approximation is listed in a deviations section. Re-deriving α/β expressions from memory is forbidden.
+Prefer loading compiled NMODL mechanisms from ModelDB 247968 / 150288.
+
+If the environment cannot run NEURON, a Brian2 (or pure-Python) re-implementation is allowed **only** if:
+1. Every coefficient is taken from published tables / `.mod` files, and
+2. Every approximation is listed in `deviations.md`.
+
+Re-deriving α/β expressions from memory is forbidden.
+
+**Simulator preference:** NEURON + ModelDB first; Brian2 second with full coefficient table in `full_parameters.json`.
