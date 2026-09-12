@@ -27,7 +27,7 @@
 > *Journal of Neurophysiology*, 69(4):1350–1362, 1993.
 > DOI: 10.1152/jn.1993.69.4.1350 · PMID: 8492168
 
-**Provides:** Electrophysiological characterization of adapting vs continuous-spiking principal cells and FSIs; basis for adaptation classification and sAHP magnitudes used in Kim/Feng models. (Previous draft listed an unrelated adenosine/dopamine title; corrected.)
+**Provides:** Electrophysiological characterization of adapting vs continuous-spiking principal cells and FSIs; basis for adaptation classification and sAHP magnitudes used in Kim/Feng models.
 
 ---
 
@@ -38,3 +38,39 @@
 > *PNAS*, 87(17), 1990.
 
 **Provides:** s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹, the voltage-dependent Mg²⁺ block used in Feng et al.
+
+---
+
+### McDonald & Betette 2001 — PV interneuron fraction (rat BLA)
+
+> McDonald AJ, Betette RL.
+> **"Parvalbumin-containing neurons in the rat basolateral amygdala: morphology and co-localization of Calbindin-D28k"** (confirm exact title against PDF).
+> *Neuroscience*, 102(2):413–425, 2001.
+
+**Provides:** PV+ neurons as “∼50% of the interneuronal population” in rat BLA. Primary source for the PV row in `Simulation tests/BLA/Research/02_cell_types.md`. **Not** replaceable by Mascagni & McDonald 2003.
+
+---
+
+### McDonald & Mascagni 2002 — SOM interneuron fraction (rat BLA)
+
+> McDonald AJ, Mascagni F.
+> **Somatostatin-containing interneurons in rat basolateral amygdala** (confirm exact title).
+> *Brain Research*, 943:237–244, 2002.
+
+**Provides:** SOM+ = 11–18% of the GABAergic population. Primary source for the SOM row in `02_cell_types.md`.
+
+---
+
+### Mascagni & McDonald 2003 — CCK interneurons (rat BLA)
+
+> Mascagni F, McDonald AJ.
+> **Cholecystokinin-immunoreactive neurons in the rat basolateral amygdala** (confirm exact title).
+> *Brain Research*, 976:171–184, 2003.
+
+**Provides:** CCK-containing neuron description/percentages. Use **only** for the CCK row — not as a blanket citation for the whole interneuron taxonomy table.
+
+---
+
+### VIP / CR percentage — open
+
+No single primary paper has been locked for the ~30–35% VIP/CR (small peptide) class used in secondary summaries. Do not attribute this row to Mascagni & McDonald 2003. Locate before thesis citation.
