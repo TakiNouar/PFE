@@ -1,38 +1,49 @@
 # 04 — Synaptic Models
 
-All values below are the required targets. Units: time in ms, conductance in nS, voltage in mV.
+**Source of truth:** `Research/Sources/01_primary_bla_references.md` (Feng Table 3/4 + upstream papers).  
+See also `12_sources_map.md`.
+
+Units: time **ms**, conductance **nS**, voltage **mV** (Feng convention).
 
 ## Receptor kinetics (Feng Table 3)
 
-| Connection | Receptor | Rise τ | Decay τ | Peak g | E_rev | Upstream source (per Feng) |
-|------------|----------|--------|---------|--------|-------|----------------------------|
-| PN → PN | AMPA | 0.3 | **6.9** | 1.0 | 0 | Mahanty & Sah 1998; Guzman et al. 2016 |
-| PN → PN | NMDA | 3.7 | **125** | 0.5 | 0 | (confirm Feng footnote) |
+| Connection | Receptor | Rise τ | Decay τ | Peak g | E_rev | Upstream (Feng cites) |
+|------------|----------|--------|---------|--------|-------|------------------------|
+| PN → PN | AMPA | 0.3 | **6.9** | 1.0 | 0 | Mahanty & Sah **1998**; Guzman et al. **2016** |
+| PN → PN | NMDA | 3.7 | **125** | 0.5 | 0 | Confirm Feng footnote (do not assume Weisskopf) |
 | PN → PV/SOM | AMPA | 0.1 | 2.4 | 1.0 | 0 | Mahanty & Sah 1998; Guzman et al. 2016 |
 | PN → PV/SOM | NMDA | 3.7 | 125 | 0.5 | 0 | |
-| PV/SOM → PN | GABA-A | 0.5 | 6.8 | 0.6 | **−75** | **Galarreta & Hestrin 1997** |
-| PV → PV | GABA-A | 0.5 | 6.8 | 0.2 | −75 | **Galarreta & Hestrin 1997** |
+| PV/SOM → PN | GABA-A | 0.5 | **6.8** | 0.6 | **−75** | **Galarreta & Hestrin 1997** |
+| PV → PV | GABA-A | 0.5 | 6.8 | 0.2 | −75 | Galarreta & Hestrin 1997 |
+
+**Do not** attribute the 6.9 ms / 2.4 ms AMPA decays to Mahanty & Sah 1999.
 
 ## NMDA Mg²⁺ block (mandatory, dynamic)
 
 ```
-s(V) = 1 / (1 + 0.33 * exp(−0.06 * V))
+s(V) = 1 / (1 + 0.33 * exp(-0.06 * V))
 ```
 
-(Zador et al. 1990). Evaluated every time step.
+Source: **Zador et al. 1990** (via Feng). Apply every timestep. Listed in `Research/Sources/02_supporting_biological.md`.
 
 ## Synaptic delay
 
-Fixed = **1.5 ms** (Feng).
+Fixed **1.5 ms** unless ModelDB 247968 specifies otherwise — then copy ModelDB into `full_parameters.json`.
 
-## Short-term depression (Feng Table 4 — corrected)
+## Short-term depression (Feng Table 4)
 
-| Connection | D_max | Experimental basis |
-|------------|-------|--------------------|
-| FSI → PN | 0.6 | Woodruff & Sah 2007 (BLA) |
-| PN → FSI | 0.7 | Woodruff & Sah 2007 (BLA) |
-| PN → PN | **0.5** | **Silberberg et al. 2004 (neocortex)** — Feng notes no BLA-specific data |
+| Connection | D_max | d1/d2 | τD1/τD2 (ms) | Experimental basis |
+|------------|-------|-------|--------------|--------------------|
+| FSI → PN | **0.6** | 0.9/0.95 | 40/70 | Woodruff & Sah **2007** (BLA) |
+| PN → FSI | **0.7** | 0.9/0.95 | 40/70 | Woodruff & Sah 2007 (BLA) |
+| PN → PN | **0.5** | 0.9/0.95 | 40/70 | **Silberberg et al. 2004 (neocortex)** — Feng: no BLA-specific data |
 
-Dual recovery time constants in the ~40 ms / ~70 ms range as implemented in Feng. Depression state updated on every presynaptic spike.
+Depression state updates on every presynaptic spike. Static weights alone are insufficient.
 
-**Do not** state that PN→PN depression is BLA-measured; the source paper flags the import.
+**Do not** claim PN→PN depression is BLA-measured or cite Woodruff & Sah for that row.
+
+## Implementation notes
+
+- Dual-exponential conductances (Destexhe kinetic formalism — see `Research/Sources/05_computational_neuroscience.md`).
+- If the simulator uses µS, document conversion (`1 nS = 0.001 µS`) in `full_parameters.json`.
+- PN→FSI AMPA uses **2.4 ms** decay, not 6.9 ms.
