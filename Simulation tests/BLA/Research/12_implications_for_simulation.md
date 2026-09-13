@@ -2,7 +2,7 @@
 
 ## Clean restart (Run 1)
 
-Earlier isolation attempts are archived under `reports/test_run_1/` as failed tests. The next implementation is **Run 1** of a new campaign: literature-constrained parameters only, no inheritance of guessed kinetics from the archive.
+Earlier isolation attempts are archived under `reports/test_run_1/` as failed tests. The next implementation is **Run 1**: literature-constrained parameters only.
 
 See `reports/00_clean_restart_policy.md`.
 
@@ -16,36 +16,41 @@ See `reports/00_clean_restart_policy.md`.
 
 ## What Run 1 must **not** be required to produce
 
-- Long after-discharge / seconds-scale emotional inertia (network-level target; record it, do not optimize for it in isolation).
-- Intermittent gamma as a hard pass/fail criterion (desirable if recurrent dynamics are correct; treat as a diagnostic, not a gate — see `architecture/10_validation_gates.md`).
+- Long after-discharge / seconds-scale emotional inertia.
+- Intermittent gamma as a hard pass/fail criterion (diagnostic only).
+- Astrocyte dynamics, LTP/LTD rules, projection-defined ensembles, VIP/CCK as separate classes.
 
-## Parameter sources that override any earlier guesses
+## Parameter sources
 
 | Item | Use |
 |------|-----|
-| Synaptic kinetics | Feng et al. 2019 Table 3 |
-| Mg²⁺ block | `s(V) = 1 / (1 + 0.33 * exp(−0.06 * V))` |
-| Connectivity | Distance-dependent probabilities (Feng / Abatis) |
-| Noise | Conductance-based OU, Feng Table 7 |
-| Short-term depression | Feng Table 4 (Woodruff & Sah 2007 foundation) |
+| Synaptic kinetics | Feng Table 3 + upstream (see Sources) |
+| Mg²⁺ block | Zador formula via Feng |
+| Connectivity | Distance-dependent (Feng / Abatis) |
+| Noise | Destexhe 2001 formalism; Feng Table 7 |
+| STP | Feng Table 4 (Woodruff / Silberberg as attributed) |
 | PN currents | Kim / Feng multi-compartment + I_sAHP |
-| E_GABA | **−75 mV** |
+| E_GABA | −75 mV |
 
-## Population size (default)
-
-**Default for Run 1:** N_pyr = 50, N_PV = 12, N_SOM = 8 (total 70).
-
-Scale sweeps keep the same proportions. Density and connection *probabilities* stay fixed; do not use fixed in-degree K while freely scaling N.
+**Default population:** 50 Pyr / 12 PV / 8 SOM.
 
 ## Path to the full limbic core
 
-1. Validated isolated BLA (this dossier + architecture + Run 1 implementation).
+1. Validated isolated BLA (Run 1).
 2. Isolated CeA.
-3. BLA ↔ CeA two-region network (first place where after-discharge and suppression-gap dynamics become meaningful test targets).
-4. Progressive addition of PFC, VTA, HIP, HYP, PAG.
+3. BLA ↔ CeA two-region network.
+4. Progressive PFC, VTA, HIP, HYP, PAG.
 
-Every new region gets the same literature-grounded treatment before wiring.
+## What the 2026 literature batch establishes for multi-region work
+
+1. **SOM activity level = suppression-state indicator.** When BLA is wired to PFC and CeA, SOM rate is a primary measurable proxy for local top-down suppression. Monitoring SOM population rate is the simulation’s window into the suppression gap inside BLA.
+
+2. **Valence competition is local and interneuron-mediated.** Mutual feedforward inhibition between positive- and negative-valence PN ensembles can be tested in isolated BLA if two PN ensembles with cross-inhibitory INs are instantiated.
+
+3. **Projection-specific routing is experience-dependent.** Same input routes differently to NAc vs CeA vs BNST based on history — requires wired targets and updateable weights, not fixed isolated-BLA parameters.
+
+4. **Astrocytes carry tonic arousal.** NA → α1 → astrocyte → sustained anxiety tone is not captured by neuron-only HH simulation. Multi-region design should plan a slow scalar (or equivalent) for that tone even if external at first.
 
 ## Blueprint note
 
-The Design Blueprint is a living outline. When Run 1 (or later work) changes justified parameters or scope, the blueprint is updated to match — not the other way around.
+The Design Blueprint is a living outline. When Run 1 or later work changes justified parameters or scope, the blueprint is updated to match — not the other way around.
