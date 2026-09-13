@@ -1,80 +1,64 @@
 # Open Uncertainties — BLA / Research Track
 
-**Date:** September 2026  
-**Purpose:** Single place for unresolved provenance, implementation, and design questions. Not a list of known errors (those are fixed or logged in `ACCURACY_VERIFICATION_CORRECTIONS.md`).
+**Date:** September 2026 (updated after 2026 paper batch)  
+**Purpose:** Unresolved provenance, implementation, and design questions. Known fixed errors live in `ACCURACY_VERIFICATION_CORRECTIONS.md`.
 
-**Authority while open:** Prefer Feng Table numbers + `Simulation tests/BLA/Research/architecture/`. Do not invent fill-ins. Record any temporary choice in `simulation/deviations.md`.
-
----
-
-## 1. Literature provenance (thesis-blocking if cited wrongly)
-
-| ID | Uncertainty | Why it matters | Suggested resolution |
-|----|-------------|----------------|----------------------|
-| **U1** | Exact Feng Table 3 / Methods **footnote for τ_NMDA = 125 ms** | Weisskopf et al. 1999 is *not* confirmed as the measurement source; wrong attribution in a thesis is a citation failure | Open Feng 2019 PDF reference list + Table 3 footnotes; record paper + page |
-| **U2** | **Guzman et al. 2016** vs Feng’s numbered reference | Best match is Guzman, Schlögl, Frotscher, Jonas *Science* 353:1117–1123 (hippocampal **CA3**, not BLA). Feng co-cites it with Mahanty & Sah 1998 for AMPA kinetics | Confirm Feng ref number; if different Guzman 2016, replace; if same, keep CA3 caveat in every citation |
-| **U3** | Full bibliographic line for **Silberberg et al. 2004** | Source of PN→PN D_max = 0.5 (neocortex); Feng flags no BLA-specific data | Copy exact entry from Feng reference list |
-| **U4** | Full **Abatis et al. 2017** citation (journal, DOI, pages) | Distance-dependent PN→PN probabilities (3/2/1/0.5%) | Find DOI or state explicitly “cited only via Feng Tables 5–6 / unpublished” |
-| **U5** | Primary paper for **VIP/CR interneuron %** in rat BLA | Taxonomy table left VIP row open; not Mascagni & McDonald 2003 | McDonald/Mascagni series or later quantitative review; one primary paper |
-| **U6** | Exact title/pages for **Galarreta & Hestrin 1997** as Feng cites it | GABA-A 0.5/6.8 ms upstream | Match Feng ref list entry character-for-character |
-| **U7** | **Mahanty & Sah 1999** role | Companion LA pyramidal paper exists; Feng Table 3 attributes AMPA τs to 1998 + Guzman 2016, not 1999 | Keep 1999 as supporting only unless Feng footnote says otherwise |
-
-**Settled (do not re-open without new primary evidence):**
-
-- AMPA 6.9 / 2.4 ms attribution in repo follows **Feng Table 3** (1998 + Guzman 2016), not the older “1999 for PN” secondary guess.
-- Noise **methods** paper = Destexhe et al. **2001** (*Neuroscience* 107); 2003 *Nat Rev Neurosci* = review only.
-- Headley 2021 second author = **Kyriazi P** (not Kanta V).
-- Kim 2013 = *Learn Mem* 20:421–430, ModelDB 150288.
-- Rainnie 1993 = intracellular BLA morphology paper (not the adenosine title).
-- Wang & Buzsáki 1996 = **ING**; Feng BLA gamma = **PING**.
+**Authority while open:** Feng tables + `architecture/`. No invented fill-ins. Temporary choices → `simulation/deviations.md`.
 
 ---
 
-## 2. Architecture / Run 1 implementation
+## 1. Literature provenance
 
-| ID | Uncertainty | Default until resolved |
-|----|-------------|------------------------|
-| **U8** | FSI OU τ_e, τ_i, E_e, E_i exact Table 7 / ModelDB values | Copy from ModelDB 247968 into `full_parameters.json` before first run; do not leave “as in ModelDB” blank |
-| **U9** | Synaptic delay 1.5 ms vs any per-type ModelDB delays | Use 1.5 ms unless ModelDB differs; document in `full_parameters.json` |
-| **U10** | SOM = PV kinetics for Run 1 | Allowed only with `deviations.md` entry; real SOM needs NaP/H (Cattani et al. 2024) later |
-| **U11** | `P_SOM_PN = 0.34` | Approximation (same as PV→PN); not a Feng Table value — must stay in `deviations.md` |
-| **U12** | Passive parameters (C_m, R_m, …) “typical ranges” | Prefer exact Kim/Feng template values; no invented ±10% heterogeneity |
-| **U13** | Simulator: NEURON+ModelDB vs Brian2 re-implementation | Prefer NEURON; Brian2 only with full coefficient table + deviations |
-| **U14** | Intermittent gamma at N=70 | Diagnostic only, not a pass/fail gate |
+| ID | Uncertainty | Status |
+|----|-------------|--------|
+| **U1** | Feng footnote for τ_NMDA = 125 ms | **Open** |
+| **U2** | Guzman 2016 exact Feng ref (CA3 paper is best match) | **Open** |
+| **U3** | Full Silberberg 2004 bibliographic line from Feng | **Open** |
+| **U4** | Full Abatis 2017 DOI / venue | **Open** |
+| **U5** | Primary paper for VIP/CR **percentage** in rat BLA | **Still open** — Báldi 2025 / Perumal & Sah 2021 confirm functional four-subtype taxonomy, not a definitive VIP % count |
+| **U6** | Exact Galarreta & Hestrin 1997 line as Feng lists it | **Open** |
+| **U7** | Mahanty & Sah 1999 role vs Feng Table 3 (1998+Guzman) | Settled stance: 1999 supporting only unless Feng says otherwise |
 
----
-
-## 3. Design / blueprint (non-blocking for isolated Run 1)
-
-| ID | Uncertainty | Notes |
-|----|-------------|-------|
-| **U15** | Mid-generation LLM state injection mechanism | Open question [4]; llama.cpp / vLLM callbacks may reduce need for a fully custom loop — still unproven for this stack |
-| **U16** | Computational definition of face `neutral` for autonomous initiation | Placeholder in camera section; needs explicit vector/threshold rule before implementation |
-| **U17** | Suppression-gap constant *k* and prefrontal fatigue law | Still open design [1] |
-| **U18** | Population / connectivity scaling for **non-BLA** regions | Q[2] partially resolved for BLA only |
-| **U19** | Whether 50/12/8 remains optimal after Feng-faithful Run 1 | Architecture default; revise only with measured gates + written decision |
+**Settled:** AMPA attribution per Feng Table 3; Destexhe 2001 methods vs 2003 review; Headley Kyriazi; Kim 2013 Learn Mem; Rainnie 1993 title; W&B 1996 = ING.
 
 ---
 
-## 4. Conflicting secondary reports (how to read them)
+## 2. Architecture / Run 1
 
-An older “Full Accuracy Verification Report” recommended some changes that **conflict** with direct Feng Table/Methods checks:
-
-| Topic | Older report said | Current repo stance |
-|-------|-------------------|---------------------|
-| AMPA 6.9 ms | Prefer Mahanty & Sah **1999** for PN | **Feng Table 3:** 1998 + Guzman 2016 |
-| Destexhe noise | Change citations to **2003** | **2001** methods; 2003 review only |
-
-When secondary audits disagree, **primary source text (Feng) wins**. See `literature_provenance_audit_sep2026.md`.
-
----
-
-## 5. Housekeeping
-
-- Update this file when U1–U7 close (cite PDF page / ref number).
-- Do not delete closed items; move them to a “Resolved” section with date and evidence.
-- Blueprint remains a living outline; closing U18–U19 may trigger a blueprint bump, not the reverse.
+| ID | Uncertainty | Default |
+|----|-------------|--------|
+| **U8** | FSI OU τ / E from Table 7 ModelDB | Copy into `full_parameters.json` before run |
+| **U9** | Delay 1.5 ms vs ModelDB per-type | 1.5 ms unless ModelDB differs |
+| **U10** | SOM = PV kinetics | Only with `deviations.md` |
+| **U11** | P_SOM_PN = 0.34 | Approximation → `deviations.md` |
+| **U12** | Passive params / heterogeneity | Source templates; else 0% extra spread |
+| **U13** | NEURON vs Brian2 | NEURON preferred |
+| **U14** | Gamma at N=70 | Diagnostic only |
 
 ---
 
-*Related:* `ACCURACY_VERIFICATION_CORRECTIONS.md` · `literature_provenance_audit_sep2026.md` · `cell_type_taxonomy_citation_check.md` · `architecture/12_sources_map.md`
+## 3. Design
+
+| ID | Uncertainty |
+|----|-------------|
+| **U15** | Mid-generation LLM state injection mechanism |
+| **U16** | Computational definition of face `neutral` |
+| **U17** | Suppression-gap *k* and prefrontal fatigue law |
+| **U18** | Scaling for non-BLA regions |
+| **U19** | Whether 50/12/8 stays after Feng-faithful Run 1 |
+
+---
+
+## 4. From 2026 paper batch (documented, not Run 1 params)
+
+- SOM as suppression readout; valence competition via INs; experience-dependent projection routing; astrocyte tonic arousal — see `12_implications_for_simulation.md` and `08_bla_2026_paper_batch.md`.
+
+---
+
+## 5. Conflicting secondary reports
+
+Older audits that say “use Destexhe 2003 for OU” or “Mahanty 1999 for 6.9 ms AMPA” lose to **Feng primary text**. See `literature_provenance_audit_sep2026.md`.
+
+---
+
+*Related:* `ACCURACY_VERIFICATION_CORRECTIONS.md` · `bla_2026_paper_batch_applied.md` · `architecture/12_sources_map.md`
