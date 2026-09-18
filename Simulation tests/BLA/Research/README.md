@@ -19,6 +19,8 @@ Literature synthesis and implementation architecture for isolated basolateral am
 
 ## Clean restart
 
-Previous isolation attempts are archived under `../reports/test_run_1/`. The next campaign is **Run 1**, not “Run 6”.
+Previous isolation attempts (historically labelled Runs 1–5) are archived under `../reports/test_run_1/`. They are **failed tests**, kept only as lessons and anti-patterns.
 
-See `../reports/00_clean_restart_policy.md`.
+**The next implementation is Run 1** of a new, literature-grounded campaign — not “Run 6”.
+
+See `../reports/00_clean_restart_policy.md` and project policy `Research/reports/project_policy_blueprint_and_runs.md`.
