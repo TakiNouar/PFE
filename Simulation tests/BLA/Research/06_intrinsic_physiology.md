@@ -14,12 +14,13 @@ Multi-compartment (soma + apical dendrite + passive dendrite) models include:
 - Slow Ca²⁺-dependent AHP (I_sAHP) — **critical for adaptation**
 - Leak
 
-Passive parameters (typical ranges from the models):
-- C_m ≈ 1.2–2.4 µF/cm²
-- R_m ≈ 55 kΩ·cm²
-- R_a ≈ 150–200 Ω·cm
-- E_L ≈ −67 to −75 mV
-- Resulting V_rest ≈ −70 mV, input resistance ~140–150 MΩ, τ_m ~30 ms
+Passive parameters (exact values from Feng et al. 2019 Materials and Methods):
+
+- C_m = **2.4 µF/cm²** (PN); **1.0 µF/cm²** (FSI) — Feng et al. 2019
+- R_m ≈ **55 kΩ·cm²** (PN); **20 kΩ·cm²** (FSI) — Feng et al. 2019
+- R_a = **150 Ω·cm** (both PN and FSI) — Feng et al. 2019
+- E_L = **−75 mV** (PN) — Feng et al. 2019
+- Resulting V_rest ≈ **−70.3 mV**, input resistance ≈ **140 MΩ**, τ_m ≈ **30 ms** (PN) — Feng et al. 2019
 
 Adaptation strength is controlled mainly by the density of I_sAHP (and to a lesser extent I_M). Type-A PNs have high I_sAHP; Type-C have very low I_sAHP and fire continuously.
 
@@ -27,7 +28,7 @@ Adaptation strength is controlled mainly by the density of I_sAHP (and to a less
 
 - Short action-potential duration (half-width <1 ms).
 - Essentially non-adapting high-frequency trains.
-- Dominated by fast Na⁺ and delayed-rectifier K⁺; lower C_m and higher leak conductance than PNs.
+- Dominated by fast Na⁺ and delayed-rectifier K⁺; lower C_m and higher leak conductance than PNs (as above).
 
 ## Why I_sAHP cannot be omitted
 
