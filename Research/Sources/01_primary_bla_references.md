@@ -32,9 +32,9 @@ Sources are grouped by role. Priority reading before the next implementation is 
 | Connection | Receptor | Rise τ | Decay τ | g | Upstream source cited by Feng |
 |---|---|---|---|---|---|
 | PN → PN | AMPA | 0.3 ms | **6.9 ms** | 1.0 nS | Mahanty & Sah 1998; Guzman et al. 2016 |
-| PN → PN | NMDA | 3.7 ms | **125 ms** | 0.5 nS | (confirm from Feng footnotes) |
+| PN → PN | NMDA | 3.7 ms | **125 ms** | 0.5 nS | **Weisskopf, Bauer & LeDoux 1999** (Feng ref. [115], confirmed) |
 | PN → FSI | AMPA | 0.1 ms | 2.4 ms | 1.0 nS | Mahanty & Sah 1998; Guzman et al. 2016 |
-| PN → FSI | NMDA | 3.7 ms | 125 ms | 0.5 nS | |
+| PN → FSI | NMDA | 3.7 ms | 125 ms | 0.5 nS | Weisskopf, Bauer & LeDoux 1999 (via Feng) |
 | FSI → PN | GABA-A | 0.5 ms | **6.8 ms** | 0.6 nS | **Galarreta & Hestrin 1997** |
 | FSI → FSI | GABA-A | 0.5 ms | 6.8 ms | 0.2 nS | **Galarreta & Hestrin 1997** |
 
@@ -139,11 +139,11 @@ Useful conceptual background; **not** the citation for the numerical noise model
 
 ---
 
-### Weisskopf, Bauer & LeDoux 1999 — Thalamo-amygdala LTP
+### Weisskopf, Bauer & LeDoux 1999 — Upstream for NMDA kinetics (Feng Table 3)
 
 > Weisskopf MG, Bauer EP, LeDoux JE.
 > **"L-Type Voltage-Gated Calcium Channels Mediate NMDA-Independent Associative Long-Term Potentiation at Thalamic Input Synapses to the Amygdala"**
 > *Journal of Neuroscience*, 19(23):10512–10519, 1999.
 > PMID: 10575047
 
-Feng’s “Weisskopf et al., 1999” (et al. form) more plausibly points here. Still **not** confirmed as the measurement source of τ_NMDA = 125 ms; confirm from Feng footnotes.
+**Confirmed:** Feng et al. 2019 Table 3 cites this paper (reference [115] in the Feng bibliography) for the PN→PN and PN→FSI NMDA rise/decay values (3.7 / 125 ms). The earlier “unconfirmed” hedge has been removed after full-text verification of Feng’s Table 3 and reference list.
