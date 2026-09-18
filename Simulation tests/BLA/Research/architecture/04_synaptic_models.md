@@ -10,9 +10,9 @@ Units: time **ms**, conductance **nS**, voltage **mV** (Feng convention).
 | Connection | Receptor | Rise τ | Decay τ | Peak g | E_rev | Upstream (Feng cites) |
 |------------|----------|--------|---------|--------|-------|------------------------|
 | PN → PN | AMPA | 0.3 | **6.9** | 1.0 | 0 | Mahanty & Sah **1998**; Guzman et al. **2016** |
-| PN → PN | NMDA | 3.7 | **125** | 0.5 | 0 | Confirm Feng footnote (do not assume Weisskopf) |
+| PN → PN | NMDA | 3.7 | **125** | 0.5 | 0 | **Weisskopf, Bauer & LeDoux 1999** (Feng ref. [115], confirmed) |
 | PN → PV/SOM | AMPA | 0.1 | 2.4 | 1.0 | 0 | Mahanty & Sah 1998; Guzman et al. 2016 |
-| PN → PV/SOM | NMDA | 3.7 | 125 | 0.5 | 0 | |
+| PN → PV/SOM | NMDA | 3.7 | 125 | 0.5 | 0 | Weisskopf, Bauer & LeDoux 1999 (via Feng) |
 | PV/SOM → PN | GABA-A | 0.5 | **6.8** | 0.6 | **−75** | **Galarreta & Hestrin 1997** |
 | PV → PV | GABA-A | 0.5 | 6.8 | 0.2 | −75 | Galarreta & Hestrin 1997 |
 
