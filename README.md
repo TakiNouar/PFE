@@ -1,6 +1,9 @@
 # PFE — Emotionally Grounded Conversational AI
 
-**Author:** Mohamed Takieddine Nouar  
+**Authors / Contributors:**  
+- Mohamed Takieddine Nouar  
+- Maria Loghrab  
+
 **Institution:** Higher Institute of Sciences — HIS, Algiers  
 **Degree:** Bachelor PFE | Computer Science
 
@@ -14,7 +17,9 @@ The limbic core is the sole authority on what is felt. The LLM only translates t
 
 Target character: **Ultron** — cold, precise, intelligent, genuinely curious, hostile only when earned.
 
-> Status: **Early simulation phase.** Design Blueprint v2.5 is complete. BLA isolated characterization (Runs 1–5) is done. Full pipeline is not yet built.
+> **Status (September 2026):** Early simulation phase. Design Blueprint v2.5 is complete.  
+> Early full-network attempts and the first BLA isolation campaign (historically labelled Runs 1–5) are **archived as failed tests**.  
+> A clean, literature-grounded BLA campaign restarts as **Run 1** under the isolation-first strategy. Full pipeline is not yet built.
 
 ---
 
@@ -42,8 +47,9 @@ PFE/
 |------|--------|
 | Design Blueprint v2.5 | [Research/Development/](Research/Development/) |
 | Literature (Feng et al. 2019 ⭐) | [Research/Sources/](Research/Sources/) |
-| BLA simulation report (Runs 1–5) | [Research/reports/](Research/reports/) |
+| Project reports & clean-restart policy | [Research/reports/](Research/reports/) |
 | Per-region sim work | [Simulation tests/](Simulation%20tests/) |
+| BLA clean restart policy | [Simulation tests/BLA/reports/00_clean_restart_policy.md](Simulation%20tests/BLA/reports/00_clean_restart_policy.md) |
 
 ---
 
