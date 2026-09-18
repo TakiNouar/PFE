@@ -26,7 +26,7 @@ If a value is not listed there, implementation **stops** and the gap is written 
 |-----------|-------|------------|------------------------|--------------|
 | PN→PN AMPA | 0.3 / **6.9** ms, 1.0 nS | Table 3 | Mahanty & Sah **1998**; Guzman et al. **2016** | `01_primary_bla_references.md` |
 | PN→FSI AMPA | 0.1 / 2.4 ms, 1.0 nS | Table 3 | same | same |
-| PN→PN / PN→FSI NMDA | 3.7 / **125** ms, 0.5 nS | Table 3 | confirm Feng footnote; not assumed Weisskopf | same |
+| PN→PN / PN→FSI NMDA | 3.7 / **125** ms, 0.5 nS | Table 3 | **Weisskopf, Bauer & LeDoux 1999** (Feng ref. [115], confirmed) | same |
 | FSI→PN GABA-A | 0.5 / **6.8** ms, 0.6 nS, E=−75 mV | Table 3 | **Galarreta & Hestrin 1997** | same |
 | FSI→FSI GABA-A | 0.5 / 6.8 ms, 0.2 nS | Table 3 | Galarreta & Hestrin 1997 | same |
 | Mg²⁺ block | s(V)=[1+0.33exp(−0.06V)]⁻¹ | Methods | **Zador et al. 1990** | `02_supporting_biological.md` |
