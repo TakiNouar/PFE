@@ -17,7 +17,7 @@ The limbic core is the sole authority on what is felt. The LLM only translates t
 
 Target character: **Ultron** — cold, precise, intelligent, genuinely curious, hostile only when earned.
 
-> **Status (September 2026):** Early simulation phase. Design Blueprint v2.5 is complete.  
+> **Status (October 2026):** Early simulation phase. Design Blueprint v2.5.1.  
 > Early full-network attempts and the first BLA isolation campaign (historically labelled Runs 1–5) are **archived as failed tests**.  
 > A clean, literature-grounded BLA campaign restarts as **Run 1** under the isolation-first strategy. Full pipeline is not yet built.
 
@@ -28,16 +28,19 @@ Target character: **Ultron** — cold, precise, intelligent, genuinely curious, 
 ```
 PFE/
 ├── README.md
-├── Research/
-│   ├── Development/     Design Blueprint v2.5 (split)
-│   ├── Sources/         Literature & parameter references
-│   └── reports/         Project-level simulation reports & audits
-└── Simulation tests/
-    ├── BLA/ … PAG/      One folder per limbic region
-    │   ├── reports/      Region-specific run reports
-    │   └── simulation/   Code, configs, outputs
-    └── Neurons Connected/   Multi-region / full-network sims
+├── Research/                 Project-wide material only
+│   ├── Development/          Design Blueprint (living outline)
+│   ├── Sources/              Literature & parameter references
+│   └── reports/              Policy, literature audits, open uncertainties
+└── Simulations/              One folder per limbic region
+    ├── BLA/ … PAG/
+    │   ├── Research/         Region dossier + architecture spec (BLA so far)
+    │   ├── reports/          Region run reports & archives
+    │   └── simulation/       Code, configs, outputs
+    └── Neurons_Connected/    Multi-region / full-network sims (+ archived full-network attempts)
 ```
+
+Folder names have no spaces, because NEURON’s `nrnivmodl` breaks on paths with spaces.
 
 ---
 
@@ -45,11 +48,12 @@ PFE/
 
 | What | Where |
 |------|--------|
-| Design Blueprint v2.5 | [Research/Development/](Research/Development/) |
+| Design Blueprint | [Research/Development/](Research/Development/) |
 | Literature (Feng et al. 2019 ⭐) | [Research/Sources/](Research/Sources/) |
-| Project reports & clean-restart policy | [Research/reports/](Research/reports/) |
-| Per-region sim work | [Simulation tests/](Simulation%20tests/) |
-| BLA clean restart policy | [Simulation tests/BLA/reports/00_clean_restart_policy.md](Simulation%20tests/BLA/reports/00_clean_restart_policy.md) |
+| Project policy, audits, open uncertainties | [Research/reports/](Research/reports/) |
+| BLA Run 1 build spec | [Simulations/BLA/Research/architecture/](Simulations/BLA/Research/architecture/) |
+| BLA clean restart policy | [Simulations/BLA/reports/00_clean_restart_policy.md](Simulations/BLA/reports/00_clean_restart_policy.md) |
+| Per-region sim work | [Simulations/](Simulations/) |
 
 ---
 

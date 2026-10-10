@@ -1,6 +1,6 @@
 # BLA Literature — Strict Verification Corrections
 
-**Date:** September 2026  
+**Date:** September 2026 (open items resolved October 2026)  
 **Scope:** `Research/Sources/` and `Research/Development/02_biophysical_substrate.md`  
 **Method:** Citations and numeric parameters checked against primary source text (Feng et al. 2019 Methods/Tables 1–7; Kim 2013; supporting papers), not only against prior repo “corrected” versions.
 
@@ -10,7 +10,7 @@
 
 An earlier accuracy pass fixed some errors but left or introduced provenance mistakes. **None change the isolated-BLA kinetic targets** (AMPA 6.9 ms, NMDA 125 ms, E_GABA −75 mV, etc.). All four citation fixes below are applied so the thesis can defend every number.
 
-Clean **Run 1** (not “Run 6”) uses the same numeric targets with corrected upstream attribution. See `Simulation tests/BLA/reports/00_clean_restart_policy.md`.
+Clean **Run 1** (not “Run 6”) uses the same numeric targets with corrected upstream attribution. See `Simulations/BLA/reports/00_clean_restart_policy.md`.
 
 ---
 
@@ -19,7 +19,7 @@ Clean **Run 1** (not “Run 6”) uses the same numeric targets with corrected u
 **Wrong:** Mahanty & Sah **1999** as source of 6.9 ms / 2.4 ms decays.  
 **Feng Table 3 actually cites:** Mahanty & Sah **1998** + **Guzman et al. 2016** for both PN→PN and PN→FSI AMPA.
 
-**Applied:** Restored 1998 + Guzman. Mahanty & Sah 1999 kept only as general LA glutamatergic support if listed. Guzman SJ, Schlögl A, Frotscher M, Jonas P (2016) *Science* 353:1117–1123 added as best match — **flagged**: CA3 paper, not amygdala; confirm Feng ref list before independent citation.
+**Applied:** Restored 1998 + Guzman. Mahanty & Sah 1999 kept only as general LA glutamatergic support if listed. Guzman SJ, Schlögl A, Frotscher M, Jonas P (2016) *Science* 353:1117–1123 added. **Confirmed Oct 2026** against Feng’s reference list. Caveat: it is a CA3 paper, not amygdala.
 
 ---
 
@@ -63,13 +63,17 @@ All: d1/d2 = 0.9/0.95, τ = 40/70 ms.
 
 ## Verified accurate (no change)
 
-Feng 2019 identity/DOI/ModelDB; Table 3 kinetics numbers; Mg block → Zador 1990; connectivity % and distance bands; Kim 2013; Headley 2021 (Kyriazi); Cattani 2024; Weisskopf 1999 hedge on τ_NMDA.
+Feng 2019 identity/DOI/ModelDB 247968, scale 27k, composition 64/26/10; Table 3 kinetics numbers; Mg block → Zador 1990; connectivity % and distance bands; Kim 2013 DOI / ModelDB 150288; Headley 2021 (Kyriazi); Cattani 2024.
 
 ---
 
-## Still open
+## Formerly open — resolved October 2026
 
-1. Feng footnote for τ_NMDA = 125 ms.
-2. Confirm Guzman 2016 against Feng numbered references.
-3. Full Silberberg 2004 bibliographic line from Feng refs.
-4. Abatis 2017 DOI if cited outside Feng.
+Checked against Feng’s full text and reference list (PMC6361623). Details in `consistency_and_source_verification_oct2026.md`.
+
+1. **τ_NMDA = 125 ms source** — Feng Table 3 cites **Weisskopf, Bauer & LeDoux 1999** (ref. [115]). The earlier hedge is removed.
+2. **Guzman 2016** — confirmed as Guzman, Schlögl, Frotscher & Jonas, *Science* 353:1117–1123 (CA3).
+3. **Silberberg 2004** — *J Physiol* 556:19–27, “Synaptic dynamics control the timing of neuronal excitation in the activated neocortical microcircuit.”
+4. **Abatis 2017** — an SfN 2017 **poster**, so no DOI exists. Cite Feng for the numbers.
+
+*This audit absorbed the former `Research/Sources/ACCURACY_VERIFICATION_CORRECTIONS.md`, which duplicated it and has been removed.*

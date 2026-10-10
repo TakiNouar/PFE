@@ -2,7 +2,7 @@
 
 ### 5.1 The Hodgkin–Huxley Equation — Every Neuron
 
-Every neuron in the simulation is intended to solve this equation at each 0.1 ms timestep:
+Every neuron in the simulation is intended to solve this equation (single-compartment form shown) at a fixed timestep of 0.05 ms, the step used by Feng et al. 2019 and the BLA architecture:
 
 ```
 C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) + I
@@ -35,7 +35,7 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 | Hypothalamus | 15 | Raw drive |
 | **Total** | **255** | Proposed scaled starting point |
 
-**BLA note (updated September 2026):** Default for the clean **Run 1** campaign is N_pyr=50, N_PV=12, N_SOM=8. An alternate 150/112/108 composition appeared in archived material only; it is **not** interchangeable with 50/12/8 (different E/I ratio) and is not used. Architecture: distance-dependent connectivity and Feng kinetics — see `Simulation tests/BLA/Research/architecture/`.
+**BLA note (updated September 2026):** Default for the clean **Run 1** campaign is N_pyr=50, N_PV=12, N_SOM=8. An alternate 150/112/108 composition appeared in archived material only; it is **not** interchangeable with 50/12/8 (different E/I ratio) and is not used. Architecture: distance-dependent connectivity and Feng kinetics — see `Simulations/BLA/Research/architecture/`.
 
 **All other regions:** Numbers chosen for plausibility and computational tractability only. Not derived from empirical analysis. Each region will be characterized in isolation (CeA next, then BLA→CeA two-region network) before full-network wiring begins.
 
@@ -57,22 +57,24 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 
 - An explicit dopamine variable (VTA-sourced) and a slower noradrenaline-like arousal variable (design incomplete — see open question [6]).
 
-- Structured (non-random) connectivity following the primary loops in §4.7, with distance-dependent connection probabilities for PN→PN (3% at <50μm, 2% at 50–100μm, 1% at 100–200μm, 0.5% at 200–600μm; source: Feng et al. 2019 citing Abatis et al. 2017).
+- Structured (non-random) connectivity following the primary loops in §4.7, with distance-dependent connection probabilities for PN→PN (3% at <50μm, 2% at 50–100μm, 1% at 100–200μm, 0.5% at 200–600μm; source: Feng et al. 2019, based on an SfN poster by Abatis et al. 2017) and distance-dependent synaptic delays (0.8 ms minimum + 1 mm/ms conduction).
 
 **Synaptic kinetics for BLA** (Feng et al. 2019 Table 3; upstream sources as cited by Feng):
 
 | Connection | Receptor | Rise τ | Decay τ | Conductance | Upstream (Feng cites) |
 | ---------- | -------- | ------ | ------- | ----------- | --------------------- |
 | PN → PN    | AMPA     | 0.3 ms | 6.9 ms  | 1.0 nS      | Mahanty & Sah 1998; Guzman et al. 2016 |
-| PN → PN    | NMDA     | 3.7 ms | 125 ms  | 0.5 nS      | (confirm Feng footnote) |
+| PN → PN    | NMDA     | 3.7 ms | 125 ms  | 0.5 nS      | Weisskopf, Bauer & LeDoux 1999 |
 | PN → FSI   | AMPA     | 0.1 ms | 2.4 ms  | 1.0 nS      | Mahanty & Sah 1998; Guzman et al. 2016 |
+| PN → FSI   | NMDA     | 3.7 ms | 125 ms  | 0.5 nS      | Weisskopf, Bauer & LeDoux 1999 |
 | FSI → PN   | GABA-A   | 0.5 ms | 6.8 ms  | 0.6 nS      | Galarreta & Hestrin 1997 |
+| FSI → FSI  | GABA-A   | 0.5 ms | 6.8 ms  | 0.2 nS      | Galarreta & Hestrin 1997 |
 
-NMDA Mg²⁺ block: s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹ (Zador et al. 1990). E_GABA = −75 mV.
+Each conductance is multiplied by a per-synapse lognormal weight (Feng Table 3 “strength”). NMDA Mg²⁺ block: s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹ (Zador et al. 1990). E_GABA = −75 mV.
 
-These parameters replace any earlier placeholder values. Full provenance in `Research/Sources/`.
+These parameters replace any earlier placeholder values. Full provenance in `Research/Sources/01_primary_bla_references.md`; the binding implementation spec is `Simulations/BLA/Research/architecture/`.
 
-None of the full multi-structure network has been implemented as a coupled system. Archived isolated attempts and the biology/architecture dossiers under `Simulation tests/BLA/` inform the clean Run 1 campaign.
+None of the full multi-structure network has been implemented as a coupled system. Archived isolated attempts and the biology/architecture dossiers under `Simulations/BLA/` inform the clean Run 1 campaign.
 
 **5.2.3 What This Phase Is Intended To Establish**
 
@@ -80,7 +82,7 @@ None of the full multi-structure network has been implemented as a coupled syste
 - A measurable PFC → CeA suppression pathway.
 - A VTA → NAc dopamine route.
 - Hypothalamic drive onto amygdala-related populations.
-- A cross-structure recurrent mesh covering all ten structures (including the dual amygdala and PAG).
+- A cross-structure recurrent mesh covering the nine structures in §5.2.1 (including the dual amygdala). PAG is deferred to a later phase (§5.2.4).
 
 **5.2.4 Deferred Beyond This Phase**
 

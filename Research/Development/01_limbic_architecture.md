@@ -67,7 +67,7 @@ The limbic core is designed as a scaled, implementable abstraction of mammalian 
 **4.3.10 Periaqueductal Gray / Upper Brainstem (PAG)**
 - Role: intended final common path for the expression of defensive and aggressive states (freezing, flight, aggression display, vocal affect).
 - Inputs: CeA and hypothalamus primarily.
-- Status: included in the design; not yet instantiated in any simulation, including the informal ones in §19.
+- Status: included in the design. A PAG population existed in the archived full-network attempts (`Simulations/Neurons_Connected/reports/full_network_attempts_1_to_4.md`), but no literature-grounded or validated PAG model exists. It is deferred in the first implementation phase (§5.2.4).
 
 ### 4.4 Sensory Input Architecture (Intended)
 

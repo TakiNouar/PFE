@@ -1,6 +1,6 @@
 # BLA Papers — September 2026 Assessment Batch
 
-**Status:** High- and medium-priority papers incorporated into `Simulation tests/BLA/Research/` dossier (Sep 2026).  
+**Status:** High- and medium-priority papers incorporated into `Simulations/BLA/Research/` dossier (Sep 2026).  
 **Assessment file:** project attachments / thesis notes — tier ranking below.
 
 Do **not** cite: Mavrych 2025 (Cureus); Sepahvand 2023 (MDPI Biology); prefer primary sources over Sun et al. 2020 F1000Research for any claim.

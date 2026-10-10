@@ -1,24 +1,30 @@
 # Software and Tools
 
-### Brian2 — Neural simulation framework
-
-> Stimberg M, Brette R, Goodman DF.
-> **"Brian 2, an intuitive and efficient neural simulator"**
-> *eLife*, 8, e47314, 2019.
-> https://elifesciences.org/articles/47314
-
-**What it provides:** The Python-based neural simulation framework used in Runs 1–5. Conductance-based synapses with axonal delays are well-supported. Recommended for Run 6 onward. The Feng et al. model was built in NEURON — parameters should be ported to Brian2 rather than switching simulators.
+**Simulator decision for clean BLA Run 1 is still open (U13).** The architecture prefers NEURON + ModelDB mechanisms (strict path), with Brian2 as a documented fallback (pragmatic path). See `Simulations/BLA/Research/architecture/03_neuron_models.md`. Do not mix the two silently.
 
 ---
 
-### NEURON — Reference simulator for Feng et al.
+### NEURON — Reference simulator for Feng et al. (preferred)
 
 > Carnevale NT, Hines ML.
 > **"The NEURON Book"**
 > Cambridge University Press, 2006.
 > https://neuron.yale.edu
 
-**What it provides:** The simulator used by Feng et al. 2019. The ModelDB code for their model is in NEURON `.hoc` files. Reading these files extracts the exact parameter values used in their simulation. Python-compatible via the `neuron` Python package.
+**What it provides:** The simulator used by Feng et al. 2019. The ModelDB code for their model is in NEURON `.hoc` / `.mod` files. Running those files directly keeps every coefficient faithful to the paper. Python-compatible via the `neuron` package.
+
+**Known blocker from the archived campaign:** `import neuron` failed and `pip install neuron` returned 502 from a mirror. Before Run 1, verify a working install and that `nrnivmodl` can compile the ModelDB `.mod` files. Keep build paths free of spaces; this is why the repo folder is named `Simulations/`.
+
+---
+
+### Brian2 — Python simulator (fallback)
+
+> Stimberg M, Brette R, Goodman DF.
+> **"Brian 2, an intuitive and efficient neural simulator"**
+> *eLife*, 8, e47314, 2019.
+> https://elifesciences.org/articles/47314
+
+**What it provides:** Python-based simulator used in the archived Runs 1–5. Suitable for the pragmatic path only if every coefficient is copied from Feng tables / ModelDB `.mod` files and every approximation is logged in `deviations.md`. Known approximations include dual-exponential versus the kinetic synapse scheme, and analytic OU versus `Gfluct`.
 
 ---
 
@@ -29,4 +35,4 @@
 > *Journal of Computational Neuroscience*, 2004.
 > https://modeldb.science
 
-**What it provides:** The repository hosting the Feng et al. 2019 BLA model code (accession 247968) and thousands of other published neural models. All models are freely downloadable. The BLA model code at https://github.com/ModelDBRepository/247968 contains the complete parameter set in runnable form.
+**What it provides:** Hosts the Feng et al. 2019 BLA model (accession **247968**, mirror https://github.com/ModelDBRepository/247968) and Kim et al. 2013 (accession **150288**). The file map for 247968 is in `01_primary_bla_references.md`.

@@ -22,9 +22,10 @@
 
 ### Cerebral Cortex 2017 — Amygdala-Hippocampus connectivity
 
-> Ritchey M, et al.
+> Hermans EJ, Kanen JW, et al.
 > **"Persistence of Amygdala–Hippocampal Connectivity and Multi-Voxel Correlation Structures During Awake Rest After Fear Learning Predicts Long-Term Expression of Fear"**
-> *Cerebral Cortex*, 27(5), 2017.
+> *Cerebral Cortex*, 27(5):3028–3041, 2017.
+> (First author corrected Oct 2026: earlier listing said “Ritchey M”, which was wrong.)
 > https://academic.oup.com/cercor/article/27/5/3028/3060757
 
 **What it provides:** Human fMRI evidence that fear memory consolidation involves amygdala-hippocampal functional connectivity that persists after learning and predicts long-term fear expression. Relevant for understanding why the HIP↔BLA loop in the blueprint is essential — without it, fear states do not consolidate into persistent representations.

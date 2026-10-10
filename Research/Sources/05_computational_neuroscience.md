@@ -14,6 +14,8 @@
 > **"Synthesis of models for excitable membranes, synaptic transmission and neuromodulation using a common kinetic formalism"**
 > *Journal of Computational Neuroscience*, 1994.
 
+This is the **kinetic** (α/β transmitter-pulse) scheme that the Feng ModelDB synapses implement (`AlphaTmax`, `Beta`, `Cdur`). It is not the same as a dual-exponential conductance. A dual-exponential re-implementation using Table 3 rise/decay values is an approximation.
+
 ---
 
 ### Destexhe et al. 2001 — Point-conductance noise (methods source used by Feng)
@@ -41,6 +43,6 @@ Conceptual background only. Different co-authors from the 2001 methods paper. Do
 
 > Wang XJ, Buzsáki G.
 > **"Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model"**
-> *Journal of Neuroscience*, 16(20), 1996.
+> *Journal of Neuroscience*, 16(20):6402–6413, 1996.
 
 Classic **ING** model. Feng’s BLA gamma is **PING** (PN↔FSI). Formal PING: Traub et al. 1997 / Whittington et al. 1997.

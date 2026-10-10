@@ -8,7 +8,7 @@
 | Voice synthesis | StyleTTS2 | 1.0 GB | 1–2 s/response |
 | Speech to text | Whisper medium | 0.8 GB | ~0.3 s |
 | Face analysis | DeepFace + MediaPipe | 0.5 GB | ~30 ms/frame |
-| Limbic simulation | Custom Python + NumPy | 0 GB (CPU) | <10 ms (estimated) |
+| Limbic simulation | NEURON or Brian2 (CPU) | 0 GB (CPU) | <10 ms (estimated; unverified for multi-compartment HH) |
 | Vector DB | ChromaDB | 0 GB (RAM) | ~20 ms |
 | OS + overhead | — | 1.0 GB | — |
 | **Total** | | **10.3 GB planned** | **1.7 GB headroom (estimated)** |
@@ -36,7 +36,7 @@ Mistral 7B could be split across GPU and CPU using llama.cpp layer offloading (`
 | Emotion analysis | RoBERTa large (GoEmotions) | 28-emotion classification |
 | Tone analysis | DeBERTa v3 large | Sarcasm, hostility, intent |
 | Face analysis | MediaPipe + DeepFace | Micro-expressions, action units, gaze |
-| Neural simulation | Custom Python + NumPy (+ Brian2) | Limbic circuit dynamics — HH equations |
+| Neural simulation | NEURON + ModelDB mechanisms (preferred) or Brian2 (fallback); Python orchestration | Limbic circuit dynamics — HH equations (simulator choice open, see `Research/reports/open_uncertainties.md` U13) |
 | Memory / retrieval | ChromaDB + LangChain | Vector storage and context management |
 | LLM | Mistral 7B Base Q4 (QLoRA) | Ultron persona, emotional reaction |
 | Fine tuning | Unsloth + HuggingFace PEFT | QLoRA training on cloud GPU |
@@ -61,7 +61,7 @@ This would remain a research prototype, not a claim of sentience, even in its be
 
 | Phase | Window | Focus |
 |---|---|---|
-| Simulation characterization | Sep → Dec 2026 | Per-region isolation studies: BLA done (5 runs), CeA next, then BLA→CeA two-region network. Establish validated parameters from literature (Feng et al. 2019) before wiring the full network. Apply corrected Feng et al. parameters to BLA (Run 6). |
+| Simulation characterization | Sep → Dec 2026 | Per-region isolation studies. The first BLA campaign (5 runs) is archived as failed. Next: clean BLA **Run 1** with Feng et al. 2019 parameters, then CeA in isolation, then the BLA→CeA two-region network. Establish validated per-region parameters before wiring the full network. |
 | Erasmus+ (parallel) | Oct 2026 → Feb 2027 | Exchange at WSB University, Poland. Simulation and theory work continues remotely; integration-heavy engineering deferred until return. Literature review, parameter validation, and design decisions can proceed during this period. |
 | Full network + theory | Dec 2026 → Mar 2027 | Wire the full 10-region network with validated per-region parameters. Finalize suppression gap equations, hypothalamic bypass rule, neuromodulator kinetics. Finalize 200–300 LLM training pairs. |
 | Implementation | Mar → May 2027 | Build and integrate the full pipeline on the RTX 3060. QLoRA fine-tuning on cloud GPU. Camera and continuous-loop integration. |

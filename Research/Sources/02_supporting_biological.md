@@ -2,10 +2,11 @@
 
 ### Abatis et al. 2017 — PN→PN connectivity in BLA
 
-> Abatis M, et al.
-> Distance-dependent connectivity of BLA principal neurons, 2017.
+> Abatis M, Niu R, Perin R, Giobellina G, Bito H, Markram H, Stoop R.
+> **"The role of local excitatory networks in the lateral amygdala in emotional memory learning."**
+> *Society for Neuroscience annual meeting, poster*, Washington DC, 2017.
 
-**Status:** Full journal citation (volume, pages, DOI) not located. The distance-dependent probabilities (3 % <50 µm, 2 % 50–100 µm, 1 % 100–200 µm, 0.5 % 200–600 µm) appear in Feng et al. 2019 Tables 5–6. Attribute the numbers to Feng until a DOI/PMID is confirmed; do not cite a free-standing “Abatis 2017” in the thesis without bibliographic completeness.
+**Status (resolved Oct 2026):** Feng’s reference list shows this is a **conference poster**, not a journal article, so no DOI/PMID exists. The distance-dependent probabilities (3 % <50 µm, 2 % 50–100 µm, 1 % 100–200 µm, 0.5 % 200–600 µm) are published only through Feng et al. 2019 Tables 5–6. In the thesis, cite **Feng et al. 2019** for the numbers and mention the unpublished poster as Feng’s basis. Note it as a limitation: these PN→PN values are not peer-reviewed as a standalone measurement.
 
 ---
 
@@ -35,7 +36,8 @@
 
 > Zador A, Koch C, Brown TH.
 > **"Biophysical model of a Hebbian synapse"**
-> *PNAS*, 87(17), 1990.
+> *PNAS*, 87(17):6718–6722, 1990.
+> DOI: 10.1073/pnas.87.17.6718
 
 **Provides:** s(V) = [1 + 0.33 × exp(−0.06V)]⁻¹, the voltage-dependent Mg²⁺ block used in Feng et al.
 
@@ -47,7 +49,7 @@
 > **"Parvalbumin-containing neurons in the rat basolateral amygdala: morphology and co-localization of Calbindin-D28k"** (confirm exact title against PDF).
 > *Neuroscience*, 102(2):413–425, 2001.
 
-**Provides:** PV+ neurons as “∼50% of the interneuronal population” in rat BLA. Primary source for the PV row in `Simulation tests/BLA/Research/02_cell_types.md`. **Not** replaceable by Mascagni & McDonald 2003.
+**Provides:** PV+ neurons as “∼50% of the interneuronal population” in rat BLA. Primary source for the PV row in `Simulations/BLA/Research/02_cell_types.md`. **Not** replaceable by Mascagni & McDonald 2003.
 
 ---
 

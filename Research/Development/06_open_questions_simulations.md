@@ -4,11 +4,11 @@ These are not implementation gaps in an existing system — they are unresolved 
 
 **[1] Suppression gap scaling.** `expressed = raw × (1 − prefrontal_strength × k)` — the constant *k* (0.7 in the illustrative example) and the decay function for `prefrontal_strength` under sustained load have not been derived or justified.
 
-**[2] Population size and synaptic weight scaling.** Partially resolved for BLA; open for all other regions.
+**[2] Population size and synaptic weight scaling.** Open for all regions, BLA included. BLA has a concrete plan.
 
-For BLA specifically, the BLA isolated simulation study (Runs 1–5, September 2026) established that: under fixed in-degree connectivity, the large-N collapse is a structural E/I asymmetry caused by constant recurrent excitation per neuron against proportionally growing inhibitory populations. This is not a genuine resonance effect at N≈200 — it is an artifact of fixed-probability unscaled connectivity. NMDA-like slow recurrent excitation (τ≈125 ms, per Feng et al. 2019) partially mitigates the collapse. Recommended BLA connectivity: fixed in-degree K≈3 (biologically consistent with Feng et al. 2019 distance-dependent probabilities at the baseline scale), with N_pyr=50, N_PV=12, N_SOM=8.
+For BLA, the archived first campaign (Runs 1–5, September 2026; now classed as failed tests) suggested that the large-N collapse is a structural E/I asymmetry, not a resonance effect: under fixed in-degree, recurrent excitation per neuron stays constant while inhibitory populations grow. Those runs used wrong kinetics, so this is a **hypothesis**, not a result. Fixed in-degree K≈3 is now an **anti-pattern** and must not be used while scaling N. The clean Run 1 uses Feng et al. 2019 distance-dependent connectivity with the default N_pyr=50, N_PV=12, N_SOM=8, and its scale sweep (0.5×–3.0×) is the first real test of the hypothesis. See `Simulations/BLA/Research/architecture/` and `Research/reports/open_uncertainties.md` (U19, U23).
 
-For all other regions (CeA, PFC, HIP, INS, ACC, NAc, VTA, PAG, HYP), the population size and connectivity question remains open. Each region will be characterized in isolation before the full network is wired. Full detail in Research/reports/.
+For all other regions (CeA, PFC, HIP, INS, ACC, NAc, VTA, PAG, HYP), the population size and connectivity question remains open. Each region will be characterized in isolation before the full network is wired.
 
 **[3] Emergent dynamics validation.** Whether inertia, bleed, sensitization, habituation, and refractory dynamics actually emerge robustly — and at what timescale — from the chosen population sizes and connectivity has not been tested at the multi-structure level.
 
@@ -28,10 +28,10 @@ For all other regions (CeA, PFC, HIP, INS, ACC, NAc, VTA, PAG, HYP), the populat
 
 ## 19. Preliminary Simulation Notes (Informal, Exploratory Only)
 
-**Note (updated September 2026):** The simulation history has grown substantially since this section was written. Tests 1 and 2 below were early informal checks during the design phase. They have since been followed by:
+**Note (updated October 2026):** The simulation history has grown substantially since this section was written. Tests 1 and 2 below were early informal checks during the design phase. They have since been followed by:
 
-* A full-network simulation (10 regions simultaneously, 4 attempts) — audited and documented with honest findings about which regions work and which don't. See Research/reports/.
-* A BLA isolated simulation (5 runs) — establishing validated BLA parameters and resolving the open question about the N≈200 collapse mechanism. See Research/reports/.
+* A full-network simulation (10 regions simultaneously, 4 attempts), archived as failed. See `Simulations/Neurons_Connected/reports/full_network_attempts_1_to_4.md`.
+* A first BLA isolated campaign (5 runs), archived as failed because it used guessed kinetics. It produced a plausible explanation of the collapse mechanism but validated no parameters. See `Simulations/BLA/reports/test_run_1/`.
 
 The two tests below are preserved because they motivated open question [2] and the isolation-first simulation strategy. They are not the current state of the simulation work.
 
@@ -43,8 +43,8 @@ The two tests below are preserved because they motivated open question [2] and t
 
 **Practical implication for §5.2.1:** the proposed population counts (BLA ≈ 70 combined, CeA = 20, PFC = 30) are smaller than the N ≈ 200 region where the exploratory test found the strongest reverberatory behavior in the most recurrent regime. This does not mean the proposed counts are wrong, but it means they have not been justified against this finding either, and should not be treated as settled until the scaling question above is resolved.
 
-**Update — September 2026:** The open interpretation question above has been answered by the BLA isolated simulation study. The N≈1000 collapse observed in Test 2 was an artifact of unscaled fixed-probability connectivity, not a genuine resonance effect. Under fixed in-degree (each neuron receives a constant number of recurrent inputs regardless of population size), the collapse mechanism is structural: inhibitory populations scale with N while recurrent excitation per neuron stays constant, so inhibition wins at large N. This is a different phenomenon from the original N≈1000 collapse, but it is equally mechanistic and equally not a resonance effect.
+**Update — October 2026 (supersedes the September 2026 update):** The archived BLA campaign points toward interpretation (b), a connectivity-scaling artifact, rather than a genuine resonance effect. Under fixed in-degree, inhibitory populations scaled with N while recurrent excitation per neuron stayed constant, so inhibition won at large N. That is a different mechanism from the original fixed-probability N≈1000 collapse, and those runs used guessed kinetics (AMPA 2 ms, no Mg²⁺ block). The question is therefore **not yet settled**. The clean Run 1 scale sweep under Feng distance-dependent connectivity is the test.
 
-The practical implication for §5.2.1 is updated: the BLA population counts (N_pyr=50, N_PV=12, N_SOM=8) have been tested empirically across four scale factors and produce valid desynchronized graded activity at the baseline scale under fixed in-degree connectivity with literature-grounded parameters (Feng et al. 2019). They are no longer unvalidated guesses — they are a tested starting point with known behavior.
+The practical implication for §5.2.1: the BLA counts (N_pyr=50, N_PV=12, N_SOM=8) are the locked **default** for Run 1, but they are **not yet validated**. An earlier version of this section said they were tested “with literature-grounded parameters”. That was incorrect: the archived runs used fixed K=3 and guessed kinetics, not Feng parameters.
 
-Full simulation history and findings are documented in Research/reports/.
+Full simulation history: `Simulations/BLA/reports/test_run_1/` and `Simulations/Neurons_Connected/reports/`.

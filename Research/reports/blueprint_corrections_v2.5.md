@@ -7,6 +7,8 @@
 
 **Status:** Applied. This document records the misalignments that were corrected when advancing the blueprint from v2.4 to v2.5.
 
+> **Superseded in part (October 2026):** corrections #2, #4 and #6 below framed the archived BLA Runs 1–5 as having *validated* 50/12/8 and fixed in-degree K≈3, and named the next run “Run 6”. The clean-restart policy later reclassified those runs as failed tests. The blueprint now treats 50/12/8 as an untested default, forbids fixed-K scaling, and names the next run “Run 1”. See `consistency_and_source_verification_oct2026.md` (blueprint v2.5.1). This file is kept unchanged below as the historical record.
+
 ---
 
 ## Why This Document Exists

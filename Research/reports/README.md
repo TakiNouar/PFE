@@ -1,36 +1,26 @@
-# Research Reports
+# Research Reports (project-wide)
 
-Project-level simulation reports and audit documents.
+Cross-cutting policy, literature audits, and open uncertainties. Region-specific run reports live under `Simulations/<Region>/reports/`; the full-network history lives under `Simulations/Neurons_Connected/reports/`.
 
 ## Policy
 
-- Blueprint is a living outline (see `project_policy_blueprint_and_runs.md`).
-- Early BLA isolation attempts are **archived failed tests**; the next campaign starts as clean **Run 1** (see `Simulation tests/BLA/reports/00_clean_restart_policy.md`).
+- The blueprint is a living outline (see `project_policy_blueprint_and_runs.md`).
+- The first BLA isolation campaign (historically Runs 1–5) is **archived as failed tests** in `Simulations/BLA/reports/test_run_1/`. The next campaign starts as clean **Run 1** (see `Simulations/BLA/reports/00_clean_restart_policy.md`).
 
-## BLA Isolated Study — Archived Campaign (historically Runs 1–5)
-
-These documents synthesise the failed first campaign and the literature corrections that feed the clean restart.
+## Files
 
 | File | Content |
 |------|---------|
-| [00_overview_and_context.md](00_overview_and_context.md) | Context, full-network pre-history, brief |
-| [01_bla_biology_and_design.md](01_bla_biology_and_design.md) | Blueprint vs literature parameters |
-| [02_runs_1_to_3.md](02_runs_1_to_3.md) | Runs 1–3 (archived) |
-| [03_runs_4_to_5.md](03_runs_4_to_5.md) | Runs 4–5 (archived) |
-| [04_established_results_and_conclusion.md](04_established_results_and_conclusion.md) | What was achieved + design conclusion |
-| [05_parameter_errors_next_steps.md](05_parameter_errors_next_steps.md) | Literature fixes; next steps for clean Run 1 |
-| [BLA_isolated_simulation_report.md](BLA_isolated_simulation_report.md) | Full monolithic report (reference) |
+| [project_policy_blueprint_and_runs.md](project_policy_blueprint_and_runs.md) | Blueprint status, run numbering, authority order, where files live |
+| [literature_provenance_audit_sep2026.md](literature_provenance_audit_sep2026.md) | Literature provenance audit (Sep 2026; open items resolved Oct 2026) |
+| [consistency_and_source_verification_oct2026.md](consistency_and_source_verification_oct2026.md) | Oct 2026 repo consistency pass + verification against Feng full text and ModelDB code |
+| [open_uncertainties.md](open_uncertainties.md) | Open provenance / architecture / design uncertainties (U1–U25) |
+| [blueprint_corrections_v2.5.md](blueprint_corrections_v2.5.md) | Audit trail of blueprint v2.4 → v2.5 (partly superseded; see note inside) |
 
-## Other
+## Where the archived simulation reports went
 
-| File | Content |
-|------|---------|
-| [project_policy_blueprint_and_runs.md](project_policy_blueprint_and_runs.md) | Project-wide policy on blueprint & run numbering |
-| [blueprint_corrections_v2.5.md](blueprint_corrections_v2.5.md) | Audit trail of blueprint v2.4 → v2.5 |
-| [BLA_isolated_simulation_report_CORRECTIONS.md](BLA_isolated_simulation_report_CORRECTIONS.md) | Accuracy corrections log |
-| [literature_provenance_audit_sep2026.md](literature_provenance_audit_sep2026.md) | Literature provenance audit |
-| [open_uncertainties.md](open_uncertainties.md) | Open uncertainties |
-| [bla_2026_paper_batch_applied.md](bla_2026_paper_batch_applied.md) | 2026 paper batch notes |
-| [cell_type_taxonomy_citation_check.md](cell_type_taxonomy_citation_check.md) | Cell-type taxonomy citation check |
-
-Region-specific run archives also live under `Simulation tests/<Region>/reports/`.
+| Topic | Location |
+|-------|----------|
+| BLA Runs 1–5 (failed campaign), established results, literature mismatches, lessons | `Simulations/BLA/reports/test_run_1/` |
+| BLA dossier audits (cell-type citations, 2026 paper batch) | `Simulations/BLA/reports/` |
+| Full-network attempts 1–4 | `Simulations/Neurons_Connected/reports/full_network_attempts_1_to_4.md` |
