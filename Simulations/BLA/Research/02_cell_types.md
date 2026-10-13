@@ -61,4 +61,4 @@ Firing phenotypes:
 
 ### Run 1 implication
 
-Minimal set: **PN + PV-like + SOM-like**. CCK and VIP out of scope for Run 1. SOM may use PV-like kinetics only with a `deviations.md` entry. Chandelier vs basket is a future refinement, not required for Run 1 pass gates.
+*Revised 2026-10-13.* Run 1 uses Feng's set only: **PN-A + PN-C + FSI (PV-like)**. SOM, VIP and CCK are out of scope for Run 1; SOM can be added later from Cattani et al. 2024 as a logged extension. Chandelier vs basket is a future refinement. See `architecture/02_population_structure.md`.

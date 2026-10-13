@@ -1,53 +1,46 @@
 # 03 — Neuron Models
 
-## Principal neuron (PN)
+## Rule
 
-### Morphology
+Use Feng's cell templates from ModelDB 247968 **unchanged**. Do not copy their numbers into new code, and do not mix in ModelDB 150288 (Kim 2013): Feng revised Kim's principal-cell model, and only the FSI model is unchanged from Kim (Feng 2019, Methods).
 
-- Multi-compartment: **soma + apical (or proximal) dendrite + passive / distal dendrite**.
-- Geometry (L, diam, nseg) taken from Kim/Feng cell templates, not invented.
+| Population | Template file (ModelDB 247968) | Template |
+|------------|--------------------------------|----------|
+| PN-A | `BLcells_template_LFP_segconsider_all_Iinject_recordingimembrane.hoc` | `Cell_A` |
+| PN-C | same file | `Cell_C` |
+| FSI | `interneuron_template_gj_LFP_Iinject_recordingimembrane.hoc` | the FSI template in that file |
 
-### Currents (all from ModelDB / Kim–Feng)
+`Cell_B` in the PN file is never used by Feng's own network and is not used here.
 
-| Current | Role |
-|---------|------|
-| I_Na | Fast spike |
-| I_Kdr | Repolarization |
-| I_A | A-type K |
-| I_M | M-current |
-| I_H | Hyperpolarization-activated |
-| I_Ca | High-threshold Ca |
-| I_NaP | Persistent Na |
-| **I_sAHP** | Slow Ca-dependent AHP — **mandatory for adaptation** |
-| Leak | Resting conductance |
+## What the templates contain (for reference, read from the code)
 
-Passive parameters (verified, Feng Methods): R_m = 55 kΩ·cm², C_m = 2.4 µF/cm², R_a = 150 Ω·cm, E_L = −75 mV (V_rest ≈ −70.3 mV). Maximal conductance densities and geometry must be copied from the ModelDB cell template into `full_parameters.json`.
+These values are **not** set by us. They are listed so the thesis can describe the cells and so Gate 2 results can be checked. Source: the template files, verified October 2026 (`Research/Sources/01_primary_bla_references.md`).
 
-### Heterogeneity
+**Principal cell (PN-A and PN-C):**
 
-- If the source files specify ranges, use those ranges only.
-- If the source does **not** specify ranges, use **0%** extra heterogeneity for Run 1 (identical passive parameters across cells of a class). Do not invent ±10% (or any other spread) without a cited justification and an entry in `deviations.md`.
-- Feng gives no passive-parameter ranges, so passive spread is 0 %. Heterogeneity in Run 1 comes from the published sources only: lognormal synaptic weights, distance-dependent delays, and independent noise.
+- **Shape:** soma (L 25 µm, diam 24.75 µm, 1 segment), apical dendrite `dend` (L 270 µm, diam 3 µm, 8 segments), distal dendrite `p_dend` (L 555 µm, diam 5 µm, 7 segments). **16 segments.**
+- **Channels:** fast Na (`na3`), delayed-rectifier K (`kdr`), A-type K (`kap`), M-current (`im`), h-current (`hd`), high-threshold Ca (`cadyn`), persistent Na (`nap`), Ca pool (`capool`, τ = 1,000 ms), slow Ca-dependent K (`sAHP`), leak.
+- **Where the adaptation brake sits:** the sAHP and its Ca pool are in the **soma only**; the dendrites have sAHP = 0.
+- **PN-A vs PN-C:** sAHP density 0.05 S/cm² (A) vs 0.0002 S/cm² (C). The code also differs in persistent Na (0.000559 vs 0.000555 S/cm²), which the paper does not mention.
+- **Passive:** Cm 2.4 µF/cm², Ra 150 Ω·cm, leak 2.5e-5 S/cm² (soma) and 4.71e-5 S/cm² (dendrites), **E_leak −72 mV**. The paper text says Rm 55 kΩ·cm² and E_L −75 mV; its own Table 2 and the code disagree with that text. The code is used (DEV-002).
+- **Reversal potentials:** Na +45, K −80, h −45, Ca +120 mV.
 
-## PV-like fast-spiking interneuron
+**FSI:**
 
-- Morphology and currents from the FSI templates in Kim/Feng.
-- Short action-potential duration, essentially non-adapting high-frequency trains.
-- Lower C_m / higher leak than PNs: R_m = 20 kΩ·cm², C_m = 1.0 µF/cm², R_a = 150 Ω·cm (Feng Methods). Feng does not state FSI E_L; take it from ModelDB `leakinter.mod`.
+- **Shape:** soma (15 × 15 µm) + one dendrite (150 × 10 µm), 1 segment each. **2 segments.**
+- **Channels:** Na (`nainter`), K (`kdrinter`), leak (`leakinter`).
+- **Passive:** Rm 20 kΩ·cm², Cm 1.0 µF/cm², dendrite Ra 150 Ω·cm, soma Ra 3,375 Ω·cm, **E_leak −70 mV**. The template overrides the `leakinter.mod` default of −75 mV.
 
-## SOM-like
+**Both:** temperature 31 °C, v_init −70 mV (set in `BL_main.hoc`; we set the same values).
 
-- Run 1: identical kinetics to PV-like is acceptable **only with a `deviations.md` entry**.
-- Later: add NaP and H currents from the extended literature; document as post-Feng.
+## Heterogeneity
 
-## Implementation rule
+None added. Every cell of a type is identical. Variety comes only from what Feng's model already has: lognormal synaptic weights, distance-dependent delays, independent noise, and random wiring.
 
-Prefer loading compiled NMODL mechanisms from ModelDB 247968 / 150288.
+## The LFP mechanism
 
-If the environment cannot run NEURON, a Brian2 (or pure-Python) re-implementation is allowed **only** if:
-1. Every coefficient is taken from published tables / `.mod` files, and
-2. Every approximation is listed in `deviations.md`.
+The templates insert `xtraimemrec` (Feng's LFP recorder). It must stay, because the templates are used unchanged, but Run 1 does not compute an LFP. It costs some speed; the benchmark measures that.
 
-Re-deriving α/β expressions from memory is forbidden.
+## What the live engine may change later
 
-**Simulator preference:** NEURON + ModelDB first; Brian2 second with full coefficient table in `full_parameters.json`.
+Run 1 does not decide the live engine's cell model. If the benchmark shows Feng's full cells cannot run fast enough beside the LLM, the live engine may use a reduced cell. Run 1's single-cell recordings (Gate 2) then become the reference that a reduced cell must match.

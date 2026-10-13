@@ -19,7 +19,7 @@ Literature and parameter references for the biophysical limbic simulation. This 
 
 1. Feng Table 3/4 upstream citations win over secondary summaries.
 2. AMPA 6.9 / 2.4 ms: Feng cites **Mahanty & Sah 1998 + Guzman et al. 2016**, not Mahanty & Sah 1999.
-3. NMDA 3.7 / 125 ms: Feng cites **Weisskopf, Bauer & LeDoux 1999** (ref. [115]).
+3. NMDA 3.7 / 125 ms: cite **Feng 2019**. Feng cites Weisskopf, Bauer & LeDoux 1999, but that paper reports no NMDA time constants (U1).
 4. GABA-A 0.5 / 6.8 ms: **Galarreta & Hestrin 1997**.
 5. STP: FSI→PN 0.6, PN→FSI 0.7 (Woodruff & Sah 2007); PN→PN **0.5** (Silberberg et al. 2004, neocortex).
 6. Noise equations: **Destexhe et al. 2001** (*Neuroscience* 107). The 2003 *Nat Rev Neurosci* paper is a review only.

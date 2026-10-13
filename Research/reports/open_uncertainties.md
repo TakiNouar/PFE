@@ -11,11 +11,11 @@
 
 | ID | Uncertainty | Status |
 |----|-------------|--------|
-| U1 | Feng source for τ_NMDA = 125 ms | **Resolved** — Weisskopf, Bauer & LeDoux 1999 (Feng ref. [115]) |
+| **U1** | Feng source for τ_NMDA = 125 ms | **Reopened as a limitation (Oct 2026)**: Feng cites Weisskopf, Bauer & LeDoux 1999 ("[115]" is only the PMC anchor number), but that paper reports **no** NMDA rise/decay constants. Cite 3.7 / 125 ms to Feng 2019 and state that the upstream constants are untraceable. Not blocking: Run 1 uses Feng's synapse files |
 | U2 | Guzman 2016 exact Feng ref | **Resolved** — *Science* 353:1117–1123 (CA3) |
 | U3 | Full Silberberg 2004 line | **Resolved** — *J Physiol* 556:19–27 |
 | U4 | Abatis 2017 DOI / venue | **Resolved** — SfN 2017 poster; no DOI; cite Feng |
-| **U5** | Primary paper for VIP/CR **percentage** in rat BLA | **Still open**. Báldi 2025 / Perumal & Sah 2021 confirm the functional four-subtype taxonomy, not a definitive VIP % count |
+| U5 | Primary paper for VIP/CR **percentage** in rat BLA | **Resolved (Oct 2026)**: Vereczki et al. 2021, *J Neurosci* 41:4575–4595 (PMID 33837051), **mouse**: VIP and/or CR cells 29–38 % of GABAergic neurons, CCK basket 7–9 %. Rat anchor: McDonald & Mascagni 2001 (PMID 11516833), CR ≈ 20 % of GABA+ neurons. No rat paper gives the full breakdown. Not used by Run 1 (no VIP/SOM cells) |
 | U6 | Exact Galarreta & Hestrin 1997 line | **Resolved** — *J Neurosci* 17:7220–7227 |
 | U7 | Mahanty & Sah 1999 role vs Feng Table 3 (1998 + Guzman) | Settled: 1999 is supporting only |
 
@@ -25,21 +25,25 @@
 
 ## 2. Architecture / Run 1
 
+Resolutions below come from the October 2026 Run 1 redesign (`Simulations/BLA/reports/04_run1_redesign_oct2026.md`), based on reading the ModelDB 247968 code.
+
 | ID | Uncertainty | Status / default |
 |----|-------------|------------------|
-| U8 | FSI OU τ / E from Table 7 | **Resolved** — τ_e 2.728 ms, τ_i 10.49 ms, E_e 0 mV, E_i −75 mV (same as PN) |
-| U9 | Synaptic delay | **Resolved** — not 1.5 ms. Feng: distance / (1 mm/ms) + 0.8 ms + U(−0.1, 0.1) ms + dt |
-| **U10** | SOM = PV kinetics | Allowed only with a `deviations.md` entry |
-| **U11** | P_SOM_PN = 0.34 | Approximation; goes in `deviations.md` |
-| **U12** | Heterogeneity | Passive values verified (Feng Methods). Feng gives no passive ranges, so 0 % extra spread. Synaptic weights *are* heterogeneous (lognormal, see U20) |
-| **U13** | NEURON vs Brian2 | **Open decision** — NEURON preferred (strict path) |
-| **U14** | Gamma at N=70 | Diagnostic only |
-| **U20** | Synaptic weight multipliers (“strength”) | Paper Table 3: PN→PN AMPA 5/3, NMDA 2/1, PN→FSI 7/2, FSI→PN 12/2, FSI→FSI 20/10. ModelDB `function_ConnectInternal_simplify_online_op.hoc` draws E→E `lognormal(2,1)` shared by AMPA+NMDA. Confirm which version `BL_main.hoc` uses |
-| **U21** | STP d1/d2 pairing | Table 4: d1/d2 = 0.9/0.95 with τ 40/70 ms. `pyrD2pyrD_STFD_new.mod` defaults: d1 = 0.95 (τD1 40), d2 = 0.9 (τD2 70). Check hoc overrides; record the value used |
-| **U22** | Synapse formalism | ModelDB uses the Destexhe 1994 kinetic scheme; dual-exponential is an approximation → `deviations.md` if used |
-| **U23** | Recurrent PN→PN sparsity at N=70 | With density preserved (cube ≈ 190 µm) and 0.5–3 % probabilities, the estimate is < 1 PN→PN input per PN at 1.0× and ≈ 1.6 at 3.0×. Recurrent effects and Gate 5 diagnostics may be near-null. Report realized counts; decide whether this is acceptable before interpreting results |
-| **U24** | Stimulus window length | A 100 ms stimulus at 10–40 Hz yields 1–4 spikes per cell, so ISI-CV is statistically weak and the “>5 Hz” active criterion means ≥ 1 spike. The window is also short relative to NMDA (125 ms) and sAHP timescales. Consider a longer stimulus window before locking Gate 2 |
-| **U25** | Extrinsic drive model | Feng drives with Poisson surrogate spike trains (≈ 3 afferents per PN); Run 1 uses private OU drive. This is a protocol choice and must be stated as a departure from Feng’s input model |
+| U8 | FSI OU τ / E from Table 7 | **Resolved**: τ_e 2.728 ms, τ_i 10.49 ms, E_e 0 mV, E_i −75 mV (same as PN). Code amplitudes are 1.21 / 0.12 / 5.73 / 2.64 nS (DEV-002) |
+| U9 | Synaptic delay | **Resolved**: not 1.5 ms. Feng: distance / (1 mm/ms) + 0.8 ms + U(−0.1, 0.1) ms + dt |
+| U10 | SOM = PV kinetics | **Moot**: Run 1 has no SOM cells (Feng's model has none) |
+| U11 | P_SOM_PN = 0.34 | **Moot**: no SOM cells in Run 1 |
+| U12 | Heterogeneity | **Resolved**: none added. Feng's templates are used unchanged; variety comes from lognormal weights, delays, noise and random wiring |
+| U13 | NEURON vs Brian2 | **Resolved for Run 1**: NEURON 9.0.2 with Feng's files unchanged (Windows installer or WSL2; no native-Windows pip wheel). The live engine is U26 |
+| U14 | Gamma | Diagnostic only. The 1,000-cell network has no spatial structure (DEV-001), so Feng's localised gamma bursts are not expected |
+| U20 | Synaptic weight multipliers ("strength") | **Resolved**: `BL_main.hoc` loads `function_ConnectInternal_simplify_online_op.hoc`. E→E draws one lognormal(mean 2, var 1) shared by AMPA and NMDA; E→I (7, 2), I→E (12, 2), I→I (20, 10). Table 3's AMPA 5/3 is not implemented. Code used (DEV-003) |
+| U21 | STP d1/d2 pairing | **Resolved**: no `.hoc` overrides. All four files: d1 0.95 @ 40 ms, d2 0.9 @ 70 ms; floors 0.5 (PN→PN) and 0.7 (all others, incl. FSI→PN and FSI→FSI). Code used (DEV-004) |
+| U22 | Synapse formalism | **Moot**: Feng's kinetic-scheme files are used unchanged; no dual-exponential port |
+| U23 | Recurrent PN→PN sparsity at N=70 | **Resolved**: not acceptable (0.65 excitatory, ~7 inhibitory inputs per PN vs Feng's 25 and 43). Run 1 uses 1,000 cells wired to Feng's inputs per cell (DEV-001) |
+| U24 | Stimulus window length | **Resolved**: 3 s settle, 30 s rest, 2 s threat windows with 2 s before and 4 s after; 5 seeds (`architecture/07`) |
+| U25 | Extrinsic drive model | **Resolved**: Feng's own afferent trains with code weights and delays. Threat = afferent rate × 2, 4, 8 (DEV-005) |
+| **U26** | Live engine: simulator and cell detail | **Open**: decided from the Phase 0 benchmark (real-time factor of Feng's full cells at 100 / 500 / 1,000 cells) |
+| **U27** | Threat pathway | **Open, later**: Run 1 uses "more afferent input"; a dedicated thalamic threat input is a later refinement |
 
 ---
 
@@ -51,7 +55,7 @@
 | **U16** | Computational definition of face `neutral` |
 | **U17** | Suppression-gap *k* and prefrontal fatigue law |
 | **U18** | Scaling for non-BLA regions |
-| **U19** | Whether 50/12/8 stays after Feng-faithful Run 1. The archived runs used wrong kinetics, so 50/12/8 is a default, **not** a validated size |
+| U19 | Whether 50/12/8 stays after Feng-faithful Run 1 | **Superseded (Oct 2026)**: Run 1 uses Feng's 640 / 260 / 100. The BLA size in the live network depends on U26 |
 
 ---
 

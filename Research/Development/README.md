@@ -1,6 +1,6 @@
 # Design Blueprint — Emotionally Grounded Conversational AI
 
-**Version:** 2.5.1 (Pre-Implementation Edition — simulation-aligned, Oct 2026 consistency pass)  
+**Version:** 2.5.2 (Pre-Implementation Edition — BLA Run 1 redesign, 13 Oct 2026)  
 **Authors / Contributors:** Mohamed Takieddine Nouar, Maria Loghrab  
 **Institution:** Higher Institute of Sciences — HIS, Algiers  
 **Project:** Bachelor PFE | Computer Science
@@ -15,7 +15,7 @@ The full 10-region integrated system has not been built. Simulation work has beg
 - A clean, literature-grounded BLA campaign restarts as **Run 1** under the isolation-first strategy.
 - See the status block in `00_status_vision_architecture.md`, project policy in `Research/reports/project_policy_blueprint_and_runs.md`, and BLA clean-restart policy in `Simulations/BLA/reports/00_clean_restart_policy.md`.
 
-This folder contains the split Design Blueprint **v2.5.1** (simulation-aligned; see `07_meta.md` for the change log).
+This folder contains the split Design Blueprint **v2.5.2** (see `07_meta.md` for the change log).
 
 ---
 
@@ -41,4 +41,4 @@ This folder contains the split Design Blueprint **v2.5.1** (simulation-aligned; 
 
 ---
 
-*Last updated: October 2026 — v2.5.1 consistency pass*
+*Last updated: 13 October 2026 — v2.5.2 BLA Run 1 redesign*

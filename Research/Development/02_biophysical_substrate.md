@@ -22,9 +22,8 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 
 | Population | Proposed N | Notes |
 |---|---|---|
-| BLA pyramidal | 50 | Excitatory principal cells |
-| BLA PV-like | 12 | Fast inhibition |
-| BLA SOM-like | 8 | Slower dendritic-like inhibition |
+| BLA principal (PN-A + PN-C) | TBD (U26) | Excitatory principal cells |
+| BLA FSI (PV-like) | TBD (U26) | Fast inhibition |
 | CeA | 20 | Output population |
 | PFC | 30 | Suppression / control |
 | VTA | 15 | Dopamine source |
@@ -33,17 +32,17 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 | Insula | 20 | Interoception |
 | Anterior Cingulate | 25 | Conflict / empathy |
 | Hypothalamus | 15 | Raw drive |
-| **Total** | **255** | Proposed scaled starting point |
+| **Total** | **185 + BLA** | Proposed scaled starting point |
 
-**BLA note (updated September 2026):** Default for the clean **Run 1** campaign is N_pyr=50, N_PV=12, N_SOM=8. An alternate 150/112/108 composition appeared in archived material only; it is **not** interchangeable with 50/12/8 (different E/I ratio) and is not used. Architecture: distance-dependent connectivity and Feng kinetics — see `Simulations/BLA/Research/architecture/`.
+**BLA note (updated 2026-10-13):** BLA **Run 1** is an offline test of Feng et al. 2019 at Feng's own reduced size: 640 PN-A / 260 PN-C / 100 FSI, Feng's NEURON files unchanged, wired to Feng's inputs per cell. The earlier 50 / 12 / 8 default gave each principal cell under one recurrent input and was dropped. The BLA size in the live network is decided after the Run 1 speed benchmark (U26). See `Simulations/BLA/Research/architecture/` and `Simulations/BLA/reports/04_run1_redesign_oct2026.md`.
 
 **All other regions:** Numbers chosen for plausibility and computational tractability only. Not derived from empirical analysis. Each region will be characterized in isolation (CeA next, then BLA→CeA two-region network) before full-network wiring begins.
 
 **5.2.2 Intended Biophysical Substrate**
 
-- **Pyramidal neurons (BLA):** 3-compartment Hodgkin–Huxley model (soma + apical dendrite + passive dendrite), following Feng et al. 2019 and Kim et al. 2013. Three compartments are required to correctly implement the Ca²⁺-dependent slow afterhyperpolarization current (I_sAHP) that produces spike frequency adaptation in real BLA principal cells. Omitting this compartmentalization removes the adaptation mechanism and produces unrealistically uniform firing throughout a sustained stimulus.
+- **Pyramidal neurons (BLA):** Feng et al. 2019 principal cells: soma + apical dendrite + distal dendrite, **16 segments** in Feng's code, with Na, Kdr, A, M, h, Ca, NaP, sAHP and leak currents. The adaptation current (I_sAHP) and its Ca²⁺ pool (τ = 1 s) sit **in the soma only**; Feng needs the dendrites mainly for synapse placement and his LFP calculation. Without I_sAHP, cells fire unrealistically uniformly during a sustained stimulus.
 
-  If computational tractability requires it, a single-compartment model is acceptable as a first approximation, but the sAHP current must be explicitly included as a simplified somatic conductance (with the caveat that its interaction with Ca²⁺ will be less realistic). This simplification must be stated in any thesis chapter describing the simulation.
+  BLA Run 1 uses Feng's full templates unchanged. If the live engine later needs fewer segments for speed, a reduced cell must keep the somatic sAHP and Ca²⁺ pool and match Run 1's single-cell recordings; the simplification must be stated in the thesis.
 
 - **Interneurons (PV, SOM, VIP):** Single-compartment fast-spiking models. PV interneurons use standard HH Na/K conductances only. SOM interneurons additionally require a persistent Na⁺ current (I_NaP) and a hyperpolarization-activated cation current (I_H) to reproduce their spontaneous activity at low drive. VIP interneurons additionally require a D-current (slowly inactivating K⁺). (Source: Cattani et al. 2024, eLife.)
 

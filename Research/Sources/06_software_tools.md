@@ -1,6 +1,6 @@
 # Software and Tools
 
-**Simulator decision for clean BLA Run 1 is still open (U13).** The architecture prefers NEURON + ModelDB mechanisms (strict path), with Brian2 as a documented fallback (pragmatic path). See `Simulations/BLA/Research/architecture/03_neuron_models.md`. Do not mix the two silently.
+**Simulator for BLA Run 1: NEURON 9.0.2 with Feng's ModelDB 247968 files unchanged (U13 resolved, 2026-10-13).** The simulator for the live engine is decided after the Run 1 speed benchmark (U26). See `Simulations/BLA/Research/architecture/03_neuron_models.md` and `07_simulation_protocol.md`.
 
 ---
 
@@ -13,7 +13,7 @@
 
 **What it provides:** The simulator used by Feng et al. 2019. The ModelDB code for their model is in NEURON `.hoc` / `.mod` files. Running those files directly keeps every coefficient faithful to the paper. Python-compatible via the `neuron` package.
 
-**Known blocker from the archived campaign:** `import neuron` failed and `pip install neuron` returned 502 from a mirror. Before Run 1, verify a working install and that `nrnivmodl` can compile the ModelDB `.mod` files. Keep build paths free of spaces; this is why the repo folder is named `Simulations/`.
+**Installing on Windows (checked October 2026):** NEURON 9.0.2 (2026-08-10, Python 3.10–3.14) ships PyPI wheels for Linux and macOS only, so `pip install neuron` fails on native Windows. Use the official installer `nrn-9.0.2.w64-mingw-py-310-311-312-313-314-setup.exe` from github.com/neuronsimulator/nrn/releases with a python.org CPython, or WSL2 Ubuntu + `pip install neuron==9.0.2`. The archived blocker (`import neuron` failed; pip 502 from an internal mirror; a `libnrnmech.so` on disk) came from a Linux sandbox's network, not from NEURON. Feng's mod files were updated in 2022 for NEURON 8.2/9.0. Keep build paths free of spaces; this is why the repo folder is named `Simulations/`.
 
 ---
 

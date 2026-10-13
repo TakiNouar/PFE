@@ -1,104 +1,84 @@
-# 12 — Sources Map (Architecture ↔ Literature)
+# 12 — Sources Map (Architecture ↔ Sources)
 
-**Authority:** Every number in this architecture must resolve to an entry under `Research/Sources/` (primary: `01_primary_bla_references.md`).
+**Authority:** every number in this architecture resolves to a row below. Feng's paper and code are documented in `Research/Sources/01_primary_bla_references.md`; code values were read from the ModelDB 247968 GitHub mirror in October 2026.
 
-If a value is not listed there, implementation **stops** and the gap is written to `deviations.md`.
+If a value is not here, implementation **stops** and the gap goes to `Simulations/BLA/simulation/deviations.md`.
 
----
-
-## Master models
-
-| Architecture need | Source document | Paper |
-|-------------------|-----------------|-------|
-| Tables 1–7, Mg block, scale, composition | `Research/Sources/01_primary_bla_references.md` | Feng et al. 2019 eNeuro; ModelDB **247968** |
-| PN / FSI single-cell mechanisms | same + Kim entry | Kim et al. 2013 Learn Mem; ModelDB **150288** |
-| Reading order for implementation | `Research/Sources/07_reading_priority.md` | — |
-| Index of all Sources files | `Research/Sources/README.md` | — |
-| Provenance audits | `Research/reports/literature_provenance_audit_sep2026.md`, `Research/reports/consistency_and_source_verification_oct2026.md` | — |
-| Open items (U-numbers) | `Research/reports/open_uncertainties.md` | — |
+Source keys (use them in `run1.json`): **F19** = Feng et al. 2019 paper; **F19code** = ModelDB 247968 file; **W&S07** = Woodruff & Sah 2007; **PROTO** = our protocol choice (always also in `deviations.md`).
 
 ---
 
-## Parameter → source (Run 1)
+## Values inside Feng's files (we do not set these)
 
-### Synaptic kinetics (`04_synaptic_models.md`)
+| Item | Value used | Key | Where documented |
+|---|---|---|---|
+| Cell templates, channels, geometry | `Cell_A`, `Cell_C`, FSI template | F19code | `03` |
+| Synapse kinetics, Mg²⁺ block, depression | four `*_STFD*.mod` files | F19code | `04` |
+| Noise τ and reversal | 2.728 / 10.49 ms; 0 / −75 mV | F19code (mod defaults) | `06` |
 
-| Parameter | Value | Feng locus | Upstream (do not omit) | Sources file |
-|-----------|-------|------------|------------------------|--------------|
-| PN→PN AMPA | 0.3 / **6.9** ms, 1.0 nS | Table 3 | Mahanty & Sah **1998**; Guzman et al. **2016** | `01_primary_bla_references.md` |
-| PN→FSI AMPA | 0.1 / 2.4 ms, 1.0 nS | Table 3 | same | same |
-| PN→PN / PN→FSI NMDA | 3.7 / **125** ms, 0.5 nS | Table 3 | **Weisskopf, Bauer & LeDoux 1999** (Feng ref. [115], confirmed) | same |
-| FSI→PN GABA-A | 0.5 / **6.8** ms, 0.6 nS, E=−75 mV | Table 3 | **Galarreta & Hestrin 1997** | same |
-| FSI→FSI GABA-A | 0.5 / 6.8 ms, 0.2 nS | Table 3 | Galarreta & Hestrin 1997 | same |
-| Weight multipliers W | lognormal; Table 3 mean/var PN→PN AMPA 5/3, NMDA 2/1; PN→FSI 7/2; FSI→PN 12/2; FSI→FSI 20/10 | Table 3 + ModelDB connect hoc | — (U20: paper vs code) | same |
-| Synaptic delay | d/(1 mm/ms) + 0.8 ms + U(±0.1) + dt | Methods + ModelDB | — | same |
-| Synapse formalism | Destexhe 1994 kinetic scheme (AlphaTmax/Beta/Cdur) | ModelDB `.mod` | Destexhe et al. 1994 | `05_computational_neuroscience.md` |
-| Mg²⁺ block | s(V)=[1+0.33exp(−0.06V)]⁻¹ | Methods | **Zador et al. 1990** | `02_supporting_biological.md` |
-| Gap junctions FSI–FSI | 8 % of pairs, coupling ≈ 0.05 | Tables 3, 6 | Woodruff & Sah 2007 | `01_primary_bla_references.md` |
+## Values we set (copied from Feng's code or paper)
 
-### Short-term depression (`04_synaptic_models.md`)
+| Item | Value | Key | Spec file |
+|---|---|---|---|
+| Cell shares | 64 / 26 / 10 % | F19 | `02` |
+| Reduced size | 1,000 cells | F19 ("1,000-neuron reduced model"); Nair-lab `feng_homogenous` | `02` |
+| Density, minimum spacing | 9,840 cells/mm³; 25 µm | F19 | `02` |
+| Inputs per cell | PN→PN 24.98, FSI→PN 42.6, PN→FSI 214.8, FSI→FSI 21.6 | F19 (Results) | `05` |
+| Gap-junction pairs | 8 % of FSI pairs | F19 ← W&S07 | `05` |
+| Gap-junction conductance | `HalfGap`, 5,000 MΩ (0.2 nS) each way | F19code (`function_ConnectInternal_gj_simplify.hoc`) | `04` |
+| Weights PN→PN | lognormal(2, 1), shared AMPA/NMDA | F19code (`function_ConnectInternal_simplify_online_op.hoc` line 24) | `04` |
+| Weights PN→FSI / FSI→PN / FSI→FSI | lognormal(7, 2) / (12, 2) / (20, 10) | F19code (same file); match F19 Table 3 | `04` |
+| Internal delay | d (mm) × 1 ms/mm + 0.8 + U(−0.1, 0.1) + dt | F19 Methods + F19code | `05` |
+| Noise PN | g_e0 3.2, σ_e 3, g_i0 21, σ_i 8 nS | F19 Table 7 = F19code | `06` |
+| Noise FSI | g_e0 1.21, σ_e 0.12, g_i0 5.73, σ_i 2.64 nS | F19code (`BL_main.hoc` 305–318) | `06` |
+| Afferent trains | Feng's recorded-cell surrogates, `input/` | F19code ← Headley et al. 2015 | `06` |
+| Afferent fan-out | 40 PNs per train; 2.97 trains per PN; 3.4 per FSI | F19 | `06` |
+| Afferent weights | PN lognormal(9, 0.05); FSI lognormal(2, 0.2) | F19code (`function_ConnectInputs_invivo_op.hoc`) | `06` |
+| Afferent delay | U(0.5, 1) ms | F19code (same file) | `06` |
+| dt, temperature, v_init | 0.05 ms, 31 °C, −70 mV | F19 + F19code (`BL_main.hoc`) | `07` |
+| Seeds per condition | 5 | F19 ("averaging five network model runs") | `07` |
 
-“D_max” is a floor on the release factor F·D1·D2 (ModelDB). d1/d2 pairing with τ is open (U21).
+## Protocol choices (ours; each also in `deviations.md`)
 
-| Connection | D_max | d1/d2 | τ (ms) | Upstream | Sources file |
-|------------|-------|-------|--------|----------|--------------|
-| FSI→PN | **0.6** | 0.9/0.95 | 40/70 | Woodruff & Sah **2007** (BLA) | `01_primary_bla_references.md` |
-| PN→FSI | **0.7** | 0.9/0.95 | 40/70 | Woodruff & Sah 2007 (BLA) | same |
-| PN→PN | **0.5** | 0.9/0.95 | 40/70 | **Silberberg et al. 2004 (neocortex)** — not BLA-measured | same |
+| Item | Value | Key |
+|---|---|---|
+| Distance-independent wiring at p = K / n_pre | `05` | PROTO (DEV-001) |
+| Threat = afferent rate × D, D = 2, 4, 8 | `06` | PROTO (DEV-005) |
+| Epoch lengths, trial counts | `07` | PROTO |
+| Synchrony guard < 0.5 | `10` | PROTO (archive lesson) |
 
-### Connectivity (`05_connectivity.md`)
+## Gate reference values (literature)
 
-| Parameter | Value | Upstream | Sources file |
-|-----------|-------|----------|--------------|
-| PN→PN distance bands | 3/2/1/0.5 % at <50 / 50–100 / 100–200 / 200–600 µm | Feng Tables 5–6 ← Abatis et al. 2017 (SfN poster; cite Feng) | `01_primary…` + `02_supporting_biological.md` |
-| PV→PN | P = 0.34 | Woodruff & Sah 2007 / Feng | `01_primary_bla_references.md` |
-| PN→PV | 0.12 uni / 0.16 reciprocal | Woodruff & Sah 2007 / Feng | same |
-| PV→PV chemical | 0.26 (0.20 uni + 0.03 bi), conditioned on gap-junction coupling | Woodruff & Sah 2007 / Feng Table 6 | same |
-| Interneuron distance limit | ~300 µm | Feng Methods | same |
-| P_SOM_PN | 0.34 (Run 1 approx.) | **Approximation** — not a Feng Table value; must appear in `deviations.md` | architecture only |
+| Gate value | Source |
+|---|---|
+| PN resting rate 0.2–3 Hz | Amir et al. 2018, *Neuron* (0.21 / 1.55 Hz; PMC5809002); Repa et al. 2001 (LA mean 2.7 Hz) |
+| FSI resting rate 10–30 Hz | Paré & Gaudreau 1996 (10–15 Hz); Amir et al. 2018 (22–27 Hz) |
+| PN Vrest −70.3 mV, Rin ~140 MΩ, τm ~30 ms | F19 Methods (text) |
+| Gap coupling ≈ 0.05 | W&S07 |
 
-### Noise (`06_noise_and_drive.md`)
+## Upstream citations Feng gives for values inside his files
 
-| Parameter | Value | Upstream | Sources file |
-|-----------|-------|----------|--------------|
-| Point-conductance / OU formalism | equations | **Destexhe, Rudolph, Fellous, Sejnowski 2001**, *Neuroscience* 107:13–24 | `01_primary…` + `05_computational_neuroscience.md` |
-| PN Table 7 coeffs | g_e0=3.2, σ_e=3, τ_e=2.728, E_e=0, g_i0=21, σ_i=8, τ_i=10.49, E_i=−75 (nS, ms, mV) | Feng Table 7 (adapted from Destexhe 2001) | `01_primary_bla_references.md` |
-| FSI Table 7 coeffs | g_e0=1.2, σ_e=0.1, τ_e=2.728, E_e=0, g_i0=5.7, σ_i=2.6, τ_i=10.49, E_i=−75 | Feng Table 7 (verified Oct 2026) | same |
-| Extrinsic input | Feng: Poisson surrogate trains, ≈3 per PN; Run 1 uses OU stimulus instead (U25) | Feng Methods | same |
-| Destexhe 2003 Nat Rev Neurosci | — | **Review only** — not the methods source | listed separately in Sources |
+These are cited as "Feng et al. 2019, citing …", never as direct sources of the numbers.
 
-### Neuron models (`03_neuron_models.md`)
+| Value | Feng cites | Caveat |
+|---|---|---|
+| AMPA kinetics | Mahanty & Sah 1998; Guzman et al. 2016 | Guzman is hippocampal CA3 |
+| NMDA 3.7 / 125 ms | Weisskopf, Bauer & LeDoux 1999 | That paper reports **no** NMDA time constants (U1); cite the values to Feng |
+| GABA-A kinetics | Galarreta & Hestrin 1997 | Neocortex; reports 0.46 / 7.5 ms |
+| FSI ↔ PN depression | W&S07 | BLA, mouse |
+| PN → PN depression | Silberberg et al. 2004 | Neocortex; Feng: no BLA data |
+| Mg²⁺ block | Zador et al. 1990 | — |
+| Noise formalism | Destexhe, Rudolph, Fellous & Sejnowski 2001 | Not the 2003 review |
 
-| Need | Source |
-|------|--------|
-| Multi-compartment PN + I_sAHP | Kim 2013 + Feng 2019 ModelDB templates |
-| PN / FSI passive params | Feng Methods (verified; see `01_primary_bla_references.md`) |
-| FSI kinetics | Kim / Feng FSI templates |
-| Time step | dt = 0.05 ms (Feng Methods) |
-| SOM = PV kinetics (Run 1) | Temporary; document in `deviations.md`; later Cattani et al. 2024 | `01_primary` / extended models |
-
----
-
-## Forbidden substitutions (from Sources audit)
+## Forbidden substitutions
 
 | Do not use | Instead |
-|------------|---------|
-| Mahanty & Sah **1999** as source of 6.9 ms AMPA | **1998** + Guzman 2016 |
-| Woodruff & Sah for PN→PN D_max | Silberberg 2004; D_max=**0.5** |
-| Destexhe **2003** as OU methods paper | Destexhe **2001** |
-| Fixed K while scaling N | Distance-dependent probabilities |
-| Invented ±10% heterogeneity | Source ranges only, else 0% |
-| Fixed 1.5 ms delay | Feng distance-dependent delay rule |
-| Bare g without weight multiplier | g × W (Table 3 strength) |
+|---|---|
+| Any edited copy of a Feng `.mod` or cell `.hoc` | The unchanged file (hash-checked) |
+| Kim 2013 / ModelDB 150288 principal-cell parameters | Feng 247968 `Cell_A` / `Cell_C` |
+| Paper value where Feng's code differs, unlogged | Code value + `deviations.md` |
+| `gap.mod` | `halfgap.mod` |
+| Invented Poisson rates for afferents | Feng's train files |
+| Mahanty & Sah 1999 as the AMPA source | Feng, citing Mahanty & Sah 1998 + Guzman 2016 |
+| Destexhe 2003 as the noise-methods paper | Destexhe et al. 2001 |
 | Abatis 2017 as a standalone citation | Feng et al. 2019 (Abatis is an SfN poster) |
-
----
-
-## Implementation checklist
-
-Before coding Run 1:
-
-1. Open `Research/Sources/01_primary_bla_references.md` and copy Table 3 / 4 / 7 numbers into `full_parameters.json` with citation keys.
-2. Open this map and tick every row used in the run.
-3. Any row marked approximation (e.g. P_SOM_PN, SOM=PV kinetics) goes into `simulation/deviations.md`.
-4. Do not invent values that are absent from Sources.

@@ -71,5 +71,6 @@ Never again use fixed in-degree while letting inhibitory population size scale f
 2. If pragmatic: write a new prompt that lists the exact published numbers that will be used and the approximations that are explicitly allowed.
 3. If strict: obtain a working NEURON environment first, then re-issue the previous strict prompt unchanged.
 4. Target population: **50 Pyr / 12 PV / 8 SOM** (locked in `Simulations/BLA/Research/architecture/02_population_structure.md`). The 150/112/108 composition used in the rebuild attempt is archive-only. It has a different E/I ratio and is not interchangeable.
+   > **Superseded 2026-10-13:** the strict NEURON path was chosen and Run 1 now uses Feng's 640 PN-A / 260 PN-C / 100 FSI. See `../04_run1_redesign_oct2026.md`.
 
 Until one of those two paths is chosen and the corresponding constraints are written down, do not write new simulation code.
