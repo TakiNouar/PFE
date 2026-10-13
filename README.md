@@ -17,7 +17,7 @@ The limbic core is the sole authority on what is felt. The LLM only translates t
 
 Target character: **Ultron** — cold, precise, intelligent, genuinely curious, hostile only when earned.
 
-> **Status (October 2026):** Early simulation phase. Design Blueprint v2.5.1.  
+> **Status (October 2026):** Early simulation phase. Design Blueprint v2.5.2.  
 > Early full-network attempts and the first BLA isolation campaign (historically labelled Runs 1–5) are **archived as failed tests**.  
 > A clean, literature-grounded BLA campaign restarts as **Run 1** under the isolation-first strategy. Full pipeline is not yet built.
 

@@ -1,46 +1,51 @@
 # 10 — Validation Gates
 
-A run is accepted only when every gate below passes. Failure of any gate stops the campaign; do not “tune past” a failed gate.
+Run 1 passes only when every gate below passes. If a gate fails, stop and report. Do not tune parameters to get past it: every value in this spec has a source, and a failure means something is built wrong or a source is wrong.
 
-## Gate 0 — Source fidelity
+## Gate 0 — Provenance
 
-- [ ] Every kinetic coefficient and probability is present in `full_parameters.json` with a literature citation or ModelDB path.
-- [ ] `deviations.md` exists and is either empty (“no deviations”) or lists only environment-forced approximations that were pre-authorized.
-- [ ] Live parameters assert: AMPA PN→PN decay = 6.9 ms, NMDA decay = 125 ms, E_GABA = −75 mV, Mg block applied each step (not merely documented).
-- [ ] Per-synapse weight multipliers drawn as specified (U20 choice recorded); delays follow the Feng distance rule (no fixed 1.5 ms); STP updates on every presynaptic spike with the recorded d1/d2 pairing (U21).
+- [ ] Every Feng file in `mechanisms/` matches its recorded SHA-256 hash (unchanged).
+- [ ] Every value we set is in `run1.json` / `full_parameters.json` with a source key.
+- [ ] `deviations.md` lists every departure (DEV-001 … ) and nothing else changed.
+- [ ] Realised inputs per cell are within 10 % of the K targets in `05_connectivity.md`.
+- [ ] Synaptic weights after a run equal the weights drawn at wiring (the inert LTP term changed nothing).
 
 ## Gate 1 — Reproducibility
 
-- [ ] Same parameters + same global seed → identical spike times (bit-level).
+- [ ] Same seed → identical spike file (step 8 of `07`, run with the live broadcast off, so this also proves the viewer changes nothing).
 
-## Gate 2 — Activity quality (1.0×)
+## Gate 2 — Single cells (step 1)
 
-- [ ] Synchrony index < 0.5
-- [ ] CV of ISIs > 0.3
-- [ ] Active fraction > 0.4
-- [ ] Mean Pyr rate ∈ [10, 40] Hz during stimulus
+- [ ] PN-A slows down during a strong current step (adaptation ratio clearly > 1); PN-C keeps a steadier rate (its adaptation ratio is lower than PN-A's at every level that gives ≥ 3 spikes).
+- [ ] FSI fires at high rates with little adaptation.
+- [ ] Resting potential, input resistance and membrane time constant of PN-A are reported next to Feng's stated −70.3 mV, ~140 MΩ, ~30 ms. A difference of more than 10 % is investigated and explained before continuing (the paper text and code disagree on the leak, see DEV-002).
+- [ ] Coupling coefficient of gap-junction pairs is reported next to Woodruff & Sah's ≈ 0.05.
 
-## Gate 3 — Inhibition functional
+## Gate 3 — Rest (1,000 cells, 5 seeds)
 
-- [ ] Suppression ratio clearly > 1. Compute it as Pyr rate with inhibition **off** ÷ rate with inhibition **on**, so that > 1 means inhibition works. (`08_metrics_and_outputs.md` defines the ratio this way. The archived campaign reported its inverse, 0.51, i.e. ~2×; that figure is not a target.)
-- [ ] PV and SOM populations are not silent under the chosen drive.
+- [ ] Mean PN rate between **0.2 and 3 Hz**. Rat BLA principal cells: 0.21 and 1.55 Hz for the two cell classes (Amir et al. 2018); lateral amygdala average 2.7 Hz (Repa et al. 2001).
+- [ ] Mean FSI rate between **10 and 30 Hz**. Rat BLA interneurons: 10–15 Hz (Paré & Gaudreau 1996); 22–27 Hz (Amir et al. 2018).
+- [ ] Synchrony index < 0.5 (project guard against the archived all-cells-fire-together failure; not a literature value).
 
-## Gate 4 — Scale behaviour
+## Gate 4 — Threat response and inhibition (1,000 cells, 5 seeds)
 
-- [ ] Scale sweep completed at 0.5× / 1.0× / 1.5× / 3.0×.
-- [ ] No catastrophic collapse to near-zero activity at 3.0× under distance-dependent connectivity.
-- [ ] Synchrony remains < 0.5 at all scales that have healthy rates.
+- [ ] PN rate during the threat is higher than before it, at every dose.
+- [ ] The PN response grows with dose (×2 < ×4 < ×8, comparing means across seeds).
+- [ ] FSI rate also rises during the threat (FSIs follow PN activity, as Feng designed).
+- [ ] Recovery: PN rate in the last 2 s after the threat is inside the rest range (`08`), at every dose.
+- [ ] Suppression ratio > 1 at rest and at ×4, with the 95 % interval across seeds excluding 1.
 
-## Gate 5 — Diagnostics
+## Gate 5 — Size check (500 vs 1,000 cells)
 
-- [ ] AMPA-off (NMDA-only) run produces interpretable activity (confirms Mg block and NMDA pathway).
-- [ ] Feed-forward-only run shows the expected loss of recurrent amplification.
+- [ ] Mean PN and FSI resting rates at 500 cells are within 2 SD (across seeds) of the 1,000-cell values. If they are not, the in-degree rule is not holding the network steady, and that must be explained before Run 1 results are used.
 
-## Gate 6 — Reporting discipline
+## Gate 6 — Reporting
 
-- [ ] Summary text contains only numbers that appear in the JSON/CSV tables of that run.
-- [ ] No template sentences, no invented claims.
+- [ ] Every number in `summary.txt` appears in `metrics.json`.
+- [ ] No template sentences, no claims beyond the measured tables.
 
-Only after all gates pass may the parameters be promoted for multi-region work.
+## Recorded but never gated
 
-Intermittent gamma is **not** a gate. If present, record it as a diagnostic under metrics.
+After-discharge, gamma power, ISI CV, NMDA-only and no-recurrence diagnostics, real-time factor.
+
+Only after all gates pass may Run 1's parameters be used for the BLA → CeA network.

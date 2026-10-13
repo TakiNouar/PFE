@@ -1,34 +1,65 @@
 # 07 — Simulation Protocol
 
-## Time base
+## Fixed settings (Feng code)
 
-| Parameter | Value |
-|-----------|-------|
-| dt | **0.05 ms** fixed step (verified: Feng et al. 2019 Methods, NEURON) |
-| Total duration | 300 ms |
-| Stimulus window | 50–150 ms |
-| After-discharge observation window | 150–250 ms |
+| Setting | Value |
+|---|---|
+| Time step | dt = **0.05 ms**, fixed step |
+| Temperature | 31 °C |
+| Starting voltage | v_init = −70 mV |
+| Advance | NEURON's own solver (`pc.psolve` in 50 ms chunks). Between chunks, Python may only save data (live viewer snapshots, `13`). No Python code that runs every time step |
 
-Use native simulator advance (fixed-step or CVODE). Stepped Python loops that update noise every dt are forbidden when they make the full population intractable.
+## Phase 0 — Setup and speed benchmark (before any gate)
 
-**Under review (U24):** at 10–40 Hz a 100 ms stimulus gives each cell only 1–4 spikes. ISI-CV (Gate 2) is then statistically weak, and the “> 5 Hz” active criterion reduces to “fired at least once”. The window is also short relative to the NMDA decay (125 ms) and the slow sAHP. Decide before Run 1 whether to lengthen the stimulus window (and, if so, update `06_noise_and_drive.md`, `08_metrics_and_outputs.md` and `10_validation_gates.md` together).
+1. Install NEURON 9.0.2: the Windows installer `nrn-9.0.2.w64-mingw-py-310-311-312-313-314-setup.exe` (GitHub releases), or WSL2 Ubuntu + `pip install neuron==9.0.2`. `pip install neuron` does **not** work on native Windows.
+2. Copy the ModelDB 247968 files into `Simulations/BLA/simulation/mechanisms/`, compile with `nrnivmodl`, and record a SHA-256 hash of every file.
+3. Time **1 s of simulated activity** for each combination:
+
+| Factor | Values |
+|---|---|
+| Size | 100, 500, 1,000 cells |
+| Threads (`pc.nthread`) | 1 and 6 |
+| dt | 0.05 ms (and 0.1 ms, only to know the cost) |
+
+Plus two extra rows at 1,000 cells, 6 threads, dt 0.05 ms:
+- **cells without synapses** (noise only): shows how much of the cost is synapses, which informs the live engine (U26);
+- **live broadcast on** (`13`): measures the viewer's overhead.
+
+4. Write `benchmark.csv`: wall-clock seconds per simulated second (the **real-time factor**; below 1 is faster than real time) and peak memory.
+
+The benchmark decides:
+- whether the protocol below fits in a night at 1,000 cells, or 500 becomes the main size (`02`);
+- what the live engine will need (a later decision, outside Run 1).
+
+Gate runs always use dt = 0.05 ms. dt = 0.1 ms is measured only for information.
+
+## Run sequence
+
+| Step | What | Size | Seeds | Simulated time per seed |
+|---|---|---|---|---|
+| 1 | Single cells: current steps on PN-A, PN-C and FSI alone | 1 cell | — | 1 s per step |
+| 2 | Settle: run and discard | 1,000 | each | 3 s |
+| 3 | Rest: background noise + afferents only | 1,000 | 5 | 30 s |
+| 4 | Threat trials: 2 s before, 2 s threat, 4 s after; 5 trials per dose, doses ×2, ×4, ×8 | 1,000 | 5 | 120 s |
+| 5 | Scale check: steps 2–3 | 500 | 5 | 33 s |
+| 6 | Inhibition-off: steps 2–3, then 5 trials at ×4, with FSI→PN weights at 0 | 1,000 | 5 | 73 s |
+| 7 | Diagnostics (report only): PN→PN AMPA at 0 (NMDA only); PN→PN connections removed | 1,000 | 1 | 33 s each |
+| 8 | Reproducibility: repeat step 3 with seed #1, **live broadcast off** | 1,000 | 1 | 33 s |
+
+Steps 3–4 run in one continuous simulation per seed (settle → rest → trials).
+
+**Why these lengths.** The principal cell's adaptation brake builds up over a Ca²⁺ pool with a 1 s time constant, so 3 s of settling is about three time constants. At ~1 Hz resting rates, a 30 s rest epoch gives about 30 spikes per PN, enough for rates and ISI statistics. Feng averaged over 5 random seeds and analysed 165 s runs.
+
+The durations are **starting values**. If the benchmark shows the full sequence cannot finish in a reasonable time, shorten the rest epoch or the trials per dose. Do not drop seeds below 3 or doses below 3. Record any change in `deviations.md`.
+
+## Single-cell step protocol (step 1)
+
+No noise, no synapses. Inject 1 s current steps into the soma, from just below threshold to strong drive (≥ 6 levels). Record voltage and spike times. Also measure resting potential, input resistance (small hyperpolarising step) and membrane time constant.
+
+For the gap-junction check, inject a 1 s hyperpolarising step into one FSI of a coupled pair and measure the coupling coefficient (ΔV of the partner ÷ ΔV of the injected cell).
 
 ## Randomness
 
-- One **global seed** (report it). All placement, connectivity, weight, delay-jitter, heterogeneity, and noise draws derive from it.
-- The calibration run and the main run, with identical parameters and seed, must produce **bit-identical** spike times.
-
-## Required run set
-
-1. **Calibration** at the chosen 1.0× population.
-2. **Scale sweep** at 0.5×, 1.0×, 1.5×, 3.0× (relative proportions preserved).
-3. **Diagnostic A:** AMPA conductances on PN→PN set to zero (NMDA + Mg block only).
-4. **Diagnostic B:** all recurrent excitation removed (feed-forward only).
-5. **Diagnostic C (optional):** all inhibitory synapses silenced → compute suppression ratio.
-
-Diagnostics A and B depend on PN→PN recurrence, which is expected to be very sparse at N=70 (U23). Report realized PN→PN in-degree next to their results.
-
-## Initialization
-
-- Resting potential ≈ −70.3 mV (Feng PN value, consistent with the passive parameters).
-- Allow a short equilibration period if the noise model requires it; document its length.
+- One **global seed** per network seed. Everything derives from it: placement, wiring, weights, delay jitter, noise streams, which afferent trains go where, and threat spikes.
+- Use separate, named streams for each purpose, so changing one (for example threat spikes) never changes another (for example wiring).
+- Network seeds: 1, 2, 3, 4, 5 (record them).

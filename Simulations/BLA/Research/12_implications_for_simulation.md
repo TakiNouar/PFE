@@ -8,11 +8,14 @@ See `reports/00_clean_restart_policy.md`.
 
 ## Isolated BLA characterization — what Run 1 must reproduce
 
-- Graded, desynchronized PN firing under moderate drive (target mean rate ~10–40 Hz during stimulus).
-- Functional PV- and SOM-mediated suppression.
-- Spike-frequency adaptation via I_sAHP.
-- Correct synaptic kinetics (AMPA PN→PN decay **6.9 ms**, NMDA decay **125 ms** + dynamic Mg²⁺ block).
-- Distance-dependent PN→PN connectivity (not fixed in-degree while scaling N).
+*Revised 2026-10-13 (`reports/04_run1_redesign_oct2026.md`). The binding list is `architecture/10_validation_gates.md`.*
+
+- Resting rates like rat BLA: principal cells about 0.2–3 Hz, FSIs about 10–30 Hz.
+- A dose-dependent response to a threat input, then a return to rest.
+- Functional FSI (PV-like) inhibition.
+- Spike-frequency adaptation via I_sAHP (PN-A strong, PN-C weak).
+- Feng's synapse files unchanged (AMPA ~7 ms, NMDA 125 ms + dynamic Mg²⁺ block, short-term depression).
+- Feng's inputs per cell on every pathway (25 / 43 / 215 / 22), at 1,000 cells.
 
 ## What Run 1 must **not** be required to produce
 
@@ -24,15 +27,14 @@ See `reports/00_clean_restart_policy.md`.
 
 | Item | Use |
 |------|-----|
-| Synaptic kinetics | Feng Table 3 + upstream (see Sources) |
-| Mg²⁺ block | Zador formula via Feng |
-| Connectivity | Distance-dependent (Feng / Abatis) |
-| Noise | Destexhe 2001 formalism; Feng Table 7 |
-| STP | Feng Table 4 (Woodruff / Silberberg as attributed) |
-| PN currents | Kim / Feng multi-compartment + I_sAHP |
-| E_GABA | −75 mV |
+| Cells, synapses, Mg²⁺ block, STP, noise mechanisms | Feng's ModelDB 247968 files, unchanged |
+| Values where paper and code differ | Code (`simulation/deviations.md` DEV-002 to DEV-004) |
+| Connectivity | Feng's realised inputs per cell, distance-independent (DEV-001) |
+| Afferent input | Feng's recorded-cell spike trains |
 
-**Default population:** 50 Pyr / 12 PV / 8 SOM.
+Full map: `architecture/12_sources_map.md`.
+
+**Population:** 640 PN-A / 260 PN-C / 100 FSI (Feng's reduced-model size). No SOM in Run 1.
 
 ## Path to the full limbic core
 

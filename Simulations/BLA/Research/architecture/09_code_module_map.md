@@ -1,61 +1,48 @@
 # 09 — Code Module Map (no source code)
 
-Recommended package layout so that the architecture above maps cleanly onto files. Names are suggestive; the important point is separation of concerns.
+Python drives NEURON. Feng's files do the biophysics; our code only builds, runs and measures. Names are suggestions; the separation of concerns is what matters.
 
 ```
-bla_sim/
-├── config/
-│   ├── full_parameters.json     # all numeric values (Feng/Kim tables) + citation keys
-│   └── seeds.json               # global seed + derived streams
-├── neurons/
-│   ├── pn.py / pn.hoc           # multi-compartment PN + currents
-│   ├── fsi.py / fsi.hoc         # PV-like
-│   └── som.py                   # SOM-like (phase-1 = FSI kinetics)
-├── synapses/
-│   ├── ampa_nmda.py             # ModelDB kinetic scheme (or logged dual-exp approx.) + dynamic Mg block + weight W
-│   ├── gaba_a.py
-│   └── stp.py                   # two-factor depression state
-├── network/
-│   ├── placement.py             # volume, density, min-distance
-│   ├── connectivity.py          # distance-dependent + fixed-p rules, lognormal weights, delays
-│   └── builder.py               # wires cells + synapses + STP
-├── drive/
-│   ├── ou_noise.py              # Feng Table 7 coefficients
-│   └── sensory_drive.py         # private/common stimulus
-├── protocol/
-│   ├── runner.py                # time loop / native advance
-│   ├── scale_sweep.py
-│   └── diagnostics.py           # AMPA-off, inhibition-off, …
-├── metrics/
-│   ├── rates.py
-│   ├── synchrony.py
-│   ├── isi_cv.py
-│   ├── afterdischarge.py
-│   └── suppression.py
-├── io/
-│   ├── write_parameters.py
-│   ├── write_tables.py
-│   └── write_spikes.py
-└── main.py                      # single entry point, reads config, runs protocol
+Simulations/BLA/simulation/
+├── mechanisms/                 # ModelDB 247968 files, unchanged: *.mod, cell templates (.hoc),
+│                               # function_ConnectInternal_gj_simplify.hoc, input/ train files
+│   └── HASHES.txt              # SHA-256 of every file (Gate 0)
+├── bla_sim/
+│   ├── config/
+│   │   └── run1.json           # every value we set + source keys (12_sources_map)
+│   ├── cells.py                # load templates; make PN-A / PN-C / FSI by ID
+│   ├── placement.py            # cube, density, 25 µm minimum distance
+│   ├── wiring.py               # in-degree rule, weights, delays, gap-junction pairs
+│   ├── inputs.py               # Gfluct noise, Feng afferent trains, threat spikes
+│   ├── run.py                  # settle → rest → trials; pc.psolve in chunks
+│   ├── benchmark.py            # Phase 0 timing table
+│   ├── single_cell.py          # step-1 current steps + gap coupling
+│   ├── metrics.py              # pure functions of spike/voltage data
+│   ├── report.py               # writes metrics.json / metrics.txt / summary.txt
+│   ├── broadcast.py            # writes live/ snapshots between chunks (13_live_viewer)
+│   └── viewer_server.py        # small local web server for the viewer, run separately
+├── viewer/                     # live viewer page: index.html + JS (canvas), no internet needed
+├── outputs/<run_id>/           # see 08_metrics_and_outputs.md (live/ = viewer snapshots only)
+├── deviations.md
+└── main.py                     # one entry point: reads config, runs the requested steps
 ```
 
-Place the package under `Simulations/BLA/simulation/`. If the NEURON path is chosen, the ModelDB `.mod` files go in a `mechanisms/` folder there and are compiled with `nrnivmodl`. Keep the path free of spaces.
+Keep `Simulations/BLA/simulation/` free of spaces in its path (`nrnivmodl` breaks on spaces).
 
-The run package writes `full_parameters.json` (a resolved copy of `config/full_parameters.json` plus seed, volume and mechanism paths) next to its outputs, as required by `08_metrics_and_outputs.md`.
+## Responsibilities
 
-## Module responsibilities
+- **config:** the only place numbers live. Nothing is hard-coded elsewhere.
+- **cells:** templates only. No wiring.
+- **wiring:** returns the connection list. Never touches inputs.
+- **inputs:** noise, afferents, threat. Never touches wiring.
+- **run:** orchestration only.
+- **metrics:** pure functions, no side effects.
+- **report:** reads `metrics.json` only.
+- **broadcast / viewer:** read-only copies for display. Nothing in `metrics` or `report` may read `live/`.
 
-- **config** — single source of truth for numbers; nothing hardcoded elsewhere.
-- **neurons** — morphology + mechanism insertion only; no network knowledge.
-- **synapses** — pure kinetic objects; STP state lives here.
-- **network** — geometry and graph construction; returns lists of NetCon / synapse objects.
-- **drive** — noise and stimulus; never touches connectivity.
-- **protocol** — orchestration only.
-- **metrics** — pure functions of spike times / currents; no side effects.
-- **io** — serialization; the summary writer may only read the metric tables.
+## Forbidden
 
-## Forbidden coupling
-
-- Do not put kinetic constants inside the runner.
-- Do not recompute connection probabilities inside the metric code.
-- Do not generate random numbers outside the seeded streams defined in `config/seeds.json`.
+- Editing any file in `mechanisms/` (Gate 0 checks the hashes).
+- Python callbacks that run every time step.
+- Random numbers outside the named, seeded streams.
+- Summary text that is not computed from `metrics.json`.

@@ -8,7 +8,7 @@
 | Voice synthesis | StyleTTS2 | 1.0 GB | 1–2 s/response |
 | Speech to text | Whisper medium | 0.8 GB | ~0.3 s |
 | Face analysis | DeepFace + MediaPipe | 0.5 GB | ~30 ms/frame |
-| Limbic simulation | NEURON or Brian2 (CPU) | 0 GB (CPU) | <10 ms (estimated; unverified for multi-compartment HH) |
+| Limbic simulation | NEURON (CPU; may run on a second machine on the LAN) | 0 GB (CPU) | Real-time factor to be measured in BLA Run 1 Phase 0 (U26). Real time at dt = 0.05 ms means ≤ 50 µs of wall-clock per step |
 | Vector DB | ChromaDB | 0 GB (RAM) | ~20 ms |
 | OS + overhead | — | 1.0 GB | — |
 | **Total** | | **10.3 GB planned** | **1.7 GB headroom (estimated)** |
@@ -36,7 +36,7 @@ Mistral 7B could be split across GPU and CPU using llama.cpp layer offloading (`
 | Emotion analysis | RoBERTa large (GoEmotions) | 28-emotion classification |
 | Tone analysis | DeBERTa v3 large | Sarcasm, hostility, intent |
 | Face analysis | MediaPipe + DeepFace | Micro-expressions, action units, gaze |
-| Neural simulation | NEURON + ModelDB mechanisms (preferred) or Brian2 (fallback); Python orchestration | Limbic circuit dynamics — HH equations (simulator choice open, see `Research/reports/open_uncertainties.md` U13) |
+| Neural simulation | NEURON + ModelDB mechanisms; Python orchestration | Limbic circuit dynamics — HH equations. BLA Run 1 uses NEURON 9.0.2 (U13 resolved); the live-engine choice follows the Run 1 benchmark (`Research/reports/open_uncertainties.md` U26) |
 | Memory / retrieval | ChromaDB + LangChain | Vector storage and context management |
 | LLM | Mistral 7B Base Q4 (QLoRA) | Ultron persona, emotional reaction |
 | Fine tuning | Unsloth + HuggingFace PEFT | QLoRA training on cloud GPU |

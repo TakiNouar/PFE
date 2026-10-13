@@ -33,6 +33,8 @@ Documents: `00_clean_restart_policy.md` (this folder), `Research/reports/project
 
 ## Remaining work before coding Run 1
 
+> **Superseded 2026-10-13:** all five items below were resolved by the Run 1 redesign (`04_run1_redesign_oct2026.md`): NEURON chosen, U20/U21 read from the code, U23/U24 resolved, and Feng's files are now used unchanged rather than transcribed. The list is kept as the historical record.
+
 *Updated October 2026.* Table 4, the full Table 7 (including FSI τ/E), the delay rule, passive parameters and Table 3 weight multipliers are now transcribed in `Research/Sources/01_primary_bla_references.md`.
 
 1. Choose the simulator path (U13: NEURON strict vs Brian2 pragmatic).

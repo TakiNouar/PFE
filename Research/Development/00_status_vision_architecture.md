@@ -7,7 +7,7 @@ Bachelor PFE | Computer Science
 
 ---
 
-## Status of this document — updated October 2026 (v2.5.1)
+## Status of this document — updated October 2026 (v2.5.2)
 
 The full 10-region integrated system described in this blueprint has not been built. Every specification for the complete architecture (multi-region wiring, translator layer, LLM fine-tuning, voice synthesis, camera integration) remains a design target, not an implemented system.
 
@@ -15,7 +15,7 @@ However, simulation work has begun:
 
 * A full-network simulation (10 regions simultaneously) was attempted four times and is **archived as failed**. 6 of 10 regions (BLA, CeA, HIP, INS, ACC, PAG) produced activity, but none with literature-grounded parameters. PFC flatlines in Stage-2 runs, HYP shows only fixed baseline activity, and NAc/VTA are dead due to wiring errors (zero inbound connections to VTA; NAc receives input only from the dead VTA). See `Simulations/Neurons_Connected/reports/full_network_attempts_1_to_4.md`.
 * A first BLA isolated campaign (historically Runs 1–5) is **archived as failed**. It used guessed kinetics, so it validated no parameters. Its lessons and anti-patterns are in `Simulations/BLA/reports/test_run_1/`.
-* A literature review identified Feng et al. 2019 (eNeuro, ModelDB 247968) as the primary reference for BLA parameters. A clean, literature-grounded BLA **Run 1** is specified in `Simulations/BLA/Research/architecture/` and has not yet been run. Provenance is in `Research/Sources/`.
+* A literature review identified Feng et al. 2019 (eNeuro, ModelDB 247968) as the primary reference for BLA parameters. A clean, literature-grounded BLA **Run 1** is specified in `Simulations/BLA/Research/architecture/` and has not yet been run. It was redesigned on 2026-10-13: Feng's own 1,000-cell reduced network, built from his NEURON files unchanged (`Simulations/BLA/reports/04_run1_redesign_oct2026.md`). Provenance is in `Research/Sources/`.
 
 The isolation-first simulation strategy (characterize each region independently, then wire the network) was adopted after the full-network attempts revealed that compounding errors across all 10 regions simultaneously made diagnosis impossible.
 

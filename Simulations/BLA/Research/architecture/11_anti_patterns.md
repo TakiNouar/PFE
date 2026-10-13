@@ -1,21 +1,32 @@
-# 11 — Anti-Patterns (archived failed tests — must not recur in Run 1)
+# 11 — Anti-Patterns (must not recur)
 
-| Anti-pattern | Consequence in archived failed tests | Required alternative |
-|--------------|--------------------------------------|----------------------|
-| Shared step current to all neurons | Synchrony = 1.0, single volley | ≥75 % private drive |
-| AMPA τ_decay = 2 ms on PN→PN | Recurrent excitation dies between spikes | **6.9 ms** |
-| NMDA without Mg block | NMDA acts as tonic current; ~85 % of excitatory current | Dynamic s(V) every step |
-| Fixed in-degree K=3 while scaling N | Large-N collapse (inhibition wins) | Distance-dependent probabilities |
-| No I_sAHP | Unadapted high-rate volleys | Multi-compartment PN with sAHP |
-| Current-injection Gaussian noise | Weak desynchronization | Conductance-based OU (Feng Table 7) |
-| No short-term depression | Missing natural brake after strong activation | Dynamic STP (Feng Table 4) |
-| Different seeds for calibration vs sweep | Non-reproducible results | Single global seed |
-| Scoring that ignores the only after-discharge candidates | Wrong parameter set selected | Explicit, documented selection rule |
-| Fabricated / template summary text | False claims of healthy graded responses | Summary derived only from measured tables |
-| Pure-Python re-implementation of `.mod` kinetics without listing deviations | Lost claim to literature fidelity | Load ModelDB mechanisms or document every approximation |
-| Stepped Python OU update on full large net | Run became intractable | Native simulator advance |
-| Treating isolated after-discharge as a success criterion | Wasted tuning effort | Record it; do not optimize for it in isolation |
+## From the archived failed tests (`reports/test_run_1/`)
 
-Any future implementation that re-introduces an anti-pattern above is considered invalid regardless of the numeric scores it produces.
+| Anti-pattern | What went wrong | Required alternative |
+|--------------|-----------------|----------------------|
+| Shared step current to all neurons | Synchrony = 1.0, single volley | Private Gfluct noise per cell; afferents shared only as in Feng |
+| AMPA τ_decay = 2 ms on PN→PN | Recurrent excitation died between spikes | Feng's synapse files unchanged (~7 ms) |
+| NMDA without Mg²⁺ block | NMDA acted as a constant current | Feng's synapse files (block computed every step) |
+| Fixing inputs per cell for excitation only, while inhibitory populations grew with N | Large-N collapse (inhibition won) | **One** in-degree rule for **every** pathway (`05`) |
+| No sAHP | Unadapted high-rate volleys | Feng's templates (sAHP in the soma) |
+| Current-injection Gaussian noise | Weak desynchronization | Feng's Gfluct conductance noise |
+| No short-term depression | No brake after strong activation | Feng's synapse files |
+| Different seeds for calibration and sweep | Non-reproducible | One global seed, named streams |
+| Scoring that ignored the only after-discharge candidates | Wrong parameter set chosen | No tuning; fixed gates |
+| Fabricated or template summary text | False claims | `summary.txt` written only from `metrics.json` |
+| Re-implementing `.mod` kinetics by hand without listing deviations | Lost literature fidelity | Feng's files unchanged, hash-checked |
+| Python update loop every time step | Run became intractable | `pc.psolve` in chunks |
+| Treating isolated after-discharge as a success criterion | Wasted tuning | Recorded only |
 
-Archive detail: `Simulations/BLA/reports/test_run_1/`.
+## Found by the October 2026 verification
+
+| Anti-pattern | What goes wrong | Required alternative |
+|--------------|-----------------|----------------------|
+| Shrinking the tissue at Feng's density (50 / 12 / 8 in a 0.19 mm cube) | ~0.65 excitatory and ~7 inhibitory inputs per PN instead of 25 and 43: recurrent dynamics cannot be tested | In-degree rule at ≥ 500 cells |
+| Gating on 10–40 Hz principal-cell rates | 10–100× above rat BLA (0.2–3 Hz) | Gate 3 rest rates from recordings |
+| 300 ms runs with a 100 ms stimulus | Shorter than the 1 s Ca²⁺ pool; almost no spikes at real rates | Seconds-long epochs (`07`) |
+| Paper value used where Feng's code differs, without saying so | Silent mismatch with Feng's published results | Code value + `deviations.md` entry |
+| Kim 2013 (ModelDB 150288) principal-cell template mixed with Feng's | Different Cm, Ra, geometry, sAHP | Feng 247968 templates only |
+| `pip install neuron` on native Windows | No Windows wheel exists | Windows installer or WSL2 (`07`) |
+
+Any implementation that re-introduces one of these is invalid, whatever its scores.

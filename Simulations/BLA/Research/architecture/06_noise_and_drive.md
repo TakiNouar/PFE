@@ -1,46 +1,59 @@
-# 06 — Noise and External Drive
+# 06 — Noise and Inputs
 
-**Source of truth:**
-- Equations: **Destexhe, Rudolph, Fellous, Sejnowski (2001)**, *Neuroscience* 107(1):13–24 — what Feng Methods cite for the point-conductance / OU formalism.
-- Coefficients: **Feng Table 7** (adapted from that formalism).
-- Docs: `Research/Sources/01_primary_bla_references.md`, `05_computational_neuroscience.md`, `12_sources_map.md`.
+Run 1 uses Feng's two kinds of input as he built them, plus one input of our own (the threat).
 
-**Do not cite Destexhe, Rudolph & Paré (2003) *Nat Rev Neurosci* as the methods source** — that is a different paper (review, different co-authors).
+| Input | Stands in for | Source | Our choice? |
+|---|---|---|---|
+| Background noise | thousands of unmodelled synapses onto every cell | Feng code | no |
+| Afferent spike trains | cortical inputs to the BLA (PFC, perirhinal, entorhinal) | Feng code + data files | no |
+| Threat input | a sensory threat arriving through those afferents | this spec | **yes** (DEV-005) |
 
-## Background noise (Feng Table 7)
+## 1. Background noise (Feng code)
 
-Conductance-based Ornstein–Uhlenbeck / point-conductance processes (separate E and I).
+Feng's point-conductance noise (Destexhe et al. 2001): a fluctuating excitatory conductance and a fluctuating inhibitory conductance at each cell's soma. Mechanisms `Gfluct2_exc` (`Gfluct_new_exc.mod`) and `Gfluct2_inh` (`Gfluct_new_inh.mod`), unchanged, one each at `soma(0.5)` of **every** cell.
 
-| Parameter | Principal cells | Fast-spiking interneurons (PV; SOM in Run 1) |
-|-----------|-----------------|----------------------------------------------|
-| g_e0 | 3.2 nS | 1.2 nS |
-| σ_e | 3 nS | 0.1 nS |
-| τ_e | 2.728 ms | 2.728 ms |
-| E_e | 0 mV | 0 mV |
-| g_i0 | 21 nS | 5.7 nS |
-| σ_i | 8 nS | 2.6 nS |
-| τ_i | 10.49 ms | 10.49 ms |
-| E_i | −75 mV | −75 mV |
+| Setting | PN | FSI | Set where |
+|---|---|---|---|
+| g_e0 (mean excitatory) | 3.2 nS | 1.21 nS | `BL_main.hoc` |
+| σ_e | 3 nS | 0.12 nS | `BL_main.hoc` |
+| τ_e, E_e | 2.728 ms, 0 mV | same | mod defaults |
+| g_i0 (mean inhibitory) | 21 nS | 5.73 nS | `BL_main.hoc` |
+| σ_i | 8 nS | 2.64 nS | `BL_main.hoc` |
+| τ_i, E_i | 10.49 ms, −75 mV | same | mod defaults |
 
-All values verified against Feng Table 7 (Oct 2026). Copy them into `full_parameters.json` with citation keys.
+PN values match Feng's Table 7. FSI values are the code's unrounded versions of Table 7's 1.2 / 0.1 / 5.7 / 2.6 nS (DEV-002). FSI noise is weak **on purpose**: Feng: FSIs should "spike with input from PNs, but not with solely background inputs".
 
-**Rule:** Prefer ModelDB `Gfluct_new_exc.mod` / `Gfluct_new_inh.mod`. Use an analytic OU in Brian2/Python only if NEURON is unavailable, with identical coefficients and a `deviations.md` entry. Giving SOM the FSI noise values is part of the SOM = PV-kinetics deviation (U10).
+Each noise process needs its own random stream. Feng uses `Random123` streams indexed by cell ID (`BL_main.hoc` lines 196 and 207); do the same, with the global seed. From Python, attach the stream with `setRandObjRef` and keep a reference to the `Random` object alive (the archived "Random binding failed" error was most likely a missing reference).
 
-## Sensory / external drive
+## 2. Afferent spike trains (Feng code + data)
 
-- Private fraction ≥ **75 %**; common ≤ **25 %**.
-- Preferred form: OU current or conductance, τ ≈ 3 ms (or ModelDB equivalent).
-- Timing: see `07_simulation_protocol.md` (current default stimulus 50–150 ms; window length under review, U24).
-- Amplitudes so mean Pyr rate during stimulus is ~**10–40 Hz**. Report amplitudes and rates.
+Feng drives the network with 1,800 spike trains built from real recordings of cortical cells in quiet, awake rats (Headley et al. 2015). They are stored in ModelDB 247968 `input/` (`spikesmatrix_op`, `spikes_ind`; 165 s long). Run 1 reuses the **first M** of those trains, so the input statistics come from Feng's data rather than from us.
 
-**Departure from Feng’s input model (U25):** Feng drives the network with Poisson surrogate spike trains from recorded PFC / perirhinal / entorhinal units. PNs receive 2.97 ± 1.7 afferents, FSIs 3.4 ± 1.9, and each train targets 40 PNs. The OU stimulus above is a protocol choice for isolating a graded “threat-like” step, not a Feng parameter. State this in the run report and in `deviations.md`.
+| Setting | Rule | Value at 1,000 cells | Source |
+|---|---|---|---|
+| Number of trains M | round(2.97 × N_PN / 40) | 67 | keeps Feng's 2.97 trains per PN |
+| PN targets per train | 40, random | 40 | Feng |
+| FSI targets per train | round(3.4 × N_FSI / M), random | 5 | keeps Feng's 3.4 trains per FSI |
+| Synapse on PN | `pyrD2pyrD_STFD` at `dend(0.9)`, W ~ lognormal(9, 0.05) | | Feng code |
+| Synapse on FSI | `pyrD2interD_STFD`, placed as in Feng's input code, W ~ lognormal(2, 0.2) | | Feng code |
+| Delay | U(0.5, 1) ms | | Feng code |
 
-## Apply drive to all populations
+The trains are fed in with `VecStim` (`vecevent.mod`). If Feng's train files cannot be read, **stop and report**. Do not replace them with invented Poisson rates.
 
-Pyr, PV-like, and SOM-like all receive background noise. Do not leave interneurons with zero external drive at small N (archived failure).
+If a protocol needs more than 165 s, loop the trains and record it.
 
-## Archived failures — do not repeat
+## 3. Threat input (our protocol choice)
 
-- Shared step current → synchrony = 1.0
-- Current-injection Gaussian (no conductance noise) → weak desynchronization
-- Drive only on Pyr → silent PV/SOM
+A threat is modelled as **the same afferent trains becoming more active** for a short window.
+
+- During the threat window, each train gets extra Poisson spikes at rate (D − 1) × r_i, where r_i is that train's mean rate over Feng's file. Its rate is therefore multiplied by D.
+- Doses **D = 2, 4 and 8**. A dose ladder replaces a single invented "threat strength": the result is a dose-response curve.
+- Same synapses, weights and targets as the afferents. Extra spikes come from a dedicated seeded stream.
+
+This is not a Feng parameter, so it is logged as DEV-005. It is a simple, explainable stand-in: "more input through the existing pathways". A specific thalamic threat pathway is a later refinement.
+
+## Rules carried from the archived failures
+
+- Every cell gets **private** background noise. Afferent trains are shared only the way Feng shares them (each train reaches 40 PNs).
+- No uniform step current to all cells (archived synchrony = 1.0).
+- No current-injection Gaussian noise (archived weak desynchronization).

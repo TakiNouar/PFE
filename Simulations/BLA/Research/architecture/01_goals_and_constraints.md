@@ -1,48 +1,38 @@
 # 01 — Goals and Constraints
 
-## Primary goals of isolated BLA Run 1
+## Goals of Run 1
 
-1. Produce **graded, desynchronized** principal-cell activity under moderate sensory-like drive.
-2. Demonstrate **functional inhibition** by PV-like and SOM-like populations.
-3. Use only parameters grounded in **`Research/Sources/`** (Feng / Kim + upstream papers mapped in `12_sources_map.md`).
-4. Be **bit-reproducible** under a single global seed.
-5. Provide clean parameters for later multi-region work without re-tuning from scratch.
+1. **Install check:** Feng's ModelDB 247968 files compile and run under NEURON 9.0.2 on the project machine.
+2. **Single cells behave like Feng's:** PN-A adapts, PN-C fires steadily, FSI fires fast.
+3. **The network rests like a real BLA:** with background input only, principal cells fire slowly (about 0.2–3 Hz) and FSIs faster (about 10–30 Hz), as recorded in rats.
+4. **The network responds and recovers:** a threat input raises principal-cell firing in proportion to its strength, inhibition limits it, and activity returns to rest afterwards.
+5. **Reproducible:** same seed, same spikes.
+6. **Speed is measured:** the real-time factor of the network is known, so the live engine can be designed from data.
 
-## Explicit non-goals (isolated phase)
+## Non-goals
 
-- After-discharge ≥ 10 ms (or seconds-scale emotional inertia).
-- Learning / plasticity rules.
-- Neuromodulatory dynamics.
-- Matching every statistic of Feng’s ~27 000-cell model (scaled N allowed; kinetic *rules* are not optional).
-- Intermittent gamma as a pass/fail criterion (diagnostic only).
+- After-discharge or seconds-scale persistence (recorded, never tuned for).
+- Learning, neuromodulation, other regions.
+- Matching every statistic of Feng's 27,000-cell model. The 1,000-cell network keeps Feng's cells, synapses, noise and inputs per cell; it does not reproduce his spatial structure.
+- Gamma oscillations as a pass/fail criterion (recorded as a diagnostic).
+- Real-time speed (that is the live engine's job).
 
-## Hard constraints (non-negotiable)
+## Hard constraints
 
-| Constraint | Rule | Sources anchor |
-|------------|------|----------------|
-| Kinetics source | Published tables / ModelDB only | `01_primary_bla_references.md` |
-| AMPA PN→PN decay | **6.9 ms** (not 2 ms) | Feng Table 3 ← Mahanty & Sah 1998; Guzman 2016 |
-| NMDA | 125 ms decay + **dynamic Mg block** every step | Feng Table 3 ← Weisskopf 1999; Zador 1990 |
-| Synaptic weights | Per-synapse lognormal multiplier W on every g (Table 3 “strength”) | Feng Table 3; ModelDB 247968 (U20) |
-| Synaptic delay | Distance-dependent: d/(1 mm/ms) + 0.8 ms ± 0.1 ms | Feng Methods; ModelDB 247968 |
-| E_GABA | **−75 mV** | Feng Table 3 |
-| GABA-A FSI→PN | 0.5 / 6.8 ms | Feng Table 3 ← Galarreta & Hestrin 1997 |
-| Adaptation | **I_sAHP** on principal cells | Kim / Feng ModelDB |
-| Connectivity | Distance-dependent probs; **no fixed-K while scaling N** | Feng Tables 5–6; Abatis via Sources |
-| STP | Dynamic two-factor depression; floors FSI→PN 0.6, PN→FSI 0.7, PN→PN **0.5** | Feng Table 4; Woodruff 2007; Silberberg 2004 (U21) |
-| Noise | Conductance OU; **Destexhe 2001** formalism; Feng Table 7 coeffs | `01_primary` + `05_computational_neuroscience` |
-| Drive | ≥75 % private | architecture / anti-patterns |
-| Seed | Single global seed | — |
-| Units | **nS** as in Feng; document simulator conversion | — |
-| Missing value | Halt; do not invent | Sources gap → `deviations.md` |
+| Constraint | Rule | Where specified |
+|------------|------|-----------------|
+| Feng's files | `.mod` and cell `.hoc` files from ModelDB 247968 are used **byte-for-byte unchanged**; a hash list proves it | `03`, `09` |
+| Code over paper | Where Feng's code and paper differ, use the **code** value and log the paper value in `deviations.md` | `04`, `12` |
+| Cells | Feng's `Cell_A` (PN-A), `Cell_C` (PN-C), and FSI template. No SOM | `02`, `03` |
+| Wiring | Same in-degree rule for **every** pathway (Feng's realised inputs per cell) | `05` |
+| Weights | Per-synapse lognormal weights as drawn in Feng's code | `04` |
+| Delays | Feng's distance rule for internal connections; U(0.5, 1) ms for afferents | `05`, `06` |
+| Noise | Feng's `Gfluct` point-conductance noise in every cell, Feng's code values | `06` |
+| Time step | dt = 0.05 ms, 31 °C, v_init = −70 mV (Feng's code) | `07` |
+| Seed | One global seed; every random draw derives from it | `07` |
+| Units | NEURON units (µS, mV, ms); tables in this spec quote nS where Feng does | `04` |
+| Missing value | Stop and report; never invent | `12` |
 
-## Success criteria (must all pass)
+## Success criteria
 
-- Synchrony index < 0.5
-- CV of ISIs > 0.3
-- Active fraction (Pyr rate > 5 Hz) > 0.4
-- Mean Pyr rate during stimulus ~10–40 Hz
-- Interneuron suppression ratio clearly > 1 (the archived runs measured ~2× with wrong kinetics; not a target to match)
-- Same parameters + seed → bit-identical spike times
-
-After-discharge is **recorded**, not a pass/fail criterion. The authoritative gate list is `10_validation_gates.md`. Note U24: the CV and active-fraction criteria are weak over a 100 ms window.
+The authoritative list is `10_validation_gates.md`. In short: provenance proven, reproducible, single cells correct, resting rates in the rat range, dose-dependent threat response with return to rest, inhibition measurably limits firing, and results stable between 500 and 1,000 cells.
