@@ -444,5 +444,4013 @@
     "coupling_rule": "parallel half-length axial resistances of Feng's dend and p_dend"
    }
   }
+ },
+ "coarse_d2_p1": {
+  "PN_A": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 1 (Feng: 7); Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000559
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010866179940144549,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.001778102172023653,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013975
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.005569505216074089,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.000256
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 6.388571428571429e-05
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  },
+  "PN_C": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 1 (Feng: 7); Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000555
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0002
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010788425521968202,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.0017653787217766141,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013875
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.0055296518692685495,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.000256
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 6.342857142857143e-05
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  }
+ },
+ "coarse_d2_p3": {
+  "PN_A": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 3 (Feng: 7); Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000559
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010866179940144549,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.001778102172023653,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013975
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.005569505216074089,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.000768
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0001916571428571429
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  },
+  "PN_C": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 3 (Feng: 7); Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000555
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0002
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010788425521968202,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.0017653787217766141,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013875
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.0055296518692685495,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.000768
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00019028571428571431
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  }
+ },
+ "coarse_d2_p7": {
+  "PN_A": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 7 (Feng: 7); Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000559
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010866179940144549,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.001778102172023653,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013975
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.005569505216074089,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.001792
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0004472000000000001
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  },
+  "PN_C": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 2 segments (Feng: 8), basal dendrite in 7 (Feng: 7); Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000555
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0002
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010788425521968202,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.0017653787217766141,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00056
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.00013875
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.0055296518692685495,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.001792
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.000444
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  }
+ },
+ "coarse_d8_p7": {
+  "PN_A": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 8 segments (Feng: 8), basal dendrite in 7 (Feng: 7); Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000559
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010866179940144549,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.001778102172023653,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00224
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.000559
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.005569505216074089,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.001792
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0004472000000000001
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  },
+  "PN_C": {
+   "source": "Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical dendrite in 8 segments (Feng: 8), basal dendrite in 7 (Feng: 7); Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000555
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0002
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010788425521968202,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 2544.690049407732,
+    "segments_merged": 8,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.013995795271742528,
+     "ghdbar_hd": 0.00038170350741115986,
+     "gbar_im": 0.00712513213834165,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.050893800988154644,
+     "glbar_leak": 0.001198549013271042,
+     "gbar_na3": 0.3817035074111598,
+     "gbar_nap": 0.0017653787217766141,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.00224
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.000555
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.002
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 270.0,
+    "diam_um": 3.0,
+    "parent_x": 0.0,
+    "nseg_feng": 8
+   },
+   "p_dend": {
+    "area_um2": 8717.919613711676,
+    "segments_merged": 7,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.047948557875414216,
+     "ghdbar_hd": 0.0013076879420567517,
+     "gbar_im": 0.02231787421110189,
+     "gkabar_kap": 0.0,
+     "gbar_kdr": 0.17435839227423355,
+     "glbar_leak": 0.0041061401380582,
+     "gbar_na3": 1.3076879420567513,
+     "gbar_nap": 0.0055296518692685495,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "segments": [
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.001792
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.000444
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     },
+     {
+      "ca_ion": {
+       "cao": 2.0
+      },
+      "cadyn": {
+       "gcabar_cadyn": 0.00055
+      },
+      "capool": {
+       "taucas_capool": 1000.0,
+       "cainf_capool": 5e-05,
+       "fcas_capool": 0.05
+      },
+      "cas_ion": {},
+      "hd": {
+       "ghdbar_hd": 1.5e-05
+      },
+      "im": {
+       "gbar_im": 0.0
+      },
+      "k_ion": {
+       "ko": 2.5
+      },
+      "kap": {
+       "gkabar_kap": 0.0
+      },
+      "kdr": {
+       "gbar_kdr": 0.002
+      },
+      "leak": {
+       "glbar_leak": 4.7100000000000006e-05,
+       "el_leak": -72.0
+      },
+      "na3": {
+       "gbar_na3": 0.015,
+       "ar2_na3": 1.0
+      },
+      "na_ion": {
+       "nao": 140.0
+      },
+      "nap": {
+       "gbar_nap": 0.0
+      },
+      "sAHP": {
+       "gsAHPbar_sAHP": 0.0
+      }
+     }
+    ],
+    "L_um": 555.0,
+    "diam_um": 5.0,
+    "parent_x": 1.0,
+    "nseg_feng": 7
+   }
+  }
  }
 }

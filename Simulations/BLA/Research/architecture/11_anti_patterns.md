@@ -37,5 +37,7 @@
 | `pc.nthread(n > 1)` with Feng's files | Error "na3 is not thread safe", then the process hangs | One core per run; parallel processes for independent runs |
 | Editing Feng's files to make them faster or thread safe | Breaks provenance and Gate 0 | New files in `mechanisms_run1/`, each a logged deviation checked against the original |
 | A reduced model that is not checked against the original | Speed bought with unknown accuracy | Gates R1 and R2 before the main run |
+| Checking a reduced cell only with current injected at the soma | The two-piece cell passed, yet responded 35 % too weakly to synaptic input on the dendrite and fired 2–3× less in a network | Gate R1 includes the dendritic-input test (`drive_test.py`) |
+| Lumping a thin dendrite that receives synapses into a fat compartment | Loses the local depolarization that relieves the NMDA Mg²⁺ block | Keep the receiving dendrite as its own section with its real diameter |
 
 Any implementation that re-introduces one of these is invalid, whatever its scores.

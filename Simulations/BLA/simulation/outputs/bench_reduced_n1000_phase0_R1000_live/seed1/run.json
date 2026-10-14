@@ -1,0 +1,285 @@
+{
+ "meta": {
+  "date": "2026-10-14T14:24:07",
+  "neuron_version": "9.0.2",
+  "python": "3.12.10",
+  "machine": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+  "repo_commit": "89037b6+uncommitted",
+  "feng_files_checked": 64,
+  "dt_ms": 0.05,
+  "celsius": 31.0
+ },
+ "block": "bench",
+ "level": "reduced",
+ "n": 1000,
+ "seed": 1,
+ "schedule": {
+  "settle_ms": 200.0,
+  "rest_ms": 1000.0,
+  "trials": [],
+  "t_end_ms": 1200.0
+ },
+ "network": {
+  "n_total": 1000,
+  "level": "reduced",
+  "cell_level": "coarse_d2_p3",
+  "seed": 1,
+  "counts": {
+   "PN_A": 640,
+   "PN_C": 260,
+   "FSI": 100
+  },
+  "cube_side_mm": 0.4666611359335675,
+  "synapses_built": true,
+  "connections": 84023,
+  "in_degree": {
+   "PN_PN": {
+    "mean": 24.817777777777778,
+    "sd": 4.9851017548464185,
+    "K": 24.98,
+    "n_pre": 899,
+    "p": 0.027786429365962182,
+    "weight_scale": 1.0
+   },
+   "FSI_PN": {
+    "mean": 42.43888888888889,
+    "sd": 5.305724255607637,
+    "K": 42.6,
+    "n_pre": 100,
+    "p": 0.426,
+    "weight_scale": 1.0
+   },
+   "PN_FSI": {
+    "mean": 213.45,
+    "sd": 11.884759147748852,
+    "K": 214.8,
+    "n_pre": 900,
+    "p": 0.23866666666666667,
+    "weight_scale": 1.0
+   },
+   "FSI_FSI": {
+    "mean": 21.47,
+    "sd": 3.780092591458574,
+    "K": 21.6,
+    "n_pre": 99,
+    "p": 0.2181818181818182,
+    "weight_scale": 1.0
+   }
+  },
+  "gap_pairs": 375,
+  "delay_ms": {
+   "min": 0.7806707423886177,
+   "mean": 1.1622780001587032,
+   "max": 1.6377089546965204
+  }
+ },
+ "afferents": {
+  "trains": 67,
+  "PNs_per_train": 40,
+  "FSIs_per_train": 5,
+  "connections": 3015
+ },
+ "afferent_train_rates_Hz": {
+  "mean": 1.0699231117141568,
+  "min": 0.0,
+  "max": 3.3515151515151516
+ },
+ "conditions": {
+  "bench": true
+ },
+ "variant": {},
+ "broadcast": true,
+ "timing": {
+  "build_s": 0.9498472999839578,
+  "simulate_wall_s": 696.4056653000007,
+  "real_time_factor": 577.5748840000015,
+  "memory_MB": 160.78848,
+  "peak_memory_MB": 160.976896
+ },
+ "config": {
+  "_about": "Every value Run 1 sets itself, with a source key (architecture/12_sources_map.md). F19 = Feng et al. 2019 paper; F19code = ModelDB 247968 file; W&S07 = Woodruff & Sah 2007; PROTO = protocol choice.",
+  "simulation": {
+   "dt_ms": 0.05,
+   "celsius": 31.0,
+   "v_init_mV": -70.0,
+   "_source": "F19code BL_main.hoc (dt line 121, celsius line 95, v_init line 129)"
+  },
+  "noise": {
+   "PN": {
+    "g_e0_uS": 0.0032,
+    "std_e_uS": 0.003,
+    "g_i0_uS": 0.021,
+    "std_i_uS": 0.008
+   },
+   "FSI": {
+    "g_e0_uS": 0.00121,
+    "std_e_uS": 0.00012,
+    "g_i0_uS": 0.00573,
+    "std_i_uS": 0.00264
+   },
+   "random123_offset": 100,
+   "_source": "F19code BL_main.hoc (PN lines 391-425, FSI lines 603-639); tau and reversal from the Gfluct mod defaults"
+  },
+  "gap_junction": {
+   "r_megohm": 5000,
+   "fraction_of_FSI_pairs": 0.08,
+   "_source": "F19code function_ConnectInternal_gj_simplify.hoc (HalfGap, g.r = 5000); F19 <- W&S07 (8 % of pairs)"
+  },
+  "network": {
+   "fractions": {
+    "PN_A": 0.64,
+    "PN_C": 0.26,
+    "FSI": 0.1
+   },
+   "density_per_mm3": 9840,
+   "min_distance_um": 25,
+   "in_degree": {
+    "PN_PN": 24.98,
+    "FSI_PN": 42.6,
+    "PN_FSI": 214.8,
+    "FSI_FSI": 21.6
+   },
+   "weight_mean_var": {
+    "PN_PN": [
+     2,
+     1
+    ],
+    "PN_FSI": [
+     7,
+     2
+    ],
+    "FSI_PN": [
+     12,
+     2
+    ],
+    "FSI_FSI": [
+     20,
+     10
+    ]
+   },
+   "delay": {
+    "min_ms": 0.8,
+    "speed_mm_per_ms": 1.0,
+    "jitter_ms": 0.1
+   },
+   "_source": "F19 (fractions, density, 25 um, realised in-degrees, Results); F19code function_ConnectInternal_simplify_online_op.hoc (lognormal weights lines 24-39, delay rule line 43); in-degree rule PROTO (DEV-001)"
+  },
+  "afferents": {
+   "trains_per_PN": 2.97,
+   "PNs_per_train": 40,
+   "trains_per_FSI": 3.4,
+   "weight_mean_var_PN": [
+    9,
+    0.05
+   ],
+   "weight_mean_var_FSI": [
+    2,
+    0.2
+   ],
+   "delay_uniform_ms": [
+    0.5,
+    1.0
+   ],
+   "train_length_ms": 165000,
+   "_source": "F19 (1800 trains x 40 PNs; 2.97 per PN, 3.4 per FSI); F19code function_ConnectInputs_invivo_op.hoc (weights, delays), input/spikesmatrix_op, input/spikes_ind"
+  },
+  "threat": {
+   "doses": [
+    2,
+    4,
+    8
+   ],
+   "trials_per_dose": 5,
+   "pre_ms": 2000,
+   "threat_ms": 2000,
+   "post_ms": 4000,
+   "_source": "PROTO (architecture/06, DEV-005)"
+  },
+  "protocol": {
+   "settle_ms": 3000,
+   "rest_ms": 30000,
+   "chunk_ms": 50,
+   "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "_source": "PROTO (architecture/07)"
+  },
+  "event_synapses": {
+   "PN_PN": {},
+   "PN_FSI": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "FSI_PN": {},
+   "FSI_FSI": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "_source": "F19code pyrD2pyrD_STFD_new.mod / pyrD2interD_STFD.mod / interD2pyrD_STFD_new.mod / interD2interD_STFD_new.mod (ExcEv defaults = PN->PN, InhEv defaults = FSI->PN)"
+  },
+  "single_cell_protocol": {
+   "settle_ms": 1000,
+   "passive_step_nA": -0.05,
+   "passive_step_ms": 1000,
+   "ladder_nA": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    0.8,
+    1.0,
+    1.5
+   ],
+   "ladder_step_ms": 1000,
+   "long_steps_nA": [
+    0.4,
+    1.0
+   ],
+   "long_step_ms": 4000,
+   "noise_settle_ms": 2000,
+   "noise_only_ms": 60000,
+   "noise_seed": 1,
+   "gap_step_nA": -0.1,
+   "gap_step_ms": 1000,
+   "trace_interval_ms": 0.25,
+   "_source": "PROTO (architecture/07, single-cell protocol)"
+  },
+  "gate_R1_tolerances": {
+   "vrest_mV": 1.0,
+   "rin_rel": 0.1,
+   "tau_rel": 0.1,
+   "count_rel": 0.1,
+   "count_abs_below_10": 1,
+   "latency_rel": 0.1,
+   "noise_rate_rel": 0.15,
+   "noise_cv_abs": 0.1,
+   "noise_cv_min_spikes": 20,
+   "_source": "PROTO (architecture/10, Gate R1)"
+  },
+  "gate_R1_drive": {
+   "rate_rel": 0.15,
+   "_source": "PROTO (architecture/10, Gate R1 synaptic part); test in bla_sim/drive_test.py"
+  },
+  "main_level_cell": "coarse_d2_p3",
+  "_main_level_cell_note": "Chosen by M. T. Nouar, 2026-10-14 (DEV-006). Replaces the two-piece cell, which responded ~35 % too weakly to dendritic synaptic input.",
+  "gate_R1_accepted_exceptions": {
+   "level": "coarse_d2_p3",
+   "checks": [
+    [
+     "PN_C",
+     "count 1.5 nA / 1 s"
+    ]
+   ],
+   "approved": "M. T. Nouar, 2026-10-14",
+   "reason": "Only at the strongest step (1.5 nA): PN-C fires 6 spikes before depolarization block instead of Feng's 9; the block itself is reproduced. DEV-006."
+  }
+ }
+}

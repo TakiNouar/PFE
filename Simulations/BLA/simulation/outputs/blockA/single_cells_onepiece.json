@@ -1,10 +1,10 @@
 {
  "meta": {
-  "date": "2026-10-14T11:27:40",
+  "date": "2026-10-14T12:52:33",
   "neuron_version": "9.0.2",
   "python": "3.12.10",
   "machine": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
-  "repo_commit": "11aa634+uncommitted",
+  "repo_commit": "89037b6+uncommitted",
   "feng_files_checked": 64,
   "dt_ms": 0.05,
   "celsius": 31.0
@@ -160,7 +160,7 @@
     "isi_cv": 0.2968563878489566,
     "seed": 1
    },
-   "wall_s": 27.7
+   "wall_s": 28.3
   },
   "PN_C": {
    "passive": {
@@ -633,7 +633,7 @@
     "isi_cv": 0.8712609173039253,
     "seed": 1
    },
-   "wall_s": 27.4
+   "wall_s": 28.3
   }
  }
 }

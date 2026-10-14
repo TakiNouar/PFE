@@ -53,23 +53,27 @@ Template:
 - **Source of substitute:** none (protocol choice). Train baseline rates come from Feng's own input files.
 - **Impact on gates:** Gate 4 tests the response and recovery under this protocol only. A specific thalamic threat pathway is a later refinement.
 
-## DEV-006 — Two-piece principal cell (main level only)
+## DEV-006 — Principal cell on a coarser grid (main level only)
 
-- **What:** the main-level PN has two compartments, with no fitted values.
-  - **Soma:** Feng's soma copied exactly (25 × 24.75 µm; `cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP` with Feng's values; same reversal potentials, Cm, Ra).
-  - **Dendrite:** Feng's two dendrites (`dend`, 8 segments; `p_dend`, 7 segments) merged into one compartment. It holds their total membrane area (11,263 µm²) and each channel's total conductance, summed segment by segment. Diameter 6.55 µm and length 547.3 µm, chosen so the area matches and the soma-to-dendrite axial resistance equals the two dendrites' half-length resistances in parallel (12.18 MΩ).
-  - **Left out:** Feng's LFP recorders (`extracellular`, `xtraimemrec`), which only record.
-  - **Synapses:** excitatory on the dendrite, inhibitory and noise on the soma, as in Feng.
-  - Parameters in `mechanisms_run1/reduced_pn.json`, written by `bla_sim/reduce_pn.py`.
-- **Why required:** measured cost of Feng's PN is 77.6 µs per cell per step; the two-piece PN costs 8.5 µs (2026-10-14).
+- **What:** the main-level PN (`coarse_d2_p3`) is Feng's PN rebuilt with his geometry and topology on 6 segments instead of 16, with no fitted values.
+  - **Soma:** copied exactly.
+  - **Apical dendrite** (`dend`, 270 × 3 µm, at soma(0)): 2 segments (Feng: 8).
+  - **Basal dendrite** (`p_dend`, 555 × 5 µm, at soma(1)): 3 segments (Feng: 7).
+  - **Channel values:** uniform values are copied; `nap` and `im`, which Feng puts only in a section's first segment, keep their total in the new first segment.
+  - **Left out:** the LFP recorders (`extracellular`, `xtraimemrec`). A rebuild on Feng's own grid without them reproduces his cell exactly, so they do not affect the dynamics.
+  - **Synapses:** at Feng's locations (excitatory at `dend(0.9)`; inhibitory and noise at the soma).
+  - Parameters in `mechanisms_run1/reduced_pn.json` (written by `bla_sim/reduce_pn.py`); selected by `main_level_cell` in `bla_sim/config/run1.json`.
+- **Why required:** Feng's PN costs 83 µs per cell per step; this cell costs 25 µs (2026-10-14).
 - **Source of substitute:** Feng's own full cell (ModelDB 247968 `Cell_A` / `Cell_C`) is the only source and the only target. Feng's files unchanged.
-- **Measured (Gate R1, 2026-10-14):** passed with two exceptions approved by M. T. Nouar on 2026-10-14 (`outputs/blockA/reduction_R1_twopiece.json`):
-  1. first-spike latency about 1 ms shorter at 0.6–1.5 nA (2.4 vs 3.3 ms at 1.5 nA);
-  2. at 1.5 nA, Feng's PN-C enters depolarization block (9 spikes in 1 s), the two-piece does not (39).
-
-  All other measures match: resting potential, input resistance (138 vs 136 MΩ), time constant (34.4 vs 34.9 ms), spike counts up to 1.0 nA and in the 4 s steps, and firing under noise (PN-A 0.35 vs 0.35 Hz, PN-C 1.45 vs 1.65 Hz).
-- **Alternative tested and rejected:** a one-piece PN (whole cell in one compartment, 4.4 µs) passed only 29/46 checks; its first spike was 15–60 % late at every current.
-- **Impact on gates:** Gate R2 (200-cell network, full detail vs reduced) decides whether the two exceptions matter in the network.
+- **Measured (Gate R1, 2026-10-14; `outputs/blockA/reduction_R1_coarse_d2_p3.json`, `drive_test.json`):**
+  - **Matches:** resting potential −70.2 vs −70.2 mV; input resistance 136.6 vs 136.2 MΩ; time constant 34.8 vs 34.9 ms; first-spike latency within 3 % at every current; spike counts at every level except one; firing under noise (PN-A 0.35 vs 0.35 Hz, PN-C 1.62 vs 1.65 Hz); under Feng's afferent trains on the dendrite, PN-A 0.66 vs 0.69 Hz, PN-C 3.36 vs 3.25 Hz.
+  - **One exception, approved by M. T. Nouar on 2026-10-14:** at 1.5 nA, PN-C fires 6 spikes before depolarization block instead of Feng's 9. The block itself is reproduced.
+- **Alternatives tested and rejected (same tests):**
+  - one-piece (first spike 15–60 % late at every current);
+  - two-piece, i.e. soma + one lumped dendrite (first spike ~1 ms early at strong current, and 35 % too weak under dendritic synaptic input). It was briefly chosen on 2026-10-14 on current-injection results alone; the dendritic-input test reversed that;
+  - apical 2 + basal 1 (first spike ~1 ms early at strong current);
+  - apical 2 + basal 7 (no exception, but 41 µs, 1.6× the cost).
+- **Impact on gates:** Gate R2 (200-cell network, full detail vs reduced) checks the network level.
 
 ## DEV-007 — Event-driven synapses (main level only)
 

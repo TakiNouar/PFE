@@ -1,10 +1,10 @@
 {
  "meta": {
-  "date": "2026-10-14T11:27:40",
+  "date": "2026-10-14T12:52:33",
   "neuron_version": "9.0.2",
   "python": "3.12.10",
   "machine": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
-  "repo_commit": "11aa634+uncommitted",
+  "repo_commit": "89037b6+uncommitted",
   "feng_files_checked": 64,
   "dt_ms": 0.05,
   "celsius": 31.0
@@ -13,7 +13,7 @@
  "level": "onepiece",
  "status": "FAIL",
  "passed_outright": 29,
- "checks_total": 46,
+ "checks_total": 48,
  "checks": [
   {
    "cell": "PN_A",
@@ -427,6 +427,24 @@
    "reduced": 0.871,
    "rule": "\u00b10.1",
    "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "dendritic drive rate_Hz",
+   "full": 0.688,
+   "reduced": 0.4,
+   "rule": "\u00b115%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "dendritic drive rate_Hz",
+   "full": 3.25,
+   "reduced": 2.431,
+   "rule": "\u00b115%",
+   "pass": false,
    "accepted_exception": false
   }
  ]

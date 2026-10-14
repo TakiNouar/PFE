@@ -13,43 +13,52 @@ import math
 from .nrn import OURS_DIR
 
 KINDS = ("PN_A", "PN_C", "FSI")
-REDUCED_LEVELS = ("onepiece", "twopiece")
+REDUCED_LEVELS = ("onepiece", "twopiece", "coarse_d2_p1", "coarse_d2_p3", "coarse_d2_p7", "coarse_d8_p7")
 REDUCED_PATH = OURS_DIR / "reduced_pn.json"
 
 
 def _fill(h, sec, comp):
-    sec.nseg = 1
+    """Build a section from a component spec. A component either has one parameter set
+    ("mechanisms") or one per segment ("segments", a list of {mech: {param: value}})."""
+    segs_spec = comp.get("segments")
+    sec.nseg = len(segs_spec) if segs_spec else 1
     sec.L = comp["L_um"]
     sec.diam = comp["diam_um"]
     sec.cm = comp["cm_uF_cm2"]
     sec.Ra = comp["Ra_ohm_cm"]
-    seg = sec(0.5)
-    for mech, values in comp["mechanisms"].items():
+    per_seg = segs_spec or [comp["mechanisms"]]
+    for mech in per_seg[0]:
         sec.insert(mech)
-        for pname, val in values.items():
-            setattr(seg, pname, val)
+    for seg, values in zip(sec, per_seg):
+        for mech, params in values.items():
+            for pname, val in params.items():
+                setattr(seg, pname, val)
     for attr, val in comp["reversal_mV"].items():
         setattr(sec, attr, val)
 
 
 class ReducedPN:
-    """Principal cell with one ("onepiece") or two ("twopiece") compartments.
+    """Principal cell reduced from Feng's full cell.
 
-    `soma` always exists. `dend` exists only in the two-piece cell; in the one-piece
-    cell it is the soma itself, so callers can place excitatory synapses on `dend`
-    (Feng: dend(0.9)) and inhibitory ones on `soma` at either level.
+    "onepiece": soma only. "twopiece": soma + one lumped dendrite. "coarse": soma +
+    Feng's apical dendrite with fewer segments + Feng's basal (p_dend) dendrite.
+    `dend` is where excitatory synapses go (Feng: dend(0.9)); in the one-piece cell it
+    is the soma itself.
     """
 
     def __init__(self, h, params, name):
         self.h = h
         self.soma = h.Section(name=f"{name}_soma")
         _fill(h, self.soma, params["soma"])
+        self.dend = self.soma
         if "dend" in params:
             self.dend = h.Section(name=f"{name}_dend")
             _fill(h, self.dend, params["dend"])
-            self.dend.connect(self.soma(1), 0)
-        else:
-            self.dend = self.soma
+            self.dend.connect(self.soma(params["dend"].get("parent_x", 1)), 0)
+        if "p_dend" in params:
+            self.p_dend = h.Section(name=f"{name}_p_dend")
+            _fill(h, self.p_dend, params["p_dend"])
+            self.p_dend.connect(self.soma(params["p_dend"].get("parent_x", 1)), 0)
 
     def connect2target(self, target=None):
         nc = self.h.NetCon(self.soma(0.5)._ref_v, target, sec=self.soma)

@@ -17,7 +17,54 @@
 
   "gap_junction": {
     "r_megohm": 5000,
-    "_source": "F19code function_ConnectInternal_gj_simplify.hoc (HalfGap, g.r = 5000)"
+    "fraction_of_FSI_pairs": 0.08,
+    "_source": "F19code function_ConnectInternal_gj_simplify.hoc (HalfGap, g.r = 5000); F19 <- W&S07 (8 % of pairs)"
+  },
+
+  "network": {
+    "fractions": {"PN_A": 0.64, "PN_C": 0.26, "FSI": 0.10},
+    "density_per_mm3": 9840,
+    "min_distance_um": 25,
+    "in_degree": {"PN_PN": 24.98, "FSI_PN": 42.6, "PN_FSI": 214.8, "FSI_FSI": 21.6},
+    "weight_mean_var": {"PN_PN": [2, 1], "PN_FSI": [7, 2], "FSI_PN": [12, 2], "FSI_FSI": [20, 10]},
+    "delay": {"min_ms": 0.8, "speed_mm_per_ms": 1.0, "jitter_ms": 0.1},
+    "_source": "F19 (fractions, density, 25 um, realised in-degrees, Results); F19code function_ConnectInternal_simplify_online_op.hoc (lognormal weights lines 24-39, delay rule line 43); in-degree rule PROTO (DEV-001)"
+  },
+
+  "afferents": {
+    "trains_per_PN": 2.97,
+    "PNs_per_train": 40,
+    "trains_per_FSI": 3.4,
+    "weight_mean_var_PN": [9, 0.05],
+    "weight_mean_var_FSI": [2, 0.2],
+    "delay_uniform_ms": [0.5, 1.0],
+    "train_length_ms": 165000,
+    "_source": "F19 (1800 trains x 40 PNs; 2.97 per PN, 3.4 per FSI); F19code function_ConnectInputs_invivo_op.hoc (weights, delays), input/spikesmatrix_op, input/spikes_ind"
+  },
+
+  "threat": {
+    "doses": [2, 4, 8],
+    "trials_per_dose": 5,
+    "pre_ms": 2000,
+    "threat_ms": 2000,
+    "post_ms": 4000,
+    "_source": "PROTO (architecture/06, DEV-005)"
+  },
+
+  "protocol": {
+    "settle_ms": 3000,
+    "rest_ms": 30000,
+    "chunk_ms": 50,
+    "seeds": [1, 2, 3, 4, 5],
+    "_source": "PROTO (architecture/07)"
+  },
+
+  "event_synapses": {
+    "PN_PN": {},
+    "PN_FSI": {"Cdur_a": 0.713, "AlphaTmax_a": 10.1571, "Beta_a": 0.4167, "fac_floor": 0.7},
+    "FSI_PN": {},
+    "FSI_FSI": {"AlphaTmax": 1.853, "Beta": 0.147, "gbar": 0.0002},
+    "_source": "F19code pyrD2pyrD_STFD_new.mod / pyrD2interD_STFD.mod / interD2pyrD_STFD_new.mod / interD2interD_STFD_new.mod (ExcEv defaults = PN->PN, InhEv defaults = FSI->PN)"
   },
 
   "single_cell_protocol": {
@@ -50,14 +97,20 @@
     "_source": "PROTO (architecture/10, Gate R1)"
   },
 
+  "gate_R1_drive": {
+    "rate_rel": 0.15,
+    "_source": "PROTO (architecture/10, Gate R1 synaptic part); test in bla_sim/drive_test.py"
+  },
+
+  "main_level_cell": "coarse_d2_p3",
+  "_main_level_cell_note": "Chosen by M. T. Nouar, 2026-10-14 (DEV-006). Replaces the two-piece cell, which responded ~35 % too weakly to dendritic synaptic input.",
+
   "gate_R1_accepted_exceptions": {
-    "level": "twopiece",
+    "level": "coarse_d2_p3",
     "checks": [
-      ["PN_A", "latency 0.6 nA"], ["PN_A", "latency 0.8 nA"], ["PN_A", "latency 1.0 nA"], ["PN_A", "latency 1.5 nA"],
-      ["PN_C", "latency 0.6 nA"], ["PN_C", "latency 0.8 nA"], ["PN_C", "latency 1.0 nA"], ["PN_C", "latency 1.5 nA"],
       ["PN_C", "count 1.5 nA / 1 s"]
     ],
     "approved": "M. T. Nouar, 2026-10-14",
-    "reason": "Strong steady somatic current only: first spike ~1 ms early at 0.6-1.5 nA, and no depolarization block in PN-C at 1.5 nA. Gate R2 decides whether these matter in the network. DEV-006."
+    "reason": "Only at the strongest step (1.5 nA): PN-C fires 6 spikes before depolarization block instead of Feng's 9; the block itself is reproduced. DEV-006."
   }
 }

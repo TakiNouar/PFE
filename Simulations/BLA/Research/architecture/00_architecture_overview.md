@@ -15,7 +15,7 @@ The Design Blueprint is a living outline only. When this architecture and the li
 Run 1 is an **offline test campaign**, not the live emotion engine. It rebuilds Feng et al. 2019's basolateral amygdala in **two levels**:
 
 - **Reference level:** Feng's NEURON files (cells, synapses, noise) **unchanged** from ModelDB 247968, kept small (single cells and a 200-cell network) because it is slow: about 1 hour of computing per simulated second at 1,000 cells on the project laptop (measured 2026-10-14).
-- **Main level:** the full 1,000-cell network and full protocol, built with two speed reductions: a **two-piece principal cell** (Feng's exact soma plus one lumped dendrite), and **event-driven synapses** that reproduce Feng's synapses exactly. It must reproduce the reference level's behaviour before its results count.
+- **Main level:** the full 1,000-cell network and full protocol, built with two speed reductions: **Feng's principal cell rebuilt on a coarser grid** (his geometry and soma, 6 segments instead of 16), and **event-driven synapses** that reproduce Feng's synapses exactly. It must reproduce the reference level's behaviour before its results count.
 
 We write the wiring, the inputs, the measurements, and the two reductions. Run 1 passes when the reductions match Feng's originals and the main network fires like a real rat BLA at rest, responds to a "threat" input, and settles back afterwards (`10_validation_gates.md`). The live engine's design is decided later, from the measured speeds (U26).
 
@@ -25,7 +25,7 @@ We write the wiring, the inputs, the measurements, and the two reductions. Run 1
 |---|---|---|
 | Simulator | NEURON 9.0.2 + ModelDB 247968 files, unchanged (our new files sit beside them, never replace them) | `03`, `09` |
 | Cell types | PN-A, PN-C, FSI (Feng's three). **No SOM** | `02`, `03` |
-| Cell detail | **Reference:** Feng's full templates (16 segments per PN). **Main:** two-piece PN (Feng's exact soma + one lumped dendrite, no fitted values); Feng's FSI template unchanged | `03` |
+| Cell detail | **Reference:** Feng's full templates (16 segments per PN). **Main:** Feng's PN on a coarser grid (apical 2 + basal 3 segments, no fitted values); Feng's FSI template unchanged | `03` |
 | Synapses | **Reference:** Feng's four synapse files. **Main:** event-driven equivalents (Destexhe, Mainen & Sejnowski 1994 method), identical to Feng's to floating-point precision and ~400× faster | `04` |
 | Size | **Main:** 1,000 cells (640 / 260 / 100), size check at 500. **Reference:** 200 cells (128 / 52 / 20) | `02` |
 | Wiring | Keep Feng's **inputs per cell** (in-degree), not his distance probabilities | `05` |
@@ -53,7 +53,7 @@ If a required value is missing from Sources, **stop** and report the gap. No gue
 | `00_architecture_overview.md` | This file |
 | `01_goals_and_constraints.md` | Goals, non-goals, hard rules |
 | `02_population_structure.md` | Cell counts, sizes, placement |
-| `03_neuron_models.md` | Feng's cell templates; the two-piece PN |
+| `03_neuron_models.md` | Feng's cell templates; the main-level coarse PN and the rejected alternatives |
 | `04_synaptic_models.md` | Feng's synapse files; the event-driven synapses |
 | `05_connectivity.md` | In-degree wiring rule, delays |
 | `06_noise_and_drive.md` | Background noise, afferent trains, threat input |
