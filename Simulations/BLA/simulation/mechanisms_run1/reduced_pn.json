@@ -1,0 +1,448 @@
+{
+ "onepiece": {
+  "PN_A": {
+   "source": "All 16 segments of Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 13206.470117528093,
+    "segments_merged": 16,
+    "cm_uF_cm2": 2.3999999999999995,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.0005526494201605709
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.0006797502230151652
+     },
+     "kdr": {
+      "gbar_kdr": 0.0019999999999999996
+     },
+     "leak": {
+      "glbar_leak": 4.3847100802854605e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.0194157002676182,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.00013791563654899964
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.007359500446030331
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.07263558564640452,
+     "ghdbar_hd": 0.001980970517629214,
+     "gbar_im": 0.07298548052819809,
+     "gkabar_kap": 0.08977101007632836,
+     "gbar_kdr": 0.2641294023505618,
+     "glbar_leak": 0.005790654264931415,
+     "gbar_na3": 2.5641286539518195,
+     "gbar_nap": 0.018213787328242293,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 64.83633240706942,
+    "diam_um": 64.83633240706942
+   }
+  },
+  "PN_C": {
+   "source": "All 16 segments of Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 13206.470117528093,
+    "segments_merged": 16,
+    "cm_uF_cm2": 2.3999999999999995,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.0005526494201605709
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.0006797502230151652
+     },
+     "kdr": {
+      "gbar_kdr": 0.0019999999999999996
+     },
+     "leak": {
+      "glbar_leak": 4.3847100802854605e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.0194157002676182,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.0001369287625844272
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 2.9438001784121325e-05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.07263558564640452,
+     "ghdbar_hd": 0.001980970517629214,
+     "gbar_im": 0.07298548052819809,
+     "gkabar_kap": 0.08977101007632836,
+     "gbar_kdr": 0.2641294023505618,
+     "glbar_leak": 0.005790654264931415,
+     "gbar_na3": 2.5641286539518195,
+     "gbar_nap": 0.018083456113013367,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 64.83633240706942,
+    "diam_um": 64.83633240706942
+   }
+  }
+ },
+ "twopiece": {
+  "PN_A": {
+   "source": "Soma copied exactly; both dendrites lumped; Feng's Cell_A (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000559
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.05
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010866179940144549,
+     "gsAHPbar_sAHP": 0.9719302272043425
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 11262.609663119409,
+    "segments_merged": 15,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.0005499999999999999
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5000000000000002e-05
+     },
+     "im": {
+      "gbar_im": 0.0002614225941422594
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.00045188284518828445
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 4.710000000000001e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.015,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 6.523894202032278e-05
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.06194435314715674,
+     "ghdbar_hd": 0.0016893914494679116,
+     "gbar_im": 0.02944300634944354,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.2252521932623882,
+     "glbar_leak": 0.005304689151329242,
+     "gbar_na3": 1.6893914494679112,
+     "gbar_nap": 0.007347607388097742,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "diam_um": 6.549806621616289,
+    "L_um": 547.344403752081,
+    "coupling_MOhm": 12.183585298758882,
+    "coupling_rule": "parallel half-length axial resistances of Feng's dend and p_dend"
+   }
+  },
+  "PN_C": {
+   "source": "Soma copied exactly; both dendrites lumped; Feng's Cell_C (ModelDB 247968); DEV-006",
+   "soma": {
+    "area_um2": 1943.8604544086847,
+    "segments_merged": 1,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.00055
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5e-05
+     },
+     "im": {
+      "gbar_im": 0.00224
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.002
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 2.5e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.045,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 0.000555
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0002
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.010691232499247768,
+     "ghdbar_hd": 0.00029157906816130275,
+     "gbar_im": 0.04354247417875454,
+     "gkabar_kap": 0.03887720908817369,
+     "gbar_kdr": 0.03887720908817369,
+     "glbar_leak": 0.0004859651136021712,
+     "gbar_na3": 0.874737204483908,
+     "gbar_nap": 0.010788425521968202,
+     "gsAHPbar_sAHP": 0.0038877209088173698
+    },
+    "parameters_that_differ_across_segments": {},
+    "L_um": 25.0,
+    "diam_um": 24.75
+   },
+   "dend": {
+    "area_um2": 11262.609663119409,
+    "segments_merged": 15,
+    "cm_uF_cm2": 2.4,
+    "Ra_ohm_cm": 150.0,
+    "mechanisms": {
+     "ca_ion": {
+      "cao": 2.0
+     },
+     "cadyn": {
+      "gcabar_cadyn": 0.0005499999999999999
+     },
+     "capool": {
+      "taucas_capool": 1000.0,
+      "cainf_capool": 5e-05,
+      "fcas_capool": 0.05
+     },
+     "cas_ion": {},
+     "hd": {
+      "ghdbar_hd": 1.5000000000000002e-05
+     },
+     "im": {
+      "gbar_im": 0.0002614225941422594
+     },
+     "k_ion": {
+      "ko": 2.5
+     },
+     "kap": {
+      "gkabar_kap": 0.00045188284518828445
+     },
+     "kdr": {
+      "gbar_kdr": 0.002
+     },
+     "leak": {
+      "glbar_leak": 4.710000000000001e-05,
+      "el_leak": -72.0
+     },
+     "na3": {
+      "gbar_na3": 0.015,
+      "ar2_na3": 1.0
+     },
+     "na_ion": {
+      "nao": 140.0
+     },
+     "nap": {
+      "gbar_nap": 6.477211595935446e-05
+     },
+     "sAHP": {
+      "gsAHPbar_sAHP": 0.0
+     }
+    },
+    "reversal_mV": {
+     "ena": 45.0,
+     "ek": -80.0,
+     "eca": 120.0
+    },
+    "total_conductance_uS": {
+     "gcabar_cadyn": 0.06194435314715674,
+     "ghdbar_hd": 0.0016893914494679116,
+     "gbar_im": 0.02944300634944354,
+     "gkabar_kap": 0.050893800988154644,
+     "gbar_kdr": 0.2252521932623882,
+     "glbar_leak": 0.005304689151329242,
+     "gbar_na3": 1.6893914494679112,
+     "gbar_nap": 0.007295030591045164,
+     "gsAHPbar_sAHP": 0.0
+    },
+    "parameters_that_differ_across_segments": {},
+    "diam_um": 6.549806621616289,
+    "L_um": 547.344403752081,
+    "coupling_MOhm": 12.183585298758882,
+    "coupling_rule": "parallel half-length axial resistances of Feng's dend and p_dend"
+   }
+  }
+ }
+}

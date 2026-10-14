@@ -7,13 +7,14 @@ Simulations/BLA/simulation/
 ├── mechanisms/                 # ModelDB 247968 files, unchanged, NOT committed (no licence):
 │                               # *.mod, cell templates (.hoc), input/ train files
 │   └── HASHES.txt              # SHA-256 of every file (Gate 0) — the only committed file here
-├── mechanisms_run1/            # OUR files, committed: one-piece PN template, event-driven
-│                               # synapse .mod files (03, 04); compiled to their own nrnmech.dll
+├── mechanisms_run1/            # OUR files, committed: reduced_pn.json (two-piece PN, 03),
+│                               # exc_ev.mod / inh_ev.mod (event-driven synapses, 04);
+│                               # compiled to their own nrnmech.dll (not committed)
 ├── bla_sim/
 │   ├── config/
 │   │   └── run1.json           # every value we set + source keys (12_sources_map)
 │   ├── cells.py                # load templates; make PN-A / PN-C / FSI by ID, at either level
-│   ├── reduce_pn.py            # builds and checks the one-piece PN from Feng's full cell (Gate R1)
+│   ├── reduce_pn.py            # builds and checks the reduced PNs from Feng's full cell (Gate R1)
 │   ├── synapse_test.py         # Feng vs event-driven synapse unit test (step A3)
 │   ├── placement.py            # cube, density, 25 µm minimum distance
 │   ├── wiring.py               # in-degree rule, weights, delays, gap-junction pairs

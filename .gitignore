@@ -19,6 +19,14 @@ build/
 Simulations/BLA/simulation/mechanisms/*
 !Simulations/BLA/simulation/mechanisms/HASHES.txt
 
+# Build products of our own mechanisms (sources *.mod and *.json are committed)
+Simulations/BLA/simulation/mechanisms_run1/*.dll
+Simulations/BLA/simulation/mechanisms_run1/*.o
+Simulations/BLA/simulation/mechanisms_run1/*.c
+Simulations/BLA/simulation/mechanisms_run1/*.cpp
+Simulations/BLA/simulation/mechanisms_run1/mod_func.*
+Simulations/BLA/simulation/mechanisms_run1/x86_64/
+
 # Live viewer snapshots (display only, rolling)
 Simulations/BLA/simulation/outputs/**/live/
 
