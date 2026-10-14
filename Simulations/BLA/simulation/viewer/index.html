@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLA Live Viewer</title>
+<!-- Live viewer for BLA Run 1 (architecture/13). Display only: reads live/ snapshots through
+     bla_sim.viewer_server and never talks to the simulation. No internet needed. -->
+<style>
+  :root {
+    --bg: #06080c; --panel: #0c1016; --panel2: #10151d; --line: #1b2330; --text: #d9dee7;
+    --muted: #7d8794; --dim: #4a5361;
+    --pna: #ff9f43; --pnc: #ffd84d; --fsi: #3fd0ff; --threat: #ff4d5e; --ok: #4ade80; --warn: #fbbf24;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 10px 16px; border-bottom: 1px solid var(--line); background: #080b10; }
+  header h1 { font-size: 15px; font-weight: 600; margin: 0; letter-spacing: .02em; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .spacer { flex: 1; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+    font: 600 11px/1.6 var(--mono); letter-spacing: .06em; border: 1px solid var(--line); background: var(--panel); }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
+  .badge.live .dot { background: var(--threat); animation: pulse 1.6s infinite; }
+  .badge.replay .dot { background: var(--fsi); }
+  .badge.done .dot { background: var(--ok); }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+  select, button { font: inherit; color: var(--text); background: var(--panel2); border: 1px solid var(--line);
+    border-radius: 6px; padding: 5px 10px; }
+  button { cursor: pointer; }
+  button:hover, select:hover { border-color: #2c3747; }
+  button.on { border-color: var(--fsi); color: var(--fsi); }
+  main { display: grid; gap: 12px; padding: 12px 16px 16px;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-areas: "micro side" "osc side" "strip side"; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; position: relative; min-width: 0; }
+  .panel h2 { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    margin: 0; padding: 9px 12px 0; display: flex; align-items: center; gap: 8px; }
+  .panel h2 .right { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 400; }
+  #microP { grid-area: micro; }
+  #oscP { grid-area: osc; }
+  #stripP { grid-area: strip; }
+  #side { grid-area: side; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  canvas { display: block; width: 100%; }
+  #micro { height: min(58vh, 560px); cursor: grab; touch-action: none; }
+  #micro:active { cursor: grabbing; }
+  #osc { height: 230px; }
+  #strip { height: 150px; }
+  .legend { position: absolute; left: 12px; bottom: 10px; display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: 12px; color: var(--muted); pointer-events: none; }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+  .hint { position: absolute; right: 12px; bottom: 10px; font-size: 11px; color: var(--dim); pointer-events: none; }
+  #threatTag { position: absolute; top: 34px; right: 12px; display: none; font: 700 12px/1 var(--mono);
+    color: #fff; background: var(--threat); padding: 6px 10px; border-radius: 6px; letter-spacing: .08em;
+    box-shadow: 0 0 24px rgba(255,77,94,.55); }
+  .stat { padding: 10px 12px 12px; }
+  .step { font-size: 18px; font-weight: 600; margin: 2px 0 2px; }
+  .step.threat { color: var(--threat); }
+  .meta { color: var(--muted); font-size: 12px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin-top: 10px; font-size: 13px; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  .kv span:nth-child(even) { font-family: var(--mono); text-align: right; }
+  #prog { height: 16px; margin-top: 12px; border-radius: 4px; }
+  .proglegend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .proglegend i { display: inline-block; width: 10px; height: 8px; border-radius: 2px; margin-right: 4px; }
+  #runs { list-style: none; margin: 0; padding: 6px 8px 10px; max-height: 340px; overflow: auto; }
+  #runs li { padding: 7px 8px; border-radius: 7px; cursor: pointer; border: 1px solid transparent; }
+  #runs li:hover { background: var(--panel2); }
+  #runs li.sel { border-color: #2c3747; background: var(--panel2); }
+  #runs .rt { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; }
+  #runs .rs { color: var(--muted); font: 11px var(--mono); }
+  #runs .bar { height: 4px; background: #1a212c; border-radius: 2px; margin-top: 5px; overflow: hidden; }
+  #runs .bar b { display: block; height: 100%; background: var(--fsi); }
+  #runs li.done .bar b { background: var(--ok); }
+  #runs li.stalled .bar b { background: var(--warn); }
+  #launch { padding: 0 12px 10px; font-size: 12px; color: var(--muted); }
+  #empty { display: none; padding: 40px 24px; text-align: center; color: var(--muted); }
+  #empty code { font-family: var(--mono); color: var(--text); background: var(--panel2); padding: 2px 6px; border-radius: 4px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .seg button { border: 0; border-radius: 0; padding: 2px 8px; font-size: 11px; background: transparent; color: var(--muted); }
+  .seg button.on { background: var(--panel2); color: var(--text); }
+  @media (max-width: 920px) {
+    main { grid-template-columns: 1fr; grid-template-areas: "side" "micro" "osc" "strip"; }
+    #micro { height: 52vh; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>BLA Run 1 · live</h1>
+    <div class="sub" id="runTitle">waiting for a broadcasting run…</div>
+  </div>
+  <div class="spacer"></div>
+  <select id="runSel" aria-label="Run to show"></select>
+  <button id="replayBtn" title="Loop the last 10 s of simulated activity at real speed (space)">Replay last 10 s</button>
+  <span class="badge" id="modeBadge"><span class="dot"></span><span id="modeText">OFFLINE</span></span>
+</header>
+
+<div id="empty" class="panel" style="margin:16px">
+  <p>No run is broadcasting right now.</p>
+  <p>Start one with <code>python -m bla_sim.launcher B</code> (or C), or a single run with
+    <code>python -m bla_sim.run … --broadcast</code>. This page picks it up by itself.</p>
+</div>
+
+<main id="mainGrid">
+  <section class="panel" id="microP">
+    <h2>Microscope <span class="right meta" id="microInfo"></span></h2>
+    <canvas id="micro" aria-label="3D view of all cells flashing when they fire"></canvas>
+    <div id="threatTag">THREAT</div>
+    <div class="legend">
+      <span><i style="background:var(--pna)"></i>PN-A</span>
+      <span><i style="background:var(--pnc)"></i>PN-C</span>
+      <span><i style="background:var(--fsi)"></i>FSI</span>
+      <span>◯ probe cells (oscilloscope)</span>
+    </div>
+    <div class="hint">drag to rotate · Ctrl + wheel to zoom · double-click to reset</div>
+  </section>
+
+  <section class="panel" id="oscP">
+    <h2>Oscilloscope · soma voltage
+      <span class="right"><span class="seg" id="oscWin">
+        <button data-w="50">50 ms</button><button data-w="200">200 ms</button><button data-w="1000">1 s</button><button data-w="5000">5 s</button>
+      </span></span></h2>
+    <canvas id="osc" aria-label="Membrane voltage of three probe cells"></canvas>
+  </section>
+
+  <section class="panel" id="stripP">
+    <h2>Population activity · last 10 s simulated <span class="right meta">Hz per cell, 50 ms bins</span></h2>
+    <canvas id="strip" aria-label="PN and FSI population rate"></canvas>
+  </section>
+
+  <div id="side">
+    <section class="panel">
+      <h2>Status</h2>
+      <div class="stat">
+        <div class="meta" id="blockLabel">–</div>
+        <div class="step" id="stepLabel">–</div>
+        <div class="kv">
+          <span>Simulated clock</span><span id="kvClock">–</span>
+          <span>On screen</span><span id="kvShow">–</span>
+          <span>Speed</span><span id="kvSpeed">–</span>
+          <span>Time left</span><span id="kvEta">–</span>
+          <span>Running for</span><span id="kvElapsed">–</span>
+          <span>Cells</span><span id="kvCells">–</span>
+        </div>
+        <canvas id="prog" aria-label="Protocol progress"></canvas>
+        <div class="proglegend">
+          <span><i style="background:#2a3240"></i>settle</span>
+          <span><i style="background:#23415e"></i>rest</span>
+          <span><i style="background:#3a3350"></i>trial</span>
+          <span><i style="background:var(--threat)"></i>threat</span>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>All broadcasting runs</h2>
+      <ul id="runs"></ul>
+      <div id="launch"></div>
+    </section>
+  </div>
+</main>
+
+<script>
+"use strict";
+const TYPES = ["PN_A", "PN_C", "FSI"];
+const NAMES = { PN_A: "PN-A", PN_C: "PN-C", FSI: "FSI" };
+const css = getComputedStyle(document.documentElement);
+const COL = TYPES.map(t => css.getPropertyValue("--" + t.replace("_", "").toLowerCase()).trim());
+const THREAT = css.getPropertyValue("--threat").trim();
+const KEEP_MS = 10000;                     // replay buffer and activity strip: 10 s simulated
+const $ = s => document.querySelector(s);
+
+// ---------------------------------------------------------------- state
+let runId = null, userPicked = false;
+let cells = null, status = null, pid = null;
+let chunks = [];                           // {chunk, t0, t1, v_t0, v, nPN, nFSI}
+let spT = [], spG = [];                    // spikes in the buffer, ordered by time
+let lastChunk = 0, loading = false;
+let tShow = 0, mode = "live";
+let flash = new Float32Array(0), typeOf = new Uint8Array(0);
+let nType = [0, 0, 0];
+let oscWin = 200;
+let rotY = 0.6, rotX = -0.35, zoom = 1, autoRot = true, lastInteract = 0;
+
+// ---------------------------------------------------------------- helpers
+const fmtDur = s => {
+  if (s == null || !isFinite(s)) return "–";
+  s = Math.max(0, Math.round(s));
+  const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+  if (d) return `${d} d ${h} h`;
+  if (h) return `${h} h ${String(m).padStart(2, "0")} min`;
+  if (m) return `${m} min ${String(x).padStart(2, "0")} s`;
+  return `${x} s`;
+};
+const fmtT = ms => (ms / 1000).toFixed(2) + " s";
+async function getJSON(url) {
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+function lowerBound(arr, x) {             // first index with arr[i] > x
+  let lo = 0, hi = arr.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m] <= x) lo = m + 1; else hi = m; }
+  return lo;
+}
+function stepText(st) {
+  if (!st) return "–";
+  const s = st.step || {};
+  if (st.done) return "Finished";
+  switch (s.phase) {
+    case "settle": return "Settling (discarded)";
+    case "rest": return "Rest · background noise + afferents";
+    case "before threat": return `Trial ${s.trial} of ${s.trials_at_dose} at ×${s.dose} · before threat`;
+    case "THREAT": return `Trial ${s.trial} of ${s.trials_at_dose} at ×${s.dose} · THREAT`;
+    case "after threat": return `Trial ${s.trial} of ${s.trials_at_dose} at ×${s.dose} · recovery`;
+    default: return s.phase || "–";
+  }
+}
+function phaseAt(t) {                      // threat on at simulated time t?
+  if (!cells) return false;
+  for (const tr of cells.schedule.trials) if (t >= tr.threat_on_ms && t < tr.threat_off_ms) return tr.dose;
+  return false;
+}
+
+// ---------------------------------------------------------------- data
+function reset() {
+  cells = null; status = null; pid = null; chunks = []; spT = []; spG = []; lastChunk = 0; tShow = 0;
+}
+async function loadRun(id) {
+  reset();
+  runId = id;
+  if (!id) return;
+  try {
+    cells = await getJSON("/api/cells?run=" + encodeURIComponent(id));
+  } catch { cells = null; return; }
+  const n = cells.cells.length;
+  flash = new Float32Array(n);
+  typeOf = new Uint8Array(cells.cells.map(c => c[3]));
+  nType = [0, 0, 0]; typeOf.forEach(k => nType[k]++);
+  $("#kvCells").textContent = `${n} (${nType[0]} / ${nType[1]} / ${nType[2]})`;
+  $("#microInfo").textContent = `${n} cells · cube ${Math.round(cells.side_um)} µm · ${cells.cell_level}`;
+  $("#runTitle").textContent = `${cells.label} · ${cells.level} level · seed ${cells.seed}`;
+  $("#blockLabel").textContent = `${cells.label} · seed ${cells.seed} · ${cells.level}`;
+  drawProgressBase();
+  await pollStatus(true);
+}
+function addChunks(list) {
+  for (const c of list) {
+    if (c.chunk <= lastChunk) continue;
+    lastChunk = c.chunk;
+    const sp = c.spikes.slice().sort((a, b) => a[1] - b[1]);
+    let nPN = 0, nF = 0;
+    for (const [g, t] of sp) { spT.push(t); spG.push(g); if (typeOf[g] === 2) nF++; else nPN++; }
+    chunks.push({ chunk: c.chunk, t0: c.t0, t1: c.t1, v_t0: c.v_t0, v: c.v, nPN, nF });
+  }
+  const tMin = chunks.length ? chunks[chunks.length - 1].t1 - KEEP_MS - 6000 : 0;
+  while (chunks.length && chunks[0].t1 < tMin) chunks.shift();
+  const cut = lowerBound(spT, tMin);
+  if (cut > 0) { spT.splice(0, cut); spG.splice(0, cut); }
+}
+async function pollStatus(first) {
+  if (!runId || !cells || loading) return;
+  loading = true;
+  try {
+    const st = await getJSON("/api/status?run=" + encodeURIComponent(runId));
+    if (pid !== null && (st.pid !== pid || st.chunk < lastChunk)) { loading = false; return loadRun(runId); }
+    pid = st.pid; status = st;
+    if (st.chunk > lastChunk) {
+      const from = first ? Math.max(1, st.chunk - Math.ceil(KEEP_MS / cells.chunk_ms) - 1) : lastChunk + 1;
+      const r = await getJSON(`/api/chunks?run=${encodeURIComponent(runId)}&from=${from}&to=${st.chunk}`);
+      addChunks(r.chunks);
+      if (first && chunks.length) tShow = chunks[chunks.length - 1].t0;
+    }
+    updateStatusPanel();
+  } catch (e) { /* server or run gone: keep showing what we have */ }
+  loading = false;
+}
+async function pollRuns() {
+  let data;
+  try { data = await getJSON("/api/runs"); } catch { setMode("offline"); return; }
+  const runs = data.runs;
+  $("#empty").style.display = runs.length ? "none" : "block";
+  $("#mainGrid").style.display = runs.length ? "" : "none";
+  const sel = $("#runSel");
+  const ids = runs.map(r => r.run);
+  if (sel.dataset.ids !== ids.join("|")) {
+    sel.innerHTML = runs.map(r => `<option value="${r.run}">${r.run}${r.done ? " (done)" : ""}</option>`).join("");
+    sel.dataset.ids = ids.join("|");
+  }
+  if (!runId || !ids.includes(runId) || (!userPicked && status && status.done)) {
+    const active = runs.filter(r => !r.done && r.age_s < 600);
+    const pick = (active.find(r => r.seed === 1) || active[0] || runs[0]);
+    if (pick && pick.run !== runId) loadRun(pick.run);
+  }
+  sel.value = runId || "";
+  $("#runs").innerHTML = runs.map(r => {
+    const stalled = !r.done && r.age_s > Math.max(600, 6 * (r.wall_per_chunk_s || 0));
+    const cls = (r.run === runId ? "sel " : "") + (r.done ? "done" : stalled ? "stalled" : "");
+    const right = r.done ? "done" : stalled ? `no update for ${fmtDur(r.age_s)}`
+      : `×${Math.round(r.slower_than_real_time || 0)} · ${fmtDur(r.eta_s)} left`;
+    return `<li class="${cls}" data-run="${r.run}"><div class="rt"><span>${r.label.replace(/^Block /, "")} · seed ${r.seed}</span>
+      <span class="rs">${r.level}, ${r.n}</span></div><div class="rs">${(100 * r.progress).toFixed(1)} % · ${right}</div>
+      <div class="bar"><b style="width:${(100 * r.progress).toFixed(2)}%"></b></div></li>`;
+  }).join("");
+  $("#launch").innerHTML = Object.entries(data.launcher).map(([k, v]) => {
+    const c = {}; Object.values(v.jobs).forEach(j => { const s = j.state.split(" ")[0]; c[s] = (c[s] || 0) + 1; });
+    return `Launcher ${k.replace("_status", "")}: ` + Object.entries(c).map(([s, n]) => `${n} ${s}`).join(", ");
+  }).join("<br>");
+}
+
+// ---------------------------------------------------------------- status panel
+function updateStatusPanel() {
+  const st = status; if (!st) return;
+  const lab = $("#stepLabel");
+  lab.textContent = stepText(st);
+  lab.classList.toggle("threat", st.step && st.step.phase === "THREAT");
+  $("#kvClock").textContent = `${fmtT(st.t_ms)} of ${fmtT(st.t_end_ms)}`;
+  $("#kvSpeed").textContent = st.slower_than_real_time ? `${Math.round(st.slower_than_real_time)}× slower than real time` : "–";
+  $("#kvEta").textContent = st.done ? "–" : fmtDur(st.eta_s);
+  $("#kvElapsed").textContent = fmtDur(st.elapsed_s);
+  if (mode !== "replay") setMode(st.done ? "done" : "live");
+}
+function setMode(m) {
+  const b = $("#modeBadge");
+  b.className = "badge " + m;
+  $("#modeText").textContent = { live: "LIVE · SLOW MOTION", replay: "REPLAY · REAL SPEED", done: "RUN FINISHED", offline: "OFFLINE" }[m];
+}
+
+// ---------------------------------------------------------------- canvases
+function fit(cv) {
+  const r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+  const w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
+  if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(d, 0, 0, d, 0, 0);
+  return [ctx, r.width, r.height];
+}
+const sprites = COL.map(c => {
+  const s = document.createElement("canvas"); s.width = s.height = 64;
+  const g = s.getContext("2d"), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, "#ffffff"); gr.addColorStop(0.18, c); gr.addColorStop(0.45, c + "66"); gr.addColorStop(1, c + "00");
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  return s;
+});
+
+function drawMicro(dt) {
+  const [ctx, W, H] = fit($("#micro"));
+  const threat = phaseAt(tShow);
+  const bg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
+  bg.addColorStop(0, threat ? "#1a0b10" : "#0d131c"); bg.addColorStop(1, "#05070a");
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  $("#threatTag").style.display = threat ? "block" : "none";
+  if (threat) $("#threatTag").textContent = `THREAT ×${threat}`;
+  if (!cells) return;
+  if (autoRot && performance.now() - lastInteract > 4000) rotY += 0.07 * dt;
+  const side = cells.side_um, cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
+  const scale = Math.min(W, H) * 0.62 * zoom, D = 2.6;
+  const proj = (x, y, z) => {
+    x = x / side - 0.5; y = y / side - 0.5; z = z / side - 0.5;
+    const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+    const y1 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
+    const f = D / (D + z2);
+    return [W / 2 + x1 * f * scale, H / 2 + y1 * f * scale, f, z2];
+  };
+  // cube
+  const v = [];
+  for (const a of [0, side]) for (const b of [0, side]) for (const c of [0, side]) v.push(proj(a, b, c));
+  ctx.strokeStyle = threat ? "rgba(255,77,94,.35)" : "rgba(160,180,210,.12)"; ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (const [i, j] of [[0,1],[0,2],[0,4],[1,3],[1,5],[2,3],[2,6],[3,7],[4,5],[4,6],[5,7],[6,7]]) {
+    ctx.moveTo(v[i][0], v[i][1]); ctx.lineTo(v[j][0], v[j][1]);
+  }
+  ctx.stroke();
+  // cells
+  const decay = Math.exp(-dt / (mode === "replay" ? 0.12 : 0.45));
+  const pts = cells.cells;
+  ctx.globalCompositeOperation = "lighter";
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i], [X, Y, f] = proj(p[0], p[1], p[2]), k = p[3];
+    const fl = flash[i];
+    ctx.globalAlpha = Math.max(0.18, Math.min(0.6, 0.38 + 0.5 * (f - 1)));   // nearer = brighter
+    ctx.fillStyle = COL[k];
+    const r0 = (k === 2 ? 2.8 : 2.2) * f;
+    ctx.beginPath(); ctx.arc(X, Y, r0 / 2, 0, 2 * Math.PI); ctx.fill();
+    if (fl > 0.02) {
+      const r = (6 + 16 * fl) * f * (k === 2 ? 0.8 : 1);
+      ctx.globalAlpha = Math.min(1, fl * 1.1);
+      ctx.drawImage(sprites[k], X - r, Y - r, 2 * r, 2 * r);
+    }
+    flash[i] = fl * decay;
+  }
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  // probes
+  ctx.font = "600 10px " + css.getPropertyValue("--mono");
+  TYPES.forEach((t, k) => {
+    const g = cells.probes[t]; if (g == null) return;
+    const p = pts[g], [X, Y, f] = proj(p[0], p[1], p[2]);
+    ctx.strokeStyle = COL[k]; ctx.lineWidth = 1.2; ctx.globalAlpha = 0.9;
+    ctx.beginPath(); ctx.arc(X, Y, 9 * f + 2, 0, 2 * Math.PI); ctx.stroke();
+    ctx.fillStyle = COL[k]; ctx.fillText(NAMES[t], X + 11 * f + 3, Y - 6);
+  });
+  ctx.globalAlpha = 1;
+}
+
+function drawOsc() {
+  const [ctx, W, H] = fit($("#osc"));
+  ctx.fillStyle = "#050806"; ctx.fillRect(0, 0, W, H);
+  if (!cells) return;
+  const top = 28, padL = 64, padR = 64, rowH = (H - top - 8) / 3, vMin = -95, vMax = 45;
+  const t1 = tShow, t0 = t1 - oscWin, xw = W - padL - padR;
+  // grid
+  ctx.strokeStyle = "rgba(80,140,100,.10)"; ctx.lineWidth = 1; ctx.beginPath();
+  for (let i = 0; i <= 10; i++) { const x = padL + xw * i / 10; ctx.moveTo(x, top); ctx.lineTo(x, H - 8); }
+  for (let r = 0; r < 3; r++) for (const mv of [-80, -40, 0, 40]) {
+    const y = top + r * rowH + rowH * (1 - (mv - vMin) / (vMax - vMin)); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y);
+  }
+  ctx.stroke();
+  ctx.fillStyle = "#5c7a66"; ctx.font = "10px " + css.getPropertyValue("--mono");
+  ctx.fillText(`${oscWin >= 1000 ? oscWin / 1000 + " s" : oscWin + " ms"} window · ${oscWin / 10 >= 100 ? oscWin / 10000 + " s" : oscWin / 10 + " ms"}/div`, padL, 16);
+  ctx.textAlign = "right"; ctx.fillText(`t = ${fmtT(t1)}`, W - padR, 16); ctx.textAlign = "left";
+  const vdt = cells.v_dt_ms;
+  TYPES.forEach((t, r) => {
+    const g = String(cells.probes[t]), y0 = top + r * rowH;
+    const Y = mv => y0 + rowH * (1 - (Math.max(vMin, Math.min(vMax, mv)) - vMin) / (vMax - vMin));
+    ctx.fillStyle = COL[r]; ctx.font = "600 11px " + css.getPropertyValue("--mono");
+    ctx.fillText(NAMES[t], 8, y0 + 16);
+    ctx.fillStyle = "#5c7a66"; ctx.font = "10px " + css.getPropertyValue("--mono");
+    ctx.fillText("#" + g, 8, y0 + 30);
+    ctx.beginPath(); let started = false, last = null;
+    const step = Math.max(1, Math.floor(oscWin / vdt / xw / 2));
+    for (const c of chunks) {
+      if (c.t1 < t0 || c.v_t0 > t1) continue;
+      const arr = c.v[g]; if (!arr) continue;
+      for (let i = 0; i < arr.length; i += (step > 1 ? step : 1)) {
+        const tt = c.v_t0 + i * vdt;
+        if (tt < t0) continue; if (tt > t1) break;
+        const x = padL + xw * (tt - t0) / oscWin, y = Y(arr[i]);
+        if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+        last = arr[i];
+      }
+    }
+    ctx.strokeStyle = COL[r]; ctx.lineWidth = 1.4; ctx.shadowColor = COL[r]; ctx.shadowBlur = 6;
+    ctx.stroke(); ctx.shadowBlur = 0;
+    if (last != null) {
+      ctx.fillStyle = COL[r]; ctx.font = "11px " + css.getPropertyValue("--mono");
+      ctx.fillText(`${last.toFixed(1)} mV`, W - padR + 8, Y(last) + 4);
+    }
+  });
+}
+
+function drawStrip() {
+  const [ctx, W, H] = fit($("#strip"));
+  ctx.fillStyle = "#070a0e"; ctx.fillRect(0, 0, W, H);
+  if (!cells) return;
+  const padL = 64, padR = 16, top = 6, bot = 18, rows = 2, gap = 6;
+  const rowH = (H - top - bot - gap) / rows, t1 = tShow, t0 = t1 - KEEP_MS, xw = W - padL - padR;
+  const X = t => padL + xw * (t - t0) / KEEP_MS;
+  // threat windows
+  ctx.fillStyle = "rgba(255,77,94,.16)";
+  for (const tr of cells.schedule.trials) {
+    const a = Math.max(t0, tr.threat_on_ms), b = Math.min(t1, tr.threat_off_ms);
+    if (b > a) ctx.fillRect(X(a), top, X(b) - X(a), H - top - bot);
+  }
+  // bins (the bin being played is counted up to the time on screen)
+  const bins = [];
+  for (const c of chunks) {
+    if (c.t1 <= t0 || c.t0 >= t1) continue;
+    let nPN = c.nPN, nF = c.nF;
+    if (c.t1 > t1) {
+      nPN = 0; nF = 0;
+      for (let i = lowerBound(spT, c.t0); i < spT.length && spT[i] <= t1; i++) (typeOf[spG[i]] === 2 ? nF++ : nPN++);
+    }
+    const w = (c.t1 - c.t0) / 1000;
+    bins.push([c.t0, Math.min(c.t1, t1), nPN / (nType[0] + nType[1]) / w, nF / nType[2] / w]);
+  }
+  [[2, "PN", COL[0], 1], [3, "FSI", COL[2], 5]].forEach(([k, name, col, floor], r) => {
+    const y0 = top + r * (rowH + gap), max = Math.max(floor, ...bins.map(b => b[k])) * 1.15;
+    ctx.fillStyle = col; ctx.globalAlpha = 0.8;
+    for (const b of bins) {
+      const h = rowH * b[k] / max, x = X(b[0]);
+      ctx.fillRect(x, y0 + rowH - h, Math.max(1, X(b[1]) - x - 0.5), h);
+    }
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = col; ctx.font = "600 11px " + css.getPropertyValue("--mono");
+    ctx.fillText(name, 8, y0 + 14);
+    ctx.fillStyle = "#6b7684"; ctx.font = "10px " + css.getPropertyValue("--mono");
+    ctx.fillText(`max ${max.toFixed(max < 10 ? 1 : 0)}`, 8, y0 + 28);
+    const recent = bins.filter(b => b[0] >= t1 - 1000);
+    if (recent.length) ctx.fillText(`1 s: ${(recent.reduce((s, b) => s + b[k], 0) / recent.length).toFixed(1)}`, 8, y0 + 40);
+    ctx.strokeStyle = "rgba(255,255,255,.06)"; ctx.beginPath(); ctx.moveTo(padL, y0 + rowH + .5); ctx.lineTo(W - padR, y0 + rowH + .5); ctx.stroke();
+  });
+  ctx.fillStyle = "#6b7684"; ctx.font = "10px " + css.getPropertyValue("--mono"); ctx.textAlign = "center";
+  for (let s = Math.ceil(t0 / 1000); s <= t1 / 1000; s++) ctx.fillText(s + " s", X(s * 1000), H - 5);
+  ctx.textAlign = "left";
+}
+
+let progBase = null;
+function drawProgressBase() {
+  progBase = null;
+  if (!cells) return;
+  const s = cells.schedule, segs = [[0, s.settle_ms, "#2a3240"], [s.settle_ms, s.settle_ms + s.rest_ms, "#23415e"]];
+  for (const tr of s.trials) {
+    segs.push([tr.start_ms, tr.threat_on_ms, "#3a3350"], [tr.threat_on_ms, tr.threat_off_ms, THREAT], [tr.threat_off_ms, tr.end_ms, "#3a3350"]);
+  }
+  progBase = segs;
+}
+function drawProgress() {
+  const [ctx, W, H] = fit($("#prog"));
+  ctx.clearRect(0, 0, W, H);
+  if (!progBase || !cells) return;
+  const T = cells.schedule.t_end_ms;
+  for (const [a, b, c] of progBase) { ctx.fillStyle = c; ctx.globalAlpha = 0.45; ctx.fillRect(W * a / T, 0, Math.max(1, W * (b - a) / T), H); }
+  ctx.globalAlpha = 1;
+  if (status) {
+    ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(0, 0, W * status.t_ms / T, H);
+    ctx.fillStyle = "#fff"; ctx.fillRect(W * tShow / T - 1, 0, 2, H);
+  }
+}
+
+// ---------------------------------------------------------------- playback
+function fireBetween(a, b) {
+  for (let i = lowerBound(spT, a); i < spT.length && spT[i] <= b; i++) flash[spG[i]] = 1;
+}
+function advance(dt) {
+  if (!chunks.length || !cells) return;
+  const first = chunks[0].t0, latest = chunks[chunks.length - 1].t1, cms = cells.chunk_ms;
+  const prev = tShow;
+  if (mode === "replay") {
+    const start = Math.max(first, latest - KEEP_MS);
+    tShow += 1000 * dt;
+    if (tShow > latest || tShow < start) { tShow = start; return; }
+  } else {
+    const lag = latest - tShow;
+    if (lag > 4 * cms || tShow < first) { tShow = latest - cms; return; }
+    if (lag > 0) {
+      const base = cms / Math.max(0.05, (status && status.wall_per_chunk_s) || 1);
+      tShow = Math.min(latest, tShow + base * Math.min(3, Math.max(0.3, 1 + 0.5 * (lag - cms) / cms)) * dt);
+    }
+  }
+  if (tShow > prev) fireBetween(prev, tShow);
+}
+
+let lastFrame = performance.now();
+function frame(now) {
+  const dt = Math.min(0.25, (now - lastFrame) / 1000); lastFrame = now;
+  advance(dt);
+  drawMicro(dt); drawOsc(); drawStrip(); drawProgress();
+  $("#kvShow").textContent = cells ? fmtT(tShow) + (mode === "replay" ? " (replay)" : "") : "–";
+  requestAnimationFrame(frame);
+}
+
+// ---------------------------------------------------------------- interaction
+const micro = $("#micro");
+let drag = null;
+micro.addEventListener("pointerdown", e => { drag = [e.clientX, e.clientY]; micro.setPointerCapture(e.pointerId); lastInteract = performance.now(); });
+micro.addEventListener("pointermove", e => {
+  if (!drag) return;
+  rotY += (e.clientX - drag[0]) * 0.008; rotX = Math.max(-1.4, Math.min(1.4, rotX + (e.clientY - drag[1]) * 0.008));
+  drag = [e.clientX, e.clientY]; lastInteract = performance.now();
+});
+micro.addEventListener("pointerup", () => { drag = null; });
+micro.addEventListener("wheel", e => { if (!e.ctrlKey) return; e.preventDefault(); zoom = Math.max(0.5, Math.min(3, zoom * Math.exp(-e.deltaY * 0.001))); }, { passive: false });
+micro.addEventListener("dblclick", () => { rotY = 0.6; rotX = -0.35; zoom = 1; lastInteract = 0; });
+$("#runSel").addEventListener("change", e => { userPicked = true; loadRun(e.target.value); });
+$("#runs").addEventListener("click", e => {
+  const li = e.target.closest("li"); if (li) { userPicked = true; loadRun(li.dataset.run); }
+});
+function toggleReplay() {
+  mode = mode === "replay" ? "live" : "replay";
+  $("#replayBtn").classList.toggle("on", mode === "replay");
+  $("#replayBtn").textContent = mode === "replay" ? "Back to live" : "Replay last 10 s";
+  if (mode === "live" && chunks.length) tShow = chunks[chunks.length - 1].t0;
+  setMode(mode === "replay" ? "replay" : (status && status.done ? "done" : "live"));
+  oscWin = mode === "replay" ? 1000 : 200; markOsc();
+}
+$("#replayBtn").addEventListener("click", toggleReplay);
+document.addEventListener("keydown", e => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); toggleReplay(); } });
+function markOsc() { document.querySelectorAll("#oscWin button").forEach(b => b.classList.toggle("on", +b.dataset.w === oscWin)); }
+$("#oscWin").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { oscWin = +b.dataset.w; markOsc(); } });
+markOsc();
+
+pollRuns();
+setInterval(pollRuns, 5000);
+setInterval(() => pollStatus(false), 1000);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

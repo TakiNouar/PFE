@@ -26,16 +26,25 @@
 
 From these, the full-detail network costs about **1 hour of computing per simulated second at 1,000 cells**, hence the two levels (`00`).
 
-**Still to measure:** time 1 s of simulated activity for each row and write `benchmark.csv`. It records wall-clock seconds per simulated second (the **real-time factor**; below 1 is faster than real time) and peak memory:
+**Measured 2026-10-14** (`python -m bla_sim.benchmark` → `outputs/benchmark/benchmark.csv` and `.json`; laptop on mains power, High performance plan). Each row: 0.2 s warm-up, then 1 s timed. The **real-time factor** is wall-clock seconds per simulated second (below 1 would be faster than real time):
 
-| Row | Purpose |
-|---|---|
-| Full-detail vs reduced, 200 cells | Real cost of the reference run and of the reductions |
-| Reduced, 500 and 1,000 cells | Real cost of the main run |
-| Reduced, 1,000 cells, **cells without synapses** (noise only) | How much of the cost is synapses (informs U26) |
-| Reduced, 1,000 cells, **1 vs 5 processes at once** | Real throughput of parallel runs on the laptop (heat and memory limits) |
-| Reduced, 1,000 cells, **live broadcast on** (`13`) | The viewer's overhead |
-| Reduced, 1,000 cells, dt 0.1 ms | Information only; gate runs always use 0.05 ms |
+| Row | Real-time factor | Peak memory | Rates in the timed second (PN-A / PN-C / FSI, Hz) |
+|---|---|---|---|
+| Main level, 200 cells | 112 | 91 MB | 0.55 / 1.12 / 42.7 |
+| Main level, 500 cells | 279 | 116 MB | 0.58 / 1.01 / 43.0 |
+| Main level, 1,000 cells | 565 | 162 MB | 0.57 / 0.97 / 41.8 |
+| Main level, 1,000 cells, cells and noise only (no synapses, no afferents) | 516 | 121 MB | 0.47 / 2.08 / 0 |
+| Main level, 1,000 cells, dt 0.1 ms (information only) | 276 | 162 MB | 0.54 / 1.04 / 41.9 |
+| **Reference level (Feng's files), 200 cells** | **656** | 160 MB | 0.60 / 1.10 / 42.8 |
+| Main level, 1,000 cells, **5 processes at once** (seeds 1–5) | 650 each (645–655) | 163 MB each | seed 1: 0.57 / 0.97 / 41.8 |
+| Main level, 1,000 cells, live broadcast on (viewer open) | 578 | 161 MB | 0.57 / 0.97 / 41.8 (identical spikes) |
+
+What the rows show:
+- **Cost grows linearly with size** (about 0.56 s of computing per simulated second per cell at the main level).
+- **Synapses are about 9 % of the cost** (565 vs 516). Cells and their noise are the rest, so a faster live engine (U26) needs cheaper cells, not cheaper synapses.
+- **Parallel runs:** 5 processes at once are each 15 % slower than one alone, so throughput is about 4.3× one process.
+- **The broadcast does not change spikes**: runs with and without `--broadcast` gave identical spike files at 100 cells (678 spikes) and at 1,000 cells (5,821 spikes). Its cost is about 2 % at most (578 vs 565 at 1,000 cells; 53.7 vs 53.3 at 100), within timing noise.
+- **Time estimates** (`benchmark.json` → `estimates`; runs slowed by the measured 5-process factor): Block B about **12 h** (full detail, 3 seeds in parallel; the reduced half takes about 2 h). Block C about **237 CPU-hours, about 2 days** on 5 parallel processes.
 
 ## Run sequence
 
@@ -44,20 +53,26 @@ From these, the full-detail network costs about **1 hour of computing per simula
 | Step | What |
 |---|---|
 | A1 | Feng's full PN-A, PN-C and FSI: single-cell protocol below. *Done 2026-10-14* |
-| A2 | Build the two-piece PN-A and PN-C (`03`); run the same protocol; Gate R1. *Done 2026-10-14: passed with two approved exceptions; a one-piece version was also tested and rejected* |
-| A3 | Synapse unit test: Feng's vs event-driven synapses (`04`). *Done 2026-10-14: identical to floating-point precision* |
+| A2 | Build the reduced PNs (`03`) with `python -m bla_sim.reduce_pn`; run the same protocol; Gate R1. *Done 2026-10-14* |
+| A2b | Dendritic-input test with `python -m bla_sim.drive_test`: Feng's afferent trains on the dendrite, full vs reduced cells (Gate R1, synaptic part). *Done 2026-10-14* |
+| A3 | Synapse unit test: Feng's vs event-driven synapses (`04`) with `python -m bla_sim.synapse_test`. *Done 2026-10-14: identical to floating-point precision* |
 
-### Block B — Reference comparison (one night)
+**Block A outcome:** main-level PN = `coarse_d2_p3` (Feng's cell, 6 segments; Gate R1 passed with one approved exception). Event-driven synapses identical to Feng's. See `03`, `04`, `10`.
+
+### Block B — Reference comparison (about 12 h, one night)
 
 The **same** 200-cell network (same seeds, wiring, weights, delays, noise and afferent streams) is run twice: once with Feng's originals (reference level), once with the reductions (main level).
 
 | Step | What | Seeds | Simulated time per seed | Estimated time (3 seeds in parallel) |
 |---|---|---|---|---|
-| B1 | Full detail: settle 3 s, rest 30 s, then 3 threat trials at ×4 | 3 | 57 s | ~10 h |
-| B2 | Reduced: identical protocol | 3 | 57 s | ~30 min |
+| B1 | Full detail: settle 3 s, rest 30 s, then 3 threat trials at ×4 | 3 | 57 s | ~12 h (measured) |
+| B2 | Reduced: identical protocol | 3 | 57 s | ~2 h (measured) |
 | B3 | Compare B1 and B2: Gate R2 | — | — | — |
 
-### Block C — Main run (one to two nights)
+Commands (from `Simulations/BLA/simulation`): `python -m bla_sim.launcher B` starts the six runs (at most one per core, longest first, each broadcasting to the viewer; `--dry-run` lists them with time estimates). A single run by hand: `python -m bla_sim.run --block B --level full --n 200 --seed 1 [--broadcast]`.
+Results go to `outputs/B_<level>_n200/seed<k>/`. Then `python -m bla_sim.gate_r2` writes `outputs/blockB/reduction_R2.json` and `.png` (Gate R2, `10`).
+
+### Block C — Main run (about 2 days)
 
 Runs only after Gates R1 and R2 pass.
 
@@ -71,7 +86,7 @@ Runs only after Gates R1 and R2 pass.
 | C6 | Diagnostics (report only): PN→PN AMPA at 0 (NMDA only); PN→PN connections removed | 1,000 | 1 | 33 s each |
 | C7 | Reproducibility: repeat C1–C2 with seed #1, **live broadcast off** | 1,000 | 1 | 33 s |
 
-C1–C3 run as one continuous simulation per seed. Rough estimate for the main level at 1,000 cells: about 160 s of computing per simulated second, so C1–C3 take about 7 h per seed, and the 5 seeds run in parallel. Phase 0 replaces these estimates with measurements.
+C1–C3 run as one continuous simulation per seed (`--block C_main`); C4 `--block C_rest --n 500`; C5 `--block C_inhoff`; C6 `--block C_nmda` and `--block C_noff`; C7 `--block C_rest --seed 1` **without** `--broadcast`. `python -m bla_sim.launcher C` starts all 18 runs in that way. Measured (Phase 0): the main level at 1,000 cells runs at a real-time factor of 565 alone and 650 with 5 runs in parallel. C1–C3 then take about 28 h per seed, with the 5 seeds in parallel; C5 about 13 h; C4 about 3 h; C6 and C7 about 6 h. All of Block C is about 237 CPU-hours, roughly 2 days of wall-clock time on 5 parallel processes.
 
 **Why these lengths.** The principal cell's adaptation brake builds up over a Ca²⁺ pool with a 1 s time constant, so 3 s of settling is about three time constants. At ~1 Hz resting rates, a 30 s rest epoch gives about 30 spikes per PN, enough for rates and ISI statistics. Feng averaged over 5 random seeds and analysed 165 s runs.
 

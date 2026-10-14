@@ -42,7 +42,7 @@ Source keys (use them in `run1.json`): **F19** = Feng et al. 2019 paper; **F19co
 
 | Item | Value / method | Key | Spec file |
 |---|---|---|---|
-| Two-piece PN | Feng's soma copied exactly; Feng's two dendrites merged into one compartment (area and channel totals summed); coupling = their half-length axial resistances in parallel. No fitted values | F19code + PROTO (DEV-006) | `03` |
+| Coarse PN (main level) | Feng's cell rebuilt with his geometry and topology on 6 segments (soma 1, apical 2, basal 3); uniform values copied, first-segment-only values (`nap`, `im`) keep their totals. No fitted values | F19code + PROTO (DEV-006) | `03` |
 | Event-driven synapses | Exact kinetic-synapse method of Destexhe, Mainen & Sejnowski 1994, *Neural Comput* 6:14–18 (the paper Feng cites), with Feng's code constants | F19code + Destexhe 1994 + PROTO (DEV-007) | `04` |
 
 ## Protocol choices (ours; each also in `deviations.md` where it departs from Feng)

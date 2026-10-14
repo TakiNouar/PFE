@@ -57,7 +57,7 @@ Setup was completed and the first measurements were taken on the project laptop 
 
 **Decision (M. T. Nouar, 2026-10-14):** option D, two levels.
 - **Reference level:** Feng's files unchanged. Single cells, plus one 200-cell network for 30 s of rest and 3 threat trials. About one night.
-- **Main level:** the full 1,000-cell protocol, run with a two-piece PN (DEV-006; a one-piece version was tested and rejected) and event-driven synapses (DEV-007). It must match the reference (Gates R1 and R2) before its results count. About one to two nights.
+- **Main level:** the full 1,000-cell protocol, run with a reduced PN (DEV-006; finally Feng's cell on a 6-segment grid, see Block A below) and event-driven synapses (DEV-007). It must match the reference (Gates R1 and R2) before its results count. Estimated at "one to two nights" here; revised to about 1.5 days after Block A, then measured at about 2 days in Phase 0.
 
 The main level also prototypes the simplifications the live engine will need (U26).
 
@@ -66,12 +66,24 @@ The main level also prototypes the simplifications the live engine will need (U2
 | Step | Result |
 |---|---|
 | A1, Feng's full cells | Resting −70.2 mV (PN; Feng −70.3), input resistance 136 MΩ (Feng ~140), time constant 34.9 ms (Feng ~30; U29). PN-A: 1 spike per 1 s step at every current (U28); PN-C: 10–28 spikes/s, steady; FSI: 24–221 spikes/s. Noise alone: PN-A 0.35 Hz, PN-C 1.65 Hz, FSI 0 Hz (rat BLA: 0.21 and 1.55 Hz; Amir et al. 2018). FSI gap coupling 0.069 (Woodruff & Sah ≈ 0.05) |
-| A2, reduced principal cell | **Two-piece** (Feng's exact soma + one lumped dendrite, no fitted values): Gate R1 passed with two approved exceptions (strong-current latency; PN-C depolarization block at 1.5 nA), 8.5 µs per cell per step. One-piece: rejected (29/46 checks), 4.4 µs. Choice: M. T. Nouar |
+| A2, reduced principal cell | **Final choice: `coarse_d2_p3`**, Feng's cell rebuilt on 6 segments (soma 1, apical 2, basal 3), no fitted values, 25 µs per cell per step (Feng's: 83). Gate R1 passed with one approved exception (PN-C at 1.5 nA: 6 spikes before depolarization block instead of 9). Under Feng's afferent trains on the dendrite it fires like Feng's cell (PN-A 0.66 vs 0.69 Hz, PN-C 3.36 vs 3.25 Hz). Choice: M. T. Nouar |
+| A2, history of the choice | The **two-piece** cell (soma + one lumped dendrite, 8.4 µs) was chosen first on current-injection results. The network smoke test then showed principal cells firing 2–3× less than in full detail. A new dendritic-input test traced this to the lumped dendrite (35 % too weak: it loses the local depolarization that relieves the NMDA Mg²⁺ block). A latency test traced the early first spike at strong current to the basal dendrite being one segment. Both are fixed by keeping Feng's two dendrites with ≥ 2 and ≥ 3 segments. One-piece, two-piece and apical 2 + basal 1 were rejected; apical 2 + basal 7 passes with no exception but costs 41 µs |
 | A3, event-driven synapses | Identical to Feng's synapse files to floating-point precision (largest relative difference 1.4e-13) for all four pathways and all trains; 0.003 µs per connection per step vs 1.32 µs |
+| Network code | `network.py`, `inputs.py`, `run.py`, `metrics.py` written and smoke-tested at 100 cells (1.2 s): full detail real-time factor 280 (PN-A 0.62, PN-C 1.65, FSI 52.8 Hz); two-piece 22.6 (0.36 / 0.58 / 23.0 Hz, rejected); coarse `coarse_d2_p3` 53.3 (0.61 / 1.38 / 49.3 Hz) |
 
-Code: `Simulations/BLA/simulation/bla_sim/` (`single_cell.py`, `reduce_pn.py`, `synapse_test.py`, `cells.py`, `nrn.py`, `provenance.py`, `plots.py`) and `mechanisms_run1/` (`exc_ev.mod`, `inh_ev.mod`, `reduced_pn.json`). Results: `Simulations/BLA/simulation/outputs/blockA/`.
+Code: `Simulations/BLA/simulation/bla_sim/` and `mechanisms_run1/`. Results: `Simulations/BLA/simulation/outputs/blockA/` and `outputs/bench_*_n100_smoke*/`.
 
-**Next:** network code (wiring, inputs, protocol runner), the Phase 0 benchmark, then Block B (the 200-cell reference comparison, one night).
+## Update 2026-10-14 — Phase 0 benchmark, Gate 2, run tools and viewer
+
+| Item | Result |
+|---|---|
+| Phase 0 benchmark | Main level 112 / 279 / 565× slower than real time at 200 / 500 / 1,000 cells; reference level 656× at 200 cells; synapses ~9 % of the cost; 5 parallel runs ×1.15 slower each. Block B about 12 h, Block C about 237 CPU-hours (about 2 days), up from the earlier 10 h and 1.5 days |
+| Gate 2 (U29) | Passed. Feng's "~30 ms" is the slowest membrane time constant (30.9 ms measured); Block A's 34.9 ms was the 63 %-rise time. The effective time constant is set mainly by Ih |
+| Run tools | `launcher.py` (parallel jobs, resume, keeps Windows awake), `gate_r2.py` (tested on synthetic data) |
+| Live viewer | Built (`architecture/13`). Identical spikes with the broadcast on and off at 100 and 1,000 cells; cost ≤ 2 % |
+| New open item | U30: FSIs fire ~42 Hz at every size and at both levels in 1 s samples (Gate 3: 10–30 Hz). FSI depolarization block seen in the 100-cell ×8 demo. Checked in Block B before Block C |
+
+**Next:** see `05_status_and_next_steps.md`.
 
 ## What did not change
 

@@ -17,31 +17,34 @@ Tolerances marked *(project)* are project choices, not literature values.
 
 ## Gate 1 — Reproducibility
 
-- [ ] Same seed → identical spike file (step C7 of `07`, run with the live broadcast off, so this also proves the viewer changes nothing).
+- [ ] Same seed → identical spike file (step C7 of `07`, run with the live broadcast off, so this also proves the viewer changes nothing). *Preliminary 2026-10-14: identical spike files with and without the broadcast at 100 cells (678 spikes) and 1,000 cells (5,821 spikes, Phase 0).*
 
 ## Gate 2 — Single cells, Feng's originals (step A1)
 
-- [ ] PN-A fires fewer spikes than PN-C at every current level, and in the 4 s steps its spikes are separated by long silent periods (strong adaptation).
-- [ ] PN-C fires steadily (last ISI ÷ first ISI within 0.8–1.25 at levels with ≥ 3 spikes) *(project)*.
-- [ ] FSI fires at high rates with little adaptation.
-- [ ] Resting potential, input resistance and membrane time constant of PN-A are reported next to Feng's stated −70.3 mV, ~140 MΩ, ~30 ms. A difference of more than 10 % is investigated and explained before continuing (the paper text and code disagree on the leak, see DEV-002). *Preliminary: resting potential −70.2 mV (2026-10-14).*
-- [ ] Coupling coefficient of gap-junction pairs is reported next to Woodruff & Sah's ≈ 0.05.
+**Passed 2026-10-14** (`outputs/blockA/single_cells_full.json`, `passive_tau.json`):
+- [x] PN-A fires fewer spikes than PN-C at every current level, and in the 4 s steps its spikes are separated by long silent periods (strong adaptation). *PN-A 1 spike per 1 s step at every level vs PN-C 9–28; 4 s at 0.4 nA: spikes at 12 and 2,107 ms.*
+- [x] PN-C fires steadily (last ISI ÷ first ISI within 0.8–1.25 at levels with ≥ 3 spikes) *(project)*. *1.03–1.11.*
+- [x] FSI fires at high rates with little adaptation. *24–221 Hz, ratio 0.98–1.01.*
+- [x] Resting potential, input resistance and membrane time constant of PN-A are reported next to Feng's stated −70.3 mV, ~140 MΩ, ~30 ms. A difference of more than 10 % is investigated and explained before continuing (the paper text and code disagree on the leak, see DEV-002). *−70.2 mV, 136 MΩ (−3 %). Time constant 30.9 ms as the slowest time constant (Rall's peeling); the 63 %-rise time of 34.9 ms is a different method. All estimates 29–39 ms (U29, `bla_sim/passive_check.py`).*
+- [x] Coupling coefficient of gap-junction pairs is reported next to Woodruff & Sah's ≈ 0.05. *0.069.*
 
-## Gate R1 — Two-piece PN matches Feng's full PN (step A2)
+## Gate R1 — Main-level PN matches Feng's full PN (step A2)
 
 For PN-A and PN-C separately, against Feng's full cell under the identical protocol *(all tolerances project)*:
 
+**Current injection at the soma** (`bla_sim/single_cell.py`, `reduce_pn.py`):
 - [x] Resting potential within ±1 mV.
 - [x] Input resistance and membrane time constant within ±10 %.
 - [x] Spike count at every current level (1 s ladder and 4 s steps) within ±10 %, or ±1 spike when the count is below 10. *Exception: PN-C at 1.5 nA.*
-- [x] First-spike latency within ±10 % at every level that fires. *Exception: 0.6–1.5 nA.*
+- [x] First-spike latency within ±10 % at every level that fires.
 - [x] Noise only (60 s): firing rate within ±15 %, and ISI CV within ±0.1 when there are ≥ 20 spikes.
 
-**Result 2026-10-14: passed with two approved exceptions** (37 of 46 checks pass outright; `outputs/blockA/reduction_R1_twopiece.json`). Approved by M. T. Nouar on 2026-10-14 and recorded in DEV-006:
-1. **First-spike latency at 0.6–1.5 nA** is about 1 ms shorter than Feng's (for example 2.4 vs 3.3 ms at 1.5 nA). Cause: in Feng's cell the proximal dendritic segments load the soma immediately; in the two-piece cell the dendrite's single node sits further away.
-2. **PN-C at 1.5 nA:** Feng's cell stops firing early (depolarization block, 9 spikes in 1 s); the two-piece cell keeps firing (39).
+**Synaptic input on the dendrite** (`bla_sim/drive_test.py`; added 2026-10-14 after the two-piece cell passed current injection but failed in a network):
+- [x] Under Feng's background noise plus three of Feng's afferent trains through Feng's afferent synapse at `dend(0.9)` (8 cells per type, 20 s, identical inputs at every level), the mean PN-A and PN-C rates are within ±15 % of Feng's full cell.
 
-Both appear only under strong steady current injected at the soma. Gate R2 checks whether they matter in the network.
+**Result 2026-10-14 for `coarse_d2_p3`: passed with one approved exception** (`outputs/blockA/reduction_R1_coarse_d2_p3.json`). Approved by M. T. Nouar on 2026-10-14 and recorded in DEV-006: at 1.5 nA, PN-C fires 6 spikes before depolarization block instead of Feng's 9. The block itself is reproduced.
+
+**Rejected cells** (same gate): one-piece (late first spike at every current); two-piece (early first spike at strong current, and 35 % too weak under dendritic input); apical 2 + basal 1 (early first spike at strong current). Apical 2 + basal 7 passes with no exception but costs 1.6× more.
 
 ## Gate R2 — Reduced network matches the full-detail network (Block B, 200 cells, 3 seeds)
 

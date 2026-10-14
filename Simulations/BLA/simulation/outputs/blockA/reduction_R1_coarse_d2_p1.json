@@ -1,0 +1,451 @@
+{
+ "meta": {
+  "date": "2026-10-14T12:52:33",
+  "neuron_version": "9.0.2",
+  "python": "3.12.10",
+  "machine": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+  "repo_commit": "89037b6+uncommitted",
+  "feng_files_checked": 64,
+  "dt_ms": 0.05,
+  "celsius": 31.0
+ },
+ "gate": "R1",
+ "level": "coarse_d2_p1",
+ "status": "FAIL",
+ "passed_outright": 39,
+ "checks_total": 48,
+ "checks": [
+  {
+   "cell": "PN_A",
+   "measure": "vrest_mV",
+   "full": -70.21472388144353,
+   "reduced": -70.21223827669246,
+   "rule": "\u00b11 mV",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "rin_MOhm",
+   "full": 136.19560947498115,
+   "reduced": 139.58735534699116,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "tau_ms",
+   "full": 34.89999999938209,
+   "reduced": 34.14999999937936,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.1 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.1 nA",
+   "full": 38.45,
+   "reduced": 38.25,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.2 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.2 nA",
+   "full": 21.6,
+   "reduced": 20.8,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.3 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.3 nA",
+   "full": 15.35,
+   "reduced": 14.4,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.4 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.4 nA",
+   "full": 12.0,
+   "reduced": 10.9,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.6 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.6 nA",
+   "full": 8.3,
+   "reduced": 7.2,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.8 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 0.8 nA",
+   "full": 6.3,
+   "reduced": 5.25,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 1.0 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 1.0 nA",
+   "full": 5.05,
+   "reduced": 4.05,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 1.5 nA / 1 s",
+   "full": 1,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "latency 1.5 nA",
+   "full": 3.3,
+   "reduced": 2.5,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 0.4 nA / 4 s",
+   "full": 2,
+   "reduced": 2,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "count 1.0 nA / 4 s",
+   "full": 3,
+   "reduced": 3,
+   "rule": "\u00b11 spike",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "noise rate_Hz",
+   "full": 0.35,
+   "reduced": 0.35,
+   "rule": "\u00b115%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "noise isi_cv",
+   "full": 0.274,
+   "reduced": 0.282,
+   "rule": "\u00b10.1",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "vrest_mV",
+   "full": -70.21472388144353,
+   "reduced": -70.21223827669246,
+   "rule": "\u00b11 mV",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "rin_MOhm",
+   "full": 136.19560947498115,
+   "reduced": 139.58735534699116,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "tau_ms",
+   "full": 34.89999999938209,
+   "reduced": 34.14999999937936,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.1 nA / 1 s",
+   "full": 10,
+   "reduced": 9,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.1 nA",
+   "full": 38.25,
+   "reduced": 38.0,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.2 nA / 1 s",
+   "full": 15,
+   "reduced": 15,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.2 nA",
+   "full": 21.55,
+   "reduced": 20.75,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.3 nA / 1 s",
+   "full": 18,
+   "reduced": 18,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.3 nA",
+   "full": 15.35,
+   "reduced": 14.35,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.4 nA / 1 s",
+   "full": 20,
+   "reduced": 20,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.4 nA",
+   "full": 12.0,
+   "reduced": 10.9,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.6 nA / 1 s",
+   "full": 22,
+   "reduced": 23,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.6 nA",
+   "full": 8.3,
+   "reduced": 7.2,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.8 nA / 1 s",
+   "full": 25,
+   "reduced": 26,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 0.8 nA",
+   "full": 6.3,
+   "reduced": 5.25,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 1.0 nA / 1 s",
+   "full": 28,
+   "reduced": 30,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 1.0 nA",
+   "full": 5.05,
+   "reduced": 4.05,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 1.5 nA / 1 s",
+   "full": 9,
+   "reduced": 1,
+   "rule": "\u00b11 spike",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "latency 1.5 nA",
+   "full": 3.3,
+   "reduced": 2.5,
+   "rule": "\u00b110%",
+   "pass": false,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 0.4 nA / 4 s",
+   "full": 78,
+   "reduced": 78,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "count 1.0 nA / 4 s",
+   "full": 110,
+   "reduced": 119,
+   "rule": "\u00b110%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "noise rate_Hz",
+   "full": 1.65,
+   "reduced": 1.5166666666666666,
+   "rule": "\u00b115%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "noise isi_cv",
+   "full": 0.824,
+   "reduced": 0.774,
+   "rule": "\u00b10.1",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_A",
+   "measure": "dendritic drive rate_Hz",
+   "full": 0.688,
+   "reduced": 0.781,
+   "rule": "\u00b115%",
+   "pass": true,
+   "accepted_exception": false
+  },
+  {
+   "cell": "PN_C",
+   "measure": "dendritic drive rate_Hz",
+   "full": 3.25,
+   "reduced": 3.388,
+   "rule": "\u00b115%",
+   "pass": true,
+   "accepted_exception": false
+  }
+ ]
+}

@@ -107,8 +107,49 @@ def reduce(h, kind):
     dend.update(diam_um=d_cm * 1e4, L_um=A_cm2 / (math.pi * d_cm) * 1e4,
                 coupling_MOhm=r_couple / 1e6,
                 coupling_rule="parallel half-length axial resistances of Feng's dend and p_dend")
-    return ({"source": f"All 16 segments of {src}", "soma": one},
-            {"source": f"Soma copied exactly; both dendrites lumped; {src}", "soma": soma, "dend": dend})
+    variants = {
+        "onepiece": {"source": f"All 16 segments of {src}", "soma": one},
+        "twopiece": {"source": f"Soma copied exactly; both dendrites lumped; {src}", "soma": soma, "dend": dend},
+    }
+    for n_d, n_p in COARSE_GRIDS:
+        variants[f"coarse_d{n_d}_p{n_p}"] = {
+            "source": f"Feng's cell rebuilt with Feng's geometry and topology, soma copied exactly, apical "
+                      f"dendrite in {n_d} segments (Feng: 8), basal dendrite in {n_p} (Feng: 7); {src}",
+            "soma": soma,
+            "dend": resegment(h, cell.dend, n_d, parent_x=0.0),
+            "p_dend": resegment(h, cell.p_dend, n_p, parent_x=1.0),
+        }
+    return variants
+
+
+COARSE_GRIDS = ((2, 1), (2, 3), (2, 7), (8, 7))
+
+
+def resegment(h, sec, n_seg, parent_x):
+    """Feng's section on a coarser grid. Values that are uniform along the section are
+    copied; values Feng puts only in the first segment (nap, im) keep their total and go
+    in the new first segment. Any other pattern stops the build."""
+    segs = list(sec)
+    comp = lump(h, segs)
+    first_area_old = segs[0].area()
+    first_area_new = math.pi * sec.diam * sec.L / n_seg
+    per_seg = [dict() for _ in range(n_seg)]
+    for mech, params in comp.pop("mechanisms").items():
+        for i in range(n_seg):
+            per_seg[i][mech] = {}
+        for p in params:
+            vals = np.array([getattr(s, p) for s in segs])
+            if np.allclose(vals, vals[0]):
+                for i in range(n_seg):
+                    per_seg[i][mech][p] = float(vals[0])
+            elif np.allclose(vals[1:], 0):
+                for i in range(n_seg):
+                    per_seg[i][mech][p] = float(vals[0] * first_area_old / first_area_new) if i == 0 else 0.0
+            else:
+                raise ValueError(f"{sec.name()}: {p} is neither uniform nor first-segment-only")
+    comp["segments"] = per_seg
+    comp.update(L_um=sec.L, diam_um=sec.diam, parent_x=parent_x, nseg_feng=len(segs))
+    return comp
 
 
 def _rel(a, b):
@@ -149,6 +190,25 @@ def gate_r1(full, red, tol):
     return checks
 
 
+def drive_checks(d, level, rel):
+    """Gate R1, synaptic part: firing under Feng's afferent trains on the dendrite
+    (bla_sim/drive_test.py must have been run for 'full' and this level)."""
+    path = d / "drive_test.json"
+    if not path.exists():
+        return [{"cell": "-", "measure": "dendritic drive", "full": None, "reduced": None,
+                 "rule": "run bla_sim.drive_test first", "pass": False}]
+    lv = json.loads(path.read_text(encoding="utf-8"))["levels"]
+    if "full" not in lv or level not in lv:
+        return [{"cell": "-", "measure": "dendritic drive", "full": None, "reduced": None,
+                 "rule": f"drive_test has no '{level}' or 'full'", "pass": False}]
+    out = []
+    for kind in ("PN_A", "PN_C"):
+        f, r = lv["full"][f"{kind}_mean_Hz"], lv[level][f"{kind}_mean_Hz"]
+        out.append({"cell": kind, "measure": "dendritic drive rate_Hz", "full": round(f, 3), "reduced": round(r, 3),
+                    "rule": f"±{rel:.0%}", "pass": abs(r - f) / f <= rel})
+    return out
+
+
 def _load_full_traces(d):
     traces = {}
     npz = np.load(d / "traces_full.npz")
@@ -166,9 +226,10 @@ def main():
     cfg = load_config()
     h = setup(cfg)
     meta = run_metadata(h)
-    reduced = {"onepiece": {}, "twopiece": {}}
+    reduced = {level: {} for level in C.REDUCED_LEVELS}
     for kind in ("PN_A", "PN_C"):
-        reduced["onepiece"][kind], reduced["twopiece"][kind] = reduce(h, kind)
+        for level, params in reduce(h, kind).items():
+            reduced[level][kind] = params
     OURS_DIR.mkdir(exist_ok=True)
     C.REDUCED_PATH.write_text(json.dumps(reduced, indent=1), encoding="utf-8")
     tp = reduced["twopiece"]["PN_A"]["dend"]
@@ -184,6 +245,7 @@ def main():
         out = {"meta": meta, "level": level, "protocol": cfg["single_cell_protocol"], "cells": results}
         (d / f"single_cells_{level}.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
         checks = gate_r1(full["cells"], results, cfg["gate_R1_tolerances"])
+        checks += drive_checks(d, level, cfg["gate_R1_drive"]["rate_rel"])
         exc = cfg.get("gate_R1_accepted_exceptions", {})
         accepted = {tuple(x) for x in exc.get("checks", [])} if exc.get("level") == level else set()
         for c in checks:
