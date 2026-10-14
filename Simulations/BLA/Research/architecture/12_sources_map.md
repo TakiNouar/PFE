@@ -38,7 +38,14 @@ Source keys (use them in `run1.json`): **F19** = Feng et al. 2019 paper; **F19co
 | dt, temperature, v_init | 0.05 ms, 31 °C, −70 mV | F19 + F19code (`BL_main.hoc`) | `07` |
 | Seeds per condition | 5 | F19 ("averaging five network model runs") | `07` |
 
-## Protocol choices (ours; each also in `deviations.md`)
+## Main-level reductions (each also in `deviations.md`)
+
+| Item | Value / method | Key | Spec file |
+|---|---|---|---|
+| One-piece PN | Feng's somatic mechanisms on one compartment; area and channel totals summed from Feng's full cell; optional fit of 4 scale factors to Feng's full cell only | F19code + PROTO (DEV-006) | `03` |
+| Event-driven synapses | Exact kinetic-synapse method of Destexhe, Mainen & Sejnowski 1994, *Neural Comput* 6:14–18 (the paper Feng cites), with Feng's code constants | F19code + Destexhe 1994 + PROTO (DEV-007) | `04` |
+
+## Protocol choices (ours; each also in `deviations.md` where it departs from Feng)
 
 | Item | Value | Key |
 |---|---|---|
@@ -46,6 +53,8 @@ Source keys (use them in `run1.json`): **F19** = Feng et al. 2019 paper; **F19co
 | Threat = afferent rate × D, D = 2, 4, 8 | `06` | PROTO (DEV-005) |
 | Epoch lengths, trial counts | `07` | PROTO |
 | Synchrony guard < 0.5 | `10` | PROTO (archive lesson) |
+| Reduction tolerances (Gates R1, R2) | `10` | PROTO |
+| 200-cell reference size | `02` | PROTO (chosen from measured cost) |
 
 ## Gate reference values (literature)
 

@@ -29,4 +29,13 @@
 | Kim 2013 (ModelDB 150288) principal-cell template mixed with Feng's | Different Cm, Ra, geometry, sAHP | Feng 247968 templates only |
 | `pip install neuron` on native Windows | No Windows wheel exists | Windows installer or WSL2 (`07`) |
 
+## Found while setting up (2026-10-14)
+
+| Anti-pattern | What goes wrong | Required alternative |
+|--------------|-----------------|----------------------|
+| Planning run times from estimates alone | The first estimate (hours) was about 100× too optimistic; the measured cost was weeks | Measure before committing to a protocol (Phase 0) |
+| `pc.nthread(n > 1)` with Feng's files | Error "na3 is not thread safe", then the process hangs | One core per run; parallel processes for independent runs |
+| Editing Feng's files to make them faster or thread safe | Breaks provenance and Gate 0 | New files in `mechanisms_run1/`, each a logged deviation checked against the original |
+| A reduced model that is not checked against the original | Speed bought with unknown accuracy | Gates R1 and R2 before the main run |
+
 Any implementation that re-introduces one of these is invalid, whatever its scores.

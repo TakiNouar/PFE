@@ -2,7 +2,9 @@
 
 Every departure from Feng et al. 2019 (paper or ModelDB 247968 code) or from `Simulations/BLA/Research/architecture/`.
 
-DEV-001 to DEV-005 are **planned** deviations, decided in the October 2026 redesign (`Simulations/BLA/reports/04_run1_redesign_oct2026.md`) before any code was written. Add implementation-time deviations below them with the next free number.
+DEV-001 to DEV-005 are **planned** deviations, decided in the October 2026 redesign (`Simulations/BLA/reports/04_run1_redesign_oct2026.md`) before any code was written. DEV-006 and DEV-007 were added on 2026-10-14, after measuring speed (option D). Add implementation-time deviations below them with the next free number.
+
+**Levels:** DEV-001 to DEV-005 apply to both levels. DEV-006 and DEV-007 apply to the **main level only**; the reference level uses Feng's cell and synapse files unchanged.
 
 Template:
 
@@ -50,3 +52,17 @@ Template:
 - **Why required:** Feng's model has no threat stimulus; Run 1 must test a response and recovery.
 - **Source of substitute:** none (protocol choice). Train baseline rates come from Feng's own input files.
 - **Impact on gates:** Gate 4 tests the response and recovery under this protocol only. A specific thalamic threat pathway is a later refinement.
+
+## DEV-006 — One-piece principal cell (main level only)
+
+- **What:** the main-level PN is a single compartment carrying Feng's somatic mechanisms (`cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP`). Its membrane area and each channel's total conductance are summed segment by segment from Feng's full 16-segment cell; `sAHP` keeps its somatic total. The LFP recorders (`extracellular`, `xtraimemrec`) are left out. All synapses sit on the one compartment (Feng: excitatory on `dend(0.9)`, inhibitory on the soma), so dendritic filtering is lost. If Gate R1 fails, four scale factors (`na3`, `kdr`, `sAHP`, leak totals) are fitted to Feng's full cell only; their values and the remaining errors are recorded here and in `full_parameters.json`.
+- **Why required:** measured cost of Feng's PN is 5.2 µs per segment per step, about 83 µs per PN per step; the full-detail 1,000-cell network needs about 1 hour of computing per simulated second (2026-10-14).
+- **Source of substitute:** Feng's own full cell (ModelDB 247968 `Cell_A` / `Cell_C`) is the only target. New template file in `Simulations/BLA/simulation/mechanisms_run1/`; Feng's files unchanged.
+- **Impact on gates:** checked by Gate R1 (cell level) and Gate R2 (network level, 200 cells, against the full-detail reference).
+
+## DEV-007 — Event-driven synapses (main level only)
+
+- **What:** Feng's four synapse types re-implemented with the exact kinetic-synapse method of Destexhe, Mainen & Sejnowski 1994 (*Neural Comput* 6:14–18): one shared mechanism per receptor type per cell, per-connection state touched only at spikes. Same `AlphaTmax`, `Beta`, `Cdur`, `gbar`, reversal potentials, weights, delays, Mg²⁺ block, d1/d2, τ and floors as Feng's code. Two differences: (a) the depression factor scales each spike's own contribution when it arrives, instead of rescaling the synapse's whole conductance at every step as Feng's code does (largest effect on the NMDA tail); (b) Feng's inert long-term-plasticity term (×1e-12) is left out.
+- **Why required:** measured cost of Feng's synapse files is 1.0–1.4 µs per synapse per step; with ~88,000 synapses at 1,000 cells that is more than all the cells together.
+- **Source of substitute:** Feng's code constants (ModelDB 247968 `*_STFD*.mod`); method from Destexhe, Mainen & Sejnowski 1994, which Feng cites for his synapse formalism. New `.mod` files in `Simulations/BLA/simulation/mechanisms_run1/`; Feng's files unchanged.
+- **Impact on gates:** checked by the synapse unit test (step A3; isolated spikes must match within 1 % of peak, train differences reported) and by Gate R2.

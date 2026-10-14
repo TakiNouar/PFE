@@ -42,6 +42,25 @@ The authors have two machines: a desktop with an RTX 3060 (12 GB) and a laptop w
 2. **Steps 1–8** of `architecture/07`, checked against `architecture/10`.
 3. After Run 1 passes: decide the live engine (U26), then CeA in isolation, then BLA → CeA.
 
+## Update 2026-10-14 — measured speed and option D
+
+Setup was completed and the first measurements were taken on the project laptop (mains power, High performance, 3.0 GHz):
+
+| Finding | Detail |
+|---|---|
+| Install | Python 3.12.10, NEURON 9.0.2 (`C:\nrn`), Feng's files cloned and hashed (commit `b5b2127`), `nrnmech.dll` compiled |
+| First neurons | PN-A rests at −70.2 mV (Feng: −70.3) and fires once, then is silent ~2 s (U28); PN-C fires steadily, 15–20 spikes/s; FSI 61–129 spikes/s without adaptation |
+| No multithreading | `pc.nthread(n > 1)` fails: "na3 is not thread safe". Independent runs go in parallel processes instead |
+| Cell cost | Feng's PN: 5.2 µs per segment per step (NEURON's `hh`: 0.13 µs), ~83 µs per 16-segment PN |
+| Synapse cost | 1.0–1.4 µs per Feng synapse per step; ~88,000 synapses at 1,000 cells |
+| Consequence | Full-detail 1,000-cell network: about 1 hour of computing per simulated second. Run 1 as specified: about 11 days with 5 parallel processes. The earlier estimate (4–20 hours) was about 100× too optimistic |
+
+**Decision (agreed with the authors):** option D, two levels.
+- **Reference level:** Feng's files unchanged. Single cells, plus one 200-cell network for 30 s of rest and 3 threat trials. About one night.
+- **Main level:** the full 1,000-cell protocol, run with a one-piece PN (DEV-006) and event-driven synapses (DEV-007). It must match the reference (Gates R1 and R2) before its results count. About one to two nights.
+
+The main level also prototypes the simplifications the live engine will need (U26).
+
 ## What did not change
 
 The clean-restart policy (`00_clean_restart_policy.md`), the archive (`test_run_1/`), the authority order, and the rule that every number has a source.

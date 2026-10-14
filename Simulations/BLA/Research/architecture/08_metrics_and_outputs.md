@@ -13,7 +13,9 @@
 | Suppression ratio | PN resting rate with FSI→PN weights at 0 ÷ PN resting rate intact (> 1 means inhibition works); also for the ×4 threat | Gate 4 |
 | After-discharge | PN rate in 100 ms bins over the 4 s after the threat; time until it returns within the rest range | report only |
 | Population spectrum | Power spectrum of the summed PN spike train in the rest epoch (gamma check) | report only |
-| Single-cell | Resting potential, input resistance, membrane time constant, f–I curve, adaptation ratio (last ISI ÷ first ISI at each step) | Gate 2 |
+| Single-cell | Resting potential, input resistance, membrane time constant, f–I curve, first-spike latency, adaptation ratio (last ISI ÷ first ISI at each step), noise-only rate and ISI CV | Gates 2, R1 |
+| Reduction match | One-piece vs full PN on every single-cell measure; reduced vs full-detail 200-cell network on rest rates, ×4 threat response, recovery and synchrony | Gates R1, R2 |
+| Synapse unit test | Largest conductance difference, Feng's vs event-driven synapse, per synapse type and train | Gate R2 (reported) |
 | Gap coupling | Coupling coefficient of coupled FSI pairs | Gate 2 |
 | Realised wiring | Inputs per cell per pathway (mean ± SD), gap-junction pairs, delays (min / mean / max) | Gate 0, report |
 | Speed | Real-time factor and peak memory per run | report |
@@ -25,7 +27,9 @@
 - `full_parameters.json`: every value we set (counts, K targets, p, weight distributions, noise settings, afferent settings, threat doses, durations, seeds), each with a source key from `12_sources_map.md`, plus paths and SHA-256 hashes of every Feng file used.
 - `connections.csv`: pre, post, pathway, weight, delay.
 - `spikes_<seed>.csv`: cell, time.
-- `single_cells.json`: step-1 results.
+- `single_cells.json`: steps A1–A2 (Feng's full cells and the one-piece cells, same protocol).
+- `synapse_test.json`: step A3.
+- `reduction_check.json`: Gate R1 and R2 comparisons, measure by measure, with pass/fail.
 - `metrics.json` + `metrics.txt`: every metric above.
 - `benchmark.csv` (Phase 0).
 - `summary.txt`: written **only** from the numbers in `metrics.json`. No template sentences.
@@ -34,4 +38,4 @@
 
 ## Reproducibility check
 
-Step 8 of `07` re-runs seed #1 with the live broadcast off. Its spike file must be identical to the first run's (byte-for-byte after sorting by time and cell). This also proves the broadcast does not change results.
+Step C7 of `07` re-runs seed #1 with the live broadcast off. Its spike file must be identical to the first run's (byte-for-byte after sorting by time and cell). This also proves the broadcast does not change results.
