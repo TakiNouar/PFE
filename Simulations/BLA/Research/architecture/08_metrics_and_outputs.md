@@ -27,9 +27,11 @@
 - `full_parameters.json`: every value we set (counts, K targets, p, weight distributions, noise settings, afferent settings, threat doses, durations, seeds), each with a source key from `12_sources_map.md`, plus paths and SHA-256 hashes of every Feng file used.
 - `connections.csv`: pre, post, pathway, weight, delay.
 - `spikes_<seed>.csv`: cell, time.
-- `single_cells.json`: steps A1–A2 (Feng's full cells and the one-piece cells, same protocol).
-- `synapse_test.json`: step A3.
-- `reduction_check.json`: Gate R1 and R2 comparisons, measure by measure, with pass/fail.
+- Block A (run id `blockA`):
+  - `single_cells_<level>.json` (level = `full`, `twopiece`, `onepiece`): steps A1–A2, same protocol.
+  - `reduction_R1_<level>.json`: Gate R1, measure by measure, with pass/fail and any approved exceptions.
+  - `synapse_test.json`: step A3.
+- Block B: `reduction_R2.json`, Gate R2 comparison of the full-detail and reduced 200-cell networks.
 - `metrics.json` + `metrics.txt`: every metric above.
 - `benchmark.csv` (Phase 0).
 - `summary.txt`: written **only** from the numbers in `metrics.json`. No template sentences.

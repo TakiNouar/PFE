@@ -43,9 +43,9 @@ From these, the full-detail network costs about **1 hour of computing per simula
 
 | Step | What |
 |---|---|
-| A1 | Feng's full PN-A, PN-C and FSI: single-cell protocol below |
-| A2 | Build the one-piece PN-A and PN-C (`03`); run the same protocol; Gate R1. Fit only if Gate R1 fails |
-| A3 | Synapse unit test: Feng's vs event-driven synapses (`04`) |
+| A1 | Feng's full PN-A, PN-C and FSI: single-cell protocol below. *Done 2026-10-14* |
+| A2 | Build the two-piece PN-A and PN-C (`03`); run the same protocol; Gate R1. *Done 2026-10-14: passed with two approved exceptions; a one-piece version was also tested and rejected* |
+| A3 | Synapse unit test: Feng's vs event-driven synapses (`04`). *Done 2026-10-14: identical to floating-point precision* |
 
 ### Block B — Reference comparison (one night)
 
@@ -79,7 +79,7 @@ The durations are **starting values**. If a block cannot finish in a reasonable 
 
 ## Single-cell protocol (A1, A2)
 
-Same protocol for Feng's full cells and the one-piece cells:
+Same protocol for Feng's full cells and the reduced cells:
 
 1. **Passive:** resting potential; input resistance and membrane time constant from a small hyperpolarising step (−0.05 nA, 1 s).
 2. **Current ladder:** 1 s depolarising steps at ≥ 6 levels from just below threshold to 1.5 nA. Record spike times.

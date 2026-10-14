@@ -53,16 +53,28 @@ Template:
 - **Source of substitute:** none (protocol choice). Train baseline rates come from Feng's own input files.
 - **Impact on gates:** Gate 4 tests the response and recovery under this protocol only. A specific thalamic threat pathway is a later refinement.
 
-## DEV-006 — One-piece principal cell (main level only)
+## DEV-006 — Two-piece principal cell (main level only)
 
-- **What:** the main-level PN is a single compartment carrying Feng's somatic mechanisms (`cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP`). Its membrane area and each channel's total conductance are summed segment by segment from Feng's full 16-segment cell; `sAHP` keeps its somatic total. The LFP recorders (`extracellular`, `xtraimemrec`) are left out. All synapses sit on the one compartment (Feng: excitatory on `dend(0.9)`, inhibitory on the soma), so dendritic filtering is lost. If Gate R1 fails, four scale factors (`na3`, `kdr`, `sAHP`, leak totals) are fitted to Feng's full cell only; their values and the remaining errors are recorded here and in `full_parameters.json`.
-- **Why required:** measured cost of Feng's PN is 5.2 µs per segment per step, about 83 µs per PN per step; the full-detail 1,000-cell network needs about 1 hour of computing per simulated second (2026-10-14).
-- **Source of substitute:** Feng's own full cell (ModelDB 247968 `Cell_A` / `Cell_C`) is the only target. New template file in `Simulations/BLA/simulation/mechanisms_run1/`; Feng's files unchanged.
-- **Impact on gates:** checked by Gate R1 (cell level) and Gate R2 (network level, 200 cells, against the full-detail reference).
+- **What:** the main-level PN has two compartments, with no fitted values.
+  - **Soma:** Feng's soma copied exactly (25 × 24.75 µm; `cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP` with Feng's values; same reversal potentials, Cm, Ra).
+  - **Dendrite:** Feng's two dendrites (`dend`, 8 segments; `p_dend`, 7 segments) merged into one compartment. It holds their total membrane area (11,263 µm²) and each channel's total conductance, summed segment by segment. Diameter 6.55 µm and length 547.3 µm, chosen so the area matches and the soma-to-dendrite axial resistance equals the two dendrites' half-length resistances in parallel (12.18 MΩ).
+  - **Left out:** Feng's LFP recorders (`extracellular`, `xtraimemrec`), which only record.
+  - **Synapses:** excitatory on the dendrite, inhibitory and noise on the soma, as in Feng.
+  - Parameters in `mechanisms_run1/reduced_pn.json`, written by `bla_sim/reduce_pn.py`.
+- **Why required:** measured cost of Feng's PN is 77.6 µs per cell per step; the two-piece PN costs 8.5 µs (2026-10-14).
+- **Source of substitute:** Feng's own full cell (ModelDB 247968 `Cell_A` / `Cell_C`) is the only source and the only target. Feng's files unchanged.
+- **Measured (Gate R1, 2026-10-14):** passed with two exceptions approved by M. T. Nouar on 2026-10-14 (`outputs/blockA/reduction_R1_twopiece.json`):
+  1. first-spike latency about 1 ms shorter at 0.6–1.5 nA (2.4 vs 3.3 ms at 1.5 nA);
+  2. at 1.5 nA, Feng's PN-C enters depolarization block (9 spikes in 1 s), the two-piece does not (39).
+
+  All other measures match: resting potential, input resistance (138 vs 136 MΩ), time constant (34.4 vs 34.9 ms), spike counts up to 1.0 nA and in the 4 s steps, and firing under noise (PN-A 0.35 vs 0.35 Hz, PN-C 1.45 vs 1.65 Hz).
+- **Alternative tested and rejected:** a one-piece PN (whole cell in one compartment, 4.4 µs) passed only 29/46 checks; its first spike was 15–60 % late at every current.
+- **Impact on gates:** Gate R2 (200-cell network, full detail vs reduced) decides whether the two exceptions matter in the network.
 
 ## DEV-007 — Event-driven synapses (main level only)
 
-- **What:** Feng's four synapse types re-implemented with the exact kinetic-synapse method of Destexhe, Mainen & Sejnowski 1994 (*Neural Comput* 6:14–18): one shared mechanism per receptor type per cell, per-connection state touched only at spikes. Same `AlphaTmax`, `Beta`, `Cdur`, `gbar`, reversal potentials, weights, delays, Mg²⁺ block, d1/d2, τ and floors as Feng's code. Two differences: (a) the depression factor scales each spike's own contribution when it arrives, instead of rescaling the synapse's whole conductance at every step as Feng's code does (largest effect on the NMDA tail); (b) Feng's inert long-term-plasticity term (×1e-12) is left out.
+- **What:** Feng's four synapse types re-implemented with the exact kinetic-synapse method of Destexhe, Mainen & Sejnowski 1994 (*Neural Comput* 6:14–18): one shared mechanism per receptor type per cell (`ExcEv` for AMPA + NMDA, `InhEv` for GABA-A), with per-connection state touched only at spikes. Same `AlphaTmax`, `Beta`, `Cdur`, `gbar`, reversal potentials, weights, delays, Mg²⁺ block, d1/d2, τ and floors as Feng's code. The whole-conductance depression rescaling, the pulse extension and NEURON's fixed-step event timing are reproduced. The only difference is that Feng's inert long-term-plasticity term (×1e-12) is left out.
 - **Why required:** measured cost of Feng's synapse files is 1.0–1.4 µs per synapse per step; with ~88,000 synapses at 1,000 cells that is more than all the cells together.
-- **Source of substitute:** Feng's code constants (ModelDB 247968 `*_STFD*.mod`); method from Destexhe, Mainen & Sejnowski 1994, which Feng cites for his synapse formalism. New `.mod` files in `Simulations/BLA/simulation/mechanisms_run1/`; Feng's files unchanged.
-- **Impact on gates:** checked by the synapse unit test (step A3; isolated spikes must match within 1 % of peak, train differences reported) and by Gate R2.
+- **Source of substitute:** Feng's code constants (ModelDB 247968 `*_STFD*.mod`); method from Destexhe, Mainen & Sejnowski 1994, which Feng cites for his synapse formalism. New files `mechanisms_run1/exc_ev.mod` and `inh_ev.mod`; Feng's files unchanged.
+- **Measured (step A3, 2026-10-14):** conductances identical to Feng's files to floating-point precision (largest relative difference 1.4e-13) for all four pathways, for isolated spikes, 5/20/50 Hz trains, 1 ms doublets, Poisson trains, and three connections sharing one object (`outputs/blockA/synapse_test.json`). Cost 0.003 µs per connection per step, against 1.32 µs for Feng's files.
+- **Impact on gates:** none expected at the synapse level; Gate R2 checks the network level.

@@ -2,7 +2,7 @@
 
 ## Rule
 
-The reference level uses Feng's cell templates from ModelDB 247968 **unchanged**. The main level uses the same FSI template unchanged, plus a **one-piece PN** built from Feng's full PN (section below). Do not mix in ModelDB 150288 (Kim 2013): Feng revised Kim's principal-cell model, and only the FSI model is unchanged from Kim (Feng 2019, Methods).
+The reference level uses Feng's cell templates from ModelDB 247968 **unchanged**. The main level uses the same FSI template unchanged, plus a **two-piece PN** built from Feng's full PN (section below). Do not mix in ModelDB 150288 (Kim 2013): Feng revised Kim's principal-cell model, and only the FSI model is unchanged from Kim (Feng 2019, Methods).
 
 | Population | Template file (ModelDB 247968) | Template |
 |------------|--------------------------------|----------|
@@ -39,32 +39,37 @@ None added. Every cell of a type is identical. Variety comes only from what Feng
 
 ## The LFP mechanism
 
-Feng's templates insert `extracellular` and `xtraimemrec` (his LFP recorder) in every section. They stay in the reference level, because the templates are used unchanged, but Run 1 does not compute an LFP. Measured cost: about 0.3 µs per segment per step for `extracellular`, and about 6 % of the PN's cost for `xtraimemrec`. The one-piece PN leaves both out; Feng's FSI template keeps them in both levels.
+Feng's templates insert `extracellular` and `xtraimemrec` (his LFP recorder) in every section. They stay in the reference level, because the templates are used unchanged, but Run 1 does not compute an LFP. Measured cost: about 0.3 µs per segment per step for `extracellular`, and about 6 % of the PN's cost for `xtraimemrec`. The two-piece PN leaves both out; Feng's FSI template keeps them in both levels.
 
 ## Measured cost (2026-10-14, project laptop, one process)
 
-Feng's PN costs about **5.2 µs per segment per time step**, about 40× NEURON's built-in `hh` (0.13 µs). The cost is spread over its 11 mechanisms per segment; `extracellular` alone adds about 0.3 µs. At 16 segments that is about 83 µs per PN per step, the main reason the full-detail network takes about an hour per simulated second at 1,000 cells.
+| Cell | Cost per cell per 0.05 ms step |
+|---|---|
+| Feng's full PN (16 segments, 11 mechanisms each) | 77.6 µs (~5 µs per segment; NEURON's `hh` is 0.13 µs) |
+| **Two-piece PN (main level)** | **8.5 µs** |
+| One-piece PN (tested, not used) | 4.4 µs |
+| Feng's FSI (2 segments) | 4.3 µs |
 
-## One-piece PN (main level only)
+## Two-piece PN (main level)
 
-**Why:** one segment instead of 16 makes each PN about 16× cheaper.
+**Decision (2026-10-14, M. T. Nouar):** the main level uses the two-piece PN. A one-piece version was built and tested the same way and rejected: its first spike was 15–60 % late at every current (Gate R1: 29/46 checks).
 
-**Where:** a new template file in `Simulations/BLA/simulation/mechanisms_run1/` (templates for PN-A and PN-C). Feng's files are not edited.
+**Where:** parameters in `Simulations/BLA/simulation/mechanisms_run1/reduced_pn.json`, written by `bla_sim/reduce_pn.py`; the cell is built by `bla_sim/cells.py`. Feng's files are not edited.
 
-**Construction:**
-1. **One section, one segment**, with the same mechanisms as Feng's soma: `cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP`. Feng's LFP recorders (`extracellular`, `xtraimemrec`) are left out; they only record and do not drive the cell.
-2. **Starting point, computed from Feng's full cell, not chosen by us:**
-   - Membrane area = the full cell's total membrane area.
-   - Each channel's **total** conductance = its total in Feng's full cell, summed segment by segment (so channels Feng places only in part of the cell, such as `nap` and `im` in the first dendritic segment, keep their real amount).
-   - `sAHP` keeps its somatic total (it is somatic in Feng).
-   - Cm, E_leak, reversal potentials, Ca²⁺-pool settings and temperature are Feng's code values.
-3. **Fit only if the starting point fails Gate R1:** scale factors on four totals (Na `na3`, K `kdr`, `sAHP`, leak), fitted by least squares to **Feng's full cell's** Gate R1 measures. Nothing else is adjusted, and no biological target is used. The fitted factors and the remaining errors go in `full_parameters.json` and DEV-006.
-4. **PN-C** is built the same way from Feng's `Cell_C` (sAHP 0.0002 S/cm² at the soma; NaP 0.000555 S/cm²).
+**Construction (no fitted values):**
+1. **Soma: Feng's soma, copied exactly:** 25 × 24.75 µm, every mechanism (`cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP`) with Feng's values, the same reversal potentials, Cm and Ra. Feng's LFP recorders (`extracellular`, `xtraimemrec`) are left out; they only record and do not drive the cell.
+2. **Dendrite: Feng's two dendrites merged into one compartment.** Its membrane area is their total (11,263 µm²). Each channel's **total** conductance is their total, summed segment by segment, so channels Feng places only in the first dendritic segment (`nap`, `im`) keep their real amount.
+3. **Coupling:** the dendrite's diameter and length are chosen so that its area matches and the soma-to-dendrite axial resistance equals the half-length resistances of Feng's two dendrites in parallel (12.18 MΩ): diameter 6.55 µm, length 547.3 µm.
+4. **PN-C** is built the same way from Feng's `Cell_C`.
 
-**Synapses on the one-piece cell:** Feng places excitatory synapses on the apical dendrite (`dend(0.9)`) and inhibitory ones on the soma. In one compartment all of them sit on the same section, so dendritic filtering is lost. This is part of DEV-006 and is exactly what Gate R2 (network-level comparison) checks.
+**Synapses:** excitatory synapses on the dendrite (Feng: `dend(0.9)`); inhibitory synapses and background noise on the soma (as Feng).
 
-**Check (Gate R1):** the one-piece cell must match Feng's full cell on resting potential, input resistance, membrane time constant, spike counts across a current ladder, first-spike latency, and firing under Feng's background noise alone (`10_validation_gates.md`).
+**Gate R1 result (2026-10-14):** matches Feng's full cell on resting potential (−70.2 vs −70.2 mV), input resistance (138 vs 136 MΩ), time constant (34.4 vs 34.9 ms), spike counts at every level up to 1.0 nA and in the 4 s steps, first-spike latency up to 0.4 nA, and firing under noise alone (PN-A 0.35 vs 0.35 Hz; PN-C 1.45 vs 1.65 Hz). Two strong-current differences were **approved as exceptions** by M. T. Nouar (DEV-006, `10_validation_gates.md`):
+- first-spike latency about 1 ms shorter at 0.6–1.5 nA (2.4 vs 3.3 ms at 1.5 nA);
+- at 1.5 nA, Feng's PN-C stops firing early (depolarization block: 9 spikes in 1 s), the two-piece does not (39).
+
+Gate R2 (network level) decides whether they matter in the network.
 
 ## The live engine
 
-Run 1 does not decide the live engine's cell model (U26). The measured costs show that real time needs cells cheaper than even the one-piece PN, plus several cores. The one-piece PN and its Gate R1 recordings are the reference such a cell must match.
+Run 1 does not decide the live engine's cell model (U26). The measured costs show that real time needs cells cheaper than even the one-piece PN, plus several cores. The two-piece PN and its Gate R1 recordings are the reference such a cell must match.

@@ -19,7 +19,7 @@ The verification found that the old Run 1 could not test what it was built to te
 | Paper values where Feng's code differs (weights, FSI→PN kinetics, depression floors, leak) | Silent mismatch with the simulations that produced Feng's results |
 | SOM cells with two invented values | Not in Feng's model; added deviations with no source |
 
-## Decisions (agreed with the authors, 2026-10-13)
+## Decisions (M. T. Nouar, 2026-10-13)
 
 | Question | Decision | Reason |
 |---|---|---|
@@ -55,11 +55,23 @@ Setup was completed and the first measurements were taken on the project laptop 
 | Synapse cost | 1.0–1.4 µs per Feng synapse per step; ~88,000 synapses at 1,000 cells |
 | Consequence | Full-detail 1,000-cell network: about 1 hour of computing per simulated second. Run 1 as specified: about 11 days with 5 parallel processes. The earlier estimate (4–20 hours) was about 100× too optimistic |
 
-**Decision (agreed with the authors):** option D, two levels.
+**Decision (M. T. Nouar, 2026-10-14):** option D, two levels.
 - **Reference level:** Feng's files unchanged. Single cells, plus one 200-cell network for 30 s of rest and 3 threat trials. About one night.
-- **Main level:** the full 1,000-cell protocol, run with a one-piece PN (DEV-006) and event-driven synapses (DEV-007). It must match the reference (Gates R1 and R2) before its results count. About one to two nights.
+- **Main level:** the full 1,000-cell protocol, run with a two-piece PN (DEV-006; a one-piece version was tested and rejected) and event-driven synapses (DEV-007). It must match the reference (Gates R1 and R2) before its results count. About one to two nights.
 
 The main level also prototypes the simplifications the live engine will need (U26).
+
+## Update 2026-10-14 — Block A results
+
+| Step | Result |
+|---|---|
+| A1, Feng's full cells | Resting −70.2 mV (PN; Feng −70.3), input resistance 136 MΩ (Feng ~140), time constant 34.9 ms (Feng ~30; U29). PN-A: 1 spike per 1 s step at every current (U28); PN-C: 10–28 spikes/s, steady; FSI: 24–221 spikes/s. Noise alone: PN-A 0.35 Hz, PN-C 1.65 Hz, FSI 0 Hz (rat BLA: 0.21 and 1.55 Hz; Amir et al. 2018). FSI gap coupling 0.069 (Woodruff & Sah ≈ 0.05) |
+| A2, reduced principal cell | **Two-piece** (Feng's exact soma + one lumped dendrite, no fitted values): Gate R1 passed with two approved exceptions (strong-current latency; PN-C depolarization block at 1.5 nA), 8.5 µs per cell per step. One-piece: rejected (29/46 checks), 4.4 µs. Choice: M. T. Nouar |
+| A3, event-driven synapses | Identical to Feng's synapse files to floating-point precision (largest relative difference 1.4e-13) for all four pathways and all trains; 0.003 µs per connection per step vs 1.32 µs |
+
+Code: `Simulations/BLA/simulation/bla_sim/` (`single_cell.py`, `reduce_pn.py`, `synapse_test.py`, `cells.py`, `nrn.py`, `provenance.py`, `plots.py`) and `mechanisms_run1/` (`exc_ev.mod`, `inh_ev.mod`, `reduced_pn.json`). Results: `Simulations/BLA/simulation/outputs/blockA/`.
+
+**Next:** network code (wiring, inputs, protocol runner), the Phase 0 benchmark, then Block B (the 200-cell reference comparison, one night).
 
 ## What did not change
 

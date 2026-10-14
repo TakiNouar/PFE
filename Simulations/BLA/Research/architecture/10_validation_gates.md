@@ -2,7 +2,7 @@
 
 Run 1 passes only when every gate below passes. If a gate fails, stop and report. Do not tune parameters to get past it: every value in this spec has a source, and a failure means something is built wrong or a source is wrong.
 
-**One exception:** the one-piece PN may be fitted, but only to Feng's own full cell (Gate R1, `03`), never to a biological target.
+**Exceptions** are recorded, never silent: any check that fails but is accepted must name the measure, the reason, who approved it and when, and must appear in `deviations.md`.
 
 Tolerances marked *(project)* are project choices, not literature values.
 
@@ -27,15 +27,21 @@ Tolerances marked *(project)* are project choices, not literature values.
 - [ ] Resting potential, input resistance and membrane time constant of PN-A are reported next to Feng's stated −70.3 mV, ~140 MΩ, ~30 ms. A difference of more than 10 % is investigated and explained before continuing (the paper text and code disagree on the leak, see DEV-002). *Preliminary: resting potential −70.2 mV (2026-10-14).*
 - [ ] Coupling coefficient of gap-junction pairs is reported next to Woodruff & Sah's ≈ 0.05.
 
-## Gate R1 — One-piece PN matches Feng's full PN (step A2)
+## Gate R1 — Two-piece PN matches Feng's full PN (step A2)
 
 For PN-A and PN-C separately, against Feng's full cell under the identical protocol *(all tolerances project)*:
 
-- [ ] Resting potential within ±1 mV.
-- [ ] Input resistance and membrane time constant within ±10 %.
-- [ ] Spike count at every current level (1 s ladder and 4 s steps) within ±10 %, or ±1 spike when the count is below 10.
-- [ ] First-spike latency within ±10 % at every level that fires.
-- [ ] Noise only (60 s): firing rate within ±15 %, and ISI CV within ±0.1 when there are ≥ 20 spikes.
+- [x] Resting potential within ±1 mV.
+- [x] Input resistance and membrane time constant within ±10 %.
+- [x] Spike count at every current level (1 s ladder and 4 s steps) within ±10 %, or ±1 spike when the count is below 10. *Exception: PN-C at 1.5 nA.*
+- [x] First-spike latency within ±10 % at every level that fires. *Exception: 0.6–1.5 nA.*
+- [x] Noise only (60 s): firing rate within ±15 %, and ISI CV within ±0.1 when there are ≥ 20 spikes.
+
+**Result 2026-10-14: passed with two approved exceptions** (37 of 46 checks pass outright; `outputs/blockA/reduction_R1_twopiece.json`). Approved by M. T. Nouar on 2026-10-14 and recorded in DEV-006:
+1. **First-spike latency at 0.6–1.5 nA** is about 1 ms shorter than Feng's (for example 2.4 vs 3.3 ms at 1.5 nA). Cause: in Feng's cell the proximal dendritic segments load the soma immediately; in the two-piece cell the dendrite's single node sits further away.
+2. **PN-C at 1.5 nA:** Feng's cell stops firing early (depolarization block, 9 spikes in 1 s); the two-piece cell keeps firing (39).
+
+Both appear only under strong steady current injected at the soma. Gate R2 checks whether they matter in the network.
 
 ## Gate R2 — Reduced network matches the full-detail network (Block B, 200 cells, 3 seeds)
 

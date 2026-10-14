@@ -77,10 +77,14 @@ Feng's files use µS (`gbar = 1e-3 µS` = 1 nS), mV and ms. This spec quotes nS 
 - the NMDA Mg²⁺ block, applied to the cell's summed NMDA conductance at every step (exact, because the block depends only on the receiving cell's voltage);
 - the depression rule: d1 = 0.95 (τ 40 ms), d2 = 0.9 (τ 70 ms), recovery between spikes, and the floors (0.5 PN→PN, 0.7 all others); facilitation stays at 1.
 
-**What differs (DEV-007):**
-- Feng's code multiplies a synapse's **whole** conductance by its current depression factor at every step, so a new spike also rescales the tail of earlier spikes. The event-driven version applies the depression factor to each spike's own contribution when it arrives. The difference is largest for the slow NMDA tail.
-- Feng's inert long-term-plasticity term (×1e-12) is left out.
-- A spike arriving while the same connection's transmitter pulse is still on extends the pulse in Feng's code; the event-driven version must handle this the same way (Destexhe 1994 describes it), and the unit test below checks it.
+**Also reproduced exactly:**
+- the whole-conductance rescaling: at each spike, the connection's existing open fraction is re-weighted with the new depression factor, as Feng's code does;
+- pulse extension: a pulse ends Cdur after the connection's **last** spike (Feng: `net_move` for NMDA and GABA, per-step check for AMPA);
+- NEURON's fixed-step event timing: each connection's open fraction is computed at the grid time where NEURON applies the event (`tgrid` in the `.mod` files), so the summed states and the per-connection bookkeeping stay consistent.
+
+**What differs (DEV-007):** only Feng's inert long-term-plasticity term (×1e-12), which is left out.
+
+**Implemented 2026-10-14:** `mechanisms_run1/exc_ev.mod` (`ExcEv`, AMPA + NMDA) and `inh_ev.mod` (`InhEv`, GABA-A), both thread safe. Unit test (step A3): conductances match Feng's files to floating-point precision (largest relative difference 1.4e-13) for every pathway and train, including three connections sharing one object. Cost: 0.003 µs per connection per step, against 1.32 µs for Feng's files.
 
 **Checks:**
 - **Unit test (before any network):** drive one Feng synapse and one event-driven synapse of the same type with the same spike trains.

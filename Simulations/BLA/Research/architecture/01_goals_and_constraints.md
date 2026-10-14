@@ -4,7 +4,7 @@
 
 1. **Install check:** Feng's ModelDB 247968 files compile and run under NEURON 9.0.2 on the project machine. *(Done 2026-10-14.)*
 2. **Single cells behave like Feng's:** PN-A adapts, PN-C fires steadily, FSI fires fast.
-3. **The reductions are faithful:** the one-piece PN matches Feng's full cell, and the reduced 200-cell network matches the full-detail 200-cell reference network (Gate R).
+3. **The reductions are faithful:** the two-piece PN matches Feng's full cell, the event-driven synapses match Feng's synapses, and the reduced 200-cell network matches the full-detail 200-cell reference network (Gates R1, R2).
 4. **The network rests like a real BLA:** with background input only, principal cells fire slowly (about 0.2–3 Hz) and FSIs faster (about 10–30 Hz), as recorded in rats.
 5. **The network responds and recovers:** a threat input raises principal-cell firing in proportion to its strength, inhibition limits it, and activity returns to rest afterwards.
 6. **Reproducible:** same seed, same spikes.
@@ -25,7 +25,7 @@
 | Feng's files | `.mod` and cell `.hoc` files from ModelDB 247968 are used **byte-for-byte unchanged**; a hash list proves it. The main level's reductions are **new files beside them**, never edits | `03`, `04`, `09` |
 | Reductions | Fitted or checked **only against Feng's own full cell and full-detail network**, never against biological targets; every reduction is a logged deviation | `03`, `04`, `10` |
 | Code over paper | Where Feng's code and paper differ, use the **code** value and log the paper value in `deviations.md` | `04`, `12` |
-| Cells | Reference: Feng's `Cell_A` (PN-A), `Cell_C` (PN-C). Main: one-piece PN-A / PN-C fitted to them. FSI template unchanged in both. No SOM | `02`, `03` |
+| Cells | Reference: Feng's `Cell_A` (PN-A), `Cell_C` (PN-C). Main: two-piece PN-A / PN-C built from them. FSI template unchanged in both. No SOM | `02`, `03` |
 | Synapses | Reference: Feng's four synapse files. Main: event-driven equivalents with the same constants | `04` |
 | Wiring | Same in-degree rule for **every** pathway (Feng's realised inputs per cell) | `05` |
 | Weights | Per-synapse lognormal weights as drawn in Feng's code | `04` |
