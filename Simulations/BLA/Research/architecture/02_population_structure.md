@@ -27,13 +27,16 @@ About 80 % of BLA neurons are principal cells, but the remaining 20 % include se
 
 ## Sizes allowed
 
-| Size | Use | Gated? |
-|------|-----|--------|
-| 1,000 | Main Run 1 network | Yes |
-| 500 | Scale check (Gate 5) | Yes |
-| 100 (64 / 26 / 10) | Debugging only, fast iteration | No |
+| Size | Level | Use | Gated? |
+|------|-------|-----|--------|
+| 1,000 | Main | Main Run 1 network | Yes |
+| 500 | Main | Scale check (Gate 5) | Yes |
+| 200 (128 / 52 / 20) | Reference **and** main | Reduction check: the same 200-cell network (same wiring, weights, seeds, inputs) built once with Feng's originals and once with the reductions (Gate R) | Yes |
+| 100 (64 / 26 / 10) | Either | Debugging only, fast iteration | No |
 
-If the Phase 0 benchmark shows 1,000 cells are too slow to finish the protocol, 500 becomes the main size and 250 the scale check. Record the change in `deviations.md`.
+**Why 200 for the reference:** Feng's full-detail network costs about 600 s of computing per simulated second at 200 cells (measured costs, 2026-10-14), so the reference protocol finishes overnight. At 200 cells there are only 20 FSIs, fewer than the 43 inhibitory inputs a PN should receive, so the weight-scaling rule in `05` applies. That is fine for this purpose: both versions of the 200-cell network use exactly the same wiring, so the comparison isolates the effect of the reductions.
+
+If the main protocol at 1,000 cells cannot finish in a reasonable time even with the reductions, 500 becomes the main size and 250 the scale check. Record the change in `deviations.md`.
 
 ## Spatial placement
 

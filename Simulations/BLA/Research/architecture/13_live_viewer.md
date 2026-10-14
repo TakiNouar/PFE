@@ -14,6 +14,10 @@
 | **Activity strip** | PN and FSI population rate over the last 10 s of simulated time, with threat windows shaded |
 | **Status** | Current step (settle / rest / threat trial k of 5 at ×D / size check / …), seed n of 5, simulated clock, speed (how many times slower than real time), estimated time left, and a progress bar for the whole protocol |
 
+## Which run it shows
+
+Several runs execute at once as separate processes (`07`). The viewer broadcasts **one** of them, by default seed 1 of the run in progress (Block B or C), and you can switch to another. The status panel lists the progress of all running processes.
+
 ## How "live" works
 
 The simulation runs slower than real time (estimated 10–60×; measured in Phase 0). A live broadcast is therefore **slow motion**: what you see is what the computer is calculating at that moment.
@@ -28,7 +32,7 @@ The simulation runs slower than real time (estimated 10–60×; measured in Phas
 1. **Display only.** Metrics come from the run's own spike files (`08`), never from `live/`.
 2. **The simulation never waits for the viewer.** It writes each snapshot to a temporary file and renames it (so the viewer never reads half a file), then continues. If the viewer is closed or crashes, the run is unaffected.
 3. **No per-time-step Python.** Snapshots are written between chunks only.
-4. **No effect on the dynamics.** Recording spikes and three voltages does not change the simulation, and with a fixed time step the chunk length does not change spike times. Gate 1's reproducibility re-run (`07` step 8) is done **with the broadcast switched off** and must give an identical spike file. That proves it.
+4. **No effect on the dynamics.** Recording spikes and three voltages does not change the simulation, and with a fixed time step the chunk length does not change spike times. Gate 1's reproducibility re-run (`07` step C7) is done **with the broadcast switched off** and must give an identical spike file. That proves it.
 5. **Probe cells** are chosen once per seed from the seeded stream and listed in `cells.json`.
 
 ## Files

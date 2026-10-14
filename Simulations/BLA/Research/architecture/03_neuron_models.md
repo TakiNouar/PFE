@@ -2,7 +2,7 @@
 
 ## Rule
 
-Use Feng's cell templates from ModelDB 247968 **unchanged**. Do not copy their numbers into new code, and do not mix in ModelDB 150288 (Kim 2013): Feng revised Kim's principal-cell model, and only the FSI model is unchanged from Kim (Feng 2019, Methods).
+The reference level uses Feng's cell templates from ModelDB 247968 **unchanged**. The main level uses the same FSI template unchanged, plus a **one-piece PN** built from Feng's full PN (section below). Do not mix in ModelDB 150288 (Kim 2013): Feng revised Kim's principal-cell model, and only the FSI model is unchanged from Kim (Feng 2019, Methods).
 
 | Population | Template file (ModelDB 247968) | Template |
 |------------|--------------------------------|----------|
@@ -39,8 +39,32 @@ None added. Every cell of a type is identical. Variety comes only from what Feng
 
 ## The LFP mechanism
 
-The templates insert `xtraimemrec` (Feng's LFP recorder). It must stay, because the templates are used unchanged, but Run 1 does not compute an LFP. It costs some speed; the benchmark measures that.
+Feng's templates insert `extracellular` and `xtraimemrec` (his LFP recorder) in every section. They stay in the reference level, because the templates are used unchanged, but Run 1 does not compute an LFP. Measured cost: about 0.3 µs per segment per step for `extracellular`, and about 6 % of the PN's cost for `xtraimemrec`. The one-piece PN leaves both out; Feng's FSI template keeps them in both levels.
 
-## What the live engine may change later
+## Measured cost (2026-10-14, project laptop, one process)
 
-Run 1 does not decide the live engine's cell model. If the benchmark shows Feng's full cells cannot run fast enough beside the LLM, the live engine may use a reduced cell. Run 1's single-cell recordings (Gate 2) then become the reference that a reduced cell must match.
+Feng's PN costs about **5.2 µs per segment per time step**, about 40× NEURON's built-in `hh` (0.13 µs). The cost is spread over its 11 mechanisms per segment; `extracellular` alone adds about 0.3 µs. At 16 segments that is about 83 µs per PN per step, the main reason the full-detail network takes about an hour per simulated second at 1,000 cells.
+
+## One-piece PN (main level only)
+
+**Why:** one segment instead of 16 makes each PN about 16× cheaper.
+
+**Where:** a new template file in `Simulations/BLA/simulation/mechanisms_run1/` (templates for PN-A and PN-C). Feng's files are not edited.
+
+**Construction:**
+1. **One section, one segment**, with the same mechanisms as Feng's soma: `cadyn`, `capool`, `hd`, `im`, `kap`, `kdr`, `leak`, `na3`, `nap`, `sAHP`. Feng's LFP recorders (`extracellular`, `xtraimemrec`) are left out; they only record and do not drive the cell.
+2. **Starting point, computed from Feng's full cell, not chosen by us:**
+   - Membrane area = the full cell's total membrane area.
+   - Each channel's **total** conductance = its total in Feng's full cell, summed segment by segment (so channels Feng places only in part of the cell, such as `nap` and `im` in the first dendritic segment, keep their real amount).
+   - `sAHP` keeps its somatic total (it is somatic in Feng).
+   - Cm, E_leak, reversal potentials, Ca²⁺-pool settings and temperature are Feng's code values.
+3. **Fit only if the starting point fails Gate R1:** scale factors on four totals (Na `na3`, K `kdr`, `sAHP`, leak), fitted by least squares to **Feng's full cell's** Gate R1 measures. Nothing else is adjusted, and no biological target is used. The fitted factors and the remaining errors go in `full_parameters.json` and DEV-006.
+4. **PN-C** is built the same way from Feng's `Cell_C` (sAHP 0.0002 S/cm² at the soma; NaP 0.000555 S/cm²).
+
+**Synapses on the one-piece cell:** Feng places excitatory synapses on the apical dendrite (`dend(0.9)`) and inhibitory ones on the soma. In one compartment all of them sit on the same section, so dendritic filtering is lost. This is part of DEV-006 and is exactly what Gate R2 (network-level comparison) checks.
+
+**Check (Gate R1):** the one-piece cell must match Feng's full cell on resting potential, input resistance, membrane time constant, spike counts across a current ladder, first-spike latency, and firing under Feng's background noise alone (`10_validation_gates.md`).
+
+## The live engine
+
+Run 1 does not decide the live engine's cell model (U26). The measured costs show that real time needs cells cheaper than even the one-piece PN, plus several cores. The one-piece PN and its Gate R1 recordings are the reference such a cell must match.

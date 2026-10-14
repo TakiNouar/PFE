@@ -34,16 +34,17 @@ Resolutions below come from the October 2026 Run 1 redesign (`Simulations/BLA/re
 | U10 | SOM = PV kinetics | **Moot**: Run 1 has no SOM cells (Feng's model has none) |
 | U11 | P_SOM_PN = 0.34 | **Moot**: no SOM cells in Run 1 |
 | U12 | Heterogeneity | **Resolved**: none added. Feng's templates are used unchanged; variety comes from lognormal weights, delays, noise and random wiring |
-| U13 | NEURON vs Brian2 | **Resolved for Run 1**: NEURON 9.0.2 with Feng's files unchanged (Windows installer or WSL2; no native-Windows pip wheel). The live engine is U26 |
+| U13 | NEURON vs Brian2 | **Resolved for Run 1**: NEURON 9.0.2, installed 2026-10-14 from the Windows installer (no native-Windows pip wheel). Feng's files are not thread safe, so each run uses one core. The live engine is U26 |
 | U14 | Gamma | Diagnostic only. The 1,000-cell network has no spatial structure (DEV-001), so Feng's localised gamma bursts are not expected |
 | U20 | Synaptic weight multipliers ("strength") | **Resolved**: `BL_main.hoc` loads `function_ConnectInternal_simplify_online_op.hoc`. E→E draws one lognormal(mean 2, var 1) shared by AMPA and NMDA; E→I (7, 2), I→E (12, 2), I→I (20, 10). Table 3's AMPA 5/3 is not implemented. Code used (DEV-003) |
 | U21 | STP d1/d2 pairing | **Resolved**: no `.hoc` overrides. All four files: d1 0.95 @ 40 ms, d2 0.9 @ 70 ms; floors 0.5 (PN→PN) and 0.7 (all others, incl. FSI→PN and FSI→FSI). Code used (DEV-004) |
-| U22 | Synapse formalism | **Moot**: Feng's kinetic-scheme files are used unchanged; no dual-exponential port |
+| U22 | Synapse formalism | **Resolved**: the reference level uses Feng's kinetic-scheme files unchanged. The main level uses an event-driven version of the same kinetic scheme (Destexhe, Mainen & Sejnowski 1994), not a dual-exponential (DEV-007) |
 | U23 | Recurrent PN→PN sparsity at N=70 | **Resolved**: not acceptable (0.65 excitatory, ~7 inhibitory inputs per PN vs Feng's 25 and 43). Run 1 uses 1,000 cells wired to Feng's inputs per cell (DEV-001) |
 | U24 | Stimulus window length | **Resolved**: 3 s settle, 30 s rest, 2 s threat windows with 2 s before and 4 s after; 5 seeds (`architecture/07`) |
 | U25 | Extrinsic drive model | **Resolved**: Feng's own afferent trains with code weights and delays. Threat = afferent rate × 2, 4, 8 (DEV-005) |
-| **U26** | Live engine: simulator and cell detail | **Open**: decided from the Phase 0 benchmark (real-time factor of Feng's full cells at 100 / 500 / 1,000 cells) |
+| **U26** | Live engine: simulator and cell detail | **Open**, informed by measurements (2026-10-14): Feng's PN costs 5.2 µs per segment per step and each Feng synapse 1.0–1.4 µs; Feng's files cannot multithread. Even the main level's one-piece PN (~5 µs per cell per step) is far from real time at hundreds of cells, so the live engine needs cheaper cell code, event-driven synapses and several cores, or fewer neurons. Decide after Phase 0 |
 | **U27** | Threat pathway | **Open, later**: Run 1 uses "more afferent input"; a dedicated thalamic threat input is a later refinement |
+| **U28** | PN-A single-cell firing | **Open**: Feng's unchanged PN-A fires one spike and then stays silent for about 2 s under steady current (0.2–1.5 nA; preliminary, 2026-10-14). Consistent with its very large sAHP (50 mS/cm²) and 1 s Ca²⁺ pool, but check against Feng's (and Kim's) description of type-A adaptation before Gate 2 |
 
 ---
 
@@ -55,7 +56,7 @@ Resolutions below come from the October 2026 Run 1 redesign (`Simulations/BLA/re
 | **U16** | Computational definition of face `neutral` |
 | **U17** | Suppression-gap *k* and prefrontal fatigue law |
 | **U18** | Scaling for non-BLA regions |
-| U19 | Whether 50/12/8 stays after Feng-faithful Run 1 | **Superseded (Oct 2026)**: Run 1 uses Feng's 640 / 260 / 100. The BLA size in the live network depends on U26 |
+| U19 | Whether 50/12/8 stays after Feng-faithful Run 1. **Superseded (Oct 2026)**: Run 1 uses Feng's 640 / 260 / 100. The BLA size in the live network depends on U26 |
 
 ---
 

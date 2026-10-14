@@ -2,7 +2,7 @@
 
 ## Rule
 
-Use Feng's four synapse files from ModelDB 247968 **unchanged**. They already contain the receptor kinetics, the NMDA Mg²⁺ block and the short-term depression. We only choose **which cells connect** (`05_connectivity.md`) and draw each connection's **weight** and **delay**, the way Feng's wiring code does.
+The reference level uses Feng's four synapse files from ModelDB 247968 **unchanged**. They already contain the receptor kinetics, the NMDA Mg²⁺ block and the short-term depression. We only choose **which cells connect** (`05_connectivity.md`) and draw each connection's **weight** and **delay**, the way Feng's wiring code does. The main level uses **event-driven equivalents** with the same constants (section at the end).
 
 Where Feng's paper and code differ, the **code** is used, because the code produced his published results. Each difference is logged in `Simulations/BLA/simulation/deviations.md`. Values below were read from the code in October 2026 (`Research/Sources/01_primary_bla_references.md`).
 
@@ -62,3 +62,28 @@ The swapped d1/d2 pairing changes the second spike's strength by about 1 % (DEV-
 ## Units
 
 Feng's files use µS (`gbar = 1e-3 µS` = 1 nS), mV and ms. This spec quotes nS where Feng's paper does.
+
+## Event-driven synapses (main level only)
+
+**Why:** each of Feng's synapses is its own object, updated at every time step: 1.0–1.4 µs per synapse per step (measured 2026-10-14). The 1,000-cell network has about 88,000 of them, about 100 ms of computing per 0.05 ms step, more than all the cells together. Most steps carry no spike for a given synapse.
+
+**Method:** the exact kinetic-synapse method of **Destexhe, Mainen & Sejnowski 1994** (*Neural Comput* 6:14–18), the same paper Feng cites for his synapse formalism. All connections of one receptor type onto one cell share **one** mechanism. Each connection keeps its own small state (pulse timing, depression factors) and is touched only when one of its spikes arrives. Between spikes, the shared conductance follows the scheme's exact exponential solution.
+
+**Where:** new `.mod` files in `Simulations/BLA/simulation/mechanisms_run1/` (one per Feng synapse type: PN→PN, PN→FSI, FSI→PN, FSI→FSI). Feng's files are not edited.
+
+**What stays exactly the same as Feng's code:**
+- `AlphaTmax`, `Beta`, `Cdur`, `gbar` and reversal potential for every receptor type (table above);
+- per-connection weights and delays (`05`), one weight shared by AMPA and NMDA on PN→PN;
+- the NMDA Mg²⁺ block, applied to the cell's summed NMDA conductance at every step (exact, because the block depends only on the receiving cell's voltage);
+- the depression rule: d1 = 0.95 (τ 40 ms), d2 = 0.9 (τ 70 ms), recovery between spikes, and the floors (0.5 PN→PN, 0.7 all others); facilitation stays at 1.
+
+**What differs (DEV-007):**
+- Feng's code multiplies a synapse's **whole** conductance by its current depression factor at every step, so a new spike also rescales the tail of earlier spikes. The event-driven version applies the depression factor to each spike's own contribution when it arrives. The difference is largest for the slow NMDA tail.
+- Feng's inert long-term-plasticity term (×1e-12) is left out.
+- A spike arriving while the same connection's transmitter pulse is still on extends the pulse in Feng's code; the event-driven version must handle this the same way (Destexhe 1994 describes it), and the unit test below checks it.
+
+**Checks:**
+- **Unit test (before any network):** drive one Feng synapse and one event-driven synapse of the same type with the same spike trains.
+  - Isolated spikes (≥ 1 s apart): conductance traces match within 1 % of peak.
+  - Trains (regular 5, 20 and 50 Hz bursts, and a Poisson train, including spikes that land inside a pulse): the largest difference is measured and reported. It should come only from the depression rule above; Gate R2 decides whether it matters at network level.
+- **Network test:** Gate R2 compares the full-detail and reduced 200-cell networks.

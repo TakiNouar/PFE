@@ -34,7 +34,7 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 | Hypothalamus | 15 | Raw drive |
 | **Total** | **185 + BLA** | Proposed scaled starting point |
 
-**BLA note (updated 2026-10-13):** BLA **Run 1** is an offline test of Feng et al. 2019 at Feng's own reduced size: 640 PN-A / 260 PN-C / 100 FSI, Feng's NEURON files unchanged, wired to Feng's inputs per cell. The earlier 50 / 12 / 8 default gave each principal cell under one recurrent input and was dropped. The BLA size in the live network is decided after the Run 1 speed benchmark (U26). See `Simulations/BLA/Research/architecture/` and `Simulations/BLA/reports/04_run1_redesign_oct2026.md`.
+**BLA note (updated 2026-10-14):** BLA **Run 1** is an offline test of Feng et al. 2019 at Feng's own reduced size: 640 PN-A / 260 PN-C / 100 FSI, wired to Feng's inputs per cell. Measured cost made the full-detail network too slow at that size (about 1 hour of computing per simulated second), so Run 1 has two levels: Feng's NEURON files unchanged for single cells and a 200-cell reference network, and a one-piece PN with event-driven synapses for the 1,000-cell run, checked against the reference. The earlier 50 / 12 / 8 default gave each principal cell under one recurrent input and was dropped. The BLA size in the live network is decided after the Run 1 speed benchmark (U26). See `Simulations/BLA/Research/architecture/` and `Simulations/BLA/reports/04_run1_redesign_oct2026.md`.
 
 **All other regions:** Numbers chosen for plausibility and computational tractability only. Not derived from empirical analysis. Each region will be characterized in isolation (CeA next, then BLA→CeA two-region network) before full-network wiring begins.
 
@@ -42,7 +42,7 @@ C (dV/dt) = −g_Na m³h(V − E_Na) − g_K n⁴(V − E_K) − g_L(V − E_L) 
 
 - **Pyramidal neurons (BLA):** Feng et al. 2019 principal cells: soma + apical dendrite + distal dendrite, **16 segments** in Feng's code, with Na, Kdr, A, M, h, Ca, NaP, sAHP and leak currents. The adaptation current (I_sAHP) and its Ca²⁺ pool (τ = 1 s) sit **in the soma only**; Feng needs the dendrites mainly for synapse placement and his LFP calculation. Without I_sAHP, cells fire unrealistically uniformly during a sustained stimulus.
 
-  BLA Run 1 uses Feng's full templates unchanged. If the live engine later needs fewer segments for speed, a reduced cell must keep the somatic sAHP and Ca²⁺ pool and match Run 1's single-cell recordings; the simplification must be stated in the thesis.
+  BLA Run 1 uses Feng's full templates unchanged at its reference level, and a one-piece cell fitted to them (keeping the somatic sAHP and Ca²⁺ pool) at its main level. Measured cost of Feng's cell: 5.2 µs per segment per time step on the project laptop (2026-10-14). Any reduced cell, in Run 1 or the live engine, must match Feng's full cell's single-cell recordings, and the simplification must be stated in the thesis.
 
 - **Interneurons (PV, SOM, VIP):** Single-compartment fast-spiking models. PV interneurons use standard HH Na/K conductances only. SOM interneurons additionally require a persistent Na⁺ current (I_NaP) and a hyperpolarization-activated cation current (I_H) to reproduce their spontaneous activity at low drive. VIP interneurons additionally require a D-current (slowly inactivating K⁺). (Source: Cattani et al. 2024, eLife.)
 
