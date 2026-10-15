@@ -4,6 +4,8 @@
 **Purpose:** The binding specification for isolated BLA **Run 1**. No code: structure, numbers, rules, module map.  
 **Revised:** October 2026 (Run 1 redesign), updated 2026-10-14 (option D: two levels). Why: `Simulations/BLA/reports/04_run1_redesign_oct2026.md`.
 
+> **Since 2026-10-15 the main model is the simplified BLA in `14_simplified_model.md`.** Files 00–13 describe Feng's detailed model, which is now the reference only (Block A single cells, Block B network).
+
 This series is the authoritative design for Run 1. It supersedes the archived failed tests in `reports/test_run_1/`.
 
 The Design Blueprint is a living outline only. When this architecture and the literature disagree with older blueprint numbers, **architecture + literature win**, and the blueprint is updated afterward.

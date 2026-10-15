@@ -25,7 +25,8 @@
 
 | Decision | Choice |
 |---|---|
-| Main model | **Simplified neurons in Brian2** (adaptive integrate-and-fire; PN-A and PN-C with a dendrite carrying NMDA; FSI point neuron), fitted to Feng's cells; Feng's paper and code taken as documented facts |
+| Main model | **Simplified neurons** (adaptive integrate-and-fire; PN-A and PN-C with a dendrite carrying NMDA; FSI point neuron without depolarization block), fitted to Feng's cells; Feng's paper and code taken as documented facts |
+| Engine | **GeNN (PyGeNN 5.4)** as the single model: exact CPU mode for fitting and checks, GPU for large and live runs; Brian2 only as a CPU cross-check (decided 2026-10-15) |
 | Reference model | NEURON 9.0.2 with Feng's files unchanged: Block A single cells (done) and Block B network (running) |
 | Machine | The laptop (Ryzen 5 4600H, 6 cores) during Erasmus; the RTX 3060 desktop is not in use for now |
 | Cells | PN-A, PN-C, FSI; no SOM |
@@ -41,7 +42,7 @@ Done on 2026-10-14 (second session): coarse-cell smoke test and Gate R1 regenera
 
 1. ~~Block B~~: done 2026-10-15 04:18, no failures (`07_blockB_reference_oct2026.md`; summary `outputs/blockB/reference_summary.json`). Rest PN-A 0.51, PN-C 0.97, FSI 35.1 Hz; dose-dependent threat response (PN 0.84 / 1.00 / 1.37 Hz at ×2 / ×4 / ×8); recovery in 8 of 9 trials; FSI depolarization block once at ×8 (U30).
 2. ~~Engine benchmark~~ (`06_engine_benchmark_oct2026.md`): GPU (PyGeNN 5.4, CUDA 12.9) runs a simplified network in real time up to ~70,000–75,000 neurons (0.35× real time up to 20,000); CPU (Brian2, 1 core) up to ~2,000. The 1/3/6-core CPU runs start automatically after Block B (`Simulations/BLA/simplified/outputs/engine_benchmark/cpu_after_blockB.log`); add them to report 06.
-3. **Spec for the simplified model** (new architecture file): cell equations, the fitting targets from Block A, synapses (Feng's kinetics and depression as documented), wiring and inputs from `run1.json`, and the gates.
+3. **Spec for the simplified model:** draft written 2026-10-15, `Research/architecture/14_simplified_model.md`. Choices settled the same day: S-1 = fitted rise-and-decay synapses; SciPy installed for fitting.
 4. **Fit the three cells** to Feng's Block A results: resting potential, input resistance, time constant, current-to-firing curves, adaptation, firing under noise, and the dendritic-input test.
 5. **Build the 1,000-cell Brian2 network** and check it against rat data, Feng's paper and Block B.
 
