@@ -51,9 +51,8 @@ Seeds 1 and 2 showed no block. Other FSI silences of 250 ms or more in all seeds
 ## What it means
 
 1. **U30, FSI rate:** with a 30 s rest, FSIs fire 35 Hz in Feng's own cells under our wiring. That's lower than the 1 s samples (~42 Hz), but still above rat data (22–27 Hz) and above Gate 3's 30 Hz. Since the cells are Feng's, unchanged, the difference comes from our network setup, not from the cells. Candidates:
-   - at 200 cells, every FSI receives all 180 PNs (p = 1) with weights ×1.19 to reach Feng's 215 inputs, so its inputs are more shared and stronger than in Feng's 27,000-cell network;
-   - afferent sharing;
-   - no distance structure.
+   - **Not the network size:** in the Phase 0 benchmark (1 s samples) FSIs fired about the same at 200, 500 and 1,000 cells (42.7 / 43.0 / 41.8 Hz), although only at 200 cells does every FSI receive all PNs (p = 1, weights ×1.19). So the shared, scaled input at 200 cells is not the main cause.
+   - **Remaining candidates:** how afferent trains reach FSIs at our sizes (Feng: 3.4 trains per FSI, FSIs within 300 µm sharing a train with 0.3 % probability); the missing distance structure (Feng's PN→FSI connections are local); and Feng's in-degree values having been read from his realised 27,000-cell connectivity. Open (U30).
 
    For the simplified model, the FSI target comes from the rat data and Feng's paper (FSIs tuned to in vivo rates). Block B's 35 Hz is a known difference, not a target.
 2. **Depolarization block is a property of Feng's FSI model** under strong drive, at 200 cells too, not only the 100-cell artifact suspected on 2026-10-14. Whether real BLA FSIs do this is not documented in Feng's paper. The simplified FSI can reproduce or omit it, but the choice must be stated (open).
