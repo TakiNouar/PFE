@@ -4,7 +4,8 @@ Usage (from Simulations/BLA/simulation):
     python -m bla_sim.run --block B --level full --n 200 --seed 1
     python -m bla_sim.run --block C_main --level reduced --n 1000 --seed 1
 Blocks:
-    B        settle, rest, 3 threat trials at x4                (Block B, Gate R2)
+    B        settle, rest, one threat trial each at x2, x4, x8   (Block B: reference behaviour of
+             Feng's network for the simplified model, decision 2026-10-14)
     C_main   settle, rest, 5 trials at each of x2, x4, x8        (C1-C3)
     C_rest   settle, rest                                        (C4 size check, C7 reproducibility)
     C_inhoff settle, rest, 5 trials at x4, FSI->PN weights at 0  (C5)
@@ -33,7 +34,7 @@ from .nrn import OUTPUT_DIR, load_config, setup
 from .provenance import run_metadata
 
 BLOCKS = {
-    "B": {"trials": [4, 4, 4]},
+    "B": {"trials": [2, 4, 8]},
     "C_main": {"trials": "doses"},
     "C_rest": {"trials": []},
     "C_inhoff": {"trials": [4] * 5, "inhibition_off": True},

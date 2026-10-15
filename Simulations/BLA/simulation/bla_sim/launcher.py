@@ -4,7 +4,8 @@ Usage (from Simulations/BLA/simulation):
     python -m bla_sim.launcher B --dry-run      # list the jobs with time estimates, start nothing
     python -m bla_sim.launcher B                # Block B: 3 seeds x full and reduced, 200 cells
     python -m bla_sim.launcher C                # Block C: C1-C7
-Options: --max-procs K (default: physical cores - 1), --force (rerun finished jobs).
+Options: --max-procs K (default: physical cores - 1), --force (rerun finished jobs),
+--level full|reduced (only that level's jobs).
 
 One `python -m bla_sim.run` process per job, at most K at once, longest jobs first; never
 pc.nthread > 1. Every job broadcasts to the live viewer except C7 (C_rest, 1,000 cells, seed 1),
@@ -75,12 +76,13 @@ def main():
     ap.add_argument("--max-procs", type=int, default=max(1, (psutil.cpu_count(logical=False) or 2) - 1))
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--level", choices=("full", "reduced"), help="only this level's jobs")
     args = ap.parse_args()
 
     cfg = load_config()
     bp = OUTPUT_DIR / "benchmark" / "benchmark.json"
     bench = json.loads(bp.read_text(encoding="utf-8")) if bp.exists() else {}
-    jobs = plan(args.block)
+    jobs = [j for j in plan(args.block) if not args.level or j[1] == args.level]
     est = {job_name(j): estimate_h(j, cfg, bench) for j in jobs}
     jobs.sort(key=lambda j: -(est[job_name(j)] or schedule(j[0], cfg)["t_end_ms"] * j[2]))
     todo = [j for j in jobs if args.force or not (run_dir(j) / "run.json").exists()]

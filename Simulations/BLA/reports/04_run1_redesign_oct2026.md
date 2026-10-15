@@ -83,6 +83,16 @@ Code: `Simulations/BLA/simulation/bla_sim/` and `mechanisms_run1/`. Results: `Si
 | Live viewer | Built (`architecture/13`). Identical spikes with the broadcast on and off at 100 and 1,000 cells; cost ≤ 2 % |
 | New open item | U30: FSIs fire ~42 Hz at every size and at both levels in 1 s samples (Gate 3: 10–30 Hz). FSI depolarization block seen in the 100-cell ×8 demo. Checked in Block B before Block C |
 
+## Decision 2026-10-14 (M. T. Nouar) — simplified neurons; Feng as the documented reference
+
+| Question | Decision | Reason |
+|---|---|---|
+| Main model | **Simplified neurons in Brian2**: PN-A and PN-C as adaptive integrate-and-fire cells with a dendrite carrying NMDA, FSI as a point neuron, all fitted to Feng's cells as measured in Block A | The project builds an emotional engine, not new neuroscience. Feng's paper and code are taken as the documented facts. The final live system needs simple neurons anyway (U26), and only they leave room for the other limbic populations |
+| Feng's detailed model | Kept as the **reference** only: Block A (done) gives the single-cell fitting targets, Block B gives the network reference | It costs no further work. Detailed network runs take days on the laptop |
+| Block B | **Full level only, 3 seeds, one threat trial each at ×2, ×4, ×8** (57 s each; started 2026-10-14 16:40) | Gives the simplified network a dose response to match, from Feng's own network under the same inputs |
+| Block C and the 6-segment main level | **Dropped** | Their purpose (a detailed main run) is replaced by the simplified model |
+| Targets Feng does not document | Threat dose response and recovery come from experimental papers, checked against Block B | Feng's paper covers rest firing and gamma, not graded threat input |
+
 **Next:** see `05_status_and_next_steps.md`.
 
 ## What did not change
