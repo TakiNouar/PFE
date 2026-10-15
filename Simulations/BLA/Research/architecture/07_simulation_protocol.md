@@ -61,6 +61,8 @@ What the rows show:
 
 ### Block B — Reference comparison (about 12 h, one night)
 
+**Changed 2026-10-14 (decision in `reports/04`):** only B1 runs, as the reference behaviour of Feng's network for the simplified model, with **one threat trial each at ×2, ×4 and ×8** instead of three at ×4 (same 57 s). B2, B3 and Block C are dropped; command `python -m bla_sim.launcher B --level full --max-procs 3`. The text below is the original plan.
+
 The **same** 200-cell network (same seeds, wiring, weights, delays, noise and afferent streams) is run twice: once with Feng's originals (reference level), once with the reductions (main level).
 
 | Step | What | Seeds | Simulated time per seed | Estimated time (3 seeds in parallel) |

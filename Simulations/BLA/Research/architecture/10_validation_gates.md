@@ -48,6 +48,8 @@ For PN-A and PN-C separately, against Feng's full cell under the identical proto
 
 ## Gate R2 — Reduced network matches the full-detail network (Block B, 200 cells, 3 seeds)
 
+*Superseded 2026-10-14: the 6-segment main level is dropped in favour of simplified neurons (`reports/04`). Gates 3–6 will be re-stated for the simplified model; `gate_r2.py` stays available.*
+
 The same 200-cell network, built once with Feng's originals (B1) and once with the reductions (B2):
 
 - [ ] Mean PN-A, PN-C and FSI resting rates of B2 are within 2 SD (across B1's seeds) of B1's values.

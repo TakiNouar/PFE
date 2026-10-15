@@ -1,0 +1,28 @@
+{
+ "block": "B",
+ "updated": "2026-10-15T04:18:43",
+ "max_procs": 3,
+ "jobs": {
+  "B_full_n200_seed1": {
+   "state": "done",
+   "estimate_h": 11.955492537885767,
+   "started": "2026-10-14T16:40:55",
+   "cmd": "-u -m bla_sim.run --block B --level full --n 200 --seed 1 --broadcast",
+   "finished": "2026-10-15T04:15:38"
+  },
+  "B_full_n200_seed2": {
+   "state": "done",
+   "estimate_h": 11.955492537885767,
+   "started": "2026-10-14T16:40:55",
+   "cmd": "-u -m bla_sim.run --block B --level full --n 200 --seed 2 --broadcast",
+   "finished": "2026-10-15T04:18:43"
+  },
+  "B_full_n200_seed3": {
+   "state": "done",
+   "estimate_h": 11.955492537885767,
+   "started": "2026-10-14T16:40:55",
+   "cmd": "-u -m bla_sim.run --block B --level full --n 200 --seed 3 --broadcast",
+   "finished": "2026-10-15T04:17:13"
+  }
+ }
+}

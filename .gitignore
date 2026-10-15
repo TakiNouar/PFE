@@ -50,3 +50,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Simplified model: compiled build folders (regenerable, large)
+Simulations/BLA/simplified/outputs/**/build_*/
+Simulations/BLA/simplified/**/__pycache__/

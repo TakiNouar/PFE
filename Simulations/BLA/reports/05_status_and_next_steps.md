@@ -2,6 +2,7 @@
 
 **Date:** 2026-10-14
 **Purpose:** a self-contained starting point for the next working session.
+**Direction changed 2026-10-14 (M. T. Nouar):** the main model becomes **simplified neurons in Brian2**, fitted to Feng's cells; Feng's detailed model is kept as the reference only (Block A done, Block B running). Block C is dropped. See `04_run1_redesign_oct2026.md`, last section.
 **Branch:** `run1-redesign`. Binding spec: `Simulations/BLA/Research/architecture/` (00–13). Decision history: `04_run1_redesign_oct2026.md`. Deviations: `Simulations/BLA/simulation/deviations.md` (DEV-001 to DEV-007).
 
 ---
@@ -10,40 +11,39 @@
 
 | Part | Status |
 |---|---|
-| Spec (architecture 00–13) | Up to date with every decision below |
+| Spec (architecture 00–13) | Describes the detailed Run 1. A spec for the simplified model is still to write |
 | Phase 0 setup | **Done.** Python 3.12.10, NEURON 9.0.2 (`C:\nrn`), Feng's ModelDB 247968 files byte-exact and hashed, both mechanism sets compiled |
 | Phase 0 benchmark | **Done** (`outputs/benchmark/`, table in `architecture/07`). Block B about 12 h, Block C about 2 days |
 | Block A (single cells, reductions, synapses) | **Done.** Gate 2 passed (time constant explained, U29). Gate R1 passed for the chosen cell with one approved exception; event-driven synapses identical to Feng's |
 | Network code | **Written** (`network.py`, `inputs.py`, `run.py`, `metrics.py`) and benchmarked at 200–1,000 cells |
 | Run tools | **Written and tested**: `launcher.py` (ran two demo seeds in parallel), `gate_r2.py` (tested on synthetic spikes: passes when matched, fails on the right lines when not) |
-| Block B (200-cell reference comparison, Gate R2) | **Ready to start** (`python -m bla_sim.launcher B`). About 12 h. Ask M. T. Nouar first |
-| Block C (main run, 1,000 cells, 5 seeds) | Not started. About 237 CPU-hours, about 2 days on 5 parallel processes |
+| Block B (Feng's network, reference behaviour) | **Done** 2026-10-15 (3 seeds × 11.6 h, no failures). Results and targets: `07_blockB_reference_oct2026.md`, `outputs/blockB/reference_summary.json` |
+| Block C, 6-segment main level, Gate R2 | **Dropped** (decision 2026-10-14) |
 | Live viewer | **Built and tested** (`architecture/13`): microscope, oscilloscope, activity strip, status, replay. The broadcast leaves spike files identical (checked at 100 and 1,000 cells) and costs ≤ 2 % |
 
 ## 2. Decisions in force (all by M. T. Nouar)
 
 | Decision | Choice |
 |---|---|
-| Simulator | NEURON 9.0.2; Feng's files unchanged; one core per run, parallel processes for seeds (Feng's files are not thread safe) |
+| Main model | **Simplified neurons in Brian2** (adaptive integrate-and-fire; PN-A and PN-C with a dendrite carrying NMDA; FSI point neuron), fitted to Feng's cells; Feng's paper and code taken as documented facts |
+| Reference model | NEURON 9.0.2 with Feng's files unchanged: Block A single cells (done) and Block B network (running) |
 | Machine | The laptop (Ryzen 5 4600H, 6 cores) during Erasmus; the RTX 3060 desktop is not in use for now |
 | Cells | PN-A, PN-C, FSI; no SOM |
-| Reference level | Feng's full cells and synapses (single cells; 200-cell network) |
-| Main-level principal cell | **`coarse_d2_p3`**: Feng's cell rebuilt on 6 segments (soma 1, apical 2, basal 3). One approved exception: PN-C fires 6 instead of 9 spikes before depolarization block at 1.5 nA |
-| Main-level synapses | Event-driven `ExcEv` / `InhEv` (identical to Feng's, ~400× faster) |
-| Size | 1,000 cells (640 / 260 / 100) main; 500 size check; 200 reference |
+| Size | 1,000 cells (640 / 260 / 100) for the BLA; 200 for the Block B reference |
 | Wiring | Feng's realised inputs per cell (25 / 43 / 215 / 22), distance-independent |
 | Inputs | Feng's noise and afferent trains; threat = afferent rate ×2, ×4, ×8 for 2 s |
 | Seeds | 5 (1–5) |
-| Live viewer | Part of Run 1: a live, slow-motion broadcast, display only |
+| Live viewer | Display only; its snapshot format does not depend on the simulator, so it will be reused for Brian2 |
 
 ## 3. Next steps, in order
 
-Done on 2026-10-14 (second session): coarse-cell smoke test and Gate R1 regeneration; Phase 0 benchmark; Gate 2 / U29; `gate_r2.py`; `launcher.py`; live viewer (`broadcast.py`, `viewer_server.py`, `viewer/index.html`) with a `demo` block.
+Done on 2026-10-14 (second session): coarse-cell smoke test and Gate R1 regeneration; Phase 0 benchmark; Gate 2 / U29; `gate_r2.py`; `launcher.py`; live viewer with a `demo` block; decision for simplified neurons; Block B started.
 
-1. **Block B** (about 12 h; ask before starting): `python -m bla_sim.launcher B`, and in a second terminal `python -m bla_sim.viewer_server` to watch. Then `python -m bla_sim.gate_r2` → Gate R2.
-2. **U30 check** from Block B's 30 s rest: FSI rate at both levels. If it stays above 30 Hz, find the difference from Feng before Block C (see U30).
-3. **`report.py`** (can be written while Block B runs): `metrics.json`, `metrics.txt`, `summary.txt`; Gates 3–6 per `architecture/10`, and the C7 reproducibility comparison (C_main seed 1 rest vs C_rest seed 1).
-4. **Block C** (about 2 days): `python -m bla_sim.launcher C` → Gates 3–6 → report.
+1. ~~Block B~~: done 2026-10-15 04:18, no failures (`07_blockB_reference_oct2026.md`; summary `outputs/blockB/reference_summary.json`). Rest PN-A 0.51, PN-C 0.97, FSI 35.1 Hz; dose-dependent threat response (PN 0.84 / 1.00 / 1.37 Hz at ×2 / ×4 / ×8); recovery in 8 of 9 trials; FSI depolarization block once at ×8 (U30).
+2. ~~Engine benchmark~~ (`06_engine_benchmark_oct2026.md`): GPU (PyGeNN 5.4, CUDA 12.9) runs a simplified network in real time up to ~70,000–75,000 neurons (0.35× real time up to 20,000); CPU (Brian2, 1 core) up to ~2,000. The 1/3/6-core CPU runs start automatically after Block B (`Simulations/BLA/simplified/outputs/engine_benchmark/cpu_after_blockB.log`); add them to report 06.
+3. **Spec for the simplified model** (new architecture file): cell equations, the fitting targets from Block A, synapses (Feng's kinetics and depression as documented), wiring and inputs from `run1.json`, and the gates.
+4. **Fit the three cells** to Feng's Block A results: resting potential, input resistance, time constant, current-to-firing curves, adaptation, firing under noise, and the dendritic-input test.
+5. **Build the 1,000-cell Brian2 network** and check it against rat data, Feng's paper and Block B.
 
 ## 4. How to run things
 
