@@ -92,6 +92,8 @@ Code: `Simulations/BLA/simulation/bla_sim/` and `mechanisms_run1/`. Results: `Si
 | Block B | **Full level only, 3 seeds, one threat trial each at ×2, ×4, ×8** (57 s each; started 2026-10-14 16:40) | Gives the simplified network a dose response to match, from Feng's own network under the same inputs |
 | Block C and the 6-segment main level | **Dropped** | Their purpose (a detailed main run) is replaced by the simplified model |
 | Targets Feng does not document | Threat dose response and recovery come from experimental papers, checked against Block B | Feng's paper covers rest firing and gamma, not graded threat input |
+| Engine (decided 2026-10-15) | **GeNN (PyGeNN 5.4) holds the one model**: its exact single-core CPU mode for fitting and checks, its GPU mode for the large and live network. Brian2 is kept only as an independent CPU cross-check | One model code avoids two copies that must stay identical. Only GeNN runs on the GPU on Windows (Brian2CUDA needs Linux; Brian2GeNN needs Brian2 2.5.x and GeNN 4) and only PyGeNN can step the model from Python for the live LLM loop (`06_engine_benchmark_oct2026.md`) |
+| FSI depolarization block (decided 2026-10-15) | **Not reproduced by default.** The simplified FSI can fire very fast but does not jam; jamming stays a documented, switchable option | Seen in Feng's model only under our ×8 test (1 of 3 seeds, Block B); not reported by Feng and not documented for the BLA; would add parameters with no data to fit them and make the engine's response unpredictable. Revisit if a study shows BLA FSI block in vivo |
 
 **Next:** see `05_status_and_next_steps.md`.
 
