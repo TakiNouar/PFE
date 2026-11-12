@@ -36,6 +36,16 @@ Units: mV, ms, nF, µS, nA. All values below marked *fit* are fitted to Block A 
 
 ### 3.1 Principal cells (PN-A and PN-C)
 
+> **As implemented (2026-10-21, `simplified/bla_simple/cells.py`, `simplified/deviations.md` S-DEV-1, `reports/08`):**
+> - **Fast adaptation:** a spike-triggered **potassium conductance**, w_f(V − E_K) with E_K = −80 mV.
+> - **PN-A slow adaptation:** Feng's calcium- and voltage-gated sAHP (Hill exponent and calcium decay kept from Feng; gate voltage and time fitted).
+> - **Dendrite:** a back-propagating kick at each somatic spike, and a gain kD on dendritic synaptic current.
+> - **Dendrite:** its leak reverses at the resting potential (E_Ld).
+> - **Passive values set exactly, not fitted:** E_L, g_Ls and C_s are derived so that the cell rests at −70.2 mV with 136.2 MΩ over the −0.05 nA step and a slowest time constant of 30.9 ms, with the spike-onset term included.
+> - **63 % rise time:** cannot be matched by any passive two-compartment cell, so it is reported only.
+>
+> The equations below are the first draft.
+
 **Equations (two compartments):**
 
 ```
@@ -133,7 +143,7 @@ Kinetics and depression are Feng's code values (DEV-003, DEV-004; `simulation/me
 
 ## 6. Gates
 
-**S1 — Single cells (CPU, double precision), against Block A:**
+**S1 — Single cells (CPU, double precision), against Block A:** *69 of 71 checks pass, 2026-10-21 (`simplified/outputs/S1_cells.json`). Open: PN-A latency at 1.5 nA and PN-A dendritic-input rate (−28 %); decision pending.*
 - **Passive:** resting potential within ±1 mV; input resistance and time constant within ±10 %.
 - **Firing:** spike counts within ±10 % (±1 below 10 spikes) at 0.1–1.0 nA (PN-C 1.5 nA exempt: block not modelled).
 - **Latency** within ±10 %.
@@ -141,7 +151,7 @@ Kinetics and depression are Feng's code values (DEV-003, DEV-004; `simulation/me
 - **Noise-only rates** within ±15 %; ISI CV within ±0.1.
 - **Dendritic-input test** rates within ±15 %.
 
-**S2 — Synapses:**
+**S2 — Synapses:** *PASS with 1 approved exception, 2026-10-15* (`simplified/outputs/S2_synapses.json`; `simplified/deviations.md`, S-DEV-3).
 - unitary conductance peak and decay within ±5 % of Feng's;
 - the response to 5, 20 and 50 Hz trains (with depression) within ±5 % (`synapse_test.json` protocols).
 
@@ -184,9 +194,11 @@ Simulations/BLA/simplified/
 ├── config/cells_fitted.json    ☐ fitted cell values (written by fit_cells.py)
 ├── bla_simple/
 │   ├── cells.py                ☐ GeNN neuron models (PN two-compartment, FSI)
-│   ├── synapses.py             ☐ GeNN synapse and depression models (choice S-1)
-│   ├── fit_cells.py            ☐ S1 fitting against Block A
-│   ├── synapse_check.py        ☐ S2
+│   ├── synapses.py             ✔ GeNN synapse models: rise-and-decay, saturation, depression (S-1 b)
+│   ├── fit_synapses.py         ✔ fits to Feng's unitary waveforms → config/synapses_fitted.json
+│   ├── cells.py, fit_cells.py  ✔ cell models and S1 fitting (FSI, PN stages 1 and 2)
+│   ├── cell_check.py           ✔ gate S1 (exact CPU mode)
+│   ├── synapse_check.py        ✔ S2 (PASS with 1 approved exception)
 │   ├── network.py              ☐ wiring, delays, gaps (reuses simulation/bla_sim streams and wiring rules)
 │   ├── inputs.py               ☐ noise, Feng's afferent trains, threat
 │   ├── run.py                  ☐ offline runs (CPU or GPU backend)
@@ -201,7 +213,7 @@ Simulations/BLA/simplified/
 |---|---|
 | S-DEV-1 | Simplified cells: two-compartment adaptive integrate-and-fire PN, point FSI; no Ih (its effect fitted into the passive values), no spike shape |
 | S-DEV-2 | No depolarization block (FSI, and PN-C at 1.5 nA) |
-| S-DEV-3 | Synapse kinetics: rise-and-decay conductances fitted to Feng's pulse-scheme waveforms (choice S-1 b); Feng's depression rule unchanged |
+| S-DEV-3 | Synapse kinetics: rise-and-decay conductances with exact peak, charge and decay, plus saturation from Feng's kinetic constants; depression per spike (Varela et al. 1997). **Implemented 2026-10-15**, `simplified/deviations.md` |
 | S-DEV-4 | Time step 0.1 ms (Feng 0.05 ms); single precision on the GPU |
 | S-DEV-5 | FSI rate tuned to the rat range if needed (U30) |
 

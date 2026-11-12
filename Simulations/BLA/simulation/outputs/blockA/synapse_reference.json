@@ -1,0 +1,608 @@
+{
+ "meta": {
+  "date": "2026-10-15T11:34:33",
+  "neuron_version": "9.0.2",
+  "python": "3.12.10",
+  "machine": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+  "repo_commit": "8707245+uncommitted",
+  "feng_files_checked": 64,
+  "dt_ms": 0.05,
+  "celsius": 31.0
+ },
+ "dt_ms": 0.05,
+ "clamp_mV": -70.0,
+ "entries": [
+  {
+   "key": "PN_to_PN|AMPA|isolated (1 s apart)",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "isolated (1 s apart)",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001920205475076625
+  },
+  {
+   "key": "PN_to_PN|NMDA|isolated (1 s apart)",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "isolated (1 s apart)",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009609181729985046
+  },
+  {
+   "key": "PN_to_PN|AMPA|5 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "5 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001920205475076625
+  },
+  {
+   "key": "PN_to_PN|NMDA|5 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "5 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009609144828054747
+  },
+  {
+   "key": "PN_to_PN|AMPA|20 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "20 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001920205475076625
+  },
+  {
+   "key": "PN_to_PN|NMDA|20 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "20 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009609144828054747
+  },
+  {
+   "key": "PN_to_PN|AMPA|50 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "50 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001920205475076625
+  },
+  {
+   "key": "PN_to_PN|NMDA|50 Hz x10",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "50 Hz x10",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009609144828054747
+  },
+  {
+   "key": "PN_to_PN|AMPA|doublets 1 ms apart",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "doublets 1 ms apart",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001882855667770817
+  },
+  {
+   "key": "PN_to_PN|NMDA|doublets 1 ms apart",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "doublets 1 ms apart",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.000825975316467997
+  },
+  {
+   "key": "PN_to_PN|AMPA|Poisson 20 Hz",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "Poisson 20 Hz",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0019204630659329235
+  },
+  {
+   "key": "PN_to_PN|NMDA|Poisson 20 Hz",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "Poisson 20 Hz",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009585717119958164
+  },
+  {
+   "key": "PN_to_PN|AMPA|Poisson 20 Hz, >=5 ms",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.001920205475076625
+  },
+  {
+   "key": "PN_to_PN|NMDA|Poisson 20 Hz, >=5 ms",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009539415548599759
+  },
+  {
+   "key": "PN_to_PN|AMPA|Poisson 50 Hz, >=5 ms",
+   "pathway": "PN_to_PN",
+   "receptor": "AMPA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0019215643596638453
+  },
+  {
+   "key": "PN_to_PN|NMDA|Poisson 50 Hz, >=5 ms",
+   "pathway": "PN_to_PN",
+   "receptor": "NMDA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 2.0,
+   "feng_file": "pyrD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.0009610488368740995
+  },
+  {
+   "key": "PN_to_FSI|AMPA|isolated (1 s apart)",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "isolated (1 s apart)",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|isolated (1 s apart)",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "isolated (1 s apart)",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.003363213605494766
+  },
+  {
+   "key": "PN_to_FSI|AMPA|5 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "5 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|5 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "5 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.0033632006898191616
+  },
+  {
+   "key": "PN_to_FSI|AMPA|20 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "20 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|20 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "20 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.0033632006898191616
+  },
+  {
+   "key": "PN_to_FSI|AMPA|50 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "50 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|50 Hz x10",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "50 Hz x10",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.0033632006898191616
+  },
+  {
+   "key": "PN_to_FSI|AMPA|doublets 1 ms apart",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "doublets 1 ms apart",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|doublets 1 ms apart",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "doublets 1 ms apart",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.0028909136076379896
+  },
+  {
+   "key": "PN_to_FSI|AMPA|Poisson 20 Hz",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "Poisson 20 Hz",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|Poisson 20 Hz",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "Poisson 20 Hz",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.0033550009919853575
+  },
+  {
+   "key": "PN_to_FSI|AMPA|Poisson 20 Hz, >=5 ms",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.006720035578091848
+  },
+  {
+   "key": "PN_to_FSI|NMDA|Poisson 20 Hz, >=5 ms",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.003338795442009916
+  },
+  {
+   "key": "PN_to_FSI|AMPA|Poisson 50 Hz, >=5 ms",
+   "pathway": "PN_to_FSI",
+   "receptor": "AMPA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.00672172050215221
+  },
+  {
+   "key": "PN_to_FSI|NMDA|Poisson 50 Hz, >=5 ms",
+   "pathway": "PN_to_FSI",
+   "receptor": "NMDA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 7.0,
+   "feng_file": "pyrD2interD_STFD",
+   "overrides": {
+    "Cdur_a": 0.713,
+    "AlphaTmax_a": 10.1571,
+    "Beta_a": 0.4167,
+    "fac_floor": 0.7
+   },
+   "peak_uS": 0.003363670929059348
+  },
+  {
+   "key": "FSI_to_PN|GABA|isolated (1 s apart)",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "isolated (1 s apart)",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_PN|GABA|5 Hz x10",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "5 Hz x10",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_PN|GABA|20 Hz x10",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "20 Hz x10",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_PN|GABA|50 Hz x10",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "50 Hz x10",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_PN|GABA|doublets 1 ms apart",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "doublets 1 ms apart",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00514448118431747
+  },
+  {
+   "key": "FSI_to_PN|GABA|Poisson 20 Hz",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "Poisson 20 Hz",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_PN|GABA|Poisson 20 Hz, >=5 ms",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.004601511496869234
+  },
+  {
+   "key": "FSI_to_PN|GABA|Poisson 50 Hz, >=5 ms",
+   "pathway": "FSI_to_PN",
+   "receptor": "GABA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 12.0,
+   "feng_file": "interD2pyrD_STFD",
+   "overrides": {},
+   "peak_uS": 0.00469444259121497
+  },
+  {
+   "key": "FSI_to_FSI|GABA|isolated (1 s apart)",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "isolated (1 s apart)",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  },
+  {
+   "key": "FSI_to_FSI|GABA|5 Hz x10",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "5 Hz x10",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  },
+  {
+   "key": "FSI_to_FSI|GABA|20 Hz x10",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "20 Hz x10",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  },
+  {
+   "key": "FSI_to_FSI|GABA|50 Hz x10",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "50 Hz x10",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  },
+  {
+   "key": "FSI_to_FSI|GABA|doublets 1 ms apart",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "doublets 1 ms apart",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0029996611848631125
+  },
+  {
+   "key": "FSI_to_FSI|GABA|Poisson 20 Hz",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "Poisson 20 Hz",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  },
+  {
+   "key": "FSI_to_FSI|GABA|Poisson 20 Hz, >=5 ms",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "Poisson 20 Hz, >=5 ms",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.002822085422054858
+  },
+  {
+   "key": "FSI_to_FSI|GABA|Poisson 50 Hz, >=5 ms",
+   "pathway": "FSI_to_FSI",
+   "receptor": "GABA",
+   "protocol": "Poisson 50 Hz, >=5 ms",
+   "W": 20.0,
+   "feng_file": "interD2interD_STFD",
+   "overrides": {
+    "AlphaTmax": 1.853,
+    "Beta": 0.147,
+    "gbar": 0.0002
+   },
+   "peak_uS": 0.0028790796264899195
+  }
+ ]
+}

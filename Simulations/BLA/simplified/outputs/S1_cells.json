@@ -1,0 +1,800 @@
+{
+ "passive": {
+  "PN_C": {
+   "vrest_mV": -70.21472388144353,
+   "rin_MOhm": 136.19560947495046,
+   "t63_ms": 23.5,
+   "tau_slow_ms": 29.139206827891865
+  },
+  "PN_A": {
+   "vrest_mV": -70.21472388144353,
+   "rin_MOhm": 136.19560947495046,
+   "t63_ms": 23.5,
+   "tau_slow_ms": 29.139206827891865
+  },
+  "FSI": {
+   "vrest_mV": -69.97173939395306,
+   "rin_MOhm": 371.76724858382073,
+   "t63_ms": 20.0,
+   "tau_slow_ms": 19.975173302847562
+  }
+ },
+ "rows": [
+  {
+   "type": "PN_C",
+   "amp_nA": 0.1,
+   "count": 10,
+   "count_target": 10,
+   "latency_ms": 40.200000000000045,
+   "latency_target_ms": 38.24999999949432
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.2,
+   "count": 14,
+   "count_target": 15,
+   "latency_ms": 21.0,
+   "latency_target_ms": 21.54999999944482
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.3,
+   "count": 17,
+   "count_target": 18,
+   "latency_ms": 14.700000000000045,
+   "latency_target_ms": 15.34999999945046
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.4,
+   "count": 19,
+   "count_target": 20,
+   "latency_ms": 11.5,
+   "latency_target_ms": 11.999999999453507
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.6,
+   "count": 23,
+   "count_target": 22,
+   "latency_ms": 8.100000000000023,
+   "latency_target_ms": 8.299999999456873
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.8,
+   "count": 26,
+   "count_target": 25,
+   "latency_ms": 6.400000000000091,
+   "latency_target_ms": 6.2999999994586915
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 1.0,
+   "count": 29,
+   "count_target": 28,
+   "latency_ms": 5.2000000000000455,
+   "latency_target_ms": 5.049999999459828
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 0.4,
+   "dur_ms": 4000.0,
+   "count": 76,
+   "count_target": 78,
+   "spike_times_ms": [
+    11.5,
+    63.9,
+    116.5,
+    169.1
+   ],
+   "target_times_ms": [
+    12.0,
+    62.15,
+    113.4,
+    164.95
+   ]
+  },
+  {
+   "type": "PN_C",
+   "amp_nA": 1.0,
+   "dur_ms": 4000.0,
+   "count": 114,
+   "count_target": 110,
+   "spike_times_ms": [
+    5.2,
+    39.4,
+    74.5,
+    109.6
+   ],
+   "target_times_ms": [
+    5.05,
+    39.6,
+    76.0,
+    112.7
+   ]
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.1,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 40.200000000000045,
+   "latency_target_ms": 38.44999999949505
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.2,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 21.0,
+   "latency_target_ms": 21.599999999444776
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.3,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 14.700000000000045,
+   "latency_target_ms": 15.34999999945046
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.4,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 11.5,
+   "latency_target_ms": 11.999999999453507
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.6,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 8.100000000000023,
+   "latency_target_ms": 8.299999999456873
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.8,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 6.400000000000091,
+   "latency_target_ms": 6.2999999994586915
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 1.0,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 5.2000000000000455,
+   "latency_target_ms": 5.049999999459828
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 1.5,
+   "count": 1,
+   "count_target": 1,
+   "latency_ms": 3.7000000000000455,
+   "latency_target_ms": 3.29999999946142
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 0.4,
+   "dur_ms": 4000.0,
+   "count": 2,
+   "count_target": 2,
+   "spike_times_ms": [
+    11.5,
+    1964.6
+   ],
+   "target_times_ms": [
+    12.0,
+    2107.15
+   ]
+  },
+  {
+   "type": "PN_A",
+   "amp_nA": 1.0,
+   "dur_ms": 4000.0,
+   "count": 3,
+   "count_target": 3,
+   "spike_times_ms": [
+    5.2,
+    1680.5,
+    3527.5
+   ],
+   "target_times_ms": [
+    5.05,
+    1662.25,
+    3301.15
+   ]
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.1,
+   "count": 25,
+   "count_target": 24,
+   "latency_ms": 39.200000000000045,
+   "latency_target_ms": 39.74999999949978
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.2,
+   "count": 61,
+   "count_target": 61,
+   "latency_ms": 14.800000000000068,
+   "latency_target_ms": 14.34999999945137
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.3,
+   "count": 89,
+   "count_target": 89,
+   "latency_ms": 9.400000000000091,
+   "latency_target_ms": 9.1499999994561
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.4,
+   "count": 111,
+   "count_target": 111,
+   "latency_ms": 7.0,
+   "latency_target_ms": 6.849999999458191
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.6,
+   "count": 145,
+   "count_target": 144,
+   "latency_ms": 4.600000000000023,
+   "latency_target_ms": 4.599999999460238
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 0.8,
+   "count": 169,
+   "count_target": 168,
+   "latency_ms": 3.5,
+   "latency_target_ms": 3.5499999994611926
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 1.0,
+   "count": 189,
+   "count_target": 187,
+   "latency_ms": 2.800000000000068,
+   "latency_target_ms": 2.8999999994617838
+  },
+  {
+   "type": "FSI",
+   "amp_nA": 1.5,
+   "count": 222,
+   "count_target": 221,
+   "latency_ms": 1.900000000000091,
+   "latency_target_ms": 1.9999999994626023
+  }
+ ],
+ "stage2": {
+  "noise_PN_A_Hz": 0.3441666666666666,
+  "noise_PN_A_cv": 0.23068023909418,
+  "noise_PN_C_Hz": 1.5191666666666666,
+  "noise_PN_C_cv": 0.8584834411806883,
+  "drive_PN_A_Hz": 0.5020833333333333,
+  "drive_PN_C_Hz": 3.6645833333333333
+ },
+ "checks": [
+  {
+   "check": "PN_A resting potential",
+   "value": -70.21472388144353,
+   "target": -70.21472388144353,
+   "pass": true,
+   "rule": "+-1 mV"
+  },
+  {
+   "check": "PN_A input resistance",
+   "value": 136.19560947495046,
+   "target": 136.19560947498115,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A membrane time constant (slowest)",
+   "value": 29.139206827891865,
+   "target": 30.876791103896487,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C resting potential",
+   "value": -70.21472388144353,
+   "target": -70.21472388144353,
+   "pass": true,
+   "rule": "+-1 mV"
+  },
+  {
+   "check": "PN_C input resistance",
+   "value": 136.19560947495046,
+   "target": 136.19560947498115,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C membrane time constant (slowest)",
+   "value": 29.139206827891865,
+   "target": 30.876791103896487,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI resting potential",
+   "value": -69.97173939395306,
+   "target": -69.99980835255067,
+   "pass": true,
+   "rule": "+-1 mV"
+  },
+  {
+   "check": "FSI input resistance",
+   "value": 371.76724858382073,
+   "target": 371.2230548103699,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI membrane time constant (63 % rise)",
+   "value": 20.0,
+   "target": 19.949999999346232,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.1 nA",
+   "value": 10,
+   "target": 10,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.1 nA",
+   "value": 40.200000000000045,
+   "target": 38.24999999949432,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.2 nA",
+   "value": 14,
+   "target": 15,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.2 nA",
+   "value": 21.0,
+   "target": 21.54999999944482,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.3 nA",
+   "value": 17,
+   "target": 18,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.3 nA",
+   "value": 14.700000000000045,
+   "target": 15.34999999945046,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.4 nA",
+   "value": 19,
+   "target": 20,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.4 nA",
+   "value": 11.5,
+   "target": 11.999999999453507,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.6 nA",
+   "value": 23,
+   "target": 22,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.6 nA",
+   "value": 8.100000000000023,
+   "target": 8.299999999456873,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 0.8 nA",
+   "value": 26,
+   "target": 25,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 0.8 nA",
+   "value": 6.400000000000091,
+   "target": 6.2999999994586915,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C spike count, 1.0 nA",
+   "value": 29,
+   "target": 28,
+   "pass": true,
+   "rule": "+-10 % (+-1 below 10)"
+  },
+  {
+   "check": "PN_C first-spike latency, 1.0 nA",
+   "value": 5.2000000000000455,
+   "target": 5.049999999459828,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C 4 s count, 0.4 nA",
+   "value": 76,
+   "target": 78,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_C 4 s count, 1.0 nA",
+   "value": 114,
+   "target": 110,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.1 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.1 nA",
+   "value": 40.200000000000045,
+   "target": 38.44999999949505,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.2 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.2 nA",
+   "value": 21.0,
+   "target": 21.599999999444776,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.3 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.3 nA",
+   "value": 14.700000000000045,
+   "target": 15.34999999945046,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.4 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.4 nA",
+   "value": 11.5,
+   "target": 11.999999999453507,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.6 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.6 nA",
+   "value": 8.100000000000023,
+   "target": 8.299999999456873,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 0.8 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 0.8 nA",
+   "value": 6.400000000000091,
+   "target": 6.2999999994586915,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 1.0 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 1.0 nA",
+   "value": 5.2000000000000455,
+   "target": 5.049999999459828,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A one spike per 1 s step, 1.5 nA",
+   "value": 1,
+   "target": 1,
+   "pass": true,
+   "rule": "exactly 1"
+  },
+  {
+   "check": "PN_A first-spike latency, 1.5 nA",
+   "value": 3.7000000000000455,
+   "target": 3.29999999946142,
+   "pass": false,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "PN_A 4 s count, 0.4 nA",
+   "value": 2,
+   "target": 2,
+   "pass": true,
+   "rule": "exact"
+  },
+  {
+   "check": "PN_A 4 s gap 1, 0.4 nA",
+   "value": 1953.1000000000004,
+   "target": 2095.15,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_A 4 s count, 1.0 nA",
+   "value": 3,
+   "target": 3,
+   "pass": true,
+   "rule": "exact"
+  },
+  {
+   "check": "PN_A 4 s gap 1, 1.0 nA",
+   "value": 1675.3,
+   "target": 1657.2,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_A 4 s gap 2, 1.0 nA",
+   "value": 1847.0,
+   "target": 1638.9,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_A noise-only rate",
+   "value": 0.3441666666666666,
+   "target": 0.34500000000000003,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_A noise-only ISI CV",
+   "value": 0.23068023909418,
+   "target": 0.21213243655955522,
+   "pass": true,
+   "rule": "+-0.1"
+  },
+  {
+   "check": "PN_A dendritic-input rate",
+   "value": 0.5020833333333333,
+   "target": 0.7000000000000001,
+   "pass": false,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_C noise-only rate",
+   "value": 1.5191666666666666,
+   "target": 1.5399999999999998,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "PN_C noise-only ISI CV",
+   "value": 0.8584834411806883,
+   "target": 0.7898023607535228,
+   "pass": true,
+   "rule": "+-0.1"
+  },
+  {
+   "check": "PN_C dendritic-input rate",
+   "value": 3.6645833333333333,
+   "target": 3.1875,
+   "pass": true,
+   "rule": "+-15 %"
+  },
+  {
+   "check": "FSI spike count, 0.1 nA",
+   "value": 25,
+   "target": 24,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.1 nA",
+   "value": 39.200000000000045,
+   "target": 39.74999999949978,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 0.2 nA",
+   "value": 61,
+   "target": 61,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.2 nA",
+   "value": 14.800000000000068,
+   "target": 14.34999999945137,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 0.3 nA",
+   "value": 89,
+   "target": 89,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.3 nA",
+   "value": 9.400000000000091,
+   "target": 9.1499999994561,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 0.4 nA",
+   "value": 111,
+   "target": 111,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.4 nA",
+   "value": 7.0,
+   "target": 6.849999999458191,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 0.6 nA",
+   "value": 145,
+   "target": 144,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.6 nA",
+   "value": 4.600000000000023,
+   "target": 4.599999999460238,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 0.8 nA",
+   "value": 169,
+   "target": 168,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 0.8 nA",
+   "value": 3.5,
+   "target": 3.5499999994611926,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 1.0 nA",
+   "value": 189,
+   "target": 187,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 1.0 nA",
+   "value": 2.800000000000068,
+   "target": 2.8999999994617838,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI spike count, 1.5 nA",
+   "value": 222,
+   "target": 221,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI first-spike latency, 1.5 nA",
+   "value": 1.900000000000091,
+   "target": 1.9999999994626023,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI 4 s count, 0.4 nA",
+   "value": 444,
+   "target": 446,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI 4 s count, 1.0 nA",
+   "value": 755,
+   "target": 748,
+   "pass": true,
+   "rule": "+-10 %"
+  },
+  {
+   "check": "FSI noise-only rate",
+   "value": 0.0,
+   "target": 0.0,
+   "pass": true,
+   "rule": "silent (< 0.05 Hz), as Feng's FSIs"
+  }
+ ],
+ "status": "FAIL (2 of 71 checks)",
+ "backend": "single_threaded_cpu",
+ "precision": "double",
+ "dt_ms": 0.1,
+ "reported_only": {
+  "PN_C": {
+   "t63_ms": 23.5
+  },
+  "PN_A": {
+   "t63_ms": 23.5
+  },
+  "FSI": {
+   "t63_ms": 20.0
+  }
+ }
+}

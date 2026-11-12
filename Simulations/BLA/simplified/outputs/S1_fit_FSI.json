@@ -1,0 +1,79 @@
+{
+ "kind": "FSI",
+ "params": {
+  "EL": -69.99980835255067,
+  "gL": 0.002693798208494419,
+  "C": 0.053741274257702545,
+  "VT": -41.99711312220363,
+  "DeltaT": 5.331775235014145,
+  "Vr": -64.59918235611164,
+  "tref": 2.671101778650144
+ },
+ "fixed_from_block_a": [
+  "EL",
+  "gL",
+  "C"
+ ],
+ "cost": 0.008242918501804029,
+ "generations": 80,
+ "evaluations": 81,
+ "wall_s": 19.974009400000796,
+ "ladder": [
+  {
+   "amp_nA": 0.1,
+   "count": 25,
+   "count_target": 24,
+   "latency_ms": 39.200000000000045,
+   "latency_target_ms": 39.74999999949978
+  },
+  {
+   "amp_nA": 0.2,
+   "count": 61,
+   "count_target": 61,
+   "latency_ms": 14.800000000000068,
+   "latency_target_ms": 14.34999999945137
+  },
+  {
+   "amp_nA": 0.3,
+   "count": 89,
+   "count_target": 89,
+   "latency_ms": 9.400000000000091,
+   "latency_target_ms": 9.1499999994561
+  },
+  {
+   "amp_nA": 0.4,
+   "count": 111,
+   "count_target": 111,
+   "latency_ms": 7.0,
+   "latency_target_ms": 6.849999999458191
+  },
+  {
+   "amp_nA": 0.6,
+   "count": 145,
+   "count_target": 144,
+   "latency_ms": 4.600000000000023,
+   "latency_target_ms": 4.599999999460238
+  },
+  {
+   "amp_nA": 0.8,
+   "count": 169,
+   "count_target": 168,
+   "latency_ms": 3.5,
+   "latency_target_ms": 3.5499999994611926
+  },
+  {
+   "amp_nA": 1.0,
+   "count": 189,
+   "count_target": 187,
+   "latency_ms": 2.800000000000068,
+   "latency_target_ms": 2.8999999994617838
+  },
+  {
+   "amp_nA": 1.5,
+   "count": 222,
+   "count_target": 221,
+   "latency_ms": 1.900000000000091,
+   "latency_target_ms": 1.9999999994626023
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "source": "Feng's synapse files (ModelDB 247968) in NEURON, voltage clamp -70 mV, simulation/outputs/blockA/synapse_reference.npz",
+ "form": "A*(exp(-t/tau_d) - exp(-t/tau_r)) per unit weight",
+ "fits": {
+  "FSI_to_FSI|GABA": {
+   "A_uS": 0.00015624102227988413,
+   "tau_r_ms": 0.10652045976953578,
+   "tau_d_ms": 6.80272108843532,
+   "errors": {
+    "peak_rel": -2.1976615194319038e-08,
+    "time_to_peak_ms": -0.3500000000000085,
+    "charge_rel": -0.0002864364966861377,
+    "worst_point_rel_peak": 0.5628864410445892
+   },
+   "feng": {
+    "peak_uS_per_W": 0.00014395398132449597,
+    "time_to_peak_ms": 0.8000000000000114,
+    "charge_uS_ms_per_W": 0.001046221231613945
+   }
+  },
+  "FSI_to_PN|GABA": {
+   "A_uS": 0.0004218557097420012,
+   "tau_r_ms": 0.10118261753148682,
+   "tau_d_ms": 7.142857142857147,
+   "errors": {
+    "peak_rel": -0.00011339135202981243,
+    "time_to_peak_ms": -0.3500000000000085,
+    "charge_rel": -0.000287074541949206,
+    "worst_point_rel_peak": 0.5962705097553903
+   },
+   "feng": {
+    "peak_uS_per_W": 0.0003912035492679142,
+    "time_to_peak_ms": 0.8000000000000114,
+    "charge_uS_ms_per_W": 0.0029705706046534255
+   }
+  },
+  "PN_to_FSI|AMPA": {
+   "A_uS": 0.0013096143072390584,
+   "tau_r_ms": 0.19806877251999255,
+   "tau_d_ms": 2.3998080153587726,
+   "errors": {
+    "peak_rel": -0.00013538294562565056,
+    "time_to_peak_ms": -0.19999999999998863,
+    "charge_rel": -0.00043778840750519077,
+    "worst_point_rel_peak": 0.2762123428496754
+   },
+   "feng": {
+    "peak_uS_per_W": 0.0009600050825845497,
+    "time_to_peak_ms": 0.75,
+    "charge_uS_ms_per_W": 0.0028834292132313578
+   }
+  },
+  "PN_to_FSI|NMDA": {
+   "A_uS": 0.000545773456838785,
+   "tau_r_ms": 3.370629574525642,
+   "tau_d_ms": 125.00000000000715,
+   "errors": {
+    "peak_rel": -3.161857686784231e-07,
+    "time_to_peak_ms": -4.300000000000011,
+    "charge_rel": -0.0007679233487951631,
+    "worst_point_rel_peak": 0.085618981396278
+   },
+   "feng": {
+    "peak_uS_per_W": 0.00048045724140273737,
+    "time_to_peak_ms": 16.80000000000001,
+    "charge_uS_ms_per_W": 0.06638208195024012
+   }
+  },
+  "PN_to_PN|AMPA": {
+   "A_uS": 0.0011741570672243473,
+   "tau_r_ms": 0.3337529873261599,
+   "tau_d_ms": 6.9979006298110145,
+   "errors": {
+    "peak_rel": -5.902345667929687e-05,
+    "time_to_peak_ms": -0.3999999999999915,
+    "charge_rel": -8.916518558366171e-05,
+    "worst_point_rel_peak": 0.16144171871978086
+   },
+   "feng": {
+    "peak_uS_per_W": 0.0009601027375383125,
+    "time_to_peak_ms": 1.4500000000000028,
+    "charge_uS_ms_per_W": 0.007824756051450065
+   }
+  },
+  "PN_to_PN|NMDA": {
+   "A_uS": 0.0005457734568387851,
+   "tau_r_ms": 3.3706295745256405,
+   "tau_d_ms": 125.00000000000715,
+   "errors": {
+    "peak_rel": -3.1618576845637847e-07,
+    "time_to_peak_ms": -4.300000000000011,
+    "charge_rel": -0.0007679233487953852,
+    "worst_point_rel_peak": 0.0856189813962781
+   },
+   "feng": {
+    "peak_uS_per_W": 0.00048045724140273737,
+    "time_to_peak_ms": 16.80000000000001,
+    "charge_uS_ms_per_W": 0.06638208195024013
+   }
+  }
+ }
+}
