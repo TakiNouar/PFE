@@ -1,0 +1,12 @@
+{
+ "_about": "Gate exceptions approved by M. T. Nouar. A listed check may fail without failing its gate; it stays reported. Spec: Simulations/BLA/Research/architecture/14_simplified_model.md, section 6.",
+ "S2": [
+  {
+   "key": "FSI_to_PN|GABA|Poisson 20 Hz",
+   "observed": "peak +5.9 % (limit 5 %), charge +2.2 %",
+   "reason": "The Poisson 20 Hz reference train has no refractory period and contains spike intervals of 1.49, 2.39 and 2.96 ms. An FSI cannot fire that fast (fastest 221 Hz in Block A, about 4.5 ms between spikes). At such intervals Feng's file also rescales the GABA conductance still active, while the simplified synapse depresses only the new response (S-DEV-3).",
+   "evidence": "Same synapse with physiological random trains (no interval below 5 ms): peak +2.6 % / charge +2.0 % at 20 Hz, +0.6 % / +1.4 % at 50 Hz. FSI_to_FSI GABA passes the same train (+1.3 %).",
+   "approved": "M. T. Nouar, 2026-10-15"
+  }
+ ]
+}

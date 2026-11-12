@@ -1,9 +1,12 @@
-# BLA Run 1 — Status and Next Steps
+# BLA — Status and Next Steps
 
-**Date:** 2026-10-14
-**Purpose:** a self-contained starting point for the next working session.
-**Direction changed 2026-10-14 (M. T. Nouar):** the main model becomes **simplified neurons in Brian2**, fitted to Feng's cells; Feng's detailed model is kept as the reference only (Block A done, Block B running). Block C is dropped. See `04_run1_redesign_oct2026.md`, last section.
-**Branch:** `run1-redesign`. Binding spec: `Simulations/BLA/Research/architecture/` (00–13). Decision history: `04_run1_redesign_oct2026.md`. Deviations: `Simulations/BLA/simulation/deviations.md` (DEV-001 to DEV-007).
+**Updated:** 2026-11-12
+**Purpose:** the self-contained starting point for the next working session.
+**Git:** branch `run1-redesign`, merged into `main` on 2026-11-12.
+**Specs and history:**
+- Main model spec: `Simulations/BLA/Research/architecture/14_simplified_model.md`. Files 00–13 describe Feng's detailed model, now the reference only.
+- Decision history: `04_run1_redesign_oct2026.md`.
+- Deviations: `Simulations/BLA/simplified/deviations.md` (simplified model, S-DEV-1 to S-DEV-3) and `Simulations/BLA/simulation/deviations.md` (wiring, code values and inputs, DEV-001 to DEV-007).
 
 ---
 
@@ -11,103 +14,99 @@
 
 | Part | Status |
 |---|---|
-| Spec (architecture 00–13) | Describes the detailed Run 1. A spec for the simplified model is still to write |
-| Phase 0 setup | **Done.** Python 3.12.10, NEURON 9.0.2 (`C:\nrn`), Feng's ModelDB 247968 files byte-exact and hashed, both mechanism sets compiled |
-| Phase 0 benchmark | **Done** (`outputs/benchmark/`, table in `architecture/07`). Block B about 12 h, Block C about 2 days |
-| Block A (single cells, reductions, synapses) | **Done.** Gate 2 passed (time constant explained, U29). Gate R1 passed for the chosen cell with one approved exception; event-driven synapses identical to Feng's |
-| Network code | **Written** (`network.py`, `inputs.py`, `run.py`, `metrics.py`) and benchmarked at 200–1,000 cells |
-| Run tools | **Written and tested**: `launcher.py` (ran two demo seeds in parallel), `gate_r2.py` (tested on synthetic spikes: passes when matched, fails on the right lines when not) |
-| Block B (Feng's network, reference behaviour) | **Done** 2026-10-15 (3 seeds × 11.6 h, no failures). Results and targets: `07_blockB_reference_oct2026.md`, `outputs/blockB/reference_summary.json` |
-| Block C, 6-segment main level, Gate R2 | **Dropped** (decision 2026-10-14) |
-| Live viewer | **Built and tested** (`architecture/13`): microscope, oscilloscope, activity strip, status, replay. The broadcast leaves spike files identical (checked at 100 and 1,000 cells) and costs ≤ 2 % |
+| Direction | **Simplified neurons in GeNN** (decided 2026-10-14 / 15). Feng's detailed NEURON model is the reference |
+| Feng reference, single cells (Block A) | **Done**, plus a sharper stage-2 reference: noise-only and dendritic-input rates with more samples (`simulation/outputs/blockA/stage2_reference.json`) |
+| Feng reference, network (Block B) | **Done** 2026-10-15: 200 cells, 3 seeds, threat ×2/×4/×8 (`07_blockB_reference_oct2026.md`, `simulation/outputs/blockB/reference_summary.json`) |
+| Engine benchmark | **Done** (`06`): GPU real time up to ~70,000 neurons; CPU ~2,000–3,000 |
+| Simplified synapses (gate S2) | **PASS with 1 approved exception** (`08`) |
+| Simplified cells (gate S1) | **69 of 71 checks pass.** Two open: PN-A latency at 1.5 nA (3.7 vs 3.3 ms) and PN-A dendritic-input rate (0.50 vs 0.70 Hz). **Decision pending** (`08` section 2) |
+| 1,000-cell simplified network (gates S3–S6) | Not started |
+| Live mode with the LLM | Not started (spec 14 section 7) |
+| Detailed-model tools | Kept: launcher, live viewer, gate R2, benchmark (`simulation/bla_sim/`) |
+| Block C, 6-segment main level | Dropped (2026-10-14) |
 
 ## 2. Decisions in force (all by M. T. Nouar)
 
 | Decision | Choice |
 |---|---|
-| Main model | **Simplified neurons** (adaptive integrate-and-fire; PN-A and PN-C with a dendrite carrying NMDA; FSI point neuron without depolarization block), fitted to Feng's cells; Feng's paper and code taken as documented facts |
-| Engine | **GeNN (PyGeNN 5.4)** as the single model: exact CPU mode for fitting and checks, GPU for large and live runs; Brian2 only as a CPU cross-check (decided 2026-10-15) |
-| Reference model | NEURON 9.0.2 with Feng's files unchanged: Block A single cells (done) and Block B network (running) |
-| Machine | The laptop (Ryzen 5 4600H, 6 cores) during Erasmus; the RTX 3060 desktop is not in use for now |
-| Cells | PN-A, PN-C, FSI; no SOM |
-| Size | 1,000 cells (640 / 260 / 100) for the BLA; 200 for the Block B reference |
-| Wiring | Feng's realised inputs per cell (25 / 43 / 215 / 22), distance-independent |
-| Inputs | Feng's noise and afferent trains; threat = afferent rate ×2, ×4, ×8 for 2 s |
-| Seeds | 5 (1–5) |
-| Live viewer | Display only; its snapshot format does not depend on the simulator, so it will be reused for Brian2 |
+| Main model | Simplified neurons fitted to Feng's cells; Feng's paper and code taken as documented facts |
+| Engine | GeNN (PyGeNN 5.4) as the single model: exact CPU mode (double precision) for fitting and checks, GPU (single precision) for large and live runs; Brian2 only as a cross-check |
+| Synapses | Rise-and-decay conductances fitted to Feng's waveforms, with saturation and per-spike depression (S-1 b); S2 exception approved 2026-10-15 |
+| FSI depolarization block | Not reproduced by default; documented option |
+| Fitting optimiser | SciPy differential evolution |
+| Cells | PN-A, PN-C, FSI; no SOM. Network size 1,000 (640 / 260 / 100) |
+| Wiring and inputs | Feng's inputs per cell (25 / 43 / 215 / 22), Feng's noise and afferent trains; threat = afferent rate ×2, ×4, ×8 |
+| FSI rest-rate target | Rat data (22–27 Hz, Amir et al. 2018), not Block B's 35 Hz (U30) |
+| Machine | The laptop (Ryzen 5 4600H, GTX 1650 Ti 4 GB). Smart App Control turned off by M. T. Nouar on 2026-10-21 (it blocked the locally built GeNN) |
 
 ## 3. Next steps, in order
 
-Done on 2026-10-14 (second session): coarse-cell smoke test and Gate R1 regeneration; Phase 0 benchmark; Gate 2 / U29; `gate_r2.py`; `launcher.py`; live viewer with a `demo` block; decision for simplified neurons; Block B started.
-
-1. ~~Block B~~: done 2026-10-15 04:18, no failures (`07_blockB_reference_oct2026.md`; summary `outputs/blockB/reference_summary.json`). Rest PN-A 0.51, PN-C 0.97, FSI 35.1 Hz; dose-dependent threat response (PN 0.84 / 1.00 / 1.37 Hz at ×2 / ×4 / ×8); recovery in 8 of 9 trials; FSI depolarization block once at ×8 (U30).
-2. ~~Engine benchmark~~ (`06_engine_benchmark_oct2026.md`): GPU (PyGeNN 5.4, CUDA 12.9) runs a simplified network in real time up to ~70,000–75,000 neurons (0.35× real time up to 20,000); CPU (Brian2, 1 core) up to ~2,000. The 1/3/6-core CPU runs start automatically after Block B (`Simulations/BLA/simplified/outputs/engine_benchmark/cpu_after_blockB.log`); add them to report 06.
-3. **Spec for the simplified model:** draft written 2026-10-15, `Research/architecture/14_simplified_model.md`. Choices settled the same day: S-1 = fitted rise-and-decay synapses; SciPy installed for fitting.
-4. **Fit the three cells** to Feng's Block A results: resting potential, input resistance, time constant, current-to-firing curves, adaptation, firing under noise, and the dendritic-input test.
-5. **Build the 1,000-cell Brian2 network** and check it against rat data, Feng's paper and Block B.
+1. **Decide the two open S1 checks** (`08` section 2).
+   - (a), recommended: approve both as exceptions in `simplified/config/gate_exceptions.json` (add an "S1" list, then make `cell_check.py` read it as `synapse_check.py` does) and record them in S-DEV-1.
+   - (b) One more PN-A fitting attempt first.
+2. **Build the 1,000-cell simplified network in GeNN** (spec 14 sections 5, 6, 8):
+   - `bla_simple/network.py`: wiring with the `simulation/bla_sim` named streams and in-degree rule; per-connection delays via dendritic delays.
+   - `bla_simple/inputs.py`: Feng's afferent trains and the threat.
+   - `bla_simple/run.py`: CPU and GPU backends.
+   - `bla_simple/gates.py`: gates S3–S6, reusing `simulation/bla_sim/metrics.py`.
+   - Watch FSI rates (target 22–27 Hz, U30).
+3. Gates **S3** (rest against rat data), **S4** (threat response shaped like Block B), **S5** (inhibition-off, size 500 vs 1,000), **S6** (GPU = CPU statistics, dt 0.05 vs 0.1, Brian2 cross-check, ≤ 0.5× real time).
+4. Live mode (spec 14 section 7) and the viewer for the simplified model; then the other limbic populations.
 
 ## 4. How to run things
 
-Every command runs from `Simulations/BLA/simulation` (never from a `mechanisms` folder: NEURON auto-loads an `nrnmech.dll` found in the current directory). New terminals already have the NEURON settings; terminals opened before 2026-10-14 need them set by hand:
+**Simplified model** (from `Simulations/BLA/simplified`, through the toolchain script):
 
 ```
-NEURONHOME=C:\nrn
-PYTHONPATH=C:\nrn\lib\python
-PATH = C:\nrn\bin;C:\nrn\mingw\usr\bin;...
-python = %LOCALAPPDATA%\Programs\Python\Python312\python.exe
+with_gpu_env.cmd C:\Users\nouar\.venvs\brian2\Scripts\python.exe -m <module>
 ```
+
+| Task | Module |
+|---|---|
+| Fit synapses to Feng's waveforms | `bla_simple.fit_synapses` |
+| Gate S2 | `bla_simple.synapse_check` |
+| Fit FSI / PN stage 1 / PN stage 2 (GPU; PN2 ~20 min) | `bla_simple.fit_cells FSI` / `PN` / `PN2` |
+| Gate S1 (exact CPU mode, ~5 min) | `bla_simple.cell_check` |
+| Engine benchmark | `engine_benchmark.run_bench gpu` / `cpu --threads 1 3 6` |
+
+**Feng reference** (from `Simulations/BLA/simulation`, system Python with NEURON):
 
 | Task | Command |
 |---|---|
-| Recompile our mechanisms (after editing `exc_ev.mod` / `inh_ev.mod`) | `C:\nrn\bin\nrnivmodl.bat` inside `mechanisms_run1/` |
-| Block A1, Feng's single cells (~6 min) | `python -m bla_sim.single_cell --level full` |
-| Block A2, reduced cells + Gate R1 (~5 min) | `python -m bla_sim.reduce_pn` |
-| Block A2b, dendritic-input test (full level ~10 min) | `python -m bla_sim.drive_test --levels full coarse_d2_p3` |
-| Block A3, synapse test (~1 min) | `python -m bla_sim.synapse_test` |
-| Gate 2 time constant check (~1 min) | `python -m bla_sim.passive_check` |
-| Phase 0 benchmark (~1 h; `--list` shows rows, `--rows` picks some) | `python -m bla_sim.benchmark` |
-| One network run | `python -m bla_sim.run --block <B|C_main|C_rest|C_inhoff|C_nmda|C_noff|bench|demo> --level <full|reduced> --n <N> --seed <k> [--broadcast]` |
-| Block B or C, all runs in parallel (`--dry-run` lists jobs and hours) | `python -m bla_sim.launcher B` / `C` |
-| Gate R2 after Block B | `python -m bla_sim.gate_r2` |
-| Live viewer (separate terminal; open http://localhost:8765) | `python -m bla_sim.viewer_server` (`--lan` for phone or desktop) |
-| See the viewer working in ~3 min (100 cells, one ×8 threat) | `python -m bla_sim.run --block demo --level reduced --n 100 --broadcast` |
+| Synapse reference traces (~1 min; writes the 16 MB `synapse_reference.npz`, not in git) | `python -m bla_sim.synapse_reference` |
+| Stage-2 reference: noise and dendritic input (~65 min) | `python -m bla_sim.stage2_reference` |
+| Block B summary | `python -m bla_sim.blockb_summary` |
+| Earlier tools: single cells, Gate 2, benchmark, runs, launcher, viewer | see `architecture/07`, `09`, `13` |
 
-Outputs go to `outputs/<block>_<level>_n<N>/seed<k>/` (`run.json` committed; `spikes.npz` git-ignored).
-
-## 5. Key measured numbers (laptop, 2026-10-14)
+## 5. Key numbers
 
 | Item | Value |
 |---|---|
-| Feng's full PN | 83 µs per cell per 0.05 ms step |
-| Main-level coarse PN | 25 µs |
-| Feng's FSI | 4.3 µs |
-| Feng synapse / event-driven synapse | 1.32 / 0.003 µs per connection per step |
-| Feng's PN, noise only | PN-A 0.35 Hz, PN-C 1.65 Hz (rat BLA 0.21 / 1.55 Hz) |
-| 100-cell network, full detail | real-time factor 280; PN-A 0.62 Hz, PN-C 1.65 Hz, FSI 52.8 Hz (1 s, one seed) |
-| 100-cell network, two-piece (rejected) | real-time factor 22.6; PN-A 0.36 Hz, PN-C 0.58 Hz, FSI 23.0 Hz |
-| 100-cell network, coarse (chosen) | real-time factor 53.3 (5.3× faster than full); PN-A 0.61 Hz, PN-C 1.38 Hz, FSI 49.3 Hz |
-| Phase 0, main level, 200 / 500 / 1,000 cells | real-time factor 112 / 279 / 565 (about 0.56 per cell) |
-| Phase 0, reference level (Feng's files), 200 cells | real-time factor 656; PN-A 0.60, PN-C 1.10, FSI 42.8 Hz (main level at 200: 0.55 / 1.12 / 42.7) |
-| Phase 0, 1,000 cells without synapses | 516 (synapses are ~9 % of the cost) |
-| Phase 0, 5 runs at once | 650 each (×1.15 slower than one alone) |
-| Phase 0, 1,000 cells, broadcast on | 578 (≤ 2 % cost); spikes identical to the run without it (5,821 spikes) |
-| Membrane time constant (Feng's PN-A) | 30.9 ms slowest time constant (Feng ~30); 34.9 ms 63 % rise; 53–55 ms without Ih |
-
-The 100-cell runs and the Phase 0 rows are 1 s samples (one seed), so they are speed measurements, not results. The reference and main levels agree at 200 cells, but FSIs fire ~42 Hz at every size, above the 10–30 Hz of Gate 3 (U30).
+| Feng's cells, noise only | PN-A 0.345 Hz (CV 0.21), PN-C 1.54 Hz (CV 0.79), FSI silent |
+| Feng's cells, dendritic input | PN-A 0.70 Hz, PN-C 3.19 Hz |
+| Feng's network, rest (Block B) | PN-A 0.51, PN-C 0.97, FSI 35.1 Hz; threat PN 0.84 / 1.00 / 1.37 Hz at ×2 / ×4 / ×8 |
+| Simplified cells (S1) | passive exact; firing curves within 6 %; noise rates within 2 %; dendritic input PN-C 3.66, PN-A 0.50 Hz |
+| Simplified synapses (S2) | within 2.8 % on physiological trains |
+| GeNN GPU | ~0.35× real time up to 20,000 neurons; real time up to ~70,000 |
 
 ## 6. Open items
 
 | ID | Item |
 |---|---|
-| U26 | Live engine: Phase 0 shows cells (not synapses) are ~91 % of the cost; a live engine needs far cheaper cells and several cores, or fewer neurons |
-| U30 | FSIs ~42 Hz in all 1 s benchmark runs (Gate 3 wants 10–30); FSI depolarization block seen in the 100-cell ×8 demo. Check over Block B's 30 s rest |
+| U31 | PN-A's response to dendritic input is 28 % below Feng's (S1); its effect on the network is to be judged by S3/S4 |
+| U30 | FSI rate in our wiring (35 Hz with Feng's cells) above the rat range; cause open |
+| U26 | Live engine: the exchange loop with the LLM (spec 14 section 7) |
 | U27 | Threat pathway: later, a dedicated thalamic input |
-| U28 | PN-A fires once per ~2 s under steady current: consistent with its sAHP and with rat data under noise; still check Feng's and Kim's description |
-| — | `reports/` and `research_notes/` at the repo root (the October verification report and its notes) are not committed; decide whether to move them to `Research/reports/` |
+| — | `reports/` and `research_notes/` at the repo root (the October verification report) are still not committed; decide whether to keep them |
 
 ## 7. Practical notes
 
-- Feng's files must never be edited; Gate 0 hashes them on every run (`provenance.check_feng_hashes`).
-- `pc.nthread(n > 1)` fails with Feng's files and then hangs the process. Use one core per run.
-- PowerShell 5.1 strips quotes inside `python -c "..."`; put scripts in files.
-- A stuck test process (PID 33984, 0 CPU) from 2026-10-14 lingers in the process list until the next reboot. It is harmless.
+- **Two Python environments:**
+  - System Python 3.12 with NEURON (`C:\nrn`, needs `NEURONHOME`) for Feng's reference.
+  - `C:\Users\nouar\.venvs\brian2` (Brian2, PyGeNN, SciPy) for the simplified model.
+
+  Never pip-install into NEURON's Python while simulations run.
+- GeNN and Brian2 compiled runs need `with_gpu_env.cmd` (MSVC 2022 + CUDA 12.9).
+- GeNN stores explicit connections sorted by (pre, post); give per-connection values in that order.
+- Feng's files must never be edited (Gate 0 hashes them).
+- PowerShell 5.1 strips quotes in `python -c`; put scripts in files.

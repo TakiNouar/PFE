@@ -1,0 +1,306 @@
+{
+ "gate": "S2",
+ "status": "PASS with 1 approved exception",
+ "worst_gated_rel": 0.058808759677960065,
+ "dt_ms": 0.1,
+ "backend": "single_threaded_cpu",
+ "precision": "double",
+ "rule": "peak and charge within 5 % for isolated (1 s apart), 5 Hz x10, Poisson 20 Hz",
+ "results": {
+  "PN_to_PN|AMPA|isolated (1 s apart)": {
+   "peak_rel": 0.0006304877998208891,
+   "charge_rel": -0.0006475696735868119,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|AMPA|5 Hz x10": {
+   "peak_rel": 0.0006304877998208891,
+   "charge_rel": -0.0006475696736604197,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|AMPA|20 Hz x10": {
+   "peak_rel": 0.0006304877998208891,
+   "charge_rel": -0.0007865218534980345,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|AMPA|50 Hz x10": {
+   "peak_rel": 0.0006304877998208891,
+   "charge_rel": -0.008892313626744586,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|AMPA|doublets 1 ms apart": {
+   "peak_rel": 0.0205453195943035,
+   "charge_rel": 0.023754692769333285,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|AMPA|Poisson 20 Hz": {
+   "peak_rel": -0.00036666051804556954,
+   "charge_rel": -0.009725316660980754,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|AMPA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": -0.00023256215657141421,
+   "charge_rel": -0.007679988161063633,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|AMPA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": -0.00023256215657141421,
+   "charge_rel": -0.018963053750731707,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|NMDA|isolated (1 s apart)": {
+   "peak_rel": -4.156462675042327e-06,
+   "charge_rel": -0.0007871282398218549,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|NMDA|5 Hz x10": {
+   "peak_rel": -3.161857744515828e-07,
+   "charge_rel": -0.023758501878183624,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|NMDA|20 Hz x10": {
+   "peak_rel": -3.161857744515828e-07,
+   "charge_rel": -0.05128207744902047,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|NMDA|50 Hz x10": {
+   "peak_rel": -3.161857744515828e-07,
+   "charge_rel": 0.04883683238116454,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|NMDA|doublets 1 ms apart": {
+   "peak_rel": 0.17346370150601675,
+   "charge_rel": 0.15307123906931475,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|NMDA|Poisson 20 Hz": {
+   "peak_rel": 0.0025667233691863967,
+   "charge_rel": -0.0038482102156619513,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_PN|NMDA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": 0.007309278102506367,
+   "charge_rel": -0.02773910814499536,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_PN|NMDA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": -0.00014011556015480764,
+   "charge_rel": 0.008695209788222913,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|AMPA|isolated (1 s apart)": {
+   "peak_rel": -0.0012525375545724415,
+   "charge_rel": -0.0038009733467638807,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|AMPA|5 Hz x10": {
+   "peak_rel": -0.0012525375545724415,
+   "charge_rel": -0.0038009733467635476,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|AMPA|20 Hz x10": {
+   "peak_rel": -0.0012525375545724415,
+   "charge_rel": -0.0038009736030469865,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|AMPA|50 Hz x10": {
+   "peak_rel": -0.0012525375545724415,
+   "charge_rel": -0.0038624130313336114,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|AMPA|doublets 1 ms apart": {
+   "peak_rel": -0.0012525375545724415,
+   "charge_rel": -0.07387464907489172,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|AMPA|Poisson 20 Hz": {
+   "peak_rel": -0.0016774227492326599,
+   "charge_rel": -0.012794263368879122,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|AMPA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": -0.0016774227492326599,
+   "charge_rel": -0.006531135838023006,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|AMPA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": -0.0016774227492326599,
+   "charge_rel": -0.011689283373881865,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|NMDA|isolated (1 s apart)": {
+   "peak_rel": -4.15646267615255e-06,
+   "charge_rel": -0.0007871282398241863,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|NMDA|5 Hz x10": {
+   "peak_rel": -3.1618577567282813e-07,
+   "charge_rel": -0.023758501878184846,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|NMDA|20 Hz x10": {
+   "peak_rel": -3.1618577567282813e-07,
+   "charge_rel": -0.05128207744902369,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|NMDA|50 Hz x10": {
+   "peak_rel": -3.1618577567282813e-07,
+   "charge_rel": 0.048836832381163875,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|NMDA|doublets 1 ms apart": {
+   "peak_rel": 0.17346370150601542,
+   "charge_rel": 0.15307123906931652,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|NMDA|Poisson 20 Hz": {
+   "peak_rel": 0.0025667233691855085,
+   "charge_rel": -0.0038482102156615072,
+   "gated": true,
+   "pass": true
+  },
+  "PN_to_FSI|NMDA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": 0.007309278102505035,
+   "charge_rel": -0.027834164944449014,
+   "gated": false,
+   "pass": null
+  },
+  "PN_to_FSI|NMDA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": -0.00014011556015591786,
+   "charge_rel": -0.02371008500082339,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_PN|GABA|isolated (1 s apart)": {
+   "peak_rel": -0.0010706205843282746,
+   "charge_rel": -0.0013925771440161938,
+   "gated": true,
+   "pass": true
+  },
+  "FSI_to_PN|GABA|5 Hz x10": {
+   "peak_rel": -0.0010706205843282746,
+   "charge_rel": -0.001392577144061602,
+   "gated": true,
+   "pass": true
+  },
+  "FSI_to_PN|GABA|20 Hz x10": {
+   "peak_rel": -0.0010706205843282746,
+   "charge_rel": -0.0014413673980760988,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_PN|GABA|50 Hz x10": {
+   "peak_rel": -0.0010706205843282746,
+   "charge_rel": -0.003004249499963585,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_PN|GABA|doublets 1 ms apart": {
+   "peak_rel": 0.08343515320336437,
+   "charge_rel": 0.05945588843109961,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_PN|GABA|Poisson 20 Hz": {
+   "peak_rel": 0.058808759677960065,
+   "charge_rel": 0.02236372235140416,
+   "gated": true,
+   "pass": false,
+   "approved_exception": {
+    "key": "FSI_to_PN|GABA|Poisson 20 Hz",
+    "observed": "peak +5.9 % (limit 5 %), charge +2.2 %",
+    "reason": "The Poisson 20 Hz reference train has no refractory period and contains spike intervals of 1.49, 2.39 and 2.96 ms. An FSI cannot fire that fast (fastest 221 Hz in Block A, about 4.5 ms between spikes). At such intervals Feng's file also rescales the GABA conductance still active, while the simplified synapse depresses only the new response (S-DEV-3).",
+    "evidence": "Same synapse with physiological random trains (no interval below 5 ms): peak +2.6 % / charge +2.0 % at 20 Hz, +0.6 % / +1.4 % at 50 Hz. FSI_to_FSI GABA passes the same train (+1.3 %).",
+    "approved": "M. T. Nouar, 2026-10-15"
+   }
+  },
+  "FSI_to_PN|GABA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": 0.026262284291515448,
+   "charge_rel": 0.02011695855741702,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_PN|GABA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": 0.005946416046914482,
+   "charge_rel": 0.013792300483903341,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_FSI|GABA|isolated (1 s apart)": {
+   "peak_rel": -0.0014900726171823697,
+   "charge_rel": -0.0014160114939326673,
+   "gated": true,
+   "pass": true
+  },
+  "FSI_to_FSI|GABA|5 Hz x10": {
+   "peak_rel": -0.0014900726171823697,
+   "charge_rel": -0.0014160114939447688,
+   "gated": true,
+   "pass": true
+  },
+  "FSI_to_FSI|GABA|20 Hz x10": {
+   "peak_rel": -0.0014900726171823697,
+   "charge_rel": -0.0014532708519519044,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_FSI|GABA|50 Hz x10": {
+   "peak_rel": -0.0014900726171823697,
+   "charge_rel": -0.003044419835389389,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_FSI|GABA|doublets 1 ms apart": {
+   "peak_rel": 0.08703040133897466,
+   "charge_rel": 0.05835904883527365,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_FSI|GABA|Poisson 20 Hz": {
+   "peak_rel": 0.013376153234995636,
+   "charge_rel": 0.019775440436354152,
+   "gated": true,
+   "pass": true
+  },
+  "FSI_to_FSI|GABA|Poisson 20 Hz, >=5 ms": {
+   "peak_rel": 0.026190458969724162,
+   "charge_rel": 0.017631287516396643,
+   "gated": false,
+   "pass": null
+  },
+  "FSI_to_FSI|GABA|Poisson 50 Hz, >=5 ms": {
+   "peak_rel": 0.005876012550909415,
+   "charge_rel": 0.011377437554595637,
+   "gated": false,
+   "pass": null
+  }
+ }
+}

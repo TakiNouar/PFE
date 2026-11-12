@@ -9,6 +9,7 @@
 | [04_run1_redesign_oct2026.md](04_run1_redesign_oct2026.md) | Why Run 1 was redesigned (1,000 cells, Feng's files unchanged, in-degree wiring, rat-rate gates), option D, Block A results and how the main-level cell was chosen |
 | [06_engine_benchmark_oct2026.md](06_engine_benchmark_oct2026.md) | Simplified-model engine benchmark: GPU (GeNN) real time up to ~70,000 neurons, CPU (Brian2) ~2,000 per core; laptop toolchain notes |
 | [07_blockB_reference_oct2026.md](07_blockB_reference_oct2026.md) | Block B: Feng's 200-cell network at rest and under ×2/×4/×8 threat, the reference for the simplified model; FSI 35 Hz and depolarization block (U30) |
+| [08_simplified_cells_synapses_oct2026.md](08_simplified_cells_synapses_oct2026.md) | Simplified model: synapses (gate S2 passed) and cells (gate S1, 69 of 71), how the cell model was arrived at, decision pending |
 | [05_status_and_next_steps.md](05_status_and_next_steps.md) | **Start here:** current status, decisions in force, next steps, commands, key numbers |
 | [test_run_1/](test_run_1/) | **Archive** of the failed first campaign (historically Runs 1–5) — lessons and anti-patterns only |
 
